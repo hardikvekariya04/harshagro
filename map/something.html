@@ -1,0 +1,360 @@
+<html><head>
+    <title>WikiMap - Ahmedabad district</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta charset="UTF-8">
+    <style type="text/css">
+      html { height: 100% }
+      body { height: 100%; margin: 0; padding: 0 }
+      #map_canvas { height: 100% }
+      .checkboxes {
+        background-color: #ccf;
+        font-size: 15px;
+      }
+    </style>
+    <link rel="stylesheet" href="lea/leaflet.css">
+    <link rel="stylesheet" href="cluster/MarkerCluster.css">
+    <link rel="stylesheet" href="cluster/MarkerCluster.Default.css">
+    <link rel="stylesheet" href="spin/spin.css">
+    <link rel="stylesheet" href="search/leaflet-search.css">
+    <link rel="stylesheet" href="side/L.Control.Sidebar.css">
+    <link rel="stylesheet" href="message/L.Control.Window.css">
+    <script src="lea/leaflet.js"></script>
+    <script src="cluster/leaflet.markercluster.js"></script>
+    <script src="cluster/leaflet.markercluster.freezable.js"></script>
+    <script src="spin/spin.js"></script>
+    <script src="spin/leaflet.spin.js"></script>
+    <script src="search/leaflet-search.js"></script>
+    <script src="side/L.Control.Sidebar.js"></script>
+    <script src="message/L.Control.Window.js"></script>
+    <script src="rotate/leaflet.rotatedMarker.js"></script>
+    <script src="KML/L.KML.js"></script>
+    <script src="geojson/osmtogeojson.js"></script>
+    <script src="info/info.js"></script>
+    <script>
+      var Fired=0;
+      function GPS(position) {
+	Fired=1;
+	map.setView([position.coords.latitude,position.coords.longitude]);
+	plot();
+      }
+      function GPSError(error)
+      {
+	Fired=1;
+        plot();
+      }
+      function GetLang()
+      {
+	var lang=FixedLang;
+	if (lang.length>0)
+		return lang;
+	if (navigator.languages)
+		lang=navigator.languages[0];
+	else
+		lang=navigator.language;
+	var dash=lang.indexOf('-');
+	if (dash>-1)
+		return lang.substring(0,dash);
+	return lang;
+      }
+      function IsMobile()
+      {
+	return L.Browser.mobile;
+      }
+      function SpecialMode(CatMode)
+      {
+	return Cat.length>0 || WPCat.length>0 || !CatMode && (Page.length>0 || CoPage.length>0 || User.length>0 || WPUser.length>0 || KML.length>0);
+      }
+      function GetParam(param)
+      {
+	var first;
+	if (!(first=window.location.href.indexOf("?"+param+"=")!=-1) && window.location.href.indexOf("&"+param+"=")==-1)
+		return "";
+	var ret=window.location.href.substring(window.location.href.indexOf((first?"?":"&")+param)+param.length+2);
+	if (ret.indexOf('&')!=-1)
+		ret=ret.substring(0,ret.indexOf('&'));
+	return ret;
+      }
+      function initialize() {
+	isMobile=IsMobile();
+	InPlot=false;
+	FixedLang=GetParam("lang");
+	Cat=GetParam("cat");
+	WPCat=GetParam("wpcat");
+	CoPage="";
+	Page=GetParam("page");
+	var DecoPage=decodeURIComponent(Page);
+	var CatNames=["Kategorie","Category","Kategori"];
+	if (DecoPage.indexOf(':')!=-1)
+		if (CatNames.indexOf(Page.split(":")[0])!=-1)
+		{
+			WPCat=Page.split(":")[1];Page="";
+		}
+		else if (DecoPage.split(":")[0]=="File")
+		{
+			CoPage=Page;Page="";
+		}
+	Links=GetParam("links")=="true";
+	LinksHere=GetParam("linkshere")=="true";
+	Shape=GetParam("shape")!="false";
+	SubCats=GetParam("subcats")=="true";
+	SubCatDepth=GetParam("subcatdepth").length==0 ? 5 : GetParam("subcatdepth");
+	Image=GetParam("image")!="false" && GetParam("noimage")!="true";
+	Cluster=GetParam("cluster")!="false";
+	AllCo=GetParam("allco")=="true";
+	User=GetParam("user");
+	WPUser=GetParam("wpuser");
+	KML=GetParam("kml");
+	Locator=GetParam("locator")=="true";
+	Sidebar=GetParam("sidebar")!="false";
+	Bearing=GetParam("bearing")!="false";
+	Camera=GetParam("camera")=="true";
+	Region=GetParam("region");
+	Year=GetParam("year");
+	BaseMap=GetParam("basemap");
+	Project=GetParam("project")=="" ? "wikipedia" : GetParam("project");
+	wps=L.markerClusterGroup({maxClusterRadius:function(zoom){return zoom<19 ? 80 : 0;}});commons=L.markerClusterGroup({maxClusterRadius:function(zoom){return zoom<19 ? 80 : 0;}});
+	var layers=[];
+	if (GetParam("wp")!="false" && Cat.length==0 && CoPage.length==0 && User.length==0 && KML.length==0)
+		layers.push(wps);
+	if (GetParam("commons")!="false" && WPCat.length==0 && Page.length==0 && WPUser.length==0 && KML.length==0)
+		layers.push(commons);
+	var zoom = 13;
+        if (GetParam("zoom").length>0)
+                zoom=GetParam("zoom");
+	var lat=51.163361,lon=10.447683;
+	if (GetParam("lat").length>0 && GetParam("lon").length>0)
+	{
+		lat=GetParam("lat");lon=GetParam("lon");
+	}
+	wpsmarker=[];commonsmarker=[];
+	wiki1=Project=="wikipedia" ? L.icon({iconUrl:'wiki1.png',iconSize:[32,29]}) : Project=="wikivoyage" ? L.icon({iconUrl:'wiki3.png',iconSize:[32,32]}) : L.icon({iconUrl:'wiki4.png',iconSize:[32,18]});
+        wiki2=L.icon({iconUrl:'wiki2.png',iconSize:[32,43]});
+	camera=L.icon({iconUrl:'camera.png',iconSize:[32,32]});
+	def=new L.Icon.Default;
+	var attrib1='<a href="https://foundation.wikimedia.org/wiki/Maps_Terms_of_Use">';var attrib2='</a> per <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors';
+	var osm1=L.tileLayer('https://maps.wikimedia.org/osm-intl/{z}/{x}/{y}.png?lang='+GetLang(),{attribution:attrib1+'Wikimedia maps'+attrib2,maxZoom:22,maxNativeZoom:19});
+        var osm2=L.tileLayer('https://tiles.wmflabs.org/osm/{z}/{x}/{y}.png',{attribution:attrib1+'WMFlabs map'+attrib2,maxZoom:22,maxNativeZoom:20});
+	layers.push(BaseMap=="2" ? osm2 : osm1);
+	if (SpecialMode(false))
+		map=L.map('map_canvas',{layers:layers,maxZoom:22});
+	else
+		map=L.map('map_canvas',{center:[lat, lon],zoom:zoom,layers:layers,maxZoom:22,dragging:!isMobile});
+	L.control.scale().addTo(map);
+	L.Control.Cluster=L.Control.extend({onAdd:function(map){var div=L.DomUtil.create('div','checkboxes');div.innerHTML='<form><label for="command"><input id="command" type="checkbox" onclick="if (checked) {wps.enableClustering();commons.enableClustering();} else {wps.disableClusteringKeepSpiderfy();commons.disableClusteringKeepSpiderfy();}Cluster=!Cluster;"'+(Cluster ? " checked" : "")+'/>'+(GetLang()=="de" ? "Einträge gruppieren" : "Cluster markers")+'</label>'+(SpecialMode(true) ? '<br/><label for="command2"><input id="command2" type="checkbox" onclick="SubCats=!SubCats;plot();"'+(SubCats ? " checked" : "")+'/>'+(GetLang()=="de" ? "Unterkategorien" : "Subcategories")+'</label>' : '')+'</form2>';return div;}});
+	if (KML.length==0)
+		new L.Control.Cluster().addTo(map);
+	var baseLayers={'Wikimedia maps':osm1,'WMFlabs map':osm2};
+	var _Layers={};
+	_Layers['<img src="wiki'+(Project=="wikipedia" ? '1' : Project=="wikivoyage" ? '3' : '4')+'.png"> '+Project[0].toUpperCase()+Project.slice(1)]=wps;
+	_Layers['<img src="wiki2.png"> Commons']=commons;
+	var Layers=SpecialMode(false) ? null : _Layers;
+	L.control.layers(baseLayers,Layers).addTo(map);
+	sidebar=new L.Control.Sidebar('sidebar');
+	map.addControl(sidebar);
+	info=L.control.info({position:'bottomright',titleTooltip:GetLang()=="de" ? 'Über WikiMap...' : 'About WikiMap...',content:'<p><b><center>WikiMap</center></b></p><p><a href="https://de.wikipedia.org/wiki/Benutzer:DB111/Tools#WikiMap">'+(GetLang()=="de" ? 'Dokumentation' : 'Documentation')+'</a></p><p><a href="https://wikimap.toolforge.org/gui.php">'+(GetLang()=="de" ? 'Oberfläche' : 'User interface')+'</a></p>'});
+	info.addTo(map);
+	if (SpecialMode(false))
+	{
+		plot();
+		return;
+	}
+	map.addControl(new L.Control.Search({url:'https://nominatim.toolforge.org/search?format=json&q={s}',propertyName:'display_name',propertyLoc:['lat','lon'],marker:false,autoCollapse:true,firstTipSubmit:true,minLength:3,textErr:(GetLang()=="de" ? "Ort nicht gefunden" : "Location not found"),textPlaceholder:(GetLang()=="de" ? "Suche..." : "Search...")}));
+	map.on('moveend',function() { plot(); });
+	map.on('zoomend',function() { plot(); });
+	wps.on('add',function() { plot(); });
+	wps.on('remove',function() { plot(); });
+	commons.on('add',function() { plot(); });
+	commons.on('remove',function() { plot(); });
+	if (navigator.geolocation && (GetParam("lat").length==0 || GetParam("lon").length==0)) {
+	        navigator.geolocation.getCurrentPosition(GPS,GPSError);
+	        setTimeout(function(){if (Fired==0) plot();},10000);
+ 	} else
+	        plot();
+      }
+      function plot() {
+	if (InPlot)
+		return;
+	InPlot=true;
+	map.spin(true);
+	var dist=10000;
+	for (d=13;d<map.getZoom();d++)
+        	dist=dist/2;
+	wps.clearLayers();commons.clearLayers();
+	wpsmarker=[];commonsmarker=[];
+	sidebar.setContent("");sidebar.hide();
+	var open;
+	if (Cat.length>0)
+		open="cat="+Cat;
+	else if (WPCat.length>0)
+		open="wpcat="+WPCat;
+	else if (Page.length>0)
+		open="page="+Page+(Links ? "&links" : "")+(LinksHere ? "&linkshere" : "")+(!Shape ? "&noshape" : "");
+	else if (CoPage.length>0)
+		open="copage="+CoPage;
+	else if (User.length>0)
+		open="user="+User;
+	else if (WPUser.length>0)
+		open="wpuser="+WPUser;
+	else if (KML.length>0)
+		open="kml="+KML;
+	else
+		open="lat="+map.getCenter().lat+"&lon="+map.getCenter().lng+"&dist="+Math.round(dist)+(map.hasLayer(wps) ? "&wp" : "")+(map.hasLayer(commons) ? "&commons" : "")+(AllCo ? "&allco" : "");
+	open+="&lang="+GetLang()+(!Image ? "&noimage" : "")+(Project!="wikipedia" ? "&project="+Project : "")+(Camera || CoPage.length>0 ? "&camera" : "");
+	if (SpecialMode(false))
+	{
+		open+=(Year.length>0 ? "&year="+Year : "")+(Region.length>0 ? "&region="+Region : "");
+		document.title+=" - "+decodeURIComponent(open.split('=')[1].split('&')[0]).replace(/_/g,' ');
+	}
+	if (SpecialMode(true))
+		open+=SubCats ? "&subcats&subcatdepth="+SubCatDepth : "";
+	api = new XMLHttpRequest();
+	api.open("GET","api.php?"+open);
+	api.onreadystatechange = endplot;
+	api.send();
+	}
+	function endplot()
+	{
+	if (api.readyState!=4 || api.status!=200 || api.responseText.length==0)
+	{
+		map.spin(false);
+		InPlot=false;
+		return;
+	}
+	if (KML.length>0)
+	{
+		var track=new L.KML(new DOMParser().parseFromString(api.responseText,'text/xml'));
+		map.addLayer(track);
+		map.fitBounds(track.getBounds());
+		map.spin(false);
+		InPlot=false;
+		return;
+	}
+var names=[];
+var colors=['Red','Green','Blue','Brown','Gray','Purple','Yellow','Orange','Pink','Navy'];
+var nextcolor=0;
+var categories={};
+var json=JSON.parse(api.responseText);
+for (var i in json)
+{
+	var elem=json[i];
+	var icon,content,url;
+	var title=elem.title;
+	if (Links && title=="Internet Archive")
+		continue;
+	if (elem.ns==-1)
+		wpsmarker.push(L.geoJSON(elem.geojson));
+	else if (elem.ns==-2)
+		wpsmarker.push(L.geoJSON(osmtogeojson(JSON.parse(elem.geojson))));
+        else if (elem.ns!=6)
+	{
+		url="https://"+(Project!="wikidata" ? GetLang()+"."+Project : "www.wikidata")+".org/wiki/"+encodeURIComponent(title);
+		if (Project=="wikidata" && elem.hasOwnProperty('entityterms') && elem.entityterms.hasOwnProperty('label'))
+			title=elem.entityterms.label;
+		icon=wiki1;
+		if (elem.hasOwnProperty('thumbnail'))
+		{
+			content='<a href="'+url+'" target="_blank"><center><img width="150" src="'+elem.thumbnail.source+'"><p><small>'+title+'</small></p></center></a>';
+		}
+		else
+			content='<a href="'+url+'" target="_blank"><center>'+title+'</center></a>';
+	}
+        else
+	{
+                url="https://commons.wikimedia.org/wiki/"+encodeURIComponent(title);
+		title=title.substring(5,title.lastIndexOf('.'))
+		icon=wiki2;
+		if (elem.hasOwnProperty('imageinfo'))
+		{
+			if (elem.imageinfo[0].hasOwnProperty('extmetadata') && elem.imageinfo[0].extmetadata.hasOwnProperty('ImageDescription'))
+				title=elem.imageinfo[0].extmetadata.ImageDescription.value;
+			content='<a href="'+url+'" target="_blank"><center><img width="150" src="'+elem.imageinfo[0].thumburl+'"><p><small>'+title+'</small></p></center></a>';
+		}
+		else
+			content='<a href="'+url+'" target="_blank"><center>'+title+'</center></a>';
+	}
+	if (elem.hasOwnProperty('tag'))
+	{
+		content+='<center><p><small><a href="https://'+(elem.ns!=6 ? GetLang()+'.wikipedia' : 'commons.wikimedia')+'.org/wiki/'+encodeURIComponent(elem.tag)+'" target="_blank">'+elem.tag+'</a></small></p></center>';
+		if (!categories.hasOwnProperty(elem.tag))
+		{
+			categories[elem.tag]=colors[nextcolor++];
+			if (nextcolor==colors.length)
+				nextcolor=0;
+		}
+	}
+	if (elem.hasOwnProperty('coordinates'))
+	for (var k in elem.coordinates)
+	{
+		var coord=elem.coordinates[k];
+		var fullcontent=content;
+		if ((elem.coordinates.length>1 || !coord.primary) && coord.hasOwnProperty('name') && coord.name.length>0)
+		{
+			if (coord.name.indexOf('Bilderwunsch')!=-1)
+				continue;
+			fullcontent=fullcontent.replace(title+'</',title+'<br /><small>('+coord.name+')</small></').replace('" target="','#'+encodeURIComponent(coord.name.replace(/ /g,'_'))+'" target="');
+			names.push(coord.name);
+		}
+		else
+			names.push(title);
+		if (Locator && elem.ns==6)
+			fullcontent+='<a href="https://locator-tool.toolforge.org/#/geolocate?files='+encodeURIComponent(elem.title)+'" target="_blank" title="Locator-Tool"><center><p><img width="15" src="locator-tool.svg"></p></center></a>';
+		var marker = !SubCats ? L.marker([coord.lat,coord.lon],{icon:coord.hasOwnProperty('cam') ? camera : map.hasLayer(wps) && map.hasLayer(commons) ? icon : def,rotationAngle:Bearing && coord.hasOwnProperty('bearing') ? coord.bearing : 0}) : L.circleMarker([coord.lat,coord.lon],{radius:8,fillColor:categories[elem.tag],fillOpacity:0.5});
+		marker.bindPopup(fullcontent,{autoPan:SpecialMode(false)});
+		if (!isMobile)
+			marker.on('mouseover',function() { this.openPopup(); });
+		if (icon==wiki1)
+                        wpsmarker.push(marker);
+		else
+			commonsmarker.push(marker);
+	}
+}
+	wps.addLayers(wpsmarker);commons.addLayers(commonsmarker);
+	if ((Cat.length>0 || CoPage.length>0 || User.length>0) && commons.getLayers().length>0)
+		map.fitBounds(commons.getBounds());
+	else if ((WPCat.length>0 || Page.length>0 || WPUser.length>0) && wps.getLayers().length>0)
+		map.fitBounds(wps.getBounds());
+	if (Sidebar && (WPCat.length>0 && !SubCats || Page.length>0))
+        {
+                var sides=[];
+                for (var name in names)
+                        if (WPCat.length>0 || Links || LinksHere || names.length>1)
+                                sides.push('<a id="'+names[name]+'" href="#" onclick="var mark=wpsmarker['+name+'];wps.zoomToShowLayer(mark,function(){mark.openPopup();});return false;">'+names[name]+'</a><br />');
+		if (sides.length>0)
+		{
+			var side="";
+			sides.sort();
+			for (var s in sides)
+				side+=sides[s];
+                	sidebar.setContent(side);sidebar.show();
+		}
+        }
+	if (SubCats && GetParam("cluster")!="true" && (wps.getLayers().length+commons.getLayers().length)<1000)
+	{
+		Cluster=false;document.getElementById('command').checked=false;
+	}
+	if (Cluster)
+	{
+		wps.enableClustering();commons.enableClustering();
+	}
+	else
+	{
+		wps.disableClusteringKeepSpiderfy();commons.disableClusteringKeepSpiderfy();
+	}
+	map.spin(false);
+	InPlot=false;
+	if (wps.getLayers().length==0 && commons.getLayers().length==0)
+		if (SpecialMode(true) && !SubCats)
+			L.control.window(map,{modal:true,maxWidth:400}).title(GetLang()=="de" ? "Keine Ergebnisse" : "No results").content(GetLang()=="de" ? "Keine Ergebnisse in dieser Kategorie gefunden! Sollen Unterkategorien mit eingeblendet werden?" : "No items found! Add Subcategories to the view?").prompt({callback:function(){document.getElementById('command2').click();}}).show();
+		else if (SpecialMode(false))
+			L.control.window(map,{modal:true,maxWidth:400}).title(GetLang()=="de" ? "Keine Ergebnisse" : "No results").content(GetLang()=="de" ? "Keine Ergebnisse gefunden!" : "No items found!").show();
+	if (User.length>0)
+		 L.control.window(map,{modal:true}).title(GetLang()=="de" ? "Deine Meinung" : "Your opinion").content(GetLang()=="de" ? "Verletzt diese Tool-Funktion die Privatsphäre bzw. kann Nutzer gefährden? Schreib Deine Meinung: https://de.wikipedia.org/wiki/Benutzer_Diskussion:DB111/Tools#Privacy" : "Is this tool feature a violation of privacy or can cause harm to users? Leave a message: https://de.wikipedia.org/wiki/Benutzer_Diskussion:DB111/Tools#Privacy").show();
+      }
+    </script>
+  <style>@media print {#ghostery-tracker-tally {display:none !important}}</style></head>
+  <body onload="initialize()" class="">
+    <div id="map_canvas" style="width: 100%; height: 100%; position: relative; outline: none;" class="leaflet-container leaflet-touch leaflet-retina leaflet-fade-anim leaflet-grab leaflet-touch-drag leaflet-touch-zoom" tabindex="0"><div class="leaflet-pane leaflet-map-pane" style="transform: translate3d(-6px, -145px, 0px);"><div class="leaflet-pane leaflet-tile-pane"><div class="leaflet-layer " style="z-index: 1; opacity: 1;"><div class="leaflet-tile-container leaflet-zoom-animated" style="z-index: 21; transform: translate3d(387px, 152px, 0px) scale(0.5);"></div><div class="leaflet-tile-container leaflet-zoom-animated" style="z-index: 22; transform: translate3d(387px, 152px, 0px) scale(1);"><img alt="" role="presentation" src="https://maps.wikimedia.org/osm-intl/8/178/110.png?lang=en" class="leaflet-tile leaflet-tile-loaded" style="width: 256px; height: 256px; transform: translate3d(15px, -183px, 0px); opacity: 1;"><img alt="" role="presentation" src="https://maps.wikimedia.org/osm-intl/8/179/110.png?lang=en" class="leaflet-tile leaflet-tile-loaded" style="width: 256px; height: 256px; transform: translate3d(271px, -183px, 0px); opacity: 1;"><img alt="" role="presentation" src="https://maps.wikimedia.org/osm-intl/8/178/111.png?lang=en" class="leaflet-tile leaflet-tile-loaded" style="width: 256px; height: 256px; transform: translate3d(15px, 73px, 0px); opacity: 1;"><img alt="" role="presentation" src="https://maps.wikimedia.org/osm-intl/8/179/111.png?lang=en" class="leaflet-tile leaflet-tile-loaded" style="width: 256px; height: 256px; transform: translate3d(271px, 73px, 0px); opacity: 1;"><img alt="" role="presentation" src="https://maps.wikimedia.org/osm-intl/8/177/110.png?lang=en" class="leaflet-tile leaflet-tile-loaded" style="width: 256px; height: 256px; transform: translate3d(-241px, -183px, 0px); opacity: 1;"><img alt="" role="presentation" src="https://maps.wikimedia.org/osm-intl/8/180/110.png?lang=en" class="leaflet-tile leaflet-tile-loaded" style="width: 256px; height: 256px; transform: translate3d(527px, -183px, 0px); opacity: 1;"><img alt="" role="presentation" src="https://maps.wikimedia.org/osm-intl/8/177/111.png?lang=en" class="leaflet-tile leaflet-tile-loaded" style="width: 256px; height: 256px; transform: translate3d(-241px, 73px, 0px); opacity: 1;"><img alt="" role="presentation" src="https://maps.wikimedia.org/osm-intl/8/180/111.png?lang=en" class="leaflet-tile leaflet-tile-loaded" style="width: 256px; height: 256px; transform: translate3d(527px, 73px, 0px); opacity: 1;"><img alt="" role="presentation" src="https://maps.wikimedia.org/osm-intl/8/179/109.png?lang=en" class="leaflet-tile leaflet-tile-loaded" style="width: 256px; height: 256px; transform: translate3d(271px, -439px, 0px); opacity: 1;"><img alt="" role="presentation" src="https://maps.wikimedia.org/osm-intl/8/179/112.png?lang=en" class="leaflet-tile leaflet-tile-loaded" style="width: 256px; height: 256px; transform: translate3d(271px, 329px, 0px); opacity: 1;"><img alt="" role="presentation" src="https://maps.wikimedia.org/osm-intl/8/178/109.png?lang=en" class="leaflet-tile leaflet-tile-loaded" style="width: 256px; height: 256px; transform: translate3d(15px, -439px, 0px); opacity: 1;"><img alt="" role="presentation" src="https://maps.wikimedia.org/osm-intl/8/180/109.png?lang=en" class="leaflet-tile leaflet-tile-loaded" style="width: 256px; height: 256px; transform: translate3d(527px, -439px, 0px); opacity: 1;"><img alt="" role="presentation" src="https://maps.wikimedia.org/osm-intl/8/178/112.png?lang=en" class="leaflet-tile leaflet-tile-loaded" style="width: 256px; height: 256px; transform: translate3d(15px, 329px, 0px); opacity: 1;"><img alt="" role="presentation" src="https://maps.wikimedia.org/osm-intl/8/180/112.png?lang=en" class="leaflet-tile leaflet-tile-loaded" style="width: 256px; height: 256px; transform: translate3d(527px, 329px, 0px); opacity: 1;"><img alt="" role="presentation" src="https://maps.wikimedia.org/osm-intl/8/181/110.png?lang=en" class="leaflet-tile leaflet-tile-loaded" style="width: 256px; height: 256px; transform: translate3d(783px, -183px, 0px); opacity: 1;"><img alt="" role="presentation" src="https://maps.wikimedia.org/osm-intl/8/181/111.png?lang=en" class="leaflet-tile leaflet-tile-loaded" style="width: 256px; height: 256px; transform: translate3d(783px, 73px, 0px); opacity: 1;"><img alt="" role="presentation" src="https://maps.wikimedia.org/osm-intl/8/177/109.png?lang=en" class="leaflet-tile leaflet-tile-loaded" style="width: 256px; height: 256px; transform: translate3d(-241px, -439px, 0px); opacity: 1;"><img alt="" role="presentation" src="https://maps.wikimedia.org/osm-intl/8/181/109.png?lang=en" class="leaflet-tile leaflet-tile-loaded" style="width: 256px; height: 256px; transform: translate3d(783px, -439px, 0px); opacity: 1;"><img alt="" role="presentation" src="https://maps.wikimedia.org/osm-intl/8/177/112.png?lang=en" class="leaflet-tile leaflet-tile-loaded" style="width: 256px; height: 256px; transform: translate3d(-241px, 329px, 0px); opacity: 1;"><img alt="" role="presentation" src="https://maps.wikimedia.org/osm-intl/8/181/112.png?lang=en" class="leaflet-tile leaflet-tile-loaded" style="width: 256px; height: 256px; transform: translate3d(783px, 329px, 0px); opacity: 1;"><img alt="" role="presentation" src="https://maps.wikimedia.org/osm-intl/8/176/110.png?lang=en" class="leaflet-tile leaflet-tile-loaded" style="width: 256px; height: 256px; transform: translate3d(-497px, -183px, 0px); opacity: 1;"><img alt="" role="presentation" src="https://maps.wikimedia.org/osm-intl/8/182/110.png?lang=en" class="leaflet-tile leaflet-tile-loaded" style="width: 256px; height: 256px; transform: translate3d(1039px, -183px, 0px); opacity: 1;"><img alt="" role="presentation" src="https://maps.wikimedia.org/osm-intl/8/176/111.png?lang=en" class="leaflet-tile leaflet-tile-loaded" style="width: 256px; height: 256px; transform: translate3d(-497px, 73px, 0px); opacity: 1;"><img alt="" role="presentation" src="https://maps.wikimedia.org/osm-intl/8/182/111.png?lang=en" class="leaflet-tile leaflet-tile-loaded" style="width: 256px; height: 256px; transform: translate3d(1039px, 73px, 0px); opacity: 1;"><img alt="" role="presentation" src="https://maps.wikimedia.org/osm-intl/8/176/109.png?lang=en" class="leaflet-tile leaflet-tile-loaded" style="width: 256px; height: 256px; transform: translate3d(-497px, -439px, 0px); opacity: 1;"><img alt="" role="presentation" src="https://maps.wikimedia.org/osm-intl/8/182/109.png?lang=en" class="leaflet-tile leaflet-tile-loaded" style="width: 256px; height: 256px; transform: translate3d(1039px, -439px, 0px); opacity: 1;"><img alt="" role="presentation" src="https://maps.wikimedia.org/osm-intl/8/176/112.png?lang=en" class="leaflet-tile leaflet-tile-loaded" style="width: 256px; height: 256px; transform: translate3d(-497px, 329px, 0px); opacity: 1;"><img alt="" role="presentation" src="https://maps.wikimedia.org/osm-intl/8/182/112.png?lang=en" class="leaflet-tile leaflet-tile-loaded" style="width: 256px; height: 256px; transform: translate3d(1039px, 329px, 0px); opacity: 1;"></div></div></div><div class="leaflet-pane leaflet-shadow-pane"></div><div class="leaflet-pane leaflet-overlay-pane"><svg pointer-events="none" class="leaflet-zoom-animated" width="1843" height="384" viewBox="-148 113 1843 384" style="transform: translate3d(-148px, 113px, 0px);"><g><path class="leaflet-interactive" stroke="#3388ff" stroke-opacity="1" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" fill="none" d="M755 473L757 473L762 455"></path><path class="leaflet-interactive" stroke="#3388ff" stroke-opacity="1" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" fill="none" d="M749 480L748 477"></path><path class="leaflet-interactive" stroke="#3388ff" stroke-opacity="1" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" fill="none" d="M750 473L750 473"></path><path class="leaflet-interactive" stroke="#3388ff" stroke-opacity="1" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" fill="none" d="M748 477L748 477"></path><path class="leaflet-interactive" stroke="#3388ff" stroke-opacity="1" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" fill="none" d="M748 477L750 473"></path><path class="leaflet-interactive" stroke="#3388ff" stroke-opacity="1" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" fill="none" d="M750 473L755 473"></path><path class="leaflet-interactive" stroke="#3388ff" stroke-opacity="1" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" fill="none" d="M764 434L764 433"></path><path class="leaflet-interactive" stroke="#3388ff" stroke-opacity="1" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" fill="none" d="M764 433L762 427L763 425L767 424L771 419L786 414"></path><path class="leaflet-interactive" stroke="#3388ff" stroke-opacity="1" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" fill="none" d="M715 423L701 422L697 418L693 421L688 421L686 419L684 421L682 420"></path><path class="leaflet-interactive" stroke="#3388ff" stroke-opacity="1" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" fill="none" d="M786 414L785 411L779 409"></path><path class="leaflet-interactive" stroke="#3388ff" stroke-opacity="1" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" fill="none" d="M762 455L762 453"></path><path class="leaflet-interactive" stroke="#3388ff" stroke-opacity="1" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" fill="none" d="M749 480L739 472L733 461L724 460L721 455L721 451"></path><path class="leaflet-interactive" stroke="#3388ff" stroke-opacity="1" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" fill="none" d="M762 453L766 446L764 442L764 434"></path><path class="leaflet-interactive" stroke="#3388ff" stroke-opacity="1" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" fill="none" d="M721 451L731 452L736 449L740 443L733 441L731 442L730 438L734 436L734 433L729 429L723 427L720 423L715 423"></path><path class="leaflet-interactive" stroke="#3388ff" stroke-opacity="1" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" fill="none" d="M811 339L812 341L808 341L806 343L807 346L802 345L801 349"></path><path class="leaflet-interactive" stroke="#3388ff" stroke-opacity="1" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" fill="none" d="M695 377L695 373L697 372L694 368L699 364L705 366L704 370L715 371L719 379L719 384L724 386L726 386L739 376"></path><path class="leaflet-interactive" stroke="#3388ff" stroke-opacity="1" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" fill="none" d="M739 376L737 374L736 369L744 364"></path><path class="leaflet-interactive" stroke="#3388ff" stroke-opacity="1" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" fill="none" d="M801 349L795 356L790 358L787 357L790 364L790 368L786 374"></path><path class="leaflet-interactive" stroke="#3388ff" stroke-opacity="1" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" fill="none" d="M682 420L679 418L684 410L681 407L688 406L691 404L688 399L684 398"></path><path class="leaflet-interactive" stroke="#3388ff" stroke-opacity="1" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" fill="none" d="M771 395L782 398L783 401L777 408L779 409"></path><path class="leaflet-interactive" stroke="#3388ff" stroke-opacity="1" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" fill="none" d="M684 398L684 395L691 388L696 396L700 396L698 382L704 379L704 374L695 377"></path><path class="leaflet-interactive" stroke="#3388ff" stroke-opacity="1" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" fill="none" d="M786 374L784 376L783 375L778 377L778 381L775 381L774 383L776 383L776 390L771 395"></path><path class="leaflet-interactive" stroke="#3388ff" stroke-opacity="1" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" fill="none" d="M862 277L862 279L856 284L856 286L854 286L855 288L853 291L841 290L838 294L833 296"></path><path class="leaflet-interactive" stroke="#3388ff" stroke-opacity="1" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" fill="none" d="M862 274L862 277"></path><path class="leaflet-interactive" stroke="#3388ff" stroke-opacity="1" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" fill="none" d="M808 247L809 247"></path><path class="leaflet-interactive" stroke="#3388ff" stroke-opacity="1" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" fill="none" d="M807 240L809 240L807 246L808 247"></path><path class="leaflet-interactive" stroke="#3388ff" stroke-opacity="1" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" fill="none" d="M799 244L801 244L802 241L803 243L805 243L807 240"></path><path class="leaflet-interactive" stroke="#3388ff" stroke-opacity="1" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" fill="none" d="M710 291L709 282L713 275L711 275L711 271L713 270L712 262"></path><path class="leaflet-interactive" stroke="#3388ff" stroke-opacity="1" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" fill="none" d="M845 253L845 255L847 254L850 256L851 258L849 259L849 261L853 261L856 266L858 265L856 268L858 268L858 270L862 274"></path><path class="leaflet-interactive" stroke="#3388ff" stroke-opacity="1" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" fill="none" d="M770 252L772 253L772 255L776 255L779 257L778 261L782 262L781 261L784 259L787 260L788 264L790 263"></path><path class="leaflet-interactive" stroke="#3388ff" stroke-opacity="1" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" fill="none" d="M830 254L831 251L835 252"></path><path class="leaflet-interactive" stroke="#3388ff" stroke-opacity="1" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" fill="none" d="M835 252L838 251L840 254L845 253"></path><path class="leaflet-interactive" stroke="#3388ff" stroke-opacity="1" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" fill="none" d="M790 263L795 259L793 256L800 253L797 244L799 244"></path><path class="leaflet-interactive" stroke="#3388ff" stroke-opacity="1" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" fill="none" d="M809 247L811 245L813 248L812 250L815 249L815 247L820 247L820 255L825 255L827 253L830 254"></path><path class="leaflet-interactive" stroke="#3388ff" stroke-opacity="1" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" fill="none" d="M757 200L758 203L754 208L751 208L750 211L747 211L746 217L741 218L742 223"></path><path class="leaflet-interactive" stroke="#3388ff" stroke-opacity="1" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" fill="none" d="M738 184L744 190L747 189L748 186L750 186L751 188L753 187L754 182L757 181L759 184L761 184L760 187L763 190L762 195L759 196L757 200"></path><path class="leaflet-interactive" stroke="#3388ff" stroke-opacity="1" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" fill="none" d="M732 183L738 184"></path><path class="leaflet-interactive" stroke="#3388ff" stroke-opacity="1" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" fill="none" d="M709 174L714 172L715 182L718 182L719 185L727 181L728 183L732 183"></path><path class="leaflet-interactive" stroke="#3388ff" stroke-opacity="1" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" fill="none" d="M744 252L745 249L753 249L756 252L756 256L761 257L760 261L762 265L768 261L765 254L767 252L770 252"></path><path class="leaflet-interactive" stroke="#3388ff" stroke-opacity="1" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" fill="none" d="M712 262L703 263L701 268L699 261L695 260L691 253L693 239L696 238L700 233L707 232"></path><path class="leaflet-interactive" stroke="#3388ff" stroke-opacity="1" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" fill="none" d="M742 223L743 230L740 234L743 239L743 244L739 245L738 250L739 252L744 252"></path><path class="leaflet-interactive" stroke="#3388ff" stroke-opacity="1" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" fill="none" d="M707 232L709 224L699 226L696 221L692 223L691 230L686 230L688 222L686 219L688 216L687 212L690 208L686 198L689 196L692 198L696 196L701 196L704 192L703 182L709 174"></path><path class="leaflet-interactive" stroke="#3388ff" stroke-opacity="1" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" fill="none" d="M807 311L804 313L803 317L806 319L804 322L807 322L805 327L808 330L805 329L803 332L808 333L808 335L805 336L811 339"></path><path class="leaflet-interactive" stroke="#3388ff" stroke-opacity="1" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" fill="none" d="M744 364L738 356L727 352L722 354L721 343L714 337L720 335L722 338L727 338L729 329L720 325L721 322L719 321L720 319L718 319L720 314"></path><path class="leaflet-interactive" stroke="#3388ff" stroke-opacity="1" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" fill="none" d="M720 314L716 310L716 301L715 307L712 310L709 305L708 296L710 291"></path><path class="leaflet-interactive" stroke="#3388ff" stroke-opacity="1" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" fill="none" d="M833 296L831 296L831 294L826 293L824 296L821 295L818 299L820 301L820 310L818 308L813 307L807 311"></path></g></svg></div><div class="leaflet-pane leaflet-marker-pane"><div class="leaflet-marker-icon marker-cluster marker-cluster-small leaflet-zoom-animated leaflet-interactive" tabindex="0" style="margin-left: -20px; margin-top: -20px; width: 40px; height: 40px; transform: translate3d(815px, 268px, 0px); z-index: 268; opacity: 1;"><div><span>2</span></div></div></div><div class="leaflet-pane leaflet-tooltip-pane"></div><div class="leaflet-pane leaflet-popup-pane"></div><div class="leaflet-proxy leaflet-zoom-animated" style="transform: translate3d(45940px, 28496px, 0px) scale(128);"></div></div><div class="leaflet-control-container"><div class="leaflet-sidebar left"><div id="sidebar" class="leaflet-control"></div><a class="close">×</a></div><div class="leaflet-top leaflet-left"><div class="leaflet-control-zoom leaflet-bar leaflet-control"><a class="leaflet-control-zoom-in" href="#" title="Zoom in" role="button" aria-label="Zoom in">+</a><a class="leaflet-control-zoom-out" href="#" title="Zoom out" role="button" aria-label="Zoom out">−</a></div></div><div class="leaflet-top leaflet-right"><div class="checkboxes leaflet-control"><form><label for="command"><input id="command" type="checkbox" onclick="if (checked) {wps.enableClustering();commons.enableClustering();} else {wps.disableClusteringKeepSpiderfy();commons.disableClusteringKeepSpiderfy();}Cluster=!Cluster;" checked="">Cluster markers</label></form></div><div class="leaflet-control-layers leaflet-control" aria-haspopup="true"><a class="leaflet-control-layers-toggle" href="#" title="Layers"></a><section class="leaflet-control-layers-list"><div class="leaflet-control-layers-base"><label><div><input type="radio" class="leaflet-control-layers-selector" name="leaflet-base-layers_30" checked="checked"><span> Wikimedia maps</span></div></label><label><div><input type="radio" class="leaflet-control-layers-selector" name="leaflet-base-layers_30"><span> WMFlabs map</span></div></label></div><div class="leaflet-control-layers-separator" style="display: none;"></div><div class="leaflet-control-layers-overlays"></div></section></div></div><div class="leaflet-bottom leaflet-left"><div class="leaflet-control-scale leaflet-control"><div class="leaflet-control-scale-line" style="width: 89px;">50 km</div><div class="leaflet-control-scale-line" style="width: 86px;">30 mi</div></div></div><div class="leaflet-bottom leaflet-right"><div class="leaflet-control-layers leaflet-control" title="About WikiMap..." style="cursor: pointer;"><div class="" style="padding: 5px;">Info</div><div class="leaflet-popup-content-wraper" style="max-width: 250px; display: none;"><div class="leaflet-popup-content"><p><b></b></p><center><b>WikiMap</b></center><p></p><p><a href="https://de.wikipedia.org/wiki/Benutzer:DB111/Tools#WikiMap">Documentation</a></p><p><a href="https://wikimap.toolforge.org/gui.php">User interface</a></p></div></div><a class="leaflet-popup-close-button" style="cursor: pointer; display: none;">x</a></div><div class="leaflet-control-attribution leaflet-control"><a href="https://leafletjs.com" title="A JS library for interactive maps">Leaflet</a> | <a href="https://foundation.wikimedia.org/wiki/Maps_Terms_of_Use">Wikimedia maps</a> per <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors</div></div></div></div>
+    
+  
+
+</body></html>
