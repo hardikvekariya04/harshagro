@@ -1,3 +1,4 @@
+update_map();
 let map = L.map("map").setView([23.017054, 71.760498], 7.3);
 
 L.tileLayer(
