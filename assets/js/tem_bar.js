@@ -47,7 +47,7 @@ $.ajax({
     data: { taluka_id: taluka_id , date_id: date_id , temp_id: temp_id,per_id: per_id},
     success: function (result) {
         result = JSON.parse(result);
-        // console.log(result.amount);  
+        console.log(result.final_array);  
         update_chart(result);  
         // update_chart1(result); 
     }
@@ -59,6 +59,7 @@ $.ajax({
   data: { taluka_id: taluka_id , date_id: date_id , temp_id: temp_id,per_id: per_id},
   success: function (result1) {
       result1 = JSON.parse(result1);
+      console.log(result1.date_array);
       update_chart1(result1); 
   }
 });

@@ -1,4 +1,4 @@
-update_map();
+
 let map = L.map("map").setView([23.017054, 71.760498], 7.3);
 
 L.tileLayer(
@@ -160,10 +160,10 @@ legend.addTo(map);
 
 //DropdownCode--------------
 
-let distSel = document.getElementById("distsel");
+let distSel = document.getElementById("district");
 let ahmadabad = document.getElementById("1");
 
-distSel.addEventListener("change", (e) => {
+district.addEventListener("change", (e) => {
   if (e.target.selectedIndex === 0) {
     map.setView([22.953841, 72.549866], 8.5);
     dropDownFeature(182);

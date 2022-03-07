@@ -521,17 +521,17 @@
               
 
               <select class="in" name="type" id="type">
-              <option value="">select</option>
+           
                 <option value="min">Min Temp</option>
                 <option value="max">Max Temp</option>
                 <option value="rain">Rainfall</option>
               </select>
 
-              <select class="in" name="period" id="per">
+              <!-- <select class="in" name="period" id="per">
                 <option value="">select</option>
                 <option value="last 6 month" >last 6 month</option>
                 <option value="last 3 year">last 3 year</option>
-              </select>
+              </select> -->
 
               <input class="in" id="date" type="date" placeholder="DD-MM-YYYY" min="1997-01-01" max="2023-02-15" value="2020-12-15">
               
@@ -584,6 +584,11 @@
               <div class="chart" id="chart_data">
                   <canvas id="chart-line" class="chart-canvas" height="300" width="300"></canvas>
                 </div>
+                <select class="in" name="period" id="per">
+                <option value="">select</option>
+                <option value="last 6 month" >last 6 month</option>
+                <option value="last 3 year">last 3 year</option>
+              </select>
                 <div class="chart" id="chart_data1">
                   <canvas id="chart-bars" class="chart-canvas" height="300" width="300"></canvas>
                 </div>
@@ -657,7 +662,10 @@
     integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA=="
     crossorigin=""></script>
     <!-- <script src="./assets/js/talukas.php"></script> -->
-    <script src="./assets/js/map_fetch_data.js"></script>
+    <script src="./assets/js/talukas.js"></script>
+    <script src="./assets/js/leaf.js"></script>
+    
+
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
   <script src="https://code.highcharts.com/highcharts.js"></script>
   <script src="https://code.highcharts.com/modules/exporting.js"></script>
@@ -1030,7 +1038,6 @@ echo $avg_high_year_temp5;
           fill: true,
           data: <?php echo json_encode($month1)?>,
           maxBarThickness: 6
-
         }],
       },
       options: {

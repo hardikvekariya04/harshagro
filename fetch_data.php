@@ -6,15 +6,15 @@ $temp_id = $_POST['temp_id'];
 
 //last 7 days data fetch :
 // $date1 = $date_id;
-$date1 = strtotime($date_id);
-// $monthly = date('Y-m-d', strtotime($date_id. ' - 1 month')); 
-// $date10 =strtotime($date1. '+0 day');
-// $date2 = strtotime($date1. '-1 day');
-// $date3 = strtotime($date1. '-2 day');
-// $date4 = strtotime($date1. '-3 day');
-// $date5 = strtotime($date1. '-4 day');
-// $date6 = strtotime($date1. '-5 day');
-// $date7 = strtotime($date1. '-6 day');
+// $date1 = strtotime($date_id);
+// // $monthly = date('Y-m-d', strtotime($date_id. ' - 1 month')); 
+// // $date10 =strtotime($date1. '+0 day');
+// // $date2 = strtotime($date1. '-1 day');
+// // $date3 = strtotime($date1. '-2 day');
+// // $date4 = strtotime($date1. '-3 day');
+// // $date5 = strtotime($date1. '-4 day');
+// // $date6 = strtotime($date1. '-5 day');
+// // $date7 = strtotime($date1. '-6 day');
 $dates1 =  date('Y-m-d', strtotime($date_id. '+0 day'));
 $dates2  =date('Y-m-d', strtotime($date_id. '-1 day'));
 $dates3  =date('Y-m-d', strtotime($date_id.'-2 day'));
@@ -35,7 +35,7 @@ if($temp_id === 'max' ){
     $return_data['amount'] = $amount;
     echo json_encode($return_data);
 }
-elseif($temp_id === 'min'){
+else{
   $query1 =$con->query("SELECT min_temp,date from newdata where taluka_id = ".$taluka_id." AND date IN('$dates1','$dates2','$dates3','$dates4','$dates5','$dates6','$dates7')" );
   $month = array();
   $amount = array();
@@ -43,25 +43,94 @@ elseif($temp_id === 'min'){
     $month[] = $row1['min_temp'];
     $amount[] = $row1['date'];
   }
+  
   $return_data = array();
     $return_data['month'] = $month; 
     $return_data['amount'] = $amount;
     echo json_encode($return_data);
 }
-else{
-    $query1 =$con->query("SELECT min_temp,date from newdata where taluka_id = ".$taluka_id." AND date IN('$dates1','$dates2','$dates3','$dates4','$dates5','$dates6','$dates7')" );
-    $month = array();
-    $amount = array();
-    while($row1 = $query1->fetch_assoc()){
-      $month[] = $row1['min_temp'];
-      $amount[] = $row1['date'];
-    }
-    $return_data = array();
-      $return_data['month'] = $month; 
-      $return_data['amount'] = $amount;
-      echo json_encode($return_data);
-  
-}
+// else{
+
+// $dates1 =  date('Y-m-d', strtotime($date_id. '+0 day'));
+// $dates2  =date('Y-m-d', strtotime($dates1. '-1 day'));
+// $dates3  =date('Y-m-d', strtotime($dates2.'-2 day'));
+// $dates4  =date('Y-m-d', strtotime($dates3.'-1 day'));
+// $dates5  =date('Y-m-d', strtotime($dates4.'-1 day'));
+// $dates6  =date('Y-m-d', strtotime($dates5.'-1 day'));
+// $dates7  =date('Y-m-d', strtotime($dates6.'-1 day'));
+
+
+//   $query1 =$con->query("SELECT min_temp,date from newdata where taluka_id = ".$taluka_id." AND date IN('$dates1')" );
+//   $month = array();
+//   // $amount = array();
+//   while($row1 = $query1->fetch_assoc()){
+//     $month[] = $row1['min_temp'];
+//     $amount[] = $row1['date'];
+//   }
+
+//   $query2 =$con->query("SELECT min_temp,date from newdata where taluka_id = ".$taluka_id." AND date IN('$dates2')" );
+//   $month2 = array();
+//   // $amount = array();
+//   while($row2 = $query2->fetch_assoc()){
+//     $month2[] = $row2['min_temp'];
+//     $amount2[] = $row2['date'];
+//   }
+
+//   $query3 =$con->query("SELECT min_temp,date from newdata where taluka_id = ".$taluka_id." AND date IN('$dates3')" );
+//   $month3 = array();
+//   // $amount = array();
+//   while($row3 = $query3->fetch_assoc()){
+//     $month3[] = $row3['min_temp'];
+//     $amount3[] = $row3['date'];
+//   }
+
+//   $query4 =$con->query("SELECT min_temp,date from newdata where taluka_id = ".$taluka_id." AND date IN('$dates4')" );
+//   $month4 = array();
+//   // $amount = array();
+//   while($row4 = $query4->fetch_assoc()){
+//     $month4[] = $row4['min_temp'];
+//     $amount4[] = $row4['date'];
+//   }
+
+//   $query5 =$con->query("SELECT min_temp,date from newdata where taluka_id = ".$taluka_id." AND date IN('$dates5')" );
+//   $month5 = array();
+//   // $amount = array();
+//   while($row5 = $query5->fetch_assoc()){
+//     $month5[] = $row5['min_temp'];
+//     $amount[] = $row5['date'];
+//   }
+
+//   $query6 =$con->query("SELECT min_temp,date from newdata where taluka_id = ".$taluka_id." AND date IN('$dates6')" );
+//   $month6 = array();
+//   // $amount = array();
+//   while($row6 = $query6->fetch_assoc()){
+//     $month6[] = $row6['min_temp'];
+//     $amount[] = $row6['date'];
+//   }
+
+//     $hardik_one_date = array();
+//     $hardik_second_date =array();
+//     $hardik_third_date = array();
+//     $hardik_four_date = array();
+//     $hardik_five_date = array();
+//     $hardik_six_date = array();
+
+//     $hardik_one_date[] = strval($dates1);
+//     $hardik_second_date[] = strval($dates2);
+//     $hardik_third_date[] = strval($dates3);
+//     $hardik_four_date[] = strval($dates4);
+//     $hardik_five_date[] = strval($dates5);
+//     $hardik_six_date[] = strval($dates6);
+// // $final_array = array();
+//     $final_array = array_merge($month,$month2,$month3,$month4,$month5,$month6);
+//     $date_array = array_merge($hardik_one_date,$hardik_second_date,$hardik_third_date,$hardik_four_date,$hardik_five_date,$hardik_six_date);
+
+
+//   $return_data = array();
+//     $return_data['final_array'] = $final_array; 
+//     $return_data['date_array'] = $date_array;
+//     echo json_encode($return_data);
+// }
   // echo '<br>';
 
 

@@ -187,7 +187,7 @@ $query7 =$con->query("SELECT AVG(min_temp) as min_temp,date from newdata where t
     echo json_encode($return_data);
   }
   else{
-    $year_date_store = $date_id;
+    $year_date_store = date('Y-m-d', strtotime($date_id. ' +0 year'));
     $yearly_one_date = date('Y-m-d', strtotime($year_date_store. ' - 1 year'));
     $yearly_second_date = date('Y-m-d', strtotime($yearly_one_date. ' - 1 year'));
     $query3 =$con->query("SELECT AVG(min_temp) as min_temp,date from newdata where taluka_id = ".$taluka_id." AND (date_sub('$year_date_store',Interval 1 year)) < date && date <= '$year_date_store'");
