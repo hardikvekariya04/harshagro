@@ -3,6 +3,7 @@ $con = new mysqli('localhost','root','','agro');
 // $taluka_id = $_POST['taluka_id'];
 $date_id1 = $_POST['date_id1'];
 
+
   $query1 =$con->query("SELECT max_temp,date from `district_data`  where date = '$date_id1'" );
   $month = array();
   $amount = array();
