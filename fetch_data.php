@@ -16,6 +16,7 @@ $temp_id = $_POST['temp_id'];
 // // $date6 = strtotime($date1. '-5 day');
 // // $date7 = strtotime($date1. '-6 day');
 $dates1 =  date('Y-m-d', strtotime($date_id. '+0 day'));
+// $hardik_dates = date('m', strtotime($dates1);
 $dates2  =date('Y-m-d', strtotime($date_id. '-1 day'));
 $dates3  =date('Y-m-d', strtotime($date_id.'-2 day'));
 $dates4  =date('Y-m-d', strtotime($date_id.'-3 day'));

@@ -34,7 +34,7 @@
     <div class="sidenav-header">
       <i class="fas fa-times p-3 cursor-pointer text-white opacity-5 position-absolute end-0 top-0 d-none d-xl-none" aria-hidden="true" id="iconSidenav"></i>
       <a class="navbar-brand m-0" href=" https://demos.creative-tim.com/material-dashboard/pages/dashboard " target="_blank">
-        <img src="../assets/img/logo.png" class="navbar-brand-img h-100" alt="main_logo" style="min-width: 12rem; min-height: 4rem; top: 0;">
+      <img src="../assets/img/logo.png" class="navbar-brand-img h-100" alt="main_logo" style="min-width: 8rem; min-height: 3rem; top: 0;">
       </a>
     </div>
     <hr class="horizontal light mt-0 mb-2">
@@ -524,11 +524,12 @@
               </select>
 
               <select class="in" name="period" id="per">
+              <option value="">Select period </option>
                 <option value="last 6 month">last 6 month</option>
                 <option value="last 3 year">last 3 year</option>
               </select>
 
-              <input class="in" id="date" type="date" placeholder="DD-MM-YYYY" min="1997-01-01" max="2020-02-15" value="2018-05-30" selected>
+              <input class="in" id="date" type="date" placeholder="DD-MM-YYYY" min="1997-01-01" max="2020-02-15" value="2020-05-30" selected>
               
             </div>
           </div>
@@ -551,10 +552,10 @@
     <div class="container-fluid py-4">
       
  
-      <div class="row mt-4">
-        <div class="col-lg-6 col-md-6 mt-4 mb-4">
-          <div class="card z-index-2 ">
-            <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2 bg-transparent">
+    <div class="row mt-0" style="margin-bottom:-80px">
+      <div class="col-lg-0 col-md-6 mt-0 mb-4">
+          <!-- <div class="card z-index-2 ">
+            <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2 bg-transparent"> -->
               
                 <div class="mapcontainer" id="map1">
     
@@ -562,32 +563,36 @@
                     <div id="map"></div>
               </div>  
               
-            </div>
-            <div class="card-body">
+            <!-- </div> -->
+            <!-- <div class="card-body">
               <h6 class="mb-0 ">District Level Data</h6>
               <p class="text-sm ">Gujrat, India</p>
               <hr class="dark horizontal">
               <div class="d-flex ">
                 <i class="material-icons text-sm my-auto me-1">schedule</i>
                 <p class="mb-0 text-sm"> updated few mins ago </p>
-              </div>
-            </div>
+              </div>-->
+            <!-- </div>  -->
           </div>
-        </div>
-        <div class="col-lg-6 col-md-6 mt-4 mb-4">
-          <div class="card z-index-2  ">
-            <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2 bg-transparent">
-              <div class="bg-gradient-success shadow-success border-radius-lg py-3 pe-1">
-              <div class="chart" id="chart_data">
-                  <canvas id="chart-line" class="chart-canvas" height="300"></canvas>
-                </div>
-                <div class="chart" id="chart_data1">
-                  <canvas id="chart-bars" class="chart-canvas" height="300" width="300"></canvas>
-                </div>
-                
+      
+        <div class="col-lg-6 col-md-6 mb-4" style="width:570px;margin-top:-20px;">
+          <!-- <div class="card z-index-2  ">
+            <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2 bg-transparent"> -->
+            <div class="bg-gradient-success shadow-success border-radius-lg py-3 pe-1">
+              <div class="chart" id="chart_data" style="width:550px;">
+                  <canvas id="chart-line" class="chart-canvas" height="270" width="300"></canvas>
               </div>
+              <hr style="margin-top:-5px">
+                <div class="chart" id="chart_data1">
+                  <canvas id="chart-bars" class="chart-canvas" height="280" width="300"></canvas>
+                </div>
+                <!-- <div class="chart">
+                  <canvas id="chart-bars1" class="chart-canvas" height="300" width="300"></canvas>
+                </div> -->
+                
             </div>
-            <div class="card-body">
+            <!-- </div> -->
+            <!-- <div class="card-body">
               <h6 class="mb-0 "> Last Year Data </h6>
               <p class="text-sm "> Gujrat, Ahemdabad </p>
               <hr class="dark horizontal">
@@ -595,32 +600,30 @@
                 <i class="material-icons text-sm my-auto me-1">schedule</i>
                 <p class="mb-0 text-sm"> updated few mins ago </p>
               </div>
-            </div>
-          </div>
-        </div>
-        
+            </div> -->
+          <!-- </div>
+        </div>-->
+         
 
 
       
 
       
       </div>
+</div>
       
-      <footer class="footer py-4  ">
+<footer class="footer py-4  ">
         <div class="container-fluid">
           <div class="row align-items-center justify-content-lg-between">
-            <div class="col-lg-6 mb-lg-0 mb-4">
+            <div class="col-lg-5 mb-lg-0 mb-0">
               <div class="copyright text-center text-sm text-muted text-lg-start">
                 © <script>
                   document.write(new Date().getFullYear())
                 </script>,
                 by
                 <a class="font-weight-bold" target="_blank">Agrocast</a>
-                
-              </div>
-            </div>
-            <div class="col-lg-6">
-              <ul class="nav nav-footer justify-content-center justify-content-lg-end">
+                </div>
+                <ul class="nav nav-footer justify-content-center justify-content-lg-end">
                
                 <li class="nav-item">
                   <a href="http://www.agrocastanalytics.com/#content4-28" class="nav-link text-muted" target="_blank">About Us</a>
@@ -632,6 +635,21 @@
                   <a href="http://www.agrocastanalytics.com/index.html#form1-c" class="nav-link pe-0 text-muted" target="_blank">Get in Touch</a>
                 </li>
               </ul>
+              
+            </div>
+            <div class="col-lg-6">
+              <!-- <ul class="nav nav-footer justify-content-center justify-content-lg-end">
+               
+                <li class="nav-item">
+                  <a href="http://www.agrocastanalytics.com/#content4-28" class="nav-link text-muted" target="_blank">About Us</a>
+                </li>
+                <li class="nav-item">
+                  <a href="http://www.agrocastanalytics.com/#team1-1g" class="nav-link text-muted" target="_blank">Team</a>
+                </li>
+                <li class="nav-item">
+                  <a href="http://www.agrocastanalytics.com/index.html#form1-c" class="nav-link pe-0 text-muted" target="_blank">Get in Touch</a>
+                </li>
+              </ul> -->
             </div>
           </div>
         </div>
@@ -671,6 +689,24 @@
 
 <?php
 // last 7 days 
+
+// function getStartAndEndDate($week, $year) {
+  // $dto = new DateTime();
+  // $dto->setISODate(2013,52);
+  // $ret = $dto->format('Y-m-d');
+  // echo $ret;
+  // $dto->modify('+1 days');
+  // $ret3 = $dto->format('Y-m-d');
+  // echo $ret3;
+  // $dto->modify('+6 days');
+  // $ret2 = $dto->format('Y-m-d');
+  // echo $ret2;
+// }
+
+// $week_array = getStartAndEndDate(52,2013);
+// print_r($week_array);
+
+
 $date1 = '2018-07-30';
 $date1 = strtotime($date1);
 
@@ -689,8 +725,8 @@ $dates5  =date('Y-m-d', $date5 );
 $dates6  =date('Y-m-d', $date6 );
 $dates7  =date('Y-m-d', $date7 );
 
-echo '<br>';
-echo  date('Y-m-d', $date3);
+// echo '<br>';
+// echo  date('Y-m-d', $date3);
   $con = new mysqli('localhost','root','','agro');
   // $currDate = "2018-01-07";
   //$query =$con->query("SELECT max_temp,date from district_data where taluka_id = 2 AND date >= CURDATE() - INTERVAL 7 DAY");
@@ -712,6 +748,13 @@ $monthly2 =date('Y-m-d', strtotime($monthly1. ' - 1 month'));
 $monthly3 =date('Y-m-d', strtotime($monthly2. ' - 1 month')); 
 $monthly4 =date('Y-m-d', strtotime($monthly3. ' - 1 month')); 
 $monthly5 =date('Y-m-d', strtotime($monthly4. ' - 1 month')); 
+
+$one_monthly =date("Y - M",strtotime($monthly));
+$second_monthly =date("Y - M",strtotime($monthly1));
+$thrid_monthly =date("Y - M",strtotime($monthly2));
+$four_monthly =date("Y - M",strtotime($monthly3));
+$five_monthly =date("Y - M",strtotime($monthly4));
+$six_monthly =date("Y - M",strtotime($monthly5));
   //$query =$con->query("SELECT max_temp,date from district_data where taluka_id = 2 AND date IN(date_sub('$query_Date',Interval 1 month))" );
   $query =$con->query("SELECT max_temp,date from district_data where taluka_id = 2 AND (date_sub('2018-09-30',Interval 1 month)) < date && date <= '2018-09-30'");
   while($row = $query->fetch_assoc()){
@@ -719,7 +762,7 @@ $monthly5 =date('Y-m-d', strtotime($monthly4. ' - 1 month'));
       $amount[] = $row['date'];
     }
   $months1 =  json_encode($month);
-  echo '<br>';
+  // echo '<br>';
   $first_month =  implode (",",$month);  
   // echo $hardik;
 $month_temp1 = $first_month;//string
@@ -732,8 +775,7 @@ foreach($temp_array1 as $temp1)
 }
  $avg_high_temp1 = $tot_temp1/$temp_array_length1;
 
- echo "Average Temperature is : ".$avg_high_temp1."
-"; 
+//  echo "Average Temperature is : ".$avg_high_temp1.""; 
 
 
 $query3 =$con->query("SELECT max_temp,date from district_data where taluka_id = 2 AND  (date_sub('$monthly',Interval 1 month)) < date && date <= '$monthly'" );
@@ -763,7 +805,7 @@ $query4 =$con->query("SELECT max_temp,date from district_data where taluka_id = 
       $amount4[] = $row4['date'];
     }
   $months4 =  json_encode($month4);
-  echo '<br>';
+  // echo '<br>';
   $third_month =  implode (",",$month4);  
 
 $month_temp3 = $third_month;
@@ -784,7 +826,7 @@ $query5 =$con->query("SELECT max_temp,date from district_data where taluka_id = 
       $amount5[] = $row5['date'];
     }
   $months5 =  json_encode($month5);
-  echo '<br>';
+  // echo '<br>';
   $four_month =  implode (",",$month5); 
 
 $month_temp4 = $four_month;
@@ -805,7 +847,7 @@ $query6 =$con->query("SELECT max_temp,date from district_data where taluka_id = 
       $amount6[] = $row6['date'];
     }
   $months6 =  json_encode($month6);
-  echo '<br>';
+  // echo '<br>';
   $five_month =  implode (",",$month6); 
 $month_temp5 = $five_month;
 $temp_array5 = explode(',', $month_temp5);
@@ -825,7 +867,7 @@ $query7 =$con->query("SELECT max_temp,date from district_data where taluka_id = 
       $amount7[] = $row7['date'];
     }
   $months7 =  json_encode($month7);
-  echo '<br>';
+  // echo '<br>';
   $six_month =  implode (",",$month7); 
 $month_temp6 =$six_month;
 $temp_array6 = explode(',', $month_temp6);
@@ -845,7 +887,7 @@ $query8 =$con->query("SELECT max_temp,date from district_data where taluka_id = 
       $amount8[] = $row8['date'];
     }
   $months8 =  json_encode($month8);
-  echo '<br>';
+  // echo '<br>';
   $seven_month =  implode (",",$month8); 
 $month_temp7 = $seven_month;
 $temp_array7 = explode(',', $month_temp7);
@@ -881,8 +923,8 @@ foreach($year_array as $year_temp)
  $tot_year_temp += $year_temp;
 }
  $avg_high_year_temp = $tot_year_temp/$temp_array_year_length;
- echo "<br>";
- echo $avg_high_year_temp;
+//  echo "<br>";
+//  echo $avg_high_year_temp;
 
 
 
@@ -903,8 +945,8 @@ foreach($year_array1 as $year_temp1)
  $tot_year_temp1 += $year_temp1;
 }
  $avg_high_year_temp1 = $tot_year_temp1/$temp_array_year_length1;
- echo "<br>";
- echo $avg_high_year_temp1;
+//  echo "<br>";
+//  echo $avg_high_year_temp1;
 
 
  $query5 =$con->query("SELECT max_temp,date from district_data where taluka_id = 1 AND (date_sub('$yearly_one_date',Interval 1 year)) < date && date <= '$yearly_one_date'");
@@ -924,8 +966,8 @@ foreach($year_array5 as $year_temp5)
 $tot_year_temp5 += $year_temp5;
 }
 $avg_high_year_temp5 = $tot_year_temp5/$temp_array_year_length5;
-echo "<br>";
-echo $avg_high_year_temp5;
+// echo "<br>";
+// echo $avg_high_year_temp5;
 ?>
 <script>
 
@@ -940,7 +982,7 @@ echo $avg_high_year_temp5;
 //       borderWidth: 0,
 //       borderRadius: 4,
 //       borderSkipped: false,
-//       backgroundColor: "rgba(255, 255, 255, .8)",
+//       backgroundColor: "rgba(000, 000, 000, .8)",
 //       data: [],
 //       maxBarThickness: 6
 //     }, ],
@@ -966,7 +1008,7 @@ echo $avg_high_year_temp5;
 //           drawOnChartArea: true,
 //           drawTicks: false,
 //           borderDash: [5, 5],
-//           color: 'rgba(255, 255, 255, .2)'
+//           color: 'rgba(000, 000, 000, .2)'
 //         },
 //         ticks: {
 //           suggestedMin: 0,
@@ -990,11 +1032,11 @@ echo $avg_high_year_temp5;
 //           drawOnChartArea: true,
 //           drawTicks: false,
 //           borderDash: [5, 5],
-//           color: 'rgba(255, 255, 255, .2)'
+//           color: 'rgba(000, 000, 000, .2)'
 //         },
 //         ticks: {
 //           display: true,
-//           color: '#f8f9fa',
+//           color: '#000',
 //           padding: 10,
 //           font: {
 //             size: 14,
@@ -1013,17 +1055,16 @@ new Chart(ctx, {
   type: "bar",
   data: { 
     // labels:<?php // echo json_encode($amount1) ?>,
-    labels:['<?php echo json_encode($final_date) ?>','<?php echo json_encode($monthly) ?>','<?php echo json_encode($monthly1) ?>','<?php echo json_encode($monthly2) ?>','<?php echo json_encode($monthly3) ?>','<?php echo json_encode($monthly4) ?>','<?php echo json_encode($monthly5) ?>'],
+    labels:['<?php echo json_encode($six_monthly) ?>','<?php echo json_encode($five_monthly) ?>','<?php echo json_encode($four_monthly) ?>','<?php echo json_encode($thrid_monthly) ?>','<?php echo json_encode($second_monthly) ?>','<?php echo json_encode($one_monthly) ?>'],
     datasets: [{
       label: "Temperature",
       tension: 0.4,
       borderWidth: 0,
       borderRadius: 4,
       borderSkipped: false,
-      backgroundColor: "rgba(255, 255, 255, .8)",
+      backgroundColor: "rgba(000, 000, 000, .8)",
       //data: <?php //echo json_encode($month1) ?>,
-      data : ['<?php echo json_encode($avg_high_temp1) ?>','<?php echo json_encode($avg_high_temp2) ?>','<?php echo json_encode($avg_high_temp3) ?>',
-'<?php echo json_encode($avg_high_temp4) ?>','<?php echo json_encode($avg_high_temp5) ?>','<?php echo json_encode($avg_high_temp6) ?>','<?php echo json_encode($avg_high_temp7) ?>'],
+      data : ['<?php echo json_encode($avg_high_temp6) ?>','<?php echo json_encode($avg_high_temp5) ?>','<?php echo json_encode($avg_high_temp4) ?>','<?php echo json_encode($avg_high_temp3) ?>','<?php echo json_encode($avg_high_temp2) ?>','<?php echo json_encode($avg_high_temp1) ?>'],
       maxBarThickness: 6
     }, ],
   },
@@ -1048,7 +1089,7 @@ new Chart(ctx, {
           drawOnChartArea: true,
           drawTicks: false,
           borderDash: [5, 5],
-          color: 'rgba(255, 255, 255, .2)'
+          color: 'rgba(000, 000, 000, .2)'
         },
         ticks: {
           suggestedMin: 0,
@@ -1062,7 +1103,7 @@ new Chart(ctx, {
             style: 'normal',
             lineHeight: 2
           },
-          color: "#fff"
+          color: "#000"
         },
       },
       x: {
@@ -1072,11 +1113,11 @@ new Chart(ctx, {
           drawOnChartArea: true,
           drawTicks: false,
           borderDash: [5, 5],
-          color: 'rgba(255, 255, 255, .2)'
+          color: 'rgba(000, 000, 000, .2)'
         },
         ticks: {
           display: true,
-          color: '#f8f9fa',
+          color: '#000',
           padding: 10,
           font: {
             size: 14,
@@ -1102,10 +1143,10 @@ new Chart(ctx, {
           tension: 0,
           borderWidth: 0,
           pointRadius: 5,
-          pointBackgroundColor: "rgba(255, 255, 255, .8)",
+          pointBackgroundColor: "rgba(000, 000, 000, .8)",
           pointBorderColor: "transparent",
-          borderColor: "rgba(255, 255, 255, .8)",
-          borderColor: "rgba(255, 255, 255, .8)",
+          borderColor: "rgba(000, 000, 000, .8)",
+          borderColor: "rgba(000, 000, 000, .8)",
           borderWidth: 4,
           backgroundColor: "transparent",
           fill: true,
@@ -1133,11 +1174,11 @@ new Chart(ctx, {
               drawOnChartArea: true,
               drawTicks: false,
               borderDash: [5, 5],
-              color: 'rgba(255, 255, 255, .2)'
+              color: 'rgba(000, 000, 000, .2)'
             },
             ticks: {
               display: true,
-              color: '#f8f9fa',
+              color: '#000',
               padding: 10,
               font: {
                 size: 14,
@@ -1158,7 +1199,7 @@ new Chart(ctx, {
             },
             ticks: {
               display: true,
-              color: '#f8f9fa',
+              color: '#000',
               padding: 10,
               font: {
                 size: 14,

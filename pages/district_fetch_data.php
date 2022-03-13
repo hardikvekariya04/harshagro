@@ -35,6 +35,20 @@ if($temp_id === 'max' ){
     $return_data['amount'] = $amount;
     echo json_encode($return_data);
 }
+elseif($temp_id === 'rain' ){
+  $query1 =$con->query("SELECT rainfall,date from district_data where taluka_id = ".$taluka_id." AND date IN('$dates1','$dates2','$dates3','$dates4','$dates5','$dates6','$dates7')" );
+  $month = array();
+  $amount = array();
+  while($row1 = $query1->fetch_assoc()){
+    $month[] = $row1['rainfall'];
+    $amount[] = $row1['date'];
+  }
+  
+  $return_data = array();
+    $return_data['month'] = $month; 
+    $return_data['amount'] = $amount;
+    echo json_encode($return_data);
+}
 else{
   $query1 =$con->query("SELECT min_temp,date from district_data where taluka_id = ".$taluka_id." AND date IN('$dates1','$dates2','$dates3','$dates4','$dates5','$dates6','$dates7')" );
   $month = array();

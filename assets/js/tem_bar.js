@@ -17,7 +17,12 @@ $district.on( 'change', function() {
 //   $selected_taluka_id = e.target.selectedIndex+1;
 //   console.log(selected_taluka_id);
 // });
-
+var date_id = document.getElementById("date").value;
+console.log(date_id);
+fetch_data();
+var temp_id = document.getElementById("type").value;
+console.log(temp_id);
+fetch_data();
 $(function(){
     $(document).on('change','#taluka',function(){
         taluka_id = $(this).children(":selected").attr("id");
@@ -47,7 +52,7 @@ $.ajax({
     data: { taluka_id: taluka_id , date_id: date_id , temp_id: temp_id,per_id: per_id},
     success: function (result) {
         result = JSON.parse(result);
-        console.log(result.final_array);  
+        console.log(result.amount);  
         update_chart(result);  
         // update_chart1(result); 
     }
@@ -67,21 +72,21 @@ $.ajax({
 
 function update_chart(result){
     $("canvas#chart-line").remove();
-  $("div#chart_data").append('<canvas id="chart-line" class="chart-canvas" height="300" width="300"></canvas>');
+  $("div#chart_data").append('<canvas id="chart-line" class="chart-canvas" height="270" width="300"></canvas>');
       var ctx2 = document.getElementById("chart-line").getContext("2d");
     new Chart(ctx2, {
       type: "line",
       data: {
         labels: result.amount,
         datasets: [{
-          label: `${temp_id}`,
+          label: `${temp_id}`+ ` ` + `Temp`,
           tension: 0,
           borderWidth: 0,
           pointRadius: 5,
-          pointBackgroundColor: "rgba(255, 255, 255, .8)",
+          pointBackgroundColor: "rgba(000, 000, 000, .8)",
           pointBorderColor: "transparent",
-          borderColor: "rgba(255, 255, 255, .8)",
-          borderColor: "rgba(255, 255, 255, .8)",
+          borderColor: "rgba(000, 000, 000, .8)",
+          borderColor: "rgba(000, 000, 000, .8)",
           borderWidth: 4,
           backgroundColor: "transparent",
           fill: true,
@@ -110,11 +115,11 @@ function update_chart(result){
               drawOnChartArea: true,
               drawTicks: false,
               borderDash: [5, 5],
-              color: 'rgba(255, 255, 255, .2)'
+              color: 'rgba(000, 000, 000, .2)'
             },
             ticks: {
               display: true,
-              color: '#f8f9fa',
+              color: '#000',
               padding: 10,
               font: {
                 size: 14,
@@ -135,7 +140,7 @@ function update_chart(result){
             },
             ticks: {
               display: true,
-              color: '#f8f9fa',
+              color: '#000',
               padding: 10,
               font: {
                 size: 14,
@@ -153,19 +158,19 @@ function update_chart(result){
 
 function update_chart1(result1){
   $("canvas#chart-bars").remove();
-$("div#chart_data1").append('<canvas id="chart-bars" class="chart-canvas" height="300" width="300"></canvas>');
+$("div#chart_data1").append('<canvas id="chart-bars" class="chart-canvas" height="280" width="300"></canvas>');
 var ctx = document.getElementById("chart-bars").getContext("2d");
   new Chart(ctx, {
       type: "bar",
       data: { 
         labels: result1.date_array,
         datasets: [{
-          label: "Temperature",
+          label: `${temp_id}`+ ` ` + `Temp`,
           tension: 0.4,
           borderWidth: 0,
           borderRadius: 4,
           borderSkipped: false,
-          backgroundColor: "rgba(255, 255, 255, .8)",
+          backgroundColor: "rgba(000, 000, 000, .8)",
           data: result1.final_array,
           maxBarThickness: 6
         }, ],
@@ -191,7 +196,7 @@ var ctx = document.getElementById("chart-bars").getContext("2d");
               drawOnChartArea: true,
               drawTicks: false,
               borderDash: [5, 5],
-              color: 'rgba(255, 255, 255, .2)'
+              color: 'rgba(000, 000, 000, .2)'
             },
             ticks: {
               suggestedMin: 0,
@@ -205,7 +210,7 @@ var ctx = document.getElementById("chart-bars").getContext("2d");
                 style: 'normal',
                 lineHeight: 2
               },
-              color: "#fff"
+              color: "#000"
             },
           },
           x: {
@@ -215,11 +220,11 @@ var ctx = document.getElementById("chart-bars").getContext("2d");
               drawOnChartArea: true,
               drawTicks: false,
               borderDash: [5, 5],
-              color: 'rgba(255, 255, 255, .2)'
+              color: 'rgba(000, 000, 000, .2)'
             },
             ticks: {
               display: true,
-              color: '#f8f9fa',
+              color: '#000',
               padding: 10,
               font: {
                 size: 14,
