@@ -1,34 +1,45 @@
 <?php
-// $con = new mysqli('localhost','root','','agro');
-// // $taluka_id = $_POST['taluka_id'];
-// $date_id = $_POST['date_id'];
-
-// $query1 =$con->query("SELECT taluka_id,date,max_temp,coodinate,lat,lng from newdata1 where date = '${date_id}'");
-//   $month = array();
-//   $amount = array();
-//   $taluka_id = array();
-//   $coodinate = array();
-//   $lat = array();
-//   $lng = array();
-// $final_array=array();
-//   while($rows1 = $query1->fetch_assoc()){
-//     $month[] = $rows1['max_temp'];
-//     $amount[] = $rows1['date'];
-//     $taluka_id[] = $rows1['taluka_id'];
-//     $coodinate[] = array($rows1['lat'], $rows1['lng']);
-//     $lat[] = $rows1['lat'];
-//     $lng[] = $rows1['lng'];
-//   }
-//   $final_array = array_merge($lat,$lng);
-//   $return_data = array();
-//     $return_data['month'] = $month; 
-//     $return_data['amount'] = $amount;
-//     $return_data['taluka_id']= $taluka_id;
-//     // $return_data['final_array']= $final_array;
-
-//     $return_data['coodinate'] = $coodinate;
-//     $return_data['lat'] = $lat;
-//     $return_data['lng'] = $lng;
-
-//     echo json_encode($return_data);
+$con = new mysqli('localhost','root','','agro');
+// $taluka_id = $_POST['taluka_id'];
+$date_id1 = $_POST['date_id1'];
+$type_id1 = $_POST['type_id1'];
+if($type_id1 === 'min'){
+  $query1 =$con->query("SELECT min_temp,date from `newdata`  where date = '$date_id1'" );
+  $month = array();
+  $amount = array();
+  while($row1 = $query1->fetch_assoc()){
+    $month[] = $row1['min_temp'];
+    // $amount[] = $row1['date'];
+  }
+  $return_data = array();
+    $return_data['month'] = $month; 
+    // $return_data['amount'] = $amount;
+    echo json_encode($return_data);
+}
+elseif($type_id1 === 'max'){
+  $query1 =$con->query("SELECT max_temp,date from `newdata`  where date = '$date_id1'" );
+  $month = array();
+  $amount = array();
+  while($row1 = $query1->fetch_assoc()){
+    $month[] = $row1['max_temp'];
+    // $amount[] = $row1['date'];
+  }
+  $return_data = array();
+    $return_data['month'] = $month; 
+    // $return_data['amount'] = $amount;
+    echo json_encode($return_data);
+}
+else{
+  $query1 =$con->query("SELECT min_temp,date from `newdata`  where date = '$date_id1'" );
+  $month = array();
+  $amount = array();
+  while($row1 = $query1->fetch_assoc()){
+    $month[] = $row1['min_temp'];
+    // $amount[] = $row1['date'];
+  }
+  $return_data = array();
+    $return_data['month'] = $month; 
+    // $return_data['amount'] = $amount;
+    echo json_encode($return_data);
+}
 ?>

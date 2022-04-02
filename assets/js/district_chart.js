@@ -3,20 +3,7 @@ var taluka_id ='';
 var date_id = '';
 var temp_id = '';
 var per_id = '';
-// var $district = $( '#district' ),
-// 		$taluka = $( '#taluka' ),
-//     $options = $taluka.find( 'option' );
-    
-// $district.on( 'change', function() {
-// 	$taluka.html( $options.filter( '[value="' + this.value + '"]' ) );
-// } ).trigger( 'change' );
-// let taluka_id = document.getElementById("taluka");
-// // let ahmadabad = document.getElementById("1");
 
-// taluka_id.addEventListener("change", (e) => {
-//   $selected_taluka_id = e.target.selectedIndex+1;
-//   console.log(selected_taluka_id);
-// });
 var date_id = document.getElementById("date").value;
 console.log(date_id);
 fetch_data();

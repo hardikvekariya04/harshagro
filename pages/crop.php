@@ -41,7 +41,7 @@
     <div class="collapse navbar-collapse  w-auto  max-height-vh-100" id="sidenav-collapse-main">
       <ul class="navbar-nav">
         <li class="nav-item">
-          <a class="nav-link text-dark active bg-gradient-primary" href="../indexD.html">
+          <a class="nav-link text-dark active bg-gradient-primary" href="../indexD.php">
             <div class="text-dark text-center me-2 d-flex align-items-center justify-content-center">
               <i class="material-icons opacity-10">dashboard</i>
             </div>
@@ -59,7 +59,7 @@
         </li>
 
         <li class="nav-item" >
-          <a class="nav-link text-dark active bg-gradient-info" href="../indexD.html">
+          <a class="nav-link text-dark active bg-gradient-info" href="../indexD.php">
             <div class="text-dark text-center me-2 d-flex align-items-center justify-content-center">
               <i class="material-icons opacity-10">circle</i>
             </div>
@@ -77,7 +77,7 @@
         </li>
 
         <li class="nav-item">
-          <a class="nav-link text-dark " href="../pages/crop.html">
+          <a class="nav-link text-dark " href="../pages/crop.php">
             <div class="text-dark text-center me-2 d-flex align-items-center justify-content-center">
               <i class="material-icons opacity-10">table_view</i>
             </div>
@@ -85,7 +85,15 @@
             
           </a>
         </li>
-       
+        <li class="nav-item">
+          <a class="nav-link text-dark " href="../pages/taluka_crop.php">
+            <div class="text-dark text-center me-2 d-flex align-items-center justify-content-center">
+              <i class="material-icons opacity-10">table_view</i>
+            </div>
+            <span class="nav-link-text ms-1">Taluka Crops</span>
+            
+          </a>
+        </li>
         
       </ul>
     </div>
@@ -117,45 +125,45 @@
               
                 <!-- <label>Select District:</label> -->
                 <select id="district" >
-                    <option value="Ahmadabad" id="0">Ahmadabad</option>
-                    <option value="Anand" id="1">Anand</option>
-                    <option value="Banaskantha" id="2">Banaskantha</option>
-                    <option value="Bharuch" id="3">Bharuch</option>
-                    <option value="Dahod" id="4">Dahod</option>
-                    <option value="Gandhinagar" id="5">Gandhinagar</option>
-                    <option value="Jamnagar" id="6">Jamnagar</option>
-                    <option value="Junagadh" id="7">Junagadh</option>
-                    <option value="Kachchh" id="8">Kachchh</option>
-                    <option value="Kheda" id="9">Kheda</option>
-                    <option value="Mahesana" id="10">Mahesana</option>
-                    <option value="Narmada" id="11">Narmada</option>
-                    <option value="Navsari" id="12">Navsari</option>
-                    <option value="Panchmahal" id="13">Panchmahal</option>
-                    <option value="Patan" id="14">Patan</option>
-                    <option value="Porbandar" id="15">Porbandar</option>
-                    <option value="Rajkot" id="16">Rajkot</option>
-                    <option value="Sabarkantha" id="17">Sabarkantha</option>
-                    <option value="Surat" id="18">Surat</option>
-                    <option value="Surendrangar" id="19">Surendrangar</option>
-                    <option value="Dang" id="20">Dang</option>
-                    <option value="Vadodara" id="21">Vadodara</option>
-                    <option value="Valsad" id="22">Valsad</option>
-                    <option value="Tapi" id="23">Tapi</option>
-                    <option value="Devbhumi Dwarka" id="24">Devbhumi Dwarka</option>
-                    <option value="Morbi" id="25">Morbi</option>
-                    <option value="Aravalli" id="26">Aravalli</option>
-                    <option value="Chhota Udaipur" id="27">Chhota Udaipur</option>
-                    <option value="Amreli" id="28">Amreli</option>
-                    <option value="Girsomnath" id="29">Girsomnath</option>
-                    <option value="Mahisagar" id="30">Mahisagar</option>
-                    <option value="Bhavnagar" id="31">Bhavnagar</option>
-                    <option value="Botad" id="32">Botad</option>
+                    <option  id="0" selected>Ahmadabad</option>
+                    <option  id="1">Anand</option>
+                    <option  id="2">Banaskantha</option>
+                    <option  id="3">Bharuch</option>
+                    <option  id="4">Dahod</option>
+                    <option  id="5">Gandhinagar</option>
+                    <option  id="6">Jamnagar</option>
+                    <option  id="7">Junagadh</option>
+                    <option  id="8">Kachchh</option>
+                    <option  id="9">Kheda</option>
+                    <option  id="10">Mahesana</option>
+                    <option  id="11">Narmada</option>
+                    <option  id="12">Navsari</option>
+                    <option  id="13">Panchmahal</option>
+                    <option  id="14">Patan</option>
+                    <option  id="15">Porbandar</option>
+                    <option  id="16">Rajkot</option>
+                    <option  id="17">Sabarkantha</option>
+                    <option  id="18">Surat</option>
+                    <option  id="19">Surendrangar</option>
+                    <option  id="20">Dang</option>
+                    <option  id="21">Vadodara</option>
+                    <option  id="22">Valsad</option>
+                    <option  id="23">Tapi</option>
+                    <option  id="24">Devbhumi Dwarka</option>
+                    <option  id="25">Morbi</option>
+                    <option  id="26">Aravalli</option>
+                    <option  id="27">Chhota Udaipur</option>
+                    <option  id="28">Amreli</option>
+                    <option  id="29">Girsomnath</option>
+                    <option  id="30">Mahisagar</option>
+                    <option  id="31">Bhavnagar</option>
+                    <option  id="32">Botad</option>
                     
                    
                     
                 </select>
 
-              <!-- <select class="in" name="Taluka" id="dis">
+              <!-- <select class="in" name="Taluka" value="dis">
                 <optgroup label="Gujrat">
                 <optgroup label="Ahmedabad">
                 <option value="1">Ahmedabad</option>
@@ -517,16 +525,15 @@
                 </optgroup>
               </select> -->
               <select class="in" name="weeks" id="weeks">
-                <option value="0" default>0</option>
-                <option value="1">1</option>
-                <option value="2">2</option>
-                <option value="3">3</option>
-                <option value="4">4</option>
-                <option value="5">5</option>
-                <option value="6">6</option>
-                <option value="7">7</option>
-                <option value="8">8</option>
-                <option value="9">9</option>
+                <option value="1">01</option>
+                <option value="2">02</option>
+                <option value="3">03</option>
+                <option value="4">04</option>
+                <option value="5">05</option>
+                <option value="6">06</option>
+                <option value="7">07</option>
+                <option value="8">08</option>
+                <option value="9">09</option>
                 <option value="10">10</option>
                 <option value="11" selected>11</option>
                 <option value="12">12</option>
@@ -584,7 +591,7 @@
               <select class="in" name="period" id="per">
               <option value="">Select period </option>
                 <option value="last 6 month">last 6 month</option>
-                <option value="last 3 year">last 3 year</option>
+                <option value="last 3 year">last 52 weeks</option>
               </select>
 
               <!-- <input class="in" id="date" type="date" placeholder="DD-MM-YYYY" min="1997-01-01" max="2020-02-15" value="2020-05-30" selected> -->
@@ -643,6 +650,8 @@
               </select>
             </div>
           </div>
+          <!-- <input class="in" id="date" type="date" placeholder="YYYY" min="1997" max="2023" value="2020"> -->
+
           <ul class="navbar-nav  justify-content-end">
             
             <li class="nav-item d-xl-none ps-3 d-flex align-items-center">
@@ -847,48 +856,47 @@ $weeknumber6 = $date6->format("W");
           $month1[] = $row1['SMT'];
         }
 
-// last  6 month 
-// $query_Date = '2018-09-30';
-// $final_date = '2018-09-30';
-// $monthly = date('Y-m-d', strtotime($final_date. ' - 1 month')); 
-// $monthly1 = date('Y-m-d', strtotime($monthly. ' - 1 month')); 
-// $monthly2 =date('Y-m-d', strtotime($monthly1. ' - 1 month')); 
-// $monthly3 =date('Y-m-d', strtotime($monthly2. ' - 1 month')); 
-// $monthly4 =date('Y-m-d', strtotime($monthly3. ' - 1 month')); 
-// $monthly5 =date('Y-m-d', strtotime($monthly4. ' - 1 month')); 
-
-// $one_monthly =date("Y - M",strtotime($monthly));
-// $second_monthly =date("Y - M",strtotime($monthly1));
-// $thrid_monthly =date("Y - M",strtotime($monthly2));
-// $four_monthly =date("Y - M",strtotime($monthly3));
-// $five_monthly =date("Y - M",strtotime($monthly4));
-// $six_monthly =date("Y - M",strtotime($monthly5));
-
-
 $month_weeknumber = '38';
-$dto30 = new DateTime();
-$dto30->setISODate(2013,$month_weeknumber);
-$ret = $dto30->format('Y-m-d');
-echo $ret;
+$month_dto = new DateTime();
+$month_dto->setISODate(2013,$month_weeknumber);
+$month_ret = $month_dto->format('Y-m-d');
+echo $month_ret;
+echo '<br>';
 
-$dto30->modify('-1 month');
-$month_ret2 = $dto30->format('Y-m-d');
+$month_dto->modify('-7 days');
+$month_ret2 = $month_dto->format('Y-m-d');
 echo $month_ret2;
-
-$date3 = new DateTime($month_ret2);
-$month_weeknumber1 = $date3->format("W");
+echo '<br>';
+$month_dto->modify('-7 days');
+$month_ret3 = $month_dto->format('Y-m-d');
+echo $month_ret3;
+echo '<br>';
+$month_dto->modify('-7 days');
+$month_ret4 = $month_dto->format('Y-m-d');
+echo $month_ret4;
+echo '<br>';
+$month_dto1 = new DateTime($month_ret2);
+$month_weeknumber1 = $month_dto1->format("W");
 echo $month_weeknumber1;
+echo '<br>';
 
-  $query =$con->query("SELECT SMT from crop where d_id = 2 AND week BETWEEN '$month_weeknumber1' and '$month_weeknumber' && year = '2013'");
+$month_dto2 = new DateTime($month_ret3);
+$month_weeknumber2 = $month_dto2->format("W");
+echo $month_weeknumber2;
+echo '<br>';
+$month_dto3 = new DateTime($month_ret4);
+$month_weeknumber3 = $month_dto3->format("W");
+echo $month_weeknumber3;
+echo '<br>';
+
+  $query =$con->query("SELECT SMT from crop where d_id = 2 AND week IN('$month_weeknumber','$month_weeknumber1','$month_weeknumber2','$month_weeknumber3') AND year = '2013'");
   while($row = $query->fetch_assoc()){
       $month[] = $row['SMT'];
       // $amount[] = $row['date'];
     }
-  $months1 =  json_encode($month);
-  echo $months1;
-  // echo '<br>';
-  $first_month =  implode (",",$month);  
-  // echo $hardik;
+$months1 =  json_encode($month);
+echo $months1;
+$first_month =  implode (",",$month);  
 $month_temp1 = $first_month;//string
 $temp_array1 = explode(',', $month_temp1);
 $tot_temp1 = 0;
@@ -899,199 +907,225 @@ foreach($temp_array1 as $temp1)
 }
  $avg_high_temp1 = $tot_temp1/$temp_array_length1;
 
-//  echo "Average Temperature is : ".$avg_high_temp1.""; 
+
+$month_dto->modify('-7 days');
+$month_ret5 = $month_dto->format('Y-m-d');
+// echo $month_ret5;
+
+$month_dto->modify('-7 days');
+$month_ret6 = $month_dto->format('Y-m-d');
+// echo $month_ret6;
+$month_dto->modify('-7 days');
+$month_ret7 = $month_dto->format('Y-m-d');
+
+$month_dto->modify('-7 days');
+$month_ret8 = $month_dto->format('Y-m-d');
+
+$month_dto4 = new DateTime($month_ret5);
+$month_weeknumber4 = $month_dto4->format("W");
+// echo $month_weeknumber4;
+
+$month_dto5 = new DateTime($month_ret6);
+$month_weeknumber5 = $month_dto5->format("W");
+
+$month_dto6 = new DateTime($month_ret7);
+$month_weeknumber6 = $month_dto6->format("W");
+
+$month_dto7 = new DateTime($month_ret8);
+$month_weeknumber7 = $month_dto7->format("W");
+
+$query =$con->query("SELECT SMT from crop where d_id = 2 AND week IN('$month_weeknumber4','$month_weeknumber5','$month_weeknumber6','$month_weeknumber7') AND year = '2013'");
+  while($row = $query->fetch_assoc()){
+      $month3[] = $row['SMT'];
+      // $amount[] = $row['date'];
+    }
+    $months2 =  json_encode($month3);
+    $second_month =  implode (",",$month3);  
+  
+  $month_temp2 = $second_month;
+  $temp_array2 = explode(',', $month_temp2);
+  $tot_temp2 = 0;
+  $temp_array_length2 = count($temp_array2);
+  foreach($temp_array2 as $temp2)
+  {
+   $tot_temp2 += $temp2;
+  }
+   $avg_high_temp2 = $tot_temp2/$temp_array_length2;
 
 
-// $query3 =$con->query("SELECT max_temp,date from district_data where taluka_id = 2 AND  (date_sub('$monthly',Interval 1 month)) < date && date <= '$monthly'" );
-//   while($row3 = $query3->fetch_assoc()){
-//       $month3[] = $row3['max_temp'];
-//       $amount3[] = $row3['date'];
-//     }
-//   $months2 =  json_encode($month3);
-//   $second_month =  implode (",",$month3);  
+$month_dto->modify('-7 days');
+$month_ret9 = $month_dto->format('Y-m-d');
 
-// $month_temp2 = $second_month;
-// $temp_array2 = explode(',', $month_temp2);
-// $tot_temp2 = 0;
-// $temp_array_length2 = count($temp_array2);
-// foreach($temp_array2 as $temp2)
-// {
-//  $tot_temp2 += $temp2;
-// }
-//  $avg_high_temp2 = $tot_temp2/$temp_array_length2;
-//  //echo "Average Temperature is : ".$avg_high_temp2."";
+$month_dto->modify('-7 days');
+$month_ret10 = $month_dto->format('Y-m-d');
 
+$month_dto->modify('-7 days');
+$month_ret11 = $month_dto->format('Y-m-d');
 
+$month_dto->modify('-7 days');
+$month_ret12 = $month_dto->format('Y-m-d');
 
-// $query4 =$con->query("SELECT max_temp,date from district_data where taluka_id = 2 AND (date_sub('$monthly1',Interval 1 month)) < date && date <= '$monthly1'" );
-//   while($row4 = $query4->fetch_assoc()){
-//       $month4[] = $row4['max_temp'];
-//       $amount4[] = $row4['date'];
-//     }
-//   $months4 =  json_encode($month4);
-//   // echo '<br>';
-//   $third_month =  implode (",",$month4);  
+$month_dto8 = new DateTime($month_ret9);
+$month_weeknumber8 = $month_dto8->format("W");
 
-// $month_temp3 = $third_month;
-// $temp_array3 = explode(',', $month_temp3);
-// $tot_temp3 = 0;
-// $temp_array_length3 = count($temp_array3);
-// foreach($temp_array3 as $temp3)
-// {
-//  $tot_temp3 += $temp3;
-// }
-//  $avg_high_temp3 = $tot_temp3/$temp_array_length3;
-//  //echo "Average Temperature is : ".$avg_high_temp3."";
+$month_dto9 = new DateTime($month_ret10);
+$month_weeknumber9 = $month_dto9->format("W");
 
+$month_dto10 = new DateTime($month_ret11);
+$month_weeknumber10 = $month_dto10->format("W");
 
-// $query5 =$con->query("SELECT max_temp,date from district_data where taluka_id = 2 AND (date_sub('$monthly2',Interval 1 month)) < date && date <= '$monthly2'" );
-//   while($row5 = $query5->fetch_assoc()){
-//       $month5[] = $row5['max_temp'];
-//       $amount5[] = $row5['date'];
-//     }
-//   $months5 =  json_encode($month5);
-//   // echo '<br>';
-//   $four_month =  implode (",",$month5); 
+$month_dto11 = new DateTime($month_ret12);
+$month_weeknumber11 = $month_dto11->format("W");
 
-// $month_temp4 = $four_month;
-// $temp_array4 = explode(',', $month_temp4);
-// $tot_temp4 = 0;
-// $temp_array_length4 = count($temp_array4);
-// foreach($temp_array4 as $temp4)
-// {
-//  $tot_temp4 += $temp4;
-// }
-//  $avg_high_temp4 = $tot_temp4/$temp_array_length4;
-//  //echo "Average Temperature is : ".$avg_high_temp4."";
+$query =$con->query("SELECT SMT from crop where d_id = 2 AND week IN('$month_weeknumber8','$month_weeknumber9','$month_weeknumber10','$month_weeknumber11') AND year = '2013'");
+  while($row = $query->fetch_assoc()){
+      $month4[] = $row['SMT'];
+    }
+
+$months4 =  json_encode($month4);
+  // echo '<br>';
+  $third_month =  implode (",",$month4);  
+
+$month_temp3 = $third_month;
+$temp_array3 = explode(',', $month_temp3);
+$tot_temp3 = 0;
+$temp_array_length3 = count($temp_array3);
+foreach($temp_array3 as $temp3)
+{
+ $tot_temp3 += $temp3;
+}
+ $avg_high_temp3 = $tot_temp3/$temp_array_length3;
 
 
-// $query6 =$con->query("SELECT max_temp,date from district_data where taluka_id = 2 AND (date_sub('$monthly3',Interval 1 month)) < date && date <= '$monthly3'" );
-//   while($row6 = $query6->fetch_assoc()){
-//       $month6[] = $row6['max_temp'];
-//       $amount6[] = $row6['date'];
-//     }
-//   $months6 =  json_encode($month6);
-//   // echo '<br>';
-//   $five_month =  implode (",",$month6); 
-// $month_temp5 = $five_month;
-// $temp_array5 = explode(',', $month_temp5);
-// $tot_temp5 = 0;
-// $temp_array_length5 = count($temp_array5);
-// foreach($temp_array5 as $temp5)
-// {
-//  $tot_temp5 += $temp5;
-// }
-//  $avg_high_temp5 = $tot_temp5/$temp_array_length5;
-//  //echo "Average Temperature is : ".$avg_high_temp5."";
+$month_dto->modify('-7 days');
+$month_ret13 = $month_dto->format('Y-m-d');
+
+$month_dto->modify('-7 days');
+$month_ret14 = $month_dto->format('Y-m-d');
+
+$month_dto->modify('-7 days');
+$month_ret15 = $month_dto->format('Y-m-d');
+
+$month_dto->modify('-7 days');
+$month_ret16 = $month_dto->format('Y-m-d');
+
+$month_dto12 = new DateTime($month_ret13);
+$month_weeknumber12 = $month_dto12->format("W");
+
+$month_dto13 = new DateTime($month_ret14);
+$month_weeknumber13 = $month_dto13->format("W");
+
+$month_dto14 = new DateTime($month_ret15);
+$month_weeknumber14 = $month_dto14->format("W");
+
+$month_dto16 = new DateTime($month_ret16);
+$month_weeknumber15 = $month_dto16->format("W");
+
+$query =$con->query("SELECT SMT from crop where d_id = 2 AND week IN('$month_weeknumber12','$month_weeknumber13','$month_weeknumber14','$month_weeknumber15') AND year = '2013'");
+  while($row = $query->fetch_assoc()){
+      $month5[] = $row['SMT'];
+    }
+
+    $months5 =  json_encode($month5);
+  // echo '<br>';
+  $four_month =  implode (",",$month5); 
+
+$month_temp4 = $four_month;
+$temp_array4 = explode(',', $month_temp4);
+$tot_temp4 = 0;
+$temp_array_length4 = count($temp_array4);
+foreach($temp_array4 as $temp4)
+{
+ $tot_temp4 += $temp4;
+}
+ $avg_high_temp4 = $tot_temp4/$temp_array_length4;
 
 
-// $query7 =$con->query("SELECT max_temp,date from district_data where taluka_id = 2 AND (date_sub('$monthly4',Interval 1 month)) < date && date <= '$monthly4'" );
-//   while($row7 = $query7->fetch_assoc()){
-//       $month7[] = $row7['max_temp'];
-//       $amount7[] = $row7['date'];
-//     }
-//   $months7 =  json_encode($month7);
-//   // echo '<br>';
-//   $six_month =  implode (",",$month7); 
-// $month_temp6 =$six_month;
-// $temp_array6 = explode(',', $month_temp6);
-// $tot_temp6 = 0;
-// $temp_array_length6 = count($temp_array6);
-// foreach($temp_array6 as $temp6)
-// {
-//  $tot_temp6 += $temp6;
-// }
-//  $avg_high_temp6 = $tot_temp6/$temp_array_length6;
-//  //echo "Average Temperature is : ".$avg_high_temp6."";
+$month_dto->modify('-7 days');
+$month_ret17 = $month_dto->format('Y-m-d');
+
+$month_dto->modify('-7 days');
+$month_ret18 = $month_dto->format('Y-m-d');
+
+$month_dto->modify('-7 days');
+$month_ret19 = $month_dto->format('Y-m-d');
+
+$month_dto->modify('-7 days');
+$month_ret20 = $month_dto->format('Y-m-d');
+
+$month_dto17 = new DateTime($month_ret17);
+$month_weeknumber16 = $month_dto17->format("W");
+
+$month_dto18 = new DateTime($month_ret18);
+$month_weeknumber17 = $month_dto18->format("W");
+
+$month_dto19 = new DateTime($month_ret19);
+$month_weeknumber18 = $month_dto19->format("W");
+
+$month_dto20 = new DateTime($month_ret20);
+$month_weeknumber19 = $month_dto20->format("W");
+
+  $query =$con->query("SELECT SMT from crop where d_id = 2 AND week IN('$month_weeknumber16','$month_weeknumber17','$month_weeknumber18','$month_weeknumber19') AND year = '2013'");
+
+  while($row = $query->fetch_assoc()){
+      $month6[] = $row['SMT'];
+    }
+    $months6 =  json_encode($month6);
+    // echo '<br>';
+    $five_month =  implode (",",$month6); 
+  $month_temp5 = $five_month;
+  $temp_array5 = explode(',', $month_temp5);
+  $tot_temp5 = 0;
+  $temp_array_length5 = count($temp_array5);
+  foreach($temp_array5 as $temp5)
+  {
+   $tot_temp5 += $temp5;
+  }
+   $avg_high_temp5 = $tot_temp5/$temp_array_length5;
 
 
-// $query8 =$con->query("SELECT max_temp,date from district_data where taluka_id = 2 AND (date_sub('$monthly5',Interval 1 month)) < date && date <= '$monthly5'" );
-//   while($row8 = $query8->fetch_assoc()){
-//       $month8[] = $row8['max_temp'];
-//       $amount8[] = $row8['date'];
-//     }
-//   $months8 =  json_encode($month8);
-//   // echo '<br>';
-//   $seven_month =  implode (",",$month8); 
-// $month_temp7 = $seven_month;
-// $temp_array7 = explode(',', $month_temp7);
-// $tot_temp7 = 0;
-// $temp_array_length7 = count($temp_array7);
-// foreach($temp_array7 as $temp7)
-// {
-//  $tot_temp7 += $temp7;
-// }
-//  $avg_high_temp7 = $tot_temp7/$temp_array_length7;
-//  //echo "Average Temperature is : ".$avg_high_temp7."";
+$month_dto->modify('-7 days');
+$month_ret21 = $month_dto->format('Y-m-d');
 
+$month_dto->modify('-7 days');
+$month_ret22 = $month_dto->format('Y-m-d');
 
+$month_dto->modify('-7 days');
+$month_ret23 = $month_dto->format('Y-m-d');
 
-// // last 3 year
-// $year_date_store = '2020-12-30';
-// $yearly_one_date = date('Y-m-d', strtotime($year_date_store. ' - 1 year'));
-// $yearly_second_date = date('Y-m-d', strtotime($yearly_one_date. ' - 1 year'));
-// $query3 =$con->query("SELECT max_temp,date from district_data where taluka_id = 1 AND (date_sub('2020-12-30',Interval 1 year)) < date && date <= '2020-12-30'");
-//   while($row3 = $query3->fetch_assoc()){
-//       $year[] = $row3['max_temp'];
-//       $year_date[] = $row3['date'];
-//     }
-//     $years1 =  json_encode($year);
-//     // echo $years1;
-//     $one_year =  implode (",",$year); 
-// $year_temp = $one_year;
-// $year_array = explode(',', $year_temp);
-// $tot_year_temp = 0;
-// $temp_array_year_length = count($year_array);
-// foreach($year_array as $year_temp)
-// {
-//  $tot_year_temp += $year_temp;
-// }
-//  $avg_high_year_temp = $tot_year_temp/$temp_array_year_length;
-// //  echo "<br>";
-// //  echo $avg_high_year_temp;
+$month_dto->modify('-7 days');
+$month_ret24 = $month_dto->format('Y-m-d');
 
+$month_dto21 = new DateTime($month_ret21);
+$month_weeknumber20 = $month_dto21->format("W");
 
+$month_dto22 = new DateTime($month_ret22);
+$month_weeknumber21 = $month_dto22->format("W");
 
-// $query4 =$con->query("SELECT max_temp,date from district_data where taluka_id = 1 AND (date_sub('$yearly_one_date',Interval 1 year)) < date && date <= '$yearly_one_date'");
-//   while($row4 = $query4->fetch_assoc()){
-//       $year1[] = $row4['max_temp'];
-//       $year_date1[] = $row4['date'];
-//     }
-//     $years2 =  json_encode($year1);
-//     // echo $years1;
-//     $one_year1 =  implode (",",$year1); 
-// $year_temp1 = $one_year1;
-// $year_array1 = explode(',', $year_temp1);
-// $tot_year_temp1 = 0;
-// $temp_array_year_length1 = count($year_array1);
-// foreach($year_array1 as $year_temp1)
-// {
-//  $tot_year_temp1 += $year_temp1;
-// }
-//  $avg_high_year_temp1 = $tot_year_temp1/$temp_array_year_length1;
-// //  echo "<br>";
-// //  echo $avg_high_year_temp1;
+$month_dto23 = new DateTime($month_ret23);
+$month_weeknumber22 = $month_dto23->format("W");
 
+$month_dto24 = new DateTime($month_ret24);
+$month_weeknumber23 = $month_dto24->format("W");
 
-//  $query5 =$con->query("SELECT max_temp,date from district_data where taluka_id = 1 AND (date_sub('$yearly_one_date',Interval 1 year)) < date && date <= '$yearly_one_date'");
-//  while($row5 = $query5->fetch_assoc()){
-//      $year5[] = $row5['max_temp'];
-//      $year_date5[] = $row5['date'];
-//    }
-//    $years5 =  json_encode($year5);
-//    // echo $years1;
-//    $one_year5 =  implode (",",$year5); 
-// $year_temp5 = $one_year5;
-// $year_array5 = explode(',', $year_temp5);
-// $tot_year_temp5 = 0;
-// $temp_array_year_length5 = count($year_array5);
-// foreach($year_array5 as $year_temp5)
-// {
-// $tot_year_temp5 += $year_temp5;
-// }
-// $avg_high_year_temp5 = $tot_year_temp5/$temp_array_year_length5;
-// echo "<br>";
-// echo $avg_high_year_temp5;
+$query =$con->query("SELECT SMT from crop where d_id = 2 AND week IN('$month_weeknumber20','$month_weeknumber21','$month_weeknumber22','$month_weeknumber23') AND year = '2013'");
+
+  while($row = $query->fetch_assoc()){
+      $month7[] = $row['SMT'];
+    }
+
+    $months7 =  json_encode($month7);
+  // echo '<br>';
+  $six_month =  implode (",",$month7); 
+$month_temp6 =$six_month;
+$temp_array6 = explode(',', $month_temp6);
+$tot_temp6 = 0;
+$temp_array_length6 = count($temp_array6);
+foreach($temp_array6 as $temp6)
+{
+ $tot_temp6 += $temp6;
+}
+ $avg_high_temp6 = $tot_temp6/$temp_array_length6;
 ?>
 <script>
 
@@ -1179,7 +1213,7 @@ new Chart(ctx, {
   type: "bar",
   data: { 
     // labels:<?php // echo json_encode($amount1) ?>,
-    labels:['<?php echo json_encode($ret) ?>'],
+    labels:['<?php echo json_encode($month_ret) ?>','<?php echo json_encode($month_ret5) ?>','<?php echo json_encode($month_ret9) ?>','<?php echo json_encode($month_ret13) ?>','<?php echo json_encode($month_ret17) ?>','<?php echo json_encode($month_ret21) ?>'],
     datasets: [{
       label: "Temperature",
       tension: 0.4,
@@ -1188,7 +1222,7 @@ new Chart(ctx, {
       borderSkipped: false,
       backgroundColor: "rgba(000, 000, 000, .8)",
       //data: <?php //echo json_encode($month1) ?>,
-      data : ['<?php echo json_encode($avg_high_temp1) ?>'],
+      data : ['<?php echo json_encode($avg_high_temp1) ?>','<?php echo json_encode($avg_high_temp2) ?>','<?php echo json_encode($avg_high_temp3) ?>','<?php echo json_encode($avg_high_temp4) ?>','<?php echo json_encode($avg_high_temp5) ?>','<?php echo json_encode($avg_high_temp6) ?>'],
       maxBarThickness: 6
     }, ],
   },
@@ -1263,7 +1297,7 @@ new Chart(ctx, {
       data: {
         labels: ['<?php echo json_encode($ret7)?>','<?php echo json_encode($ret6)?>','<?php echo json_encode($ret5)?>','<?php echo json_encode($ret4)?>','<?php echo json_encode($ret3)?>','<?php echo json_encode($ret2)?>','<?php echo json_encode($ret)?>'],
         datasets: [{
-          label: "Min Temp",
+          label: "NDVI",
           tension: 0,
           borderWidth: 0,
           pointRadius: 5,

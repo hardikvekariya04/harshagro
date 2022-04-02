@@ -41,7 +41,7 @@
     <div class="collapse navbar-collapse  w-auto  max-height-vh-100" id="sidenav-collapse-main">
       <ul class="navbar-nav">
         <li class="nav-item">
-          <a class="nav-link text-dark active bg-gradient-primary" href="../indexD.html">
+          <a class="nav-link text-dark active bg-gradient-primary" href="../indexD.php">
             <div class="text-dark text-center me-2 d-flex align-items-center justify-content-center">
               <i class="material-icons opacity-10">dashboard</i>
             </div>
@@ -59,7 +59,7 @@
         </li>
 
         <li class="nav-item" >
-          <a class="nav-link text-dark active bg-gradient-info" href="../indexD.html">
+          <a class="nav-link text-dark active bg-gradient-info" href="../indexD.php">
             <div class="text-dark text-center me-2 d-flex align-items-center justify-content-center">
               <i class="material-icons opacity-10">circle</i>
             </div>
@@ -77,11 +77,20 @@
         </li>
 
         <li class="nav-item">
-          <a class="nav-link text-dark " href="../pages/crop.html">
+          <a class="nav-link text-dark " href="../pages/crop.php">
             <div class="text-dark text-center me-2 d-flex align-items-center justify-content-center">
               <i class="material-icons opacity-10">table_view</i>
             </div>
             <span class="nav-link-text ms-1">Crops</span>
+            
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link text-dark " href="../pages/taluka_crop.php">
+            <div class="text-dark text-center me-2 d-flex align-items-center justify-content-center">
+              <i class="material-icons opacity-10">table_view</i>
+            </div>
+            <span class="nav-link-text ms-1">Taluka Crops</span>
             
           </a>
         </li>

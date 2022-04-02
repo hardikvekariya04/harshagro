@@ -50,7 +50,7 @@
         </li>
 
         <li class="nav-item">
-          <a class="nav-link text-dark active bg-gradient-info" href="./pages/district.html">
+          <a class="nav-link text-dark active bg-gradient-info" href="./pages/district.php">
             <div class="text-dark text-center me-2 d-flex align-items-center justify-content-center">
               <i class="material-icons opacity-10">circle</i>
             </div>
@@ -77,7 +77,7 @@
         </li>
 
         <li class="nav-item">
-          <a class="nav-link text-dark " href="./pages/crop.html">
+          <a class="nav-link text-dark " href="./pages/crop.php">
             <div class="text-dark text-center me-2 d-flex align-items-center justify-content-center">
               <i class="material-icons opacity-10">table_view</i>
             </div>
@@ -85,7 +85,15 @@
             
           </a>
         </li>
-       
+        <li class="nav-item">
+          <a class="nav-link text-dark " href="../pages/taluka_crop.php">
+            <div class="text-dark text-center me-2 d-flex align-items-center justify-content-center">
+              <i class="material-icons opacity-10">table_view</i>
+            </div>
+            <span class="nav-link-text ms-1">Taluka Crops</span>
+            
+          </a>
+        </li>
         
       </ul>
     </div>
@@ -563,9 +571,9 @@
             <!-- <div class="card-header p-0 position-relative mt-n4 mx-0 z-index-2 bg-transparent"> -->
               
                 
-        
+        <div id="map1">
             <div id="map"></div>
-              
+</div>  
             <!-- </div> -->
             
               <!-- <h6 class="mb-0 ">Taluka level Data</h6>
@@ -671,7 +679,7 @@
     crossorigin=""></script>
     <!-- <script src="./assets/js/talukas.php"></script> -->
     <script src="./assets/js/talukas.js"></script>
-    <script src="./assets/js/leaf.js"></script>
+    <!-- <script src="./assets/js/leaf.js"></script> -->
     
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>

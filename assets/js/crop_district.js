@@ -3,25 +3,21 @@ var d_id ='';
 var year = '';
 var week = '';
 var per_id = '';
-// var $district = $( '#district' ),
-// 		$taluka = $( '#taluka' ),
-//     $options = $taluka.find( 'option' );
-    
-// $district.on( 'change', function() {
-// 	$taluka.html( $options.filter( '[value="' + this.value + '"]' ) );
-// } ).trigger( 'change' );
-// let d_id = document.getElementById("taluka");
-// // let ahmadabad = document.getElementById("1");
 
-// d_id.addEventListener("change", (e) => {
-//   $selected_taluka_id = e.target.selectedIndex+1;
-//   console.log(selected_taluka_id);
-// });
+// var d_id = document.getElementById("district").value;
+// console.log(d_id);
+// fetch_data();
+var week = document.getElementById("weeks").value;
+console.log(week);
+fetch_data();
 var year = document.getElementById("years").value;
 console.log(year);
 fetch_data();
-var week = document.getElementById("weeks").value;
-console.log(week);
+var per_id = document.getElementById("type").value;
+console.log(per_id);
+fetch_data();
+var period_id = document.getElementById("per").value;
+// console.log(per_id);
 fetch_data();
 $(function(){
     $(document).on('change','#district',function(){
@@ -29,30 +25,35 @@ $(function(){
         console.log(d_id);
         fetch_data();
     })
+    $(document).on('change','#weeks',function(){
+      week = $(this).val();
+      // console.log(week);
+      fetch_data();
+  })
     $(document).on('change','#years',function(){
         year = $(this).val();
         // console.log(year);
         fetch_data();
     })
-    $(document).on('change','#weeks',function(){
-        week = $(this).val();
-        // console.log(week);
-        fetch_data();
-    })
-//     $(document).on('change','#per',function(){
-//       per_id = $(this).val();
-//       console.log(per_id);
-//       fetch_data();
-//   })
+    $(document).on('change','#type',function(){
+      per_id = $(this).val();
+      console.log(per_id);
+      fetch_data();
+  })
+  $(document).on('change','#per',function(){
+    period_id = $(this).val();
+    console.log(period_id);
+    fetch_data();
+})
 });
 function fetch_data(){
 $.ajax({
     url: path +"crop_district_fetch_data.php"  ,
     type: 'post',
-    data: { d_id: d_id , year: year , week: week},
+    data: { d_id: d_id , week: week, year: year ,per_id: per_id},
     success: function (result) {
         result = JSON.parse(result);
-        // console.log(result.final_array);  
+        console.log(result.month);  
         update_chart(result);  
         // update_chart1(result); 
     }
@@ -61,10 +62,10 @@ $.ajax({
 $.ajax({
   url: path +"crop_district_fetch_bar_data.php"  ,
   type: 'post',
-  data: { d_id: d_id , year: year , week: week,per_id: per_id},
+  data: { d_id: d_id , week: week , year: year ,per_id: per_id,period_id: period_id},
   success: function (result1) {
       result1 = JSON.parse(result1);
-      console.log(result1.date_array);
+      console.log(result1.one_month_avg);
       update_chart1(result1); 
   }
 });
@@ -77,9 +78,9 @@ function update_chart(result){
     new Chart(ctx2, {
       type: "line",
       data: {
-        labels: result.amount,
+        labels: result.final_array,
         datasets: [{
-          label: `${week}`+` `+`Temp`,
+          label: `${per_id}`+` `+`Temp`,
           tension: 0,
           borderWidth: 0,
           pointRadius: 5,
@@ -90,7 +91,7 @@ function update_chart(result){
           borderWidth: 4,
           backgroundColor: "transparent",
           fill: true,
-          data: result.month,
+          data: result.month_final,
           maxBarThickness: 6
 
         }],
@@ -165,13 +166,13 @@ var ctx = document.getElementById("chart-bars").getContext("2d");
       data: { 
         labels: result1.date_array,
         datasets: [{
-          label: `${week}`+` `+`Temp`,
+          label: `${per_id}`+` `+`Temp`,
           tension: 0,
           borderWidth: 0,
           borderRadius: 5,
           borderSkipped: false,
           backgroundColor: "rgba(000, 000, 000, .8)",
-          data: result1.final_array,
+          data: result1.final_month_array,
           maxBarThickness: 6
         }, ],
       },
@@ -238,5 +239,4 @@ var ctx = document.getElementById("chart-bars").getContext("2d");
         },
       },
     });
-    
 }
