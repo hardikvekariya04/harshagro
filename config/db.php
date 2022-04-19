@@ -1,8 +1,9 @@
 <?php
     
-    $con = mysqli_connect("localhost","root","","agrocast");
+    $con = mysqli_connect("localhost","root","","agro");
     // Check connection
     if (mysqli_connect_errno()){
         echo "Failed to connect to MySQL: " . mysqli_connect_error();
     }
+
 ?>

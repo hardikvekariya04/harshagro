@@ -5,30 +5,24 @@ var temp_id = '';
 var per_id = '';
 
 var date_id = document.getElementById("date").value;
-console.log(date_id);
 fetch_data();
 var temp_id = document.getElementById("type").value;
-console.log(temp_id);
 fetch_data();
 $(function(){
     $(document).on('change','#district',function(){
         taluka_id = $(this).children(":selected").attr("id");
-        console.log(taluka_id);
         fetch_data();
     })
     $(document).on('change','#date',function(){
         date_id = $(this).val();
-        // console.log(date_id);
         fetch_data();
     })
     $(document).on('change','#type',function(){
         temp_id = $(this).val();
-        // console.log(temp_id);
         fetch_data();
     })
     $(document).on('change','#per',function(){
       per_id = $(this).val();
-      console.log(per_id);
       fetch_data();
   })
 });
@@ -51,7 +45,7 @@ $.ajax({
   data: { taluka_id: taluka_id , date_id: date_id , temp_id: temp_id,per_id: per_id},
   success: function (result1) {
       result1 = JSON.parse(result1);
-      console.log(result1.date_array);
+      // console.log(result1.date_array);
       update_chart1(result1); 
   }
 });

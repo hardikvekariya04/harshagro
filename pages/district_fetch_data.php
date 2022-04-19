@@ -5,16 +5,6 @@ $date_id = $_POST['date_id'];
 $temp_id = $_POST['temp_id'];
 
 //last 7 days data fetch :
-// $date1 = $date_id;
-// $date1 = strtotime($date_id);
-// // $monthly = date('Y-m-d', strtotime($date_id. ' - 1 month')); 
-// // $date10 =strtotime($date1. '+0 day');
-// // $date2 = strtotime($date1. '-1 day');
-// // $date3 = strtotime($date1. '-2 day');
-// // $date4 = strtotime($date1. '-3 day');
-// // $date5 = strtotime($date1. '-4 day');
-// // $date6 = strtotime($date1. '-5 day');
-// // $date7 = strtotime($date1. '-6 day');
 $dates1 =  date('Y-m-d', strtotime($date_id. '+0 day'));
 $dates2  =date('Y-m-d', strtotime($date_id. '-1 day'));
 $dates3  =date('Y-m-d', strtotime($date_id.'-2 day'));

@@ -50,20 +50,17 @@
                   <p class="mb-0">Enter your email and password to register</p>
                 </div>
                 <?php
-    require('./config/db.php');
-    // When form submitted, insert values into the database.
+    require('config/db.php');
     if (isset($_REQUEST['username'])) {
-        // removes backslashes
         $username = stripslashes($_REQUEST['username']);
-        //escapes special characters in a string
         $username = mysqli_real_escape_string($con, $username);
         $email    = stripslashes($_REQUEST['email']);
         $email    = mysqli_real_escape_string($con, $email);
         $password = stripslashes($_REQUEST['password']);
         $password = mysqli_real_escape_string($con, $password);
-        $create_datetime = date("Y-m-d H:i:s");
-        $query    = "INSERT into `users` (username, password, email, create_datetime)
-                     VALUES ('$username', '" . md5($password) . "', '$email', '$create_datetime')";
+        $create_datetime = date("F j, Y G:i:s");
+        $query    = "INSERT into `users` (username, password, email, create_datetime, admin)
+        VALUES ('$username', '" . md5($password) . "', '$email', '$create_datetime', '0')";
         $result   = mysqli_query($con, $query);
         if ($result) {
             echo "<br/><h4 class='font-weight-bolder'>You are registered successfully.</h4><br/><p class='link'>Click here to <a href='index.php'>Login</a></p>";
@@ -76,7 +73,7 @@
                   <form role="form" action="" method="POST">
                     <div class="input-group input-group-outline mb-3">
                       <label class="form-label">Username</label>
-                      <input type="text" class="form-control" name="username">
+                      <input type="text" class="form-control" name="username" required>
                     </div>
                     <div class="input-group input-group-outline mb-3">
                       <label class="form-label">Email</label>
@@ -88,7 +85,7 @@
                     </div>
                     <div class="input-group input-group-outline mb-3">
                       <label class="form-label">Confirm Password</label>
-                      <input type="password" name="cpassword" class="form-control">
+                      <input type="password" name="cpassword" class="form-control" required>
                     </div>
                     <div class="form-check form-check-info text-start ps-0">
                       <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault" checked>

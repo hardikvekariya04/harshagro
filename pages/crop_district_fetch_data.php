@@ -55,37 +55,37 @@ $date6 = new DateTime($ret7);
  $weeknumber6 = $date6->format("W");
 
 if($per_id === 'NDVI'){
-$query1 =$con->query("SELECT NDVI,week from `crop` where d_id = ".$d_id."  AND week = '$week' AND year = '$year' " );
+$query1 =$con->query("SELECT NDVI from `crop` where d_id = ".$d_id."  AND week = '$week' AND year = '$year' " );
   while($row1 = $query1->fetch_assoc()){
     $month[] = $row1['NDVI'];
   }
 
-$query2 =$con->query("SELECT NDVI,week from `crop` where d_id = ".$d_id."  AND week = '$weeknumber1' AND year = '$select_year2' " );
+$query2 =$con->query("SELECT NDVI from `crop` where d_id = ".$d_id."  AND week = '$weeknumber1' AND year = '$select_year2' " );
   while($row2 = $query2->fetch_assoc()){
     $month1[] = $row2['NDVI'];
   }
 
-$query3 =$con->query("SELECT NDVI,week from `crop` where d_id = ".$d_id."  AND week = '$weeknumber2' AND year = '$select_year3' " );
+$query3 =$con->query("SELECT NDVI from `crop` where d_id = ".$d_id."  AND week = '$weeknumber2' AND year = '$select_year3' " );
   while($row3 = $query3->fetch_assoc()){
     $month2[] = $row3['NDVI'];
   }
 
-$query4 =$con->query("SELECT NDVI,week from `crop` where d_id = ".$d_id."  AND week = '$weeknumber3' AND year = '$select_year4' " );
+$query4 =$con->query("SELECT NDVI from `crop` where d_id = ".$d_id."  AND week = '$weeknumber3' AND year = '$select_year4' " );
   while($row4 = $query4->fetch_assoc()){
     $month3[] = $row4['NDVI'];
   }
 
-$query5 =$con->query("SELECT NDVI,week from `crop` where d_id = ".$d_id."  AND week = '$weeknumber4' AND year = '$select_year5' " );
+$query5 =$con->query("SELECT NDVI from `crop` where d_id = ".$d_id."  AND week = '$weeknumber4' AND year = '$select_year5' " );
   while($row5 = $query5->fetch_assoc()){
     $month4[] = $row5['NDVI'];
   }
 
-  $query6 =$con->query("SELECT NDVI,week from `crop` where d_id = ".$d_id."  AND week = '$weeknumber5' AND year = '$select_year6' " );
+  $query6 =$con->query("SELECT NDVI from `crop` where d_id = ".$d_id."  AND week = '$weeknumber5' AND year = '$select_year6' " );
   while($row6 = $query6->fetch_assoc()){
     $month5[] = $row6['NDVI'];
   }
 
-  $query7 =$con->query("SELECT NDVI,week from `crop` where d_id = ".$d_id."  AND week = '$weeknumber6' AND year = '$select_year7' " );
+  $query7 =$con->query("SELECT NDVI from `crop` where d_id = ".$d_id."  AND week = '$weeknumber6' AND year = '$select_year7' " );
   while($row7 = $query7->fetch_assoc()){
     $month6[] = $row7['NDVI'];
   }
@@ -117,37 +117,37 @@ $query5 =$con->query("SELECT NDVI,week from `crop` where d_id = ".$d_id."  AND w
 
 
 elseif($per_id === 'SMT'){
-  $query1 =$con->query("SELECT SMT,week from `crop` where d_id = ".$d_id."  AND week = '$week' AND year = '$year' " );
+  $query1 =$con->query("SELECT SMT from `crop` where d_id = ".$d_id."  AND week = '$week' AND year = '$year' " );
     while($row1 = $query1->fetch_assoc()){
       $month[] = $row1['SMT'];
     }
   
-  $query2 =$con->query("SELECT SMT,week from `crop` where d_id = ".$d_id."  AND week = '$weeknumber1' AND year = '$select_year2' " );
+  $query2 =$con->query("SELECT SMT from `crop` where d_id = ".$d_id."  AND week = '$weeknumber1' AND year = '$select_year2' " );
     while($row2 = $query2->fetch_assoc()){
       $month1[] = $row2['SMT'];
     }
   
-  $query3 =$con->query("SELECT SMT,week from `crop` where d_id = ".$d_id."  AND week = '$weeknumber2' AND year = '$select_year3' " );
+  $query3 =$con->query("SELECT SMT from `crop` where d_id = ".$d_id."  AND week = '$weeknumber2' AND year = '$select_year3' " );
     while($row3 = $query3->fetch_assoc()){
       $month2[] = $row3['SMT'];
     }
   
-  $query4 =$con->query("SELECT SMT,week from `crop` where d_id = ".$d_id."  AND week = '$weeknumber3' AND year = '$select_year4' " );
+  $query4 =$con->query("SELECT SMT from `crop` where d_id = ".$d_id."  AND week = '$weeknumber3' AND year = '$select_year4' " );
     while($row4 = $query4->fetch_assoc()){
       $month3[] = $row4['SMT'];
     }
   
-  $query5 =$con->query("SELECT SMT,week from `crop` where d_id = ".$d_id."  AND week = '$weeknumber4' AND year = '$select_year5' " );
+  $query5 =$con->query("SELECT SMT from `crop` where d_id = ".$d_id."  AND week = '$weeknumber4' AND year = '$select_year5' " );
     while($row5 = $query5->fetch_assoc()){
       $month4[] = $row5['SMT'];
     }
   
-    $query6 =$con->query("SELECT SMT,week from `crop` where d_id = ".$d_id."  AND week = '$weeknumber5' AND year = '$select_year6' " );
+    $query6 =$con->query("SELECT SMT from `crop` where d_id = ".$d_id."  AND week = '$weeknumber5' AND year = '$select_year6' " );
     while($row6 = $query6->fetch_assoc()){
       $month5[] = $row6['SMT'];
     }
   
-    $query7 =$con->query("SELECT SMT,week from `crop` where d_id = ".$d_id."  AND week = '$weeknumber6' AND year = '$select_year7' " );
+    $query7 =$con->query("SELECT SMT from `crop` where d_id = ".$d_id."  AND week = '$weeknumber6' AND year = '$select_year7' " );
     while($row7 = $query7->fetch_assoc()){
       $month6[] = $row7['SMT'];
     }
@@ -177,37 +177,37 @@ elseif($per_id === 'SMT'){
       echo json_encode($return_data);
   }
 elseif($per_id === 'TCI'){
-    $query1 =$con->query("SELECT TCI,week from `crop` where d_id = ".$d_id."  AND week = '$week' AND year = '$year' " );
+    $query1 =$con->query("SELECT TCI from `crop` where d_id = ".$d_id."  AND week = '$week' AND year = '$year' " );
       while($row1 = $query1->fetch_assoc()){
         $month[] = $row1['TCI'];
       }
     
-    $query2 =$con->query("SELECT TCI,week from `crop` where d_id = ".$d_id."  AND week = '$weeknumber1' AND year = '$select_year2' " );
+    $query2 =$con->query("SELECT TCI from `crop` where d_id = ".$d_id."  AND week = '$weeknumber1' AND year = '$select_year2' " );
       while($row2 = $query2->fetch_assoc()){
         $month1[] = $row2['TCI'];
       }
     
-    $query3 =$con->query("SELECT TCI,week from `crop` where d_id = ".$d_id."  AND week = '$weeknumber2' AND year = '$select_year3' " );
+    $query3 =$con->query("SELECT TCI from `crop` where d_id = ".$d_id."  AND week = '$weeknumber2' AND year = '$select_year3' " );
       while($row3 = $query3->fetch_assoc()){
         $month2[] = $row3['TCI'];
       }
     
-    $query4 =$con->query("SELECT TCI,week from `crop` where d_id = ".$d_id."  AND week = '$weeknumber3' AND year = '$select_year4' " );
+    $query4 =$con->query("SELECT TCI from `crop` where d_id = ".$d_id."  AND week = '$weeknumber3' AND year = '$select_year4' " );
       while($row4 = $query4->fetch_assoc()){
         $month3[] = $row4['TCI'];
       }
     
-    $query5 =$con->query("SELECT TCI,week from `crop` where d_id = ".$d_id."  AND week = '$weeknumber4' AND year = '$select_year5' " );
+    $query5 =$con->query("SELECT TCI from `crop` where d_id = ".$d_id."  AND week = '$weeknumber4' AND year = '$select_year5' " );
       while($row5 = $query5->fetch_assoc()){
         $month4[] = $row5['TCI'];
       }
     
-      $query6 =$con->query("SELECT TCI,week from `crop` where d_id = ".$d_id."  AND week = '$weeknumber5' AND year = '$select_year6' " );
+      $query6 =$con->query("SELECT TCI from `crop` where d_id = ".$d_id."  AND week = '$weeknumber5' AND year = '$select_year6' " );
       while($row6 = $query6->fetch_assoc()){
         $month5[] = $row6['TCI'];
       }
     
-      $query7 =$con->query("SELECT TCI,week from `crop` where d_id = ".$d_id."  AND week = '$weeknumber6' AND year = '$select_year7' " );
+      $query7 =$con->query("SELECT TCI from `crop` where d_id = ".$d_id."  AND week = '$weeknumber6' AND year = '$select_year7' " );
       while($row7 = $query7->fetch_assoc()){
         $month6[] = $row7['TCI'];
       }
@@ -237,37 +237,37 @@ elseif($per_id === 'TCI'){
         echo json_encode($return_data);
     }
 elseif($per_id === 'VCI'){
-      $query1 =$con->query("SELECT VCI,week from `crop` where d_id = ".$d_id."  AND week = '$week' AND year = '$year' " );
+      $query1 =$con->query("SELECT VCI from `crop` where d_id = ".$d_id."  AND week = '$week' AND year = '$year' " );
         while($row1 = $query1->fetch_assoc()){
           $month[] = $row1['VCI'];
         }
       
-      $query2 =$con->query("SELECT VCI,week from `crop` where d_id = ".$d_id."  AND week = '$weeknumber1' AND year = '$select_year2' " );
+      $query2 =$con->query("SELECT VCI from `crop` where d_id = ".$d_id."  AND week = '$weeknumber1' AND year = '$select_year2' " );
         while($row2 = $query2->fetch_assoc()){
           $month1[] = $row2['VCI'];
         }
       
-      $query3 =$con->query("SELECT VCI,week from `crop` where d_id = ".$d_id."  AND week = '$weeknumber2' AND year = '$select_year3' " );
+      $query3 =$con->query("SELECT VCI from `crop` where d_id = ".$d_id."  AND week = '$weeknumber2' AND year = '$select_year3' " );
         while($row3 = $query3->fetch_assoc()){
           $month2[] = $row3['VCI'];
         }
       
-      $query4 =$con->query("SELECT VCI,week from `crop` where d_id = ".$d_id."  AND week = '$weeknumber3' AND year = '$select_year4' " );
+      $query4 =$con->query("SELECT VCI from `crop` where d_id = ".$d_id."  AND week = '$weeknumber3' AND year = '$select_year4' " );
         while($row4 = $query4->fetch_assoc()){
           $month3[] = $row4['VCI'];
         }
       
-      $query5 =$con->query("SELECT VCI,week from `crop` where d_id = ".$d_id."  AND week = '$weeknumber4' AND year = '$select_year5' " );
+      $query5 =$con->query("SELECT VCI from `crop` where d_id = ".$d_id."  AND week = '$weeknumber4' AND year = '$select_year5' " );
         while($row5 = $query5->fetch_assoc()){
           $month4[] = $row5['VCI'];
         }
       
-        $query6 =$con->query("SELECT VCI,week from `crop` where d_id = ".$d_id."  AND week = '$weeknumber5' AND year = '$select_year6' " );
+        $query6 =$con->query("SELECT VCI from `crop` where d_id = ".$d_id."  AND week = '$weeknumber5' AND year = '$select_year6' " );
         while($row6 = $query6->fetch_assoc()){
           $month5[] = $row6['VCI'];
         }
       
-        $query7 =$con->query("SELECT VCI,week from `crop` where d_id = ".$d_id."  AND week = '$weeknumber6' AND year = '$select_year7' " );
+        $query7 =$con->query("SELECT VCI from `crop` where d_id = ".$d_id."  AND week = '$weeknumber6' AND year = '$select_year7' " );
         while($row7 = $query7->fetch_assoc()){
           $month6[] = $row7['VCI'];
         }
@@ -297,37 +297,37 @@ elseif($per_id === 'VCI'){
           echo json_encode($return_data);
       }
 else{
-        $query1 =$con->query("SELECT VHI,week from `crop` where d_id = ".$d_id."  AND week = '$week' AND year = '$year' " );
+        $query1 =$con->query("SELECT VHI `crop` where d_id = ".$d_id."  AND week = '$week' AND year = '$year' " );
           while($row1 = $query1->fetch_assoc()){
             $month[] = $row1['VHI'];
           }
         
-        $query2 =$con->query("SELECT VHI,week from `crop` where d_id = ".$d_id."  AND week = '$weeknumber1' AND year = '$select_year2' " );
+        $query2 =$con->query("SELECT VHI from `crop` where d_id = ".$d_id."  AND week = '$weeknumber1' AND year = '$select_year2' " );
           while($row2 = $query2->fetch_assoc()){
             $month1[] = $row2['VHI'];
           }
         
-        $query3 =$con->query("SELECT VHI,week from `crop` where d_id = ".$d_id."  AND week = '$weeknumber2' AND year = '$select_year3' " );
+        $query3 =$con->query("SELECT VHI from `crop` where d_id = ".$d_id."  AND week = '$weeknumber2' AND year = '$select_year3' " );
           while($row3 = $query3->fetch_assoc()){
             $month2[] = $row3['VHI'];
           }
         
-        $query4 =$con->query("SELECT VHI,week from `crop` where d_id = ".$d_id."  AND week = '$weeknumber3' AND year = '$select_year4' " );
+        $query4 =$con->query("SELECT VHI from `crop` where d_id = ".$d_id."  AND week = '$weeknumber3' AND year = '$select_year4' " );
           while($row4 = $query4->fetch_assoc()){
             $month3[] = $row4['VHI'];
           }
         
-        $query5 =$con->query("SELECT VHI,week from `crop` where d_id = ".$d_id."  AND week = '$weeknumber4' AND year = '$select_year5' " );
+        $query5 =$con->query("SELECT VHI from `crop` where d_id = ".$d_id."  AND week = '$weeknumber4' AND year = '$select_year5' " );
           while($row5 = $query5->fetch_assoc()){
             $month4[] = $row5['VHI'];
           }
         
-          $query6 =$con->query("SELECT VHI,week from `crop` where d_id = ".$d_id."  AND week = '$weeknumber5' AND year = '$select_year6' " );
+          $query6 =$con->query("SELECT VHI from `crop` where d_id = ".$d_id."  AND week = '$weeknumber5' AND year = '$select_year6' " );
           while($row6 = $query6->fetch_assoc()){
             $month5[] = $row6['VHI'];
           }
         
-          $query7 =$con->query("SELECT VHI,week from `crop` where d_id = ".$d_id."  AND week = '$weeknumber6' AND year = '$select_year7' " );
+          $query7 =$con->query("SELECT VHI from `crop` where d_id = ".$d_id."  AND week = '$weeknumber6' AND year = '$select_year7' " );
           while($row7 = $query7->fetch_assoc()){
             $month6[] = $row7['VHI'];
           }

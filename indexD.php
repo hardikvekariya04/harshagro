@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -10,7 +11,8 @@
     Agrocast
   </title>
   <!--     Fonts and icons     -->
-  <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,900|Roboto+Slab:400,700" />
+  <link rel="stylesheet" type="text/css"
+    href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,900|Roboto+Slab:400,700" />
   <!-- Nucleo Icons -->
   <link href="./assets/css/nucleo-icons.css" rel="stylesheet" />
   <link href="./assets/css/nucleo-svg.css" rel="stylesheet" />
@@ -23,18 +25,29 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/papaparse@5.3.1/papaparse.min.js"></script>
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"
-  integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A=="
-  crossorigin=""/>
-
+    integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A=="
+    crossorigin="" />
+  <style>
+    Html,
+    body {
+      overflow-x: hidden !important;
+      overflow-y: hidden !important;
+    }
+  </style>
 </head>
 
 <body class="g-sidenav-show  bg-gray-200" style="overflow-y: hidden;">
   <!-- <div class="circle"></div> -->
-  <aside class="sidenav navbar navbar-vertical navbar-expand-xs border-0 border-radius-xl my-3 fixed-start ms-3 ps bg-white" id="sidenav-main">
+  <aside
+    class="sidenav navbar navbar-vertical navbar-expand-xs border-0 border-radius-xl my-3 fixed-start ms-3 ps bg-white"
+    id="sidenav-main">
     <div class="sidenav-header">
-      <i class="fas fa-times p-3 cursor-pointer text-white opacity-5 position-absolute end-0 top-0 d-block d-xl-block" aria-hidden="true" id="iconSidenav"></i>
-      <a class="navbar-brand m-0" href=" https://demos.creative-tim.com/material-dashboard/pages/dashboard " target="_blank">
-        <img src="./assets/img/logo.png" class="navbar-brand-img h-100" alt="main_logo" style="min-width: 8rem; min-height: 3rem; top: 0;">
+      <i class="fas fa-times p-3 cursor-pointer text-white opacity-5 position-absolute end-0 top-0 d-block d-xl-block"
+        aria-hidden="true" id="iconSidenav"></i>
+      <a class="navbar-brand m-0" href=" https://demos.creative-tim.com/material-dashboard/pages/dashboard "
+        target="_blank">
+        <img src="./assets/img/logo.png" class="navbar-brand-img h-100" alt="main_logo"
+          style="min-width: 8rem; min-height: 3rem; top: 0;">
       </a>
     </div>
     <hr class="horizontal light mt-0 mb-2">
@@ -68,7 +81,7 @@
         </li>
 
         <li class="nav-item">
-          <a class="nav-link text-dark active bg-gradient-info" href="./pages/heatmap.html">
+          <a class="nav-link text-dark active bg-gradient-info" href="./pages/heatmap.php">
             <div class="text-dark text-center me-2 d-flex align-items-center justify-content-center">
               <i class="material-icons opacity-10">circle</i>
             </div>
@@ -82,7 +95,7 @@
               <i class="material-icons opacity-10">table_view</i>
             </div>
             <span class="nav-link-text ms-1">Crops</span>
-            
+
           </a>
         </li>
         <li class="nav-item">
@@ -91,16 +104,17 @@
               <i class="material-icons opacity-10">table_view</i>
             </div>
             <span class="nav-link-text ms-1">Taluka Crops</span>
-            
+
           </a>
         </li>
-        
+
       </ul>
     </div>
     <div class="sidenav-footer position-absolute w-100 bottom-0 ">
       <div class="mx-3">
-              
-              <a class="btn bg-danger mt-0 w-100" href="index.php" type="button" style="color: #fff;"><i class="material-icons opacity-10">login</i> Log Out</a>
+
+        <a class="btn bg-danger mt-0 w-100" href="index.php" type="button" style="color: #fff;"><i
+            class="material-icons opacity-10">login</i> Log Out</a>
       </div>
       <div class="mx-3">
         <a class="btn bg-gradient-primary mt-0 w-100" href="" type="button">Visit Home page</a>
@@ -109,7 +123,8 @@
   </aside>
   <main class="main-content position-relative max-height-vh-100 h-100 border-radius-lg ">
     <!-- Navbar -->
-    <nav class="navbar navbar-main navbar-expand-lg px-0 mx-4 shadow-block border-radius-xl" id="navbarBlur" navbar-scroll="true">
+    <nav class="navbar navbar-main navbar-expand-lg px-0 mx-4 shadow-block border-radius-xl" id="navbarBlur"
+      navbar-scroll="true">
       <div class="container-fluid py-1 px-3">
         <nav aria-label="breadcrumb">
           <ol class="breadcrumb bg-transparent mb-0 pb-0 pt-1 px-0 me-sm-6 me-5">
@@ -120,10 +135,10 @@
         <div class="collapse navbar-collapse mt-sm-0 mt-2 me-md-0 me-sm-4" id="navbar">
           <div class="ms-md-auto pe-md-3 d-flex align-items-center">
             <div class="input-group input-group-outline">
-           
 
-              
-              <select id="district" >
+
+
+              <select id="district">
                 <!-- <option value="" >select</option> -->
                 <option value="Ahmedabad" id="0">Ahmedabad</option>
                 <option value="Anand" id="1">Anand</option>
@@ -159,12 +174,12 @@
                 <option value="Bhavnagar" id="31">Bhavnagar</option>
                 <option value="Botad" id="32">Botad</option>
 
-                
-            </select>
+
+              </select>
 
 
               <select class="in" name="Taluka" id="taluka">
-                
+
                 <!-- <optgroup label="Ahmedabad" style="display: block;" > -->
                 <option value="Ahmedabad" id="1">Ahmedabad</option>
                 <option value="Ahmedabad" id="2">Bavla</option>
@@ -227,7 +242,7 @@
                 <option value="Dahod" id="49">Jhalod</option>
                 <option value="Dahod" id="50">Singvad</option>
                 <!-- </optgroup> -->
-                
+
                 <!-- <optgroup label="Gandhinagar" style="display: block;"> -->
                 <option value="Gandhinagar" id="51">Gandhinagar</option>
                 <option value="Gandhinagar" id="52">Dehgam</option>
@@ -337,7 +352,7 @@
                 <option value="Patan" id="126">Santalpur</option>
                 <option value="Patan" id="127">Sarasvati</option>
                 <option value="Patan" id="128">Sidhpur</option>
-                  <!-- </optgroup> -->
+                <!-- </optgroup> -->
 
                 <!-- <optgroup label="Porbandar" style="display: block;"> -->
                 <option value="Porbandar" id="129">Porbandar</option>
@@ -411,10 +426,10 @@
                 <option value="Vadodara" id="179">Savli</option>
                 <option value="Vadodara" id="180">Sinor</option>
                 <option value="Vadodara" id="181">Vaghodia</option>
-              <!-- </optgroup> -->
-              
-              
-              <!-- <optgroup label="Valsad" style="display: block;"> -->
+                <!-- </optgroup> -->
+
+
+                <!-- <optgroup label="Valsad" style="display: block;"> -->
                 <option value="Valsad" id="182">Valsad</option>
                 <option value="Valsad" id="183">Dharampur</option>
                 <option value="Valsad" id="184">Kaprada</option>
@@ -466,7 +481,7 @@
                 <option value="Chhota Udepur" id="214">Kavant</option>
                 <option value="Chhota Udepur" id="215">Nasvadi</option>
                 <option value="Chhota Udepur" id="216">Sankheda</option>
-                  <!-- </optgroup> -->
+                <!-- </optgroup> -->
 
 
                 <!-- <optgroup label="Amreli" style="display: block;"> -->
@@ -522,14 +537,14 @@
                 <option value="Botad" id="252">Gadhada</option>
                 <option value="Botad" id="253">Ranpur</option>
                 <!-- </optgroup> -->
-               
+
               </select>
 
 
-              
+
 
               <select class="in" name="type" id="type">
-           
+
                 <option value="min">Min Temp</option>
                 <option value="max">Max Temp</option>
                 <option value="rain">Rainfall</option>
@@ -537,16 +552,17 @@
 
               <select class="in" name="period" id="per">
                 <option value="">select</option>
-                <option value="last 6 month" >last 6 month</option>
+                <option value="last 6 month">last 6 month</option>
                 <option value="last 3 year">last 3 year</option>
               </select>
 
-              <input class="in" id="date" type="date" placeholder="DD-MM-YYYY" min="1997-01-01" max="2023-02-15" value="2020-12-15">
-              
+              <input class="in" id="date" type="date" placeholder="DD-MM-YYYY" min="1997-01-01" max="2023-02-15"
+                value="2020-12-15">
+
             </div>
           </div>
           <ul class="navbar-nav  justify-content-end">
-            
+
             <li class="nav-item d-xl-block ps-3 d-flex align-items-center">
               <a href="javascript:;" class="nav-link text-body p-0" id="iconNavbarSidenav">
                 <div class="sidenav-toggler-inner">
@@ -562,89 +578,93 @@
     </nav>
     <!-- End Navbar -->
     <div class="container-fluid py-4">
-      
- 
+
+
       <div class="row mt-0" style="margin-bottom:-80px">
         <div class="col-lg-0 col-md-6 mt-0 mb-4">
           <!-- <div class="card z-index-2 " style="background-color:#43A047 "> -->
-          
-            <!-- <div class="card-header p-0 position-relative mt-n4 mx-0 z-index-2 bg-transparent"> -->
-              
-                
-        <div id="map1">
+
+          <!-- <div class="card-header p-0 position-relative mt-n4 mx-0 z-index-2 bg-transparent"> -->
+
+
+          <div id="map1">
             <div id="map"></div>
-</div>  
-            <!-- </div> -->
-            
-              <!-- <h6 class="mb-0 ">Taluka level Data</h6>
+          </div>
+          <!-- </div> -->
+
+          <!-- <h6 class="mb-0 ">Taluka level Data</h6>
               <p class="text-sm ">Gujrat, India</p>
               <hr class="dark horizontal">
               <div class="d-flex ">
                 <i class="material-icons text-sm my-auto me-1">schedule</i>
                 <p class="mb-0 text-sm"> updated few mins ago </p>
               </div> -->
-              
+
           <!-- </div> -->
         </div>
         <div class="col-lg-6 col-md-6 mb-4" style="width:570px;margin-top:-20px;">
           <!-- <div class="card z-index-2  "> -->
-            <!-- <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2 bg-transparent"> -->
-            <div class="bg-gradient-success shadow-success border-radius-lg py-3 pe-1">
-              <div class="chart" id="chart_data" style="width:550px;">
-                  <canvas id="chart-line" class="chart-canvas" height="270" width="300"></canvas>
-              </div>
-              <hr style="margin-top:-5px">
-              <!-- <select class="in" name="period" id="per" >
+          <!-- <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2 bg-transparent"> -->
+          <div class="bg-gradient-success shadow-success border-radius-lg py-3 pe-1">
+            <div class="chart" id="chart_data" style="width:550px;">
+              <canvas id="chart-line" class="chart-canvas" height="270" width="300"></canvas>
+            </div>
+            <hr style="margin-top:-5px">
+            <!-- <select class="in" name="period" id="per" >
                 <option value="">select</option>
                 <option value="last 6 month" >last 6 month</option>
                 <option value="last 3 year">last 3 year</option>
               </select> -->
-                <div class="chart" id="chart_data1">
-                  <canvas id="chart-bars" class="chart-canvas" height="280" width="300"></canvas>
-                </div>
-                <!-- <div class="chart">
+            <div class="chart" id="chart_data1">
+              <canvas id="chart-bars" class="chart-canvas" height="280" width="300"></canvas>
+            </div>
+            <!-- <div class="chart">
                   <canvas id="chart-bars1" class="chart-canvas" height="300" width="300"></canvas>
                 </div> -->
-                
-            </div>
-            <!-- </div> -->
-            <!-- <div class="card-body"> -->
-              <!-- <h6 class="mb-0 "> Last Year Data </h6>
+
+          </div>
+          <!-- </div> -->
+          <!-- <div class="card-body"> -->
+          <!-- <h6 class="mb-0 "> Last Year Data </h6>
               <p class="text-sm "> Gujrat, Ahemdabad </p>
               <hr class="dark horizontal">
               <div class="d-flex ">
                 <i class="material-icons text-sm my-auto me-1">schedule</i>
                 <p class="mb-0 text-sm"> updated few mins ago </p>
               </div> -->
-            <!-- </div> -->
+          <!-- </div> -->
           <!-- </div> -->
         </div>
       </div>
-      
+
       <footer class="footer py-4  ">
         <div class="container-fluid">
           <div class="row align-items-center justify-content-lg-between">
             <div class="col-lg-5 mb-lg-0 mb-0">
               <div class="copyright text-center text-sm text-muted text-lg-start">
-                © <script>
+                ©
+                <script>
                   document.write(new Date().getFullYear())
                 </script>,
                 by
                 <a class="font-weight-bold" target="_blank">Agrocast</a>
-                </div>
-                <ul class="nav nav-footer justify-content-center justify-content-lg-end">
-               
+              </div>
+              <ul class="nav nav-footer justify-content-center justify-content-lg-end">
+
                 <li class="nav-item">
-                  <a href="http://www.agrocastanalytics.com/#content4-28" class="nav-link text-muted" target="_blank">About Us</a>
+                  <a href="http://www.agrocastanalytics.com/#content4-28" class="nav-link text-muted"
+                    target="_blank">About Us</a>
                 </li>
                 <li class="nav-item">
-                  <a href="http://www.agrocastanalytics.com/#team1-1g" class="nav-link text-muted" target="_blank">Team</a>
+                  <a href="http://www.agrocastanalytics.com/#team1-1g" class="nav-link text-muted"
+                    target="_blank">Team</a>
                 </li>
                 <li class="nav-item">
-                  <a href="http://www.agrocastanalytics.com/index.html#form1-c" class="nav-link pe-0 text-muted" target="_blank">Get in Touch</a>
+                  <a href="http://www.agrocastanalytics.com/index.html#form1-c" class="nav-link pe-0 text-muted"
+                    target="_blank">Get in Touch</a>
                 </li>
               </ul>
-              
+
             </div>
             <div class="col-lg-6">
               <!-- <ul class="nav nav-footer justify-content-center justify-content-lg-end">
@@ -665,7 +685,7 @@
       </footer>
     </div>
   </main>
-  
+
   <!--   Core JS Files   -->
   <script src="./assets/js/jquery-3.2.1.min.js"></script>
   <script src="./assets/js/tem_bar.js"></script>
@@ -677,19 +697,19 @@
   <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"
     integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA=="
     crossorigin=""></script>
-    <!-- <script src="./assets/js/talukas.php"></script> -->
-    <script src="./assets/js/talukas.js"></script>
-    <!-- <script src="./assets/js/leaf.js"></script> -->
-    
+  <!-- <script src="./assets/js/talukas.php"></script> -->
+  <script src="./assets/js/talukas.js"></script>
+  <!-- <script src="./assets/js/leaf.js"></script> -->
 
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
   <script src="https://code.highcharts.com/highcharts.js"></script>
   <script src="https://code.highcharts.com/modules/exporting.js"></script>
 
 
   <!-- <script src="./map/heatmap/heatleaf.js"></script>
   <script src="./map/heatmap/leaf.js"></script> -->
-<?php
+  <?php
 // last 7 days 
 $date1 = '2018-07-30';
 $date1 = strtotime($date1);
@@ -953,88 +973,7 @@ $avg_high_year_temp5 = $tot_year_temp5/$temp_array_year_length5;
 // echo "<br>";
 // echo $avg_high_year_temp5;
 ?>
-<script>
-
-// var ctx = document.getElementById("chart-bars").getContext("2d");
-//     new Chart(ctx, {
-//   type: "bar",
-//   data: { 
-//     labels: [],
-//     datasets: [{
-//       label: "Temperature",
-//       tension: 0.4,
-//       borderWidth: 0,
-//       borderRadius: 4,
-//       borderSkipped: false,
-//       backgroundColor: "rgba(255, 255, 255, .8)",
-//       data: [],
-//       maxBarThickness: 6
-//     }, ],
-//   },
-
-//   options: {
-//     responsive: true,
-//     maintainAspectRatio: false,
-//     plugins: {
-//       legend: {
-//         display: true,
-//       }
-//     },
-//     interaction: {
-//       intersect: false,
-//       mode: 'index',
-//     },
-//     scales: {
-//       y: {
-//         grid: {
-//           drawBorder: false,
-//           display: true,
-//           drawOnChartArea: true,
-//           drawTicks: false,
-//           borderDash: [5, 5],
-//           color: 'rgba(255, 255, 255, .2)'
-//         },
-//         ticks: {
-//           suggestedMin: 0,
-//           suggestedMax: 500,
-//           beginAtZero: true,
-//           padding: 10,
-//           font: {
-//             size: 14,
-//             weight: 300,
-//             family: "Roboto",
-//             style: 'normal',
-//             lineHeight: 2
-//           },
-//           color: "#fff"
-//         },
-//       },
-//       x: {
-//         grid: {
-//           drawBorder: false,
-//           display: true,
-//           drawOnChartArea: true,
-//           drawTicks: false,
-//           borderDash: [5, 5],
-//           color: 'rgba(255, 255, 255, .2)'
-//         },
-//         ticks: {
-//           display: true,
-//           color: '#f8f9fa',
-//           padding: 10,
-//           font: {
-//             size: 14,
-//             weight: 300,
-//             family: "Roboto",
-//             style: 'normal',
-//             lineHeight: 2
-//           },
-//         }
-//       },
-//     },
-//   },
-// });
-    
+  <script>
     // chart 2 (blue) 
     var ctx2 = document.getElementById("chart-line").getContext("2d");
 
@@ -1042,22 +981,101 @@ $avg_high_year_temp5 = $tot_year_temp5/$temp_array_year_length5;
       type: "line",
       data: {
         labels: <?php echo json_encode($amount1)?>,
-        datasets: [{
-          label: "Min Temp",
-          tension: 0,
-          borderWidth: 0,
-          pointRadius: 5,
-          pointBackgroundColor: "rgba(000, 000, 000, .8)",
-          pointBorderColor: "transparent",
-          borderColor: "rgba(000, 000, 000, .8)",
-          borderColor: "rgba(000, 000, 000, .8)",
-          borderWidth: 4,
-          backgroundColor: "transparent",
-          fill: true,
-          data: <?php echo json_encode($month1)?>,
-          maxBarThickness: 6
+      datasets: [{
+        label: "Min Temp",
+        tension: 0,
+        borderWidth: 0,
+        pointRadius: 5,
+        pointBackgroundColor: "rgba(000, 000, 000, .8)",
+        pointBorderColor: "transparent",
+        borderColor: "rgba(000, 000, 000, .8)",
+        borderColor: "rgba(000, 000, 000, .8)",
+        borderWidth: 4,
+        backgroundColor: "transparent",
+        fill: true,
+        data: <?php echo json_encode($month1)?>,
+        maxBarThickness: 6
         }],
       },
+      options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      plugins: {
+        legend: {
+          display: true,
+        }
+      },
+      interaction: {
+        intersect: false,
+        mode: 'index',
+      },
+      scales: {
+        y: {
+          grid: {
+            drawBorder: false,
+            display: true,
+            drawOnChartArea: true,
+            drawTicks: false,
+            borderDash: [5, 5],
+            color: 'rgba(000, 000, 000, .2)'
+          },
+          ticks: {
+            display: true,
+            color: '#000',
+            padding: 10,
+            font: {
+              size: 14,
+              weight: 300,
+              family: "Roboto",
+              style: 'normal',
+              lineHeight: 2
+            },
+          }
+        },
+        x: {
+          grid: {
+            drawBorder: false,
+            display: false,
+            drawOnChartArea: false,
+            drawTicks: false,
+            borderDash: [5, 5]
+          },
+          ticks: {
+            display: true,
+            color: '#000',
+            padding: 10,
+            font: {
+              size: 14,
+              weight: 300,
+              family: "Roboto",
+              style: 'normal',
+              lineHeight: 2
+            },
+          }
+        },
+      },
+    },
+    });
+
+    var ctx = document.getElementById("chart-bars").getContext("2d");
+    new Chart(ctx, {
+      type: "bar",
+      data: {
+        // labels:<?php // echo json_encode($amount1) ?>,
+        labels: ['<?php echo json_encode($six_monthly) ?>', '<?php echo json_encode($five_monthly) ?>', '<?php echo json_encode($four_monthly) ?>', '<?php echo json_encode($thrid_monthly) ?>', '<?php echo json_encode($second_monthly) ?>', '<?php echo json_encode($one_monthly) ?>'],
+        datasets: [{
+          label: "Temperature",
+          tension: 0.4,
+          borderWidth: 0,
+          borderRadius: 4,
+          borderSkipped: false,
+          backgroundColor: "rgba(000, 000, 000, .8)",
+          //data: <?php //echo json_encode($month1) ?>,
+          data: ['<?php echo json_encode($avg_high_temp6) ?>', '<?php echo json_encode($avg_high_temp5) ?>', '<?php echo json_encode($avg_high_temp4) ?>', '<?php echo json_encode($avg_high_temp3) ?>', '<?php echo json_encode($avg_high_temp2) ?>', '<?php echo json_encode($avg_high_temp1) ?>'],
+          maxBarThickness: 6
+        },],
+      },
+
       options: {
         responsive: true,
         maintainAspectRatio: false,
@@ -1081,25 +1099,28 @@ $avg_high_year_temp5 = $tot_year_temp5/$temp_array_year_length5;
               color: 'rgba(000, 000, 000, .2)'
             },
             ticks: {
-              display: true,
-              color: '#000',
+              suggestedMin: 0,
+              suggestedMax: 500,
+              beginAtZero: true,
               padding: 10,
               font: {
-                size: 14,
+                size: 15,
                 weight: 300,
                 family: "Roboto",
                 style: 'normal',
                 lineHeight: 2
               },
-            }
+              color: "#000"
+            },
           },
           x: {
             grid: {
               drawBorder: false,
-              display: false,
-              drawOnChartArea: false,
+              display: true,
+              drawOnChartArea: true,
               drawTicks: false,
-              borderDash: [5, 5]
+              borderDash: [5, 5],
+              color: 'rgba(000, 000, 000, .2)'
             },
             ticks: {
               display: true,
@@ -1117,88 +1138,6 @@ $avg_high_year_temp5 = $tot_year_temp5/$temp_array_year_length5;
         },
       },
     });
-
-    var ctx = document.getElementById("chart-bars").getContext("2d");
-new Chart(ctx, {
-  type: "bar",
-  data: { 
-    // labels:<?php // echo json_encode($amount1) ?>,
-    labels:['<?php echo json_encode($six_monthly) ?>','<?php echo json_encode($five_monthly) ?>','<?php echo json_encode($four_monthly) ?>','<?php echo json_encode($thrid_monthly) ?>','<?php echo json_encode($second_monthly) ?>','<?php echo json_encode($one_monthly) ?>'],
-    datasets: [{
-      label: "Temperature",
-      tension: 0.4,
-      borderWidth: 0,
-      borderRadius: 4,
-      borderSkipped: false,
-      backgroundColor: "rgba(000, 000, 000, .8)",
-      //data: <?php //echo json_encode($month1) ?>,
-      data : ['<?php echo json_encode($avg_high_temp6) ?>','<?php echo json_encode($avg_high_temp5) ?>','<?php echo json_encode($avg_high_temp4) ?>','<?php echo json_encode($avg_high_temp3) ?>','<?php echo json_encode($avg_high_temp2) ?>','<?php echo json_encode($avg_high_temp1) ?>'],
-      maxBarThickness: 6
-    }, ],
-  },
-
-  options: {
-    responsive: true,
-    maintainAspectRatio: false,
-    plugins: {
-      legend: {
-        display: true,
-      }
-    },
-    interaction: {
-      intersect: false,
-      mode: 'index',
-    },
-    scales: {
-      y: {
-        grid: {
-          drawBorder: false,
-          display: true,
-          drawOnChartArea: true,
-          drawTicks: false,
-          borderDash: [5, 5],
-          color: 'rgba(000, 000, 000, .2)'
-        },
-        ticks: {
-          suggestedMin: 0,
-          suggestedMax: 500,
-          beginAtZero: true,
-          padding: 10,
-          font: {
-            size: 15,
-            weight: 300,
-            family: "Roboto",
-            style: 'normal',
-            lineHeight: 2
-          },
-          color: "#000"
-        },
-      },
-      x: {
-        grid: {
-          drawBorder: false,
-          display: true,
-          drawOnChartArea: true,
-          drawTicks: false,
-          borderDash: [5, 5],
-          color: 'rgba(000, 000, 000, .2)'
-        },
-        ticks: {
-          display: true,
-          color: '#000',
-          padding: 10,
-          font: {
-            size: 14,
-            weight: 300,
-            family: "Roboto",
-            style: 'normal',
-            lineHeight: 2
-          },
-        }
-      },
-    },
-  },
-});
 
   </script>
   <script>

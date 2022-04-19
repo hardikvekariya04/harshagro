@@ -27,7 +27,6 @@
   integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A=="
   crossorigin=""/>
 </head>
-
 <body class="g-sidenav-show  bg-gray-200">
   <!-- <div class="circle"></div> -->
   <aside class="sidenav navbar navbar-vertical navbar-expand-xs border-0 border-radius-xl my-3 fixed-start ms-3 ps bg-white" id="sidenav-main">
@@ -68,7 +67,7 @@
         </li>
 
         <li class="nav-item">
-          <a class="nav-link text-dark active bg-gradient-info" href="../pages/heatmap.html">
+          <a class="nav-link text-dark active bg-gradient-info" href="../pages/heatmap.php">
             <div class="text-dark text-center me-2 d-flex align-items-center justify-content-center">
               <i class="material-icons opacity-10">circle</i>
             </div>
@@ -592,7 +591,7 @@
               <select class="in" name="period" id="per">
               <option value="">Select period </option>
                 <option value="last 6 month">last 6 month</option>
-                <option value="last 3 year">last 52 weeks</option>
+                <option value="last 3 year">last 3 year</option>
               </select>
 
               <!-- <input class="in" id="date" type="date" placeholder="DD-MM-YYYY" min="1997-01-01" max="2020-02-15" value="2020-05-30" selected> -->
@@ -671,33 +670,15 @@
     <!-- End Navbar -->
     <div class="container-fluid py-4">
       
- 
     <div class="row mt-0" style="margin-bottom:-80px">
       <div class="col-lg-0 col-md-6 mt-0 mb-4">
-          <!-- <div class="card z-index-2 ">
-            <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2 bg-transparent"> -->
-              
                 <div class="mapcontainer" id="map1">
-    
-    
                     <div id="map"></div>
+                    
               </div>  
-              
-            <!-- </div> -->
-            <!-- <div class="card-body">
-              <h6 class="mb-0 ">District Level Data</h6>
-              <p class="text-sm ">Gujrat, India</p>
-              <hr class="dark horizontal">
-              <div class="d-flex ">
-                <i class="material-icons text-sm my-auto me-1">schedule</i>
-                <p class="mb-0 text-sm"> updated few mins ago </p>
-              </div>-->
-            <!-- </div>  -->
           </div>
       
         <div class="col-lg-6 col-md-6 mb-4" style="width:570px;margin-top:-20px;">
-          <!-- <div class="card z-index-2  ">
-            <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2 bg-transparent"> -->
             <div class="bg-gradient-success shadow-success border-radius-lg py-3 pe-1">
               <div class="chart" id="chart_data" style="width:550px;">
                   <canvas id="chart-line" class="chart-canvas" height="270" width="300"></canvas>
@@ -705,33 +686,10 @@
               <hr style="margin-top:-5px">
                 <div class="chart" id="chart_data1">
                   <canvas id="chart-bars" class="chart-canvas" height="280" width="300"></canvas>
-                </div>
-                <!-- <div class="chart">
-                  <canvas id="chart-bars1" class="chart-canvas" height="300" width="300"></canvas>
-                </div> -->
-                
+                </div> 
             </div>
-            <!-- </div> -->
-            <!-- <div class="card-body">
-              <h6 class="mb-0 "> Last Year Data </h6>
-              <p class="text-sm "> Gujrat, Ahemdabad </p>
-              <hr class="dark horizontal">
-              <div class="d-flex ">
-                <i class="material-icons text-sm my-auto me-1">schedule</i>
-                <p class="mb-0 text-sm"> updated few mins ago </p>
-              </div>
-            </div> -->
-          <!-- </div>
-        </div>-->
-         
-
-
-      
-
-      
       </div>
 </div>
-      
 <footer class="footer py-4  ">
         <div class="container-fluid">
           <div class="row align-items-center justify-content-lg-between">
@@ -804,10 +762,7 @@
   <script src="https://code.highcharts.com/highcharts.js"></script>
   <script src="https://code.highcharts.com/modules/exporting.js"></script>
   
-  <script type="text/javascript">
-
-  </script>
-
+<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 <?php
 // last 7 days 
   $weeknumber = '35';

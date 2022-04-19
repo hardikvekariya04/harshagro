@@ -1,3 +1,80 @@
+<?php
+    // ob_start();
+    require_once 'config/db.php';
+    // // require_once 'config/function.php';
+    // // When form submitted, check and create user session.
+    // if (isset($_POST['username'])) {
+    //     $username = stripslashes($_REQUEST['username']);    // removes backslashes
+    //     $username = mysqli_real_escape_string($con, $username);
+    //     $password = stripslashes($_REQUEST['password']);
+    //     $password = mysqli_real_escape_string($con, $password);
+    //     // Check user is exist in the database
+    //     $query    = "SELECT * FROM `users` WHERE username='$username' AND password='" . md5($password) . "' OR email='$username' AND password='" . md5($password) . "'";
+    //     $result = mysqli_query($con, $query) or die( mysqli_connect_error());
+    //     $rows = mysqli_num_rows($result);
+    //     if ($rows == 1) {
+    //       $_SESSION['id']= $rows['id'];
+    //         $_SESSION['username'] = $username;
+    //         // Redirect to user dashboard page
+    //         header("Location: indexD.php");
+    //     } else {
+    //         echo "<div class='form' style='padding: 20px'>
+    //               <h3>Incorrect Username/password.</h3><br/>
+    //               <h4 class='link'>Click here to <a href='index.php'>Login</a> again.</h4>
+    //               </div>";
+    //     }
+    // } 
+
+    session_start();
+
+error_reporting(0);
+
+if (isset($_SESSION["id"])) {
+  header("Location: indexD.php");
+}
+
+if (isset($_POST["signup"])) {
+  $full_name = mysqli_real_escape_string($conn, $_POST["signup_full_name"]);
+  $email = mysqli_real_escape_string($conn, $_POST["signup_email"]);
+  $password = mysqli_real_escape_string($conn, md5($_POST["signup_password"]));
+  $cpassword = mysqli_real_escape_string($conn, md5($_POST["signup_cpassword"]));
+
+  $check_email = mysqli_num_rows(mysqli_query($conn, "SELECT email FROM users WHERE email='$email'"));
+
+  if ($password !== $cpassword) {
+    echo "<script>alert('Password did not match.');</script>";
+  } elseif ($check_email > 0) {
+    echo "<script>alert('Email already exists in out database.');</script>";
+  } else {
+    $sql = "INSERT INTO users (full_name, email, password, status) VALUES ('$full_name', '$email', '$password', '1')";
+    $result = mysqli_query($conn, $sql);
+    if ($result) {
+      echo "<script>alert('Registration successful.');</script>";
+    } else {
+      echo "<script>alert('Registration failed.');</script>";
+}
+  }
+}
+
+if (isset($_POST['submit']) || $_SERVER['REQUEST_METHOD']=='POST') {
+  $username = stripslashes($_REQUEST['username']);    // removes backslashes
+        $username = mysqli_real_escape_string($con, $username);
+        $password = stripslashes($_REQUEST['password']);
+        $password = mysqli_real_escape_string($con, $password);
+  // $email = mysqli_real_escape_string($conn, $_POST["email"]);
+  // $password = mysqli_real_escape_string($conn, md5($_POST["password"]));
+
+  $check_email = mysqli_query($conn, "SELECT * FROM `users` WHERE username='$username' AND password='" . md5($password) . "' OR email='$username' AND password='" . md5($password) . "'");
+
+  if (mysqli_num_rows($check_email) > 0) {
+    $row = mysqli_fetch_assoc($check_email);
+    $_SESSION["id"] = $row['id'];
+    header("Location: indexD.php");
+  } else {
+    echo "<script>alert('Login details is incorrect. Please try again.');</script>";
+  }
+}
+ ?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -47,43 +124,15 @@
                 </div>
               </div>
 
-              <?php
-    require('./config/db.php');
-    session_start();
-    // When form submitted, check and create user session.
-    if (isset($_POST['username'])) {
-        $username = stripslashes($_REQUEST['username']);    // removes backslashes
-        $username = mysqli_real_escape_string($con, $username);
-        $password = stripslashes($_REQUEST['password']);
-        $password = mysqli_real_escape_string($con, $password);
-        // Check user is exist in the database
-        $query    = "SELECT * FROM `users` WHERE username='$username'
-                     AND password='" . md5($password) . "'";
-        $result = mysqli_query($con, $query) or die(mysql_error());
-        $rows = mysqli_num_rows($result);
-        if ($rows == 1) {
-            $_SESSION['username'] = $username;
-            // Redirect to user dashboard page
-            header("Location: indexD.html");
-        } else {
-            echo "<div class='form' style='padding: 20px'>
-                  <h3>Incorrect Username/password.</h3><br/>
-                  <h4 class='link'>Click here to <a href='index.php'>Login</a> again.</h4>
-                  </div>";
-        }
-    } else 
-    {
-
- ?>
               <div class="card-body">
                 <form role="form" class="text-start" action="" method="POST" name="login">
                   <div class="input-group input-group-outline my-3">
                     <label class="form-label">Username</label>
-                    <input type="text" class="form-control" name="username">
+                    <input type="text" class="form-control" name="username" required>
                   </div>
                   <div class="input-group input-group-outline mb-3">
                     <label class="form-label">Password</label>
-                    <input type="password" class="form-control" name="password">
+                    <input type="password" class="form-control" name="password" required>
                   </div>
                   <div class="form-check form-switch d-flex align-items-center mb-3">
                     <input class="form-check-input" type="checkbox" id="rememberMe">
@@ -97,9 +146,6 @@
                     <a href="sign-up.php" class="text-primary text-gradient font-weight-bold">Sign up</a>
                   </p>
                 </form>
-    <?php
-   } 
-  ?>
               </div>
             </div>
           </div>

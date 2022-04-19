@@ -3,46 +3,39 @@ var d_id ='';
 var year = '';
 var week = '';
 var per_id = '';
+var period_id = '';
 
-// var d_id = document.getElementById("district").value;
-// console.log(d_id);
-// fetch_data();
 var week = document.getElementById("weeks").value;
-console.log(week);
+
 fetch_data();
 var year = document.getElementById("years").value;
-console.log(year);
+
 fetch_data();
 var per_id = document.getElementById("type").value;
-console.log(per_id);
+
 fetch_data();
 var period_id = document.getElementById("per").value;
-// console.log(per_id);
+
 fetch_data();
 $(function(){
     $(document).on('change','#district',function(){
         d_id = $(this).children(":selected").attr("id");
-        console.log(d_id);
         fetch_data();
     })
     $(document).on('change','#weeks',function(){
       week = $(this).val();
-      // console.log(week);
       fetch_data();
   })
     $(document).on('change','#years',function(){
         year = $(this).val();
-        // console.log(year);
         fetch_data();
     })
     $(document).on('change','#type',function(){
       per_id = $(this).val();
-      console.log(per_id);
       fetch_data();
   })
   $(document).on('change','#per',function(){
     period_id = $(this).val();
-    console.log(period_id);
     fetch_data();
 })
 });
@@ -50,12 +43,10 @@ function fetch_data(){
 $.ajax({
     url: path +"crop_district_fetch_data.php"  ,
     type: 'post',
-    data: { d_id: d_id , week: week, year: year ,per_id: per_id},
+    data: { d_id: d_id , week: week, year: year ,per_id: per_id,period_id: period_id},
     success: function (result) {
-        result = JSON.parse(result);
-        console.log(result.month);  
+        result = JSON.parse(result); 
         update_chart(result);  
-        // update_chart1(result); 
     }
 });
 
@@ -65,7 +56,6 @@ $.ajax({
   data: { d_id: d_id , week: week , year: year ,per_id: per_id,period_id: period_id},
   success: function (result1) {
       result1 = JSON.parse(result1);
-      console.log(result1.one_month_avg);
       update_chart1(result1); 
   }
 });
@@ -172,7 +162,7 @@ var ctx = document.getElementById("chart-bars").getContext("2d");
           borderRadius: 5,
           borderSkipped: false,
           backgroundColor: "rgba(000, 000, 000, .8)",
-          data: result1.final_month_array,
+          data: result1.yearly_month_array,
           maxBarThickness: 6
         }, ],
       },
