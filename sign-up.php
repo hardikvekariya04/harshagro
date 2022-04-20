@@ -1,3 +1,14 @@
+<?php 
+  ob_start();
+  require_once 'config/db.php'; 
+  require_once 'config/function.php';
+  register_user();
+  if(isset($_SESSION['ID']) || isset($_SESSION['EMAIL']))
+  {
+     header("location: user/index.php"); 
+  }
+  ob_end_flush();
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -50,25 +61,15 @@
                   <p class="mb-0">Enter your email and password to register</p>
                 </div>
                 <?php
-    require('config/db.php');
-    if (isset($_REQUEST['username'])) {
-        $username = stripslashes($_REQUEST['username']);
-        $username = mysqli_real_escape_string($con, $username);
-        $email    = stripslashes($_REQUEST['email']);
-        $email    = mysqli_real_escape_string($con, $email);
-        $password = stripslashes($_REQUEST['password']);
-        $password = mysqli_real_escape_string($con, $password);
-        $create_datetime = date("F j, Y G:i:s");
-        $query    = "INSERT into `users` (username, password, email, create_datetime, admin)
-        VALUES ('$username', '" . md5($password) . "', '$email', '$create_datetime', '0')";
-        $result   = mysqli_query($con, $query);
-        if ($result) {
-            echo "<br/><h4 class='font-weight-bolder'>You are registered successfully.</h4><br/><p class='link'>Click here to <a href='index.php'>Login</a></p>";
-        } else {
-            echo "<br/><h4 class='font-weight-bolder'>Required fields are missing.</h4><br/>";
-        }
-    } else {
-?>
+
+              if(isset($_SESSION['MESSAGE']))
+              {
+                display_message();
+              }
+
+
+
+            ?>
                 <div class="card-body">
                   <form role="form" action="" method="POST">
                     <div class="input-group input-group-outline mb-3">
@@ -97,9 +98,6 @@
                       <button type="submit" class="btn btn-lg bg-gradient-primary btn-lg w-100 mt-4 mb-0" name="submit">Sign Up</button>
                     </div>
                   </form>
-                  <?php
-    }
-?>
                 </div>
                 <div class="card-footer text-center pt-0 px-lg-2 px-1">
                   <p class="mb-2 text-sm mx-auto">

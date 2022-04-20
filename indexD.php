@@ -1,4 +1,14 @@
+<?php
+ob_start();
+require_once 'config/function.php';
+require_once 'config/db.php';
 
+// update();
+
+if (!isset($_SESSION['ID']) && !isset($_SESSION['EMAIL'])) {
+  header("location: index.php");
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -113,7 +123,7 @@
     <div class="sidenav-footer position-absolute w-100 bottom-0 ">
       <div class="mx-3">
 
-        <a class="btn bg-danger mt-0 w-100" href="index.php" type="button" style="color: #fff;"><i
+        <a class="btn bg-danger mt-0 w-100" href="logout.php" type="button" style="color: #fff;"><i
             class="material-icons opacity-10">login</i> Log Out</a>
       </div>
       <div class="mx-3">
