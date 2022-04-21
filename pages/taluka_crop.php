@@ -38,11 +38,12 @@ if (!isset($_SESSION['ID']) && !isset($_SESSION['EMAIL'])) {
   crossorigin=""/>
 </head>
 <body class="g-sidenav-show  bg-gray-200">
+<div class="loader"></div>
   <!-- <div class="circle"></div> -->
   <aside class="sidenav navbar navbar-vertical navbar-expand-xs border-0 border-radius-xl my-3 fixed-start ms-3 ps bg-white" id="sidenav-main">
-    <div class="sidenav-header">
+  <div class="sidenav-header">
       <i class="fas fa-times p-3 cursor-pointer text-white opacity-5 position-absolute end-0 top-0 d-none d-xl-none" aria-hidden="true" id="iconSidenav"></i>
-      <a class="navbar-brand m-0" href=" https://demos.creative-tim.com/material-dashboard/pages/dashboard " target="_blank">
+      <a class="navbar-brand m-0" href="" target="_blank">
       <img src="../assets/img/logo.png" class="navbar-brand-img h-100" alt="main_logo" style="min-width: 8rem; min-height: 3rem; top: 0;">
       </a>
     </div>
@@ -50,16 +51,25 @@ if (!isset($_SESSION['ID']) && !isset($_SESSION['EMAIL'])) {
     <div class="collapse navbar-collapse  w-auto  max-height-vh-100" id="sidenav-collapse-main">
       <ul class="navbar-nav">
         <li class="nav-item">
-          <a class="nav-link text-dark active bg-gradient-primary" href="../indexD.php">
+          <a class="nav-link text-dark " href="../indexD.php">
             <div class="text-dark text-center me-2 d-flex align-items-center justify-content-center">
               <i class="material-icons opacity-10">dashboard</i>
             </div>
             <span class="nav-link-text ms-1">Climate</span>
           </a>
         </li>
+        <li class="nav-item" >
+          <a class="nav-link text-dark active bg-gradient-primary" href="../pages/crop.php">
+            <div class="text-dark text-center me-2 d-flex align-items-center justify-content-center">
+              <i class="material-icons opacity-10">table_view</i>
+            </div>
+            <span class="nav-link-text ms-1" style="width:200px;font-size:20px;font-weight:bold;">Crops</span>
+            
+          </a>
+        </li>
 
-        <li class="nav-item" style="border: 2px solid rgb(168, 168, 168); border-radius: 10%;">
-          <a class="nav-link text-dark active bg-gradient-info" href="#">
+        <li class="nav-item" style="width:200px;">
+          <a class="nav-link text-dark active bg-gradient-info" href="../pages/crop.php">
             <div class="text-dark text-center me-2 d-flex align-items-center justify-content-center">
               <i class="material-icons opacity-10">circle</i>
             </div>
@@ -67,8 +77,8 @@ if (!isset($_SESSION['ID']) && !isset($_SESSION['EMAIL'])) {
           </a>
         </li>
 
-        <li class="nav-item" >
-          <a class="nav-link text-dark active bg-gradient-info" href="../indexD.php">
+        <li class="nav-item" style="border: 2px solid rgb(168, 168, 168); border-radius: 10%; width:200px;">
+          <a class="nav-link text-dark active bg-gradient-info" href="../pages/taluka_crop.php">
             <div class="text-dark text-center me-2 d-flex align-items-center justify-content-center">
               <i class="material-icons opacity-10">circle</i>
             </div>
@@ -76,30 +86,21 @@ if (!isset($_SESSION['ID']) && !isset($_SESSION['EMAIL'])) {
           </a>
         </li>
 
-        <li class="nav-item">
+        <!-- <li class="nav-item">
           <a class="nav-link text-dark active bg-gradient-info" href="../pages/heatmap.php">
             <div class="text-dark text-center me-2 d-flex align-items-center justify-content-center">
               <i class="material-icons opacity-10">circle</i>
             </div>
             <span class="nav-link-text ms-1">Heatmap</span>
           </a>
-        </li>
+        </li> -->
 
         <li class="nav-item">
-          <a class="nav-link text-dark " href="../pages/crop.php">
+          <a class="nav-link text-dark " href="../pages/heatmap.php">
             <div class="text-dark text-center me-2 d-flex align-items-center justify-content-center">
               <i class="material-icons opacity-10">table_view</i>
             </div>
-            <span class="nav-link-text ms-1">Crops</span>
-            
-          </a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link text-dark " href="../pages/taluka_crop.php">
-            <div class="text-dark text-center me-2 d-flex align-items-center justify-content-center">
-              <i class="material-icons opacity-10">table_view</i>
-            </div>
-            <span class="nav-link-text ms-1">Taluka Crops</span>
+            <span class="nav-link-text ms-1">Heatmap</span>
             
           </a>
         </li>
@@ -177,7 +178,7 @@ if (!isset($_SESSION['ID']) && !isset($_SESSION['EMAIL'])) {
                 
                 <!-- <optgroup label="Ahmedabad" style="display: block;" > -->
                 <option value="Ahmedabad" id="1">Ahmedabad</option>
-                <option value="Ahmedabad" id="2">Bavla</option>
+                <option value="Ahmedabad" id="2" selected>Bavla</option>
                 <option value="Ahmedabad" id="3">Daskroi</option>
                 <option value="Ahmedabad" id="4">Detroj-Rampura</option>
                 <option value="Ahmedabad" id="5">Dhandhuka</option>
@@ -534,77 +535,6 @@ if (!isset($_SESSION['ID']) && !isset($_SESSION['EMAIL'])) {
                 <!-- </optgroup> -->
                
               </select>
-              <select class="in" name="weeks" id="weeks">
-                <option value="1">01</option>
-                <option value="2">02</option>
-                <option value="3">03</option>
-                <option value="4">04</option>
-                <option value="5">05</option>
-                <option value="6">06</option>
-                <option value="7">07</option>
-                <option value="8">08</option>
-                <option value="9">09</option>
-                <option value="10">10</option>
-                <option value="11" selected>11</option>
-                <option value="12">12</option>
-                <option value="13">13</option>
-                <option value="14">14</option>
-                <option value="15">15</option>
-                <option value="16">16</option>
-                <option value="17">17</option>
-                <option value="18">18</option>
-                <option value="19">19</option>
-                <option value="20">20</option>
-                <option value="21">21</option>
-                <option value="22">22</option>
-                <option value="23">23</option>
-                <option value="24">24</option>
-                <option value="25">25</option>
-                <option value="26">26</option>
-                <option value="27">27</option>
-                <option value="28">28</option>
-                <option value="29">29</option>
-                <option value="30">30</option>
-                <option value="31">31</option>
-                <option value="32">32</option>
-                <option value="33">33</option>
-                <option value="34">34</option>
-                <option value="35">35</option>
-                <option value="36">36</option>
-                <option value="37">37</option>
-                <option value="38">38</option>
-                <option value="39">39</option>
-                <option value="40">40</option>
-                <option value="41">41</option>
-                <option value="42">42</option>
-                <option value="43">43</option>
-                <option value="44">44</option>
-                <option value="45">45</option>
-                <option value="46">46</option>
-                <option value="47">47</option>
-                <option value="48">48</option>
-                <option value="49">49</option>
-                <option value="50">50</option>
-                <option value="51">51</option>
-                <option value="52">52</option>
-                
-              </select>
-
-              <select class="in" name="type" id="type">
-              <option value="NDVI">NDVI</option>
-                <option value="SMT">SMT</option>
-                <option value="TCI">TCI</option>
-                <option value="VCI">VCI</option>
-                <option value="VHI">VHI</option>
-              </select>
-
-              <select class="in" name="period" id="per">
-              <option value="">Select period </option>
-                <option value="last 6 month">last 6 month</option>
-                <option value="last 3 year">last 3 year</option>
-              </select>
-
-              <!-- <input class="in" id="date" type="date" placeholder="DD-MM-YYYY" min="1997-01-01" max="2020-02-15" value="2020-05-30" selected> -->
               <select class="in" name="years" id="years">
                 <option value="1981">1981</option>
                 <option value="1982">1982</option>
@@ -658,6 +588,74 @@ if (!isset($_SESSION['ID']) && !isset($_SESSION['EMAIL'])) {
                 <option value="2030">2030</option>
 
               </select>
+              <select class="in" name="weeks" id="weeks">
+              <option value="">Select Week </option>
+
+                <option value="1">01</option>
+                <option value="2">02</option>
+                <option value="3">03</option>
+                <option value="4">04</option>
+                <option value="5">05</option>
+                <option value="6">06</option>
+                <option value="7">07</option>
+                <option value="8">08</option>
+                <option value="9">09</option>
+                <option value="10">10</option>
+                <option value="11">11</option>
+                <option value="12">12</option>
+                <option value="13">13</option>
+                <option value="14">14</option>
+                <option value="15">15</option>
+                <option value="16">16</option>
+                <option value="17">17</option>
+                <option value="18">18</option>
+                <option value="19">19</option>
+                <option value="20">20</option>
+                <option value="21">21</option>
+                <option value="22">22</option>
+                <option value="23">23</option>
+                <option value="24">24</option>
+                <option value="25">25</option>
+                <option value="26">26</option>
+                <option value="27">27</option>
+                <option value="28">28</option>
+                <option value="29">29</option>
+                <option value="30">30</option>
+                <option value="31">31</option>
+                <option value="32">32</option>
+                <option value="33">33</option>
+                <option value="34">34</option>
+                <option value="35">35</option>
+                <option value="36">36</option>
+                <option value="37">37</option>
+                <option value="38">38</option>
+                <option value="39">39</option>
+                <option value="40">40</option>
+                <option value="41">41</option>
+                <option value="42">42</option>
+                <option value="43">43</option>
+                <option value="44">44</option>
+                <option value="45">45</option>
+                <option value="46">46</option>
+                <option value="47">47</option>
+                <option value="48">48</option>
+                <option value="49">49</option>
+                <option value="50">50</option>
+                <option value="51">51</option>
+                <option value="52">52</option>
+                
+              </select>
+
+              <select class="in" name="type" id="type">
+              <option value="">Select Type </option>
+              <option value="NDVI">NDVI</option>
+                <!-- <option value="SMT">SMT</option> -->
+                <!-- <option value="TCI">TCI</option> -->
+                <option value="VCI">VCI</option>
+                <option value="VHI">VHI</option>
+              </select>
+
+              <!-- <input class="in" id="date" type="date" placeholder="DD-MM-YYYY" min="1997-01-01" max="2020-02-15" value="2020-05-30" selected> -->
             </div>
           </div>
           <!-- <input class="in" id="date" type="date" placeholder="YYYY" min="1997" max="2023" value="2020"> -->
@@ -693,7 +691,12 @@ if (!isset($_SESSION['ID']) && !isset($_SESSION['EMAIL'])) {
               <div class="chart" id="chart_data" style="width:550px;">
                   <canvas id="chart-line" class="chart-canvas" height="270" width="300"></canvas>
               </div>
-              <hr style="margin-top:-5px">
+              <hr style="margin-top:-5px;margin-bottom:0px;">
+              <select class="in" name="period" id="per" style="margin-bottom:-20px;">
+              <option value="">Select period </option>
+                <option value="last 6 month">last 6 month</option>
+                <option value="last 3 year">last 3 year</option>
+              </select>
                 <div class="chart" id="chart_data1">
                   <canvas id="chart-bars" class="chart-canvas" height="280" width="300"></canvas>
                 </div> 
@@ -1338,7 +1341,9 @@ new Chart(ctx, {
       },
     });
 
-    
+    $( window ).on( "load", function() {
+        $('.loader').delay(2000).fadeOut(1000);
+    });
 </script>
   <script>
     var win = navigator.platform.indexOf('Win') > -1;

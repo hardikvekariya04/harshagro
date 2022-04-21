@@ -54,12 +54,14 @@ if (!isset($_SESSION['ID']) && !isset($_SESSION['EMAIL'])) {
     border-radius: 7px;
     border: 2px dashed gray;
     width: 50vw;
-    height: 70vh;
-    margin-bottom: -20px;
+    height: 65vh;
+    /* margin-bottom: -20px; */
+    margin-top:10px;
   }
 </style>
 
 <body class="g-sidenav-show  bg-gray-200">
+<div class="loader"></div>
   <!-- <div class="circle"></div> -->
   <aside
     class="sidenav navbar navbar-vertical navbar-expand-xs border-0 border-radius-xl my-3 fixed-start ms-3 ps bg-white"
@@ -67,7 +69,7 @@ if (!isset($_SESSION['ID']) && !isset($_SESSION['EMAIL'])) {
     <div class="sidenav-header">
       <i class="fas fa-times p-3 cursor-pointer text-white opacity-5 position-absolute end-0 top-0 d-none d-xl-none"
         aria-hidden="true" id="iconSidenav"></i>
-      <a class="navbar-brand m-0" href=" https://demos.creative-tim.com/material-dashboard/pages/dashboard "
+      <a class="navbar-brand m-0" href=""
         target="_blank">
         <img src="../assets/img/logo.png" class="navbar-brand-img h-100" alt="main_logo"
           style="min-width: 12rem; min-height: 4rem; top: 0;">
@@ -77,7 +79,7 @@ if (!isset($_SESSION['ID']) && !isset($_SESSION['EMAIL'])) {
     <div class="collapse navbar-collapse  w-auto  max-height-vh-100" id="sidenav-collapse-main">
       <ul class="navbar-nav">
         <li class="nav-item">
-          <a class="nav-link text-dark active bg-gradient-primary" href="../indexD.php">
+          <a class="nav-link text-dark " href="../indexD.php">
             <div class="text-dark text-center me-2 d-flex align-items-center justify-content-center">
               <i class="material-icons opacity-10">dashboard</i>
             </div>
@@ -85,32 +87,6 @@ if (!isset($_SESSION['ID']) && !isset($_SESSION['EMAIL'])) {
           </a>
         </li>
 
-        <li class="nav-item">
-          <a class="nav-link text-dark active bg-gradient-info" href="../pages/district.html">
-            <div class="text-dark text-center me-2 d-flex align-items-center justify-content-center">
-              <i class="material-icons opacity-10">circle</i>
-            </div>
-            <span class="nav-link-text ms-1">District</span>
-          </a>
-        </li>
-
-        <li class="nav-item">
-          <a class="nav-link text-dark active bg-gradient-info" href="../indexD.php">
-            <div class="text-dark text-center me-2 d-flex align-items-center justify-content-center">
-              <i class="material-icons opacity-10">circle</i>
-            </div>
-            <span class="nav-link-text ms-1">Taluka</span>
-          </a>
-        </li>
-
-        <li class="nav-item" style="border: 2px solid rgb(168, 168, 168); border-radius: 10%;">
-          <a class="nav-link text-dark active bg-gradient-info" href="../pages/heatmap.php">
-            <div class="text-dark text-center me-2 d-flex align-items-center justify-content-center">
-              <i class="material-icons opacity-10">circle</i>
-            </div>
-            <span class="nav-link-text ms-1">Heatmap</span>
-          </a>
-        </li>
 
         <li class="nav-item">
           <a class="nav-link text-dark " href="../pages/crop.php">
@@ -122,11 +98,11 @@ if (!isset($_SESSION['ID']) && !isset($_SESSION['EMAIL'])) {
           </a>
         </li>
         <li class="nav-item">
-          <a class="nav-link text-dark " href="../pages/taluka_crop.php">
+          <a class="nav-link text-dark active bg-gradient-primary" href=" ">
             <div class="text-dark text-center me-2 d-flex align-items-center justify-content-center">
               <i class="material-icons opacity-10">table_view</i>
             </div>
-            <span class="nav-link-text ms-1">Taluka Crops</span>
+            <span class="nav-link-text ms-1" style="font-size:20px;font-weight:bold;">Heatmap</span>
           </a>
         </li>
       </ul>
@@ -158,7 +134,7 @@ if (!isset($_SESSION['ID']) && !isset($_SESSION['EMAIL'])) {
             <div class="input-group input-group-outline">
 
               <input class="in" id="date" type="date" placeholder="DD-MM-YYYY" min="1997-01-01" max="2020-02-15"
-                value="">
+                value="" style="border-top-left-radius:50px;border-bottom-left-radius:50px;width:200px;padding:7px;margin-bottom:-10px;">
 
             </div>
           </div>
@@ -183,24 +159,32 @@ if (!isset($_SESSION['ID']) && !isset($_SESSION['EMAIL'])) {
       <div class="row mt-4">
         <div class="col-lg-5.5 col-md-6 mt-4 mb-0">
           <div class="card z-index-2 ">
-            <div id="chart-line1" class="img-magnifier-container"></div>
-
-            <!-- <div id="chart-line1"> -->
-            <hr class="dark horizontal" style="margin-bottom:-20px;">
-            <div class="card-body" style="margin-bottom:-30px;">
+          <div class="card-body" style="margin-top:-20px;">
               <h3 class="mb-0 ">Weather</h3>
               <p class="text-sm ">Heatmap Data</p>
+              <select class="in" name="type" id="type" style="position:absolute;top:10px;left:300px;border-radius:50px;width:150px;">
+                <option value="min">Min Temp</option>
+                <option value="max">Max Temp</option>
+                <option value="rain">Rainfall</option>
+              </select>
             </div>
+            <hr class="dark horizontal" style="margin-top:-30px;margin-bottom:-10px;">
+            <div id="chart-line1" class="img-magnifier-container"></div>
           </div>
         </div>
         <div class="col-lg-5.5 col-md-6 mt-4 mb-0" style="margin-left : 20px">
           <div class="card z-index-2  ">
-            <div id="chart-line2"></div>
-            <hr class="dark horizontal" style="margin-bottom:-20px;">
-            <div class="card-body" style="margin-bottom:-30px;">
+          <div class="card-body" style="margin-top:-20px;">
               <h3 class="mb-0 "> Crop </h3>
               <p class="text-sm "> Heatmap Data </p>
+              <select class="in" name="type" id="type1" style="position:absolute;top:10px;left:300px;border-radius:50px;width:150px;">
+                <option value="min">Min Temp</option>
+                <option value="max">Max Temp</option>
+                <option value="rain">Rainfall</option>
+              </select>
             </div>
+            <hr class="dark horizontal" style="margin-top:-30px;margin-bottom:-10px;">
+            <div id="chart-line2"></div>
           </div>
         </div>
       </div>
@@ -276,23 +260,35 @@ if (!isset($_SESSION['ID']) && !isset($_SESSION['EMAIL'])) {
   <script>
     var path = "http://localhost/newagro/pages/";
     var date_id = '';
-
+    var temp_id = '';
     var date_id = document.getElementById("date").value;
     // console.log(date_id);
+    fetch_data();
+    var temp_id = document.getElementById("type").value;
+    fetch_data();
+    var temp_id1 = document.getElementById("type1").value;
     fetch_data();
     $(function () {
       $(document).on('change', '#date', function () {
         date_id = $(this).val();
-        console.log(date_id);
+        // console.log(date_id);
         fetch_data();
       })
+      $(document).on('change','#type',function(){
+        temp_id = $(this).val();
+        fetch_data();
+    })
+    $(document).on('change','#type1',function(){
+        temp_id1 = $(this).val();
+        fetch_data();
+    })
     });
 
     function fetch_data() {
       $.ajax({
         url: path + "heatmap_fetch_data.php",
         type: 'POST',
-        data: { date_id: date_id },
+        data: { date_id: date_id,temp_id:temp_id ,temp_id1 : temp_id1},
         success: function (result) {
           $("#chart-line1").html(result);
         }
@@ -300,12 +296,15 @@ if (!isset($_SESSION['ID']) && !isset($_SESSION['EMAIL'])) {
       $.ajax({
         url: path + "crop_heatmap_fetch_data.php",
         type: 'POST',
-        data: { date_id: date_id },
+        data: { date_id: date_id,temp_id:temp_id,temp_id1 :temp_id1 },
         success: function (result) {
           $("#chart-line2").html(result);
         }
       });
     }
+    $( window ).on( "load", function() {
+        $('.loader').delay(2000).fadeOut(1000);
+    });
   </script>
   <!-- Github buttons -->
   <script async defer src="https://buttons.github.io/buttons.js"></script>

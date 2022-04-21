@@ -3,22 +3,36 @@ $msg = "";
 // check if the user has clicked the button "UPLOAD" 
 if (isset($_POST['uploadfile'])) {
     $date = $_POST['date'];
-    $weather_heatmap = $_FILES["choosefile"]["name"];
-    $crop_heatmap = $_FILES["choosefile1"]["name"];
+    $weather_max_heatmap = $_FILES["choosefile"]["name"];
+    $weather_min_heatmap = $_FILES["choosefile1"]["name"];
+    $weather_rain_heatmap = $_FILES["choosefile2"]["name"];
+
+    $crop_max_heatmap = $_FILES["choosefile3"]["name"];
+    $crop_min_heatmap = $_FILES["choosefile4"]["name"];
+    $crop_rain_heatmap = $_FILES["choosefile5"]["name"];
 
     $tempname = $_FILES["choosefile"]["tmp_name"];  
     $tempname1 = $_FILES["choosefile1"]["tmp_name"];  
+    $tempname2 = $_FILES["choosefile2"]["tmp_name"];  
+    $tempname3 = $_FILES["choosefile3"]["tmp_name"];  
+    $tempname4 = $_FILES["choosefile4"]["tmp_name"];  
+    $tempname5 = $_FILES["choosefile5"]["tmp_name"];  
 
-    $folder = "weather_image/".$weather_heatmap;
-    $folder1 = "crop_image/".$crop_heatmap;
+    $folder = "weather_max_image/".$weather_max_heatmap;
+    $folder1 = "weather_min_image/".$weather_min_heatmap;
+    $folder2 = "weather_rain_image/".$weather_rain_heatmap;
+
+    $folder3 = "crop_max_image/".$crop_max_heatmap;
+    $folder4 = "crop_min_image/".$crop_min_heatmap;
+    $folder5 = "crop_rain_image/".$crop_rain_heatmap;
 
       // connect with the database
     $db = mysqli_connect("localhost", "root", "", "admin_agro");
-        $sql = "INSERT INTO image (weather_heatmap,crop_heatmap,date) VALUES ('$weather_heatmap','$crop_heatmap','$date')";
+        $sql = "INSERT INTO image (weather_max_heat,weather_min_heat,weather_rain_heat,crop_max_heat,crop_min_heat,crop_rain_heat,date) VALUES ('$weather_max_heatmap','$weather_min_heatmap','$weather_rain_heatmap','$crop_max_heatmap','$crop_min_heatmap','$crop_rain_heatmap','$date')";
      // function to execute above query
         mysqli_query($db, $sql);       
         // Add the image to the "image" folder"
-        if (move_uploaded_file($tempname, $folder)) {
+        if (move_uploaded_file($tempname, $folder) && move_uploaded_file($tempname1, $folder1) && move_uploaded_file($tempname2, $folder2) && move_uploaded_file($tempname3, $folder3) && move_uploaded_file($tempname4, $folder4) && move_uploaded_file($tempname5, $folder5)) {
             echo '<script language="javascript">';
             echo 'alert("Successfully Registered")'; 
             echo '</script>';
@@ -26,11 +40,11 @@ if (isset($_POST['uploadfile'])) {
         }else{
             $msg = "Failed to upload image";
     }
-    if (move_uploaded_file($tempname1, $folder1)) {
-        $msg = "Image uploaded successfully";
-    }else{
-        $msg = "Failed to upload image";
-}
+//     if (move_uploaded_file($tempname1, $folder1)) {
+//         $msg = "Image uploaded successfully";
+//     }else{
+//         $msg = "Failed to upload weather minimum temp image";
+// }
 }
 // $result = mysqli_query($db, "SELECT * FROM image");
 ?> 
@@ -140,31 +154,31 @@ $connect = mysqli_connect("localhost", "root", "", "admin_agro");
             <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
               <i class="material-icons opacity-10">dashboard</i>
             </div>
-            <span class="nav-link-text ms-1">District_climate</span>
+            <span class="nav-link-text ms-1">Climate</span>
           </a>
         </li>
-        <li class="nav-item">
+        <!-- <li class="nav-item">
             <a class="nav-link text-white " href="taluka_climate.php">
               <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
                 <i class="material-icons opacity-10">dashboard</i>
               </div>
               <span class="nav-link-text ms-1">Taluka_climate</span>
             </a>
-          </li>
+          </li> -->
           <li class="nav-item">
             <a class="nav-link text-white " href="district_crop.php">
               <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
                 <i class="material-icons opacity-10">dashboard</i>
               </div>
-              <span class="nav-link-text ms-1">District_crop</span>
+              <span class="nav-link-text ms-1">Crop</span>
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link text-white " href="taluka_crop.php">
+            <a class="nav-link text-white " href="heatmap.php">
               <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
                 <i class="material-icons opacity-10">dashboard</i>
               </div>
-              <span class="nav-link-text ms-1">Taluka_crop</span>
+              <span class="nav-link-text ms-1">Heatmap</span>
             </a>
           </li>
         <!-- <li class="nav-item">
@@ -179,7 +193,7 @@ $connect = mysqli_connect("localhost", "root", "", "admin_agro");
     </div>
     <div class="sidenav-footer position-absolute w-100 bottom-0 ">
       <div class="mx-3">
-        <a class="btn bg-gradient-primary mt-4 w-100" href="" type="button">Log-out</a>
+        <a class="btn bg-gradient-primary mt-4 w-100" href="../logout.php" type="button" >Log-out</a>
       </div>
     </div>
   </aside>
@@ -229,9 +243,25 @@ $connect = mysqli_connect("localhost", "root", "", "admin_agro");
         <input type="date" name="date" class="form-control">
     </div>
     <br/>
-    <input type="file" name="choosefile" style="width:300px;border : 2px solid #29C5F6;padding:5px;border-radius:10px;color:red;"/>
-    <input type="file" name="choosefile1" style="width:300px;border : 2px solid #29C5F6;padding:5px;border-radius:10px;color:red;"/>
 
+    <h2>Weather</h2>
+    <div style="display:flex">
+    <h6>Max : </h6>
+    <input type="file" name="choosefile" style="width:300px;border : 2px solid #29C5F6;padding:5px;border-radius:10px;color:red;"/>
+    <h6>Min : </h6>
+    <input type="file" name="choosefile1" style="width:300px;border : 2px solid #29C5F6;padding:5px;border-radius:10px;color:red;"/>
+    <h6>Rain : </h6>
+    <input type="file" name="choosefile2" style="width:300px;border : 2px solid #29C5F6;padding:5px;border-radius:10px;color:red;"/>
+    </div>
+    <h2>crop</h2>
+  <div style="display:flex">
+    <h6>Max : </h6>
+    <input type="file" name="choosefile3" style="width:300px;border : 2px solid #29C5F6;padding:5px;border-radius:10px;color:red;"/>
+    <h6>Min : </h6>
+    <input type="file" name="choosefile4" style="width:300px;border : 2px solid #29C5F6;padding:5px;border-radius:10px;color:red;"/>
+    <h6>Rain : </h6>
+    <input type="file" name="choosefile5" style="width:300px;border : 2px solid #29C5F6;padding:5px;border-radius:10px;color:red;"/>
+  </div>
     <br />
     <br/>
     <input type="submit" name="uploadfile" value="Upload" class="btn btn-info" style="width:200px;"/>

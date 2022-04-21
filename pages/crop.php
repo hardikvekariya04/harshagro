@@ -39,11 +39,12 @@ if (!isset($_SESSION['ID']) && !isset($_SESSION['EMAIL'])) {
 </head>
 
 <body class="g-sidenav-show  bg-gray-200">
+<div class="loader"></div>
   <!-- <div class="circle"></div> -->
   <aside class="sidenav navbar navbar-vertical navbar-expand-xs border-0 border-radius-xl my-3 fixed-start ms-3 ps bg-white" id="sidenav-main">
-    <div class="sidenav-header">
+  <div class="sidenav-header">
       <i class="fas fa-times p-3 cursor-pointer text-white opacity-5 position-absolute end-0 top-0 d-none d-xl-none" aria-hidden="true" id="iconSidenav"></i>
-      <a class="navbar-brand m-0" href=" https://demos.creative-tim.com/material-dashboard/pages/dashboard " target="_blank">
+      <a class="navbar-brand m-0" href="" target="_blank">
       <img src="../assets/img/logo.png" class="navbar-brand-img h-100" alt="main_logo" style="min-width: 8rem; min-height: 3rem; top: 0;">
       </a>
     </div>
@@ -51,15 +52,24 @@ if (!isset($_SESSION['ID']) && !isset($_SESSION['EMAIL'])) {
     <div class="collapse navbar-collapse  w-auto  max-height-vh-100" id="sidenav-collapse-main">
       <ul class="navbar-nav">
         <li class="nav-item">
-          <a class="nav-link text-dark active bg-gradient-primary" href="../indexD.php">
+          <a class="nav-link text-dark " href="../indexD.php">
             <div class="text-dark text-center me-2 d-flex align-items-center justify-content-center">
               <i class="material-icons opacity-10">dashboard</i>
             </div>
             <span class="nav-link-text ms-1">Climate</span>
           </a>
         </li>
+        <li class="nav-item">
+          <a class="nav-link text-dark active bg-gradient-primary" href="../pages/crop.php">
+            <div class="text-dark text-center me-2 d-flex align-items-center justify-content-center">
+              <i class="material-icons opacity-10">table_view</i>
+            </div>
+            <span class="nav-link-text ms-1" style="width:200px;font-size:20px;font-weight:bold;">Crops</span>
+            
+          </a>
+        </li>
 
-        <li class="nav-item" style="border: 2px solid rgb(168, 168, 168); border-radius: 10%;">
+        <li class="nav-item" style="border: 2px solid rgb(168, 168, 168); border-radius: 10%; width:200px;">
           <a class="nav-link text-dark active bg-gradient-info" href="#">
             <div class="text-dark text-center me-2 d-flex align-items-center justify-content-center">
               <i class="material-icons opacity-10">circle</i>
@@ -68,8 +78,8 @@ if (!isset($_SESSION['ID']) && !isset($_SESSION['EMAIL'])) {
           </a>
         </li>
 
-        <li class="nav-item" >
-          <a class="nav-link text-dark active bg-gradient-info" href="../indexD.php">
+        <li class="nav-item" style="width:200px;">
+          <a class="nav-link text-dark active bg-gradient-info" href="../pages/taluka_crop.php">
             <div class="text-dark text-center me-2 d-flex align-items-center justify-content-center">
               <i class="material-icons opacity-10">circle</i>
             </div>
@@ -78,24 +88,16 @@ if (!isset($_SESSION['ID']) && !isset($_SESSION['EMAIL'])) {
         </li>
 
         <li class="nav-item">
-          <a class="nav-link text-dark active bg-gradient-info" href="../pages/heatmap.php">
-            <div class="text-dark text-center me-2 d-flex align-items-center justify-content-center">
-              <i class="material-icons opacity-10">circle</i>
-            </div>
-            <span class="nav-link-text ms-1">Heatmap</span>
-          </a>
-        </li>
-
-        <li class="nav-item">
-          <a class="nav-link text-dark " href="../pages/crop.php">
+          <a class="nav-link text-dark " href="../pages/heatmap.php">
             <div class="text-dark text-center me-2 d-flex align-items-center justify-content-center">
               <i class="material-icons opacity-10">table_view</i>
             </div>
-            <span class="nav-link-text ms-1">Crops</span>
+            <span class="nav-link-text ms-1">Heatmap</span>
             
           </a>
         </li>
-        <li class="nav-item">
+
+        <!-- <li class="nav-item">
           <a class="nav-link text-dark " href="../pages/taluka_crop.php">
             <div class="text-dark text-center me-2 d-flex align-items-center justify-content-center">
               <i class="material-icons opacity-10">table_view</i>
@@ -103,7 +105,7 @@ if (!isset($_SESSION['ID']) && !isset($_SESSION['EMAIL'])) {
             <span class="nav-link-text ms-1">Taluka Crops</span>
             
           </a>
-        </li>
+        </li> -->
         
       </ul>
     </div>
@@ -116,6 +118,7 @@ if (!isset($_SESSION['ID']) && !isset($_SESSION['EMAIL'])) {
         <a class="btn bg-gradient-primary mt-0 w-100" href="" type="button">Visit Home page</a>
       </div>
     </div>
+
   </aside>
   <main class="main-content position-relative max-height-vh-100 h-100 border-radius-lg ">
     <!-- Navbar -->
@@ -135,7 +138,8 @@ if (!isset($_SESSION['ID']) && !isset($_SESSION['EMAIL'])) {
               
                 <!-- <label>Select District:</label> -->
                 <select id="district" >
-                    <option  id="0" selected>Ahmadabad</option>
+                <!-- <option value="">Select period </option> -->
+                    <option  id="0">Ahmadabad</option>
                     <option  id="1">Anand</option>
                     <option  id="2">Banaskantha</option>
                     <option  id="3">Bharuch</option>
@@ -172,8 +176,61 @@ if (!isset($_SESSION['ID']) && !isset($_SESSION['EMAIL'])) {
                    
                     
                 </select>
+                <select class="in" name="years" id="years">
+                <option value="1981">1981</option>
+                <option value="1982">1982</option>
+                <option value="1983">1983</option>
+                <option value="1984">1984</option>
+                <option value="1985">1985</option>
+                <option value="1986">1986</option>
+                <option value="1987">1987</option>
+                <option value="1988">1988</option>
+                <option value="1989">1989</option>
+                <option value="1990" selected>1990</option>
+                <option value="1991">1991</option>
+                <option value="1992">1992</option>
+                <option value="1993">1993</option>
+                <option value="1994">1994</option>
+                <option value="1995">1995</option>
+                <option value="1996">1996</option>
+                <option value="1997">1997</option>
+                <option value="1998">1998</option>
+                <option value="1999">1999</option>
+                <option value="2000">2000</option>
+                <option value="2001">2001</option>
+                <option value="2002">2002</option>
+                <option value="2003">2003</option>
+                <option value="2004">2004</option>
+                <option value="2005">2005</option>
+                <option value="2006">2006</option>
+                <option value="2007">2007</option>
+                <option value="2008">2008</option>
+                <option value="2009">2009</option>
+                <option value="2010">2010</option>
+                <option value="2011">2011</option>
+                <option value="2012">2012</option>
+                <option value="2013">2013</option>
+                <option value="2014">2014</option>
+                <option value="2015">2015</option>
+                <option value="2016">2016</option>
+                <option value="2017">2017</option>
+                <option value="2018">2018</option>
+                <option value="2019">2019</option>
+                <option value="2020">2020</option>
+                <option value="2021">2021</option>
+                <option value="2022">2022</option>
+                <option value="2023">2023</option>
+                <option value="2024">2024</option>
+                <option value="2025">2025</option>
+                <option value="2026">2026</option>
+                <option value="2027">2027</option>
+                <option value="2028">2028</option>
+                <option value="2029">2029</option>
+                <option value="2030">2030</option>
 
+              </select>
               <select class="in" name="weeks" id="weeks">
+              <!-- <option value="">Select period </option> -->
                 <option value="1">01</option>
                 <option value="2">02</option>
                 <option value="3">03</option>
@@ -230,73 +287,21 @@ if (!isset($_SESSION['ID']) && !isset($_SESSION['EMAIL'])) {
               </select>
 
               <select class="in" name="type" id="type">
+              <option value=""  >Select period </option>
               <option value="NDVI">NDVI</option>
-                <option value="SMT">SMT</option>
-                <option value="TCI">TCI</option>
+                <!-- <option value="SMT">SMT</option> -->
+                <!-- <option value="TCI">TCI</option> -->
                 <option value="VCI">VCI</option>
                 <option value="VHI">VHI</option>
               </select>
 
-              <select class="in" name="period" id="per">
+              <!-- <select class="in" name="period" id="per">
               <option value="">Select period </option>
                 <option value="last 6 month">last 6 month</option>
                 <option value="last 3 year">last 3 year</option>
-              </select>
+              </select> -->
 
               <!-- <input class="in" id="date" type="date" placeholder="DD-MM-YYYY" min="1997-01-01" max="2020-02-15" value="2020-05-30" selected> -->
-              <select class="in" name="years" id="years">
-                <option value="1981">1981</option>
-                <option value="1982">1982</option>
-                <option value="1983">1983</option>
-                <option value="1984">1984</option>
-                <option value="1985">1985</option>
-                <option value="1986">1986</option>
-                <option value="1987">1987</option>
-                <option value="1988">1988</option>
-                <option value="1989">1989</option>
-                <option value="1990" selected>1990</option>
-                <option value="1991">1991</option>
-                <option value="1992">1992</option>
-                <option value="1993">1993</option>
-                <option value="1994">1994</option>
-                <option value="1995">1995</option>
-                <option value="1996">1996</option>
-                <option value="1997">1997</option>
-                <option value="1998">1998</option>
-                <option value="1999">1999</option>
-                <option value="2000">2000</option>
-                <option value="2001">2001</option>
-                <option value="2002">2002</option>
-                <option value="2003">2003</option>
-                <option value="2004">2004</option>
-                <option value="2005">2005</option>
-                <option value="2006">2006</option>
-                <option value="2007">2007</option>
-                <option value="2008">2008</option>
-                <option value="2009">2009</option>
-                <option value="2010">2010</option>
-                <option value="2011">2011</option>
-                <option value="2012">2012</option>
-                <option value="2013">2013</option>
-                <option value="2014">2014</option>
-                <option value="2015">2015</option>
-                <option value="2016">2016</option>
-                <option value="2017">2017</option>
-                <option value="2018">2018</option>
-                <option value="2019">2019</option>
-                <option value="2020">2020</option>
-                <option value="2021">2021</option>
-                <option value="2022">2022</option>
-                <option value="2023">2023</option>
-                <option value="2024">2024</option>
-                <option value="2025">2025</option>
-                <option value="2026">2026</option>
-                <option value="2027">2027</option>
-                <option value="2028">2028</option>
-                <option value="2029">2029</option>
-                <option value="2030">2030</option>
-
-              </select>
             </div>
           </div>
           <!-- <input class="in" id="date" type="date" placeholder="YYYY" min="1997" max="2023" value="2020"> -->
@@ -350,7 +355,12 @@ if (!isset($_SESSION['ID']) && !isset($_SESSION['EMAIL'])) {
               <div class="chart" id="chart_data" style="width:550px;">
                   <canvas id="chart-line" class="chart-canvas" height="270" width="300"></canvas>
               </div>
-              <hr style="margin-top:-5px">
+              <hr style="margin-top:-5px;margin-bottom:0px;">
+              <select class="in" name="period" id="per" style="margin-bottom:-20px;">
+              <option value="">Select period </option>
+                <option value="last 6 month">last 6 month</option>
+                <option value="last 3 year">last 3 year</option>
+              </select>
                 <div class="chart" id="chart_data1">
                   <canvas id="chart-bars" class="chart-canvas" height="280" width="300"></canvas>
                 </div>
@@ -1020,7 +1030,9 @@ new Chart(ctx, {
         },
       },
     });
-
+    $( window ).on( "load", function() {
+        $('.loader').delay(2000).fadeOut(1000);
+    });
     
 </script>
   <script>

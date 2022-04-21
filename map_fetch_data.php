@@ -3,7 +3,7 @@ $con = new mysqli('localhost','root','','agro');
 
 $date_id1 = $_POST['date_id1'];
 $type_id1 = $_POST['type_id1'];
-if($type_id1 === 'min'){
+if($type_id1 === 'rain'){
   $query1 =$con->query("SELECT min_temp,date from `newdata`  where date = '$date_id1'" );
   $month = array();
   $amount = array();

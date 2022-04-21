@@ -6,7 +6,7 @@ require_once 'config/db.php';
 if (isset($_POST["reset"])) {
   $email = mysqli_real_escape_string($con, $_POST["email"]);
 
-  $check_email = mysqli_query($con, "select * from mydatabase where email='$email'");
+  $check_email = mysqli_query($con, "select * from users where email='$email'");
 
   if (mysqli_num_rows($check_email) > 0) {
       $data = mysqli_fetch_assoc($check_email);

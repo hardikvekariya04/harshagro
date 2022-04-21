@@ -39,6 +39,7 @@ if (!isset($_SESSION['ID']) && !isset($_SESSION['EMAIL'])) {
 </head>
 
 <body class="g-sidenav-show  bg-gray-200">
+<div class="loader"></div>
   <!-- <div class="circle"></div> -->
   <aside class="sidenav navbar navbar-vertical navbar-expand-xs border-0 border-radius-xl my-3 fixed-start ms-3 ps bg-white" id="sidenav-main">
     <div class="sidenav-header">
@@ -51,15 +52,15 @@ if (!isset($_SESSION['ID']) && !isset($_SESSION['EMAIL'])) {
     <div class="collapse navbar-collapse  w-auto  max-height-vh-100" id="sidenav-collapse-main">
       <ul class="navbar-nav">
         <li class="nav-item">
-          <a class="nav-link text-dark active bg-gradient-primary" href="../indexD.php">
+          <a class="nav-link text-dark active bg-gradient-primary" href="../indexD.php" style="width:200px;">
             <div class="text-dark text-center me-2 d-flex align-items-center justify-content-center">
               <i class="material-icons opacity-10">dashboard</i>
             </div>
-            <span class="nav-link-text ms-1">Climate</span>
+            <span class="nav-link-text ms-1" style="font-size:20px;font-size:20px;font-weight:bold;">Climate</span>
           </a>
         </li>
 
-        <li class="nav-item" style="border: 2px solid rgb(168, 168, 168); border-radius: 10%;">
+        <li class="nav-item" style="border: 2px solid rgb(168, 168, 168); border-radius: 10%;width:200px;">
           <a class="nav-link text-dark active bg-gradient-info" href="#">
             <div class="text-dark text-center me-2 d-flex align-items-center justify-content-center">
               <i class="material-icons opacity-10">circle</i>
@@ -68,7 +69,7 @@ if (!isset($_SESSION['ID']) && !isset($_SESSION['EMAIL'])) {
           </a>
         </li>
 
-        <li class="nav-item" >
+        <li class="nav-item" style="width:200px;">
           <a class="nav-link text-dark active bg-gradient-info" href="../indexD.php">
             <div class="text-dark text-center me-2 d-flex align-items-center justify-content-center">
               <i class="material-icons opacity-10">circle</i>
@@ -77,14 +78,14 @@ if (!isset($_SESSION['ID']) && !isset($_SESSION['EMAIL'])) {
           </a>
         </li>
 
-        <li class="nav-item">
+        <!-- <li class="nav-item">
           <a class="nav-link text-dark active bg-gradient-info" href="../pages/heatmap.php">
             <div class="text-dark text-center me-2 d-flex align-items-center justify-content-center">
               <i class="material-icons opacity-10">circle</i>
             </div>
             <span class="nav-link-text ms-1">Heatmap</span>
           </a>
-        </li>
+        </li> -->
 
         <li class="nav-item">
           <a class="nav-link text-dark " href="../pages/crop.php">
@@ -96,11 +97,11 @@ if (!isset($_SESSION['ID']) && !isset($_SESSION['EMAIL'])) {
           </a>
         </li>
         <li class="nav-item">
-          <a class="nav-link text-dark " href="../pages/taluka_crop.php">
+          <a class="nav-link text-dark " href="../pages/heatmap.php">
             <div class="text-dark text-center me-2 d-flex align-items-center justify-content-center">
               <i class="material-icons opacity-10">table_view</i>
             </div>
-            <span class="nav-link-text ms-1">Taluka Crops</span>
+            <span class="nav-link-text ms-1">Heatmap</span>
             
           </a>
         </li>
@@ -174,16 +175,17 @@ if (!isset($_SESSION['ID']) && !isset($_SESSION['EMAIL'])) {
                     
                 </select>
               <select class="in" name="type" id="type">
+              <option value="">select</option>
                 <option value="min">Min Temp</option>
                 <option value="max">Max Temp</option>
                 <option value="rain">Rainfall</option>
               </select>
 
-              <select class="in" name="period" id="per">
+              <!-- <select class="in" name="period" id="per">
               <option value="">Select period </option>
                 <option value="last 6 month">last 6 month</option>
                 <option value="last 3 year">last 3 year</option>
-              </select>
+              </select> -->
 
               <input class="in" id="date" type="date" placeholder="DD-MM-YYYY" min="1997-01-01" max="2020-02-15" value="2020-05-30" selected>
               
@@ -238,7 +240,12 @@ if (!isset($_SESSION['ID']) && !isset($_SESSION['EMAIL'])) {
               <div class="chart" id="chart_data" style="width:550px;">
                   <canvas id="chart-line" class="chart-canvas" height="270" width="300"></canvas>
               </div>
-              <hr style="margin-top:-5px">
+              <hr style="margin-top:-5px;margin-bottom:0px;">
+              <select class="in" name="period" id="per" style="margin-bottom:-20px;">
+              <option value="">Select period </option>
+                <option value="last 6 month" >last 6 month</option>
+                <option value="last 3 year">last 3 year</option>
+              </select>
                 <div class="chart" id="chart_data1">
                   <canvas id="chart-bars" class="chart-canvas" height="280" width="300"></canvas>
                 </div>
@@ -789,8 +796,9 @@ new Chart(ctx, {
         },
       },
     });
-
-    
+    $( window ).on( "load", function() {
+        $('.loader').delay(2000).fadeOut(1000);
+    });
 </script>
   <script>
     var win = navigator.platform.indexOf('Win') > -1;

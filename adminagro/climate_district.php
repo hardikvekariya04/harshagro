@@ -29,6 +29,37 @@ if(isset($_POST["submit"]))
   }
  }
 }
+
+
+if(isset($_POST["submit5"]))
+{
+ if($_FILES['file']['name'])
+ {
+  $filename = explode(".", $_FILES['file']['name']);
+  if($filename[1] == 'csv')
+  {
+   $handle = fopen($_FILES['file']['tmp_name'], "r");
+   while($data = fgetcsv($handle))
+   {
+    //    $item0 = '';
+    $item1 = mysqli_real_escape_string($connect, $data[0]);  
+                $item2 = mysqli_real_escape_string($connect, $data[1]);
+                $item3 = mysqli_real_escape_string($connect, $data[2]);
+                $item4 = mysqli_real_escape_string($connect, $data[3]);
+                $item5 = mysqli_real_escape_string($connect, $data[4]);
+                // $item6 = mysqli_real_escape_string($connect, $data[5]);
+                // $item7 = mysqli_real_escape_string($connect, $data[6]);
+                // $item8 = mysqli_real_escape_string($connect, $data[7]);
+                // $item9 = mysqli_real_escape_string($connect, $data[8]);
+                // $item10 = mysqli_real_escape_string($connect, $data[9]);
+                $query = "INSERT into taluka_data(taluka_id,date,rainfall,max_temp,min_temp) values('$item1','$item2','$item3','$item4','$item5')";
+                mysqli_query($connect, $query);
+   }
+   fclose($handle);
+   echo "<script>alert('Import done');</script>";
+  }
+ }
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -132,31 +163,31 @@ if(isset($_POST["submit"]))
             <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
               <i class="material-icons opacity-10">dashboard</i>
             </div>
-            <span class="nav-link-text ms-1">District_climate</span>
+            <span class="nav-link-text ms-1">Climate</span>
           </a>
         </li>
-        <li class="nav-item">
+        <!-- <li class="nav-item">
             <a class="nav-link text-white " href="taluka_climate.php">
               <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
                 <i class="material-icons opacity-10">dashboard</i>
               </div>
               <span class="nav-link-text ms-1">Taluka_climate</span>
             </a>
-          </li>
+          </li> -->
           <li class="nav-item">
             <a class="nav-link text-white " href="district_crop.php">
               <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
                 <i class="material-icons opacity-10">dashboard</i>
               </div>
-              <span class="nav-link-text ms-1">District_crop</span>
+              <span class="nav-link-text ms-1">crop</span>
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link text-white " href="taluka_crop.php">
+            <a class="nav-link text-white " href="heatmap.php">
               <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
                 <i class="material-icons opacity-10">dashboard</i>
               </div>
-              <span class="nav-link-text ms-1">Taluka_crop</span>
+              <span class="nav-link-text ms-1">Heatmap</span>
             </a>
           </li>
         <!-- <li class="nav-item">
@@ -220,6 +251,12 @@ if(isset($_POST["submit"]))
     <br />
     <br/>
     <input type="submit" name="submit" value="Import" class="btn btn-info" style="width:200px;"/>
+    <h6>Taluka</h6>
+    <input type="file" name="file" style="width:300px;border : 2px solid #29C5F6;padding:5px;border-radius:10px;color:red;"/>
+    <br />
+    <br/>
+    <input type="submit" name="submit5" value="Import" class="btn btn-info" style="width:200px;"/>
+   </div>
    </div>
   </form>
 </div>
