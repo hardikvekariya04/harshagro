@@ -65,6 +65,7 @@ function update_chart(result){
     $("canvas#chart-line").remove();
   $("div#chart_data").append('<canvas id="chart-line" class="chart-canvas" height="270" width="300"></canvas>');
       var ctx2 = document.getElementById("chart-line").getContext("2d");
+  if(per_id == "NDVI"){
     new Chart(ctx2, {
       type: "line",
       data: {
@@ -74,10 +75,10 @@ function update_chart(result){
           tension: 0,
           borderWidth: 0,
           pointRadius: 5,
-          pointBackgroundColor: "rgba(000, 000, 000, .8)",
+          pointBackgroundColor: "rgba(46, 204, 113)",
           pointBorderColor: "transparent",
-          borderColor: "rgba(000, 000, 000, .8)",
-          borderColor: "rgba(000, 000, 000, .8)",
+          borderColor: "rgba(46, 204, 113)",
+          borderColor: "rgba(46, 204, 113)",
           borderWidth: 4,
           backgroundColor: "transparent",
           fill: true,
@@ -145,12 +146,260 @@ function update_chart(result){
         },
       },
     });
+  }
+  else if(per_id == "VCI"){
+    new Chart(ctx2, {
+      type: "line",
+      data: {
+        labels: result.final_array,
+        datasets: [{
+          label: `${per_id}`+` `+`Temp`,
+          tension: 0,
+          borderWidth: 0,
+          pointRadius: 5,
+          pointBackgroundColor: "rgba(76,152,107, .8)",
+          pointBorderColor: "transparent",
+          borderColor: "rgba(76,152,107, .8)",
+          borderColor: "rgba(76,152,107, .8)",
+          borderWidth: 4,
+          backgroundColor: "transparent",
+          fill: true,
+          data: result.month_final,
+          maxBarThickness: 6
+
+        }],
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: {
+          legend: {
+            display: true,
+          }
+        },
+        interaction: {
+          intersect: false,
+          mode: 'index',
+        },
+        scales: {
+          y: {
+            grid: {
+              drawBorder: false,
+              display: true,
+              drawOnChartArea: true,
+              drawTicks: false,
+              borderDash: [5, 5],
+              color: 'rgba(000, 000, 000, .2)'
+            },
+            ticks: {
+              display: true,
+              color: '#000',
+              padding: 10,
+              font: {
+                size: 14,
+                weight: 300,
+                family: "Roboto",
+                style: 'normal',
+                lineHeight: 2
+              },
+            }
+          },
+          x: {
+            grid: {
+              drawBorder: false,
+              display: false,
+              drawOnChartArea: false,
+              drawTicks: false,
+              borderDash: [5, 5]
+            },
+            ticks: {
+              display: true,
+              color: '#000',
+              padding: 10,
+              font: {
+                size: 14,
+                weight: 300,
+                family: "Roboto",
+                style: 'normal',
+                lineHeight: 2
+              },
+            }
+          },
+        },
+      },
+    });
+  }
+  else if(per_id == "VHI"){
+    new Chart(ctx2, {
+      type: "line",
+      data: {
+        labels: result.final_array,
+        datasets: [{
+          label: `${per_id}`+` `+`Temp`,
+          tension: 0,
+          borderWidth: 0,
+          pointRadius: 5,
+          pointBackgroundColor: "rgba(106,122,106)",
+          pointBorderColor: "transparent",
+          borderColor: "rgba(106,122,106)",
+          borderColor: "rgba(106,122,106)",
+          borderWidth: 4,
+          backgroundColor: "transparent",
+          fill: true,
+          data: result.month_final,
+          maxBarThickness: 6
+
+        }],
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: {
+          legend: {
+            display: true,
+          }
+        },
+        interaction: {
+          intersect: false,
+          mode: 'index',
+        },
+        scales: {
+          y: {
+            grid: {
+              drawBorder: false,
+              display: true,
+              drawOnChartArea: true,
+              drawTicks: false,
+              borderDash: [5, 5],
+              color: 'rgba(000, 000, 000, .2)'
+            },
+            ticks: {
+              display: true,
+              color: '#000',
+              padding: 10,
+              font: {
+                size: 14,
+                weight: 300,
+                family: "Roboto",
+                style: 'normal',
+                lineHeight: 2
+              },
+            }
+          },
+          x: {
+            grid: {
+              drawBorder: false,
+              display: false,
+              drawOnChartArea: false,
+              drawTicks: false,
+              borderDash: [5, 5]
+            },
+            ticks: {
+              display: true,
+              color: '#000',
+              padding: 10,
+              font: {
+                size: 14,
+                weight: 300,
+                family: "Roboto",
+                style: 'normal',
+                lineHeight: 2
+              },
+            }
+          },
+        },
+      },
+    });
+  }
+  else{
+    new Chart(ctx2, {
+      type: "line",
+      data: {
+        labels: result.final_array,
+        datasets: [{
+          label: `${per_id}`+` `+`Temp`,
+          tension: 0,
+          borderWidth: 0,
+          pointRadius: 5,
+          pointBackgroundColor: "rgba(000,000,000, .8)",
+          pointBorderColor: "transparent",
+          borderColor: "rgba(000,000,000, .8)",
+          borderColor: "rgba(000,000,000, .8)",
+          borderWidth: 4,
+          backgroundColor: "transparent",
+          fill: true,
+          data: result.month_final,
+          maxBarThickness: 6
+
+        }],
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: {
+          legend: {
+            display: true,
+          }
+        },
+        interaction: {
+          intersect: false,
+          mode: 'index',
+        },
+        scales: {
+          y: {
+            grid: {
+              drawBorder: false,
+              display: true,
+              drawOnChartArea: true,
+              drawTicks: false,
+              borderDash: [5, 5],
+              color: 'rgba(000, 000, 000, .2)'
+            },
+            ticks: {
+              display: true,
+              color: '#000',
+              padding: 10,
+              font: {
+                size: 14,
+                weight: 300,
+                family: "Roboto",
+                style: 'normal',
+                lineHeight: 2
+              },
+            }
+          },
+          x: {
+            grid: {
+              drawBorder: false,
+              display: false,
+              drawOnChartArea: false,
+              drawTicks: false,
+              borderDash: [5, 5]
+            },
+            ticks: {
+              display: true,
+              color: '#000',
+              padding: 10,
+              font: {
+                size: 14,
+                weight: 300,
+                family: "Roboto",
+                style: 'normal',
+                lineHeight: 2
+              },
+            }
+          },
+        },
+      },
+    });
+  }
 }
 
 function update_chart1(result1){
   $("canvas#chart-bars").remove();
 $("div#chart_data1").append('<canvas id="chart-bars" class="chart-canvas" height="280" width="300"></canvas>');
 var ctx = document.getElementById("chart-bars").getContext("2d");
+if(per_id == "NDVI"){
   new Chart(ctx, {
       type: "bar",
       data: { 
@@ -161,7 +410,7 @@ var ctx = document.getElementById("chart-bars").getContext("2d");
           borderWidth: 0,
           borderRadius: 5,
           borderSkipped: false,
-          backgroundColor: "rgba(000, 000, 000, .8)",
+          backgroundColor: "rgba(46, 204, 113)",
           data: result1.yearly_month_array,
           maxBarThickness: 6
         }, ],
@@ -229,4 +478,245 @@ var ctx = document.getElementById("chart-bars").getContext("2d");
         },
       },
     });
+}
+else if(per_id == "VCI"){
+    new Chart(ctx, {
+        type: "bar",
+        data: { 
+          labels: result1.date_array,
+          datasets: [{
+            label: `${per_id}`+` `+`Temp`,
+            tension: 0,
+            borderWidth: 0,
+            borderRadius: 5,
+            borderSkipped: false,
+            backgroundColor: "rgba(76,152,107)",
+            data: result1.yearly_month_array,
+            maxBarThickness: 6
+          }, ],
+        },
+      
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          plugins: {
+            legend: {
+              display: true,
+            }
+          },
+          interaction: {
+            intersect: false,
+            mode: 'index',
+          },
+          scales: {
+            y: {
+              grid: {
+                drawBorder: false,
+                display: true,
+                drawOnChartArea: true,
+                drawTicks: false,
+                borderDash: [5, 5],
+                color: 'rgba(000, 000, 000, .2)'
+              },
+              ticks: {
+                suggestedMin: 0,
+                suggestedMax: 500,
+                beginAtZero: true,
+                padding: 10,
+                font: {
+                  size: 14,
+                  weight: 300,
+                  family: "Roboto",
+                  style: 'normal',
+                  lineHeight: 2
+                },
+                color: "#000"
+              },
+            },
+            x: {
+              grid: {
+                drawBorder: false,
+                display: true,
+                drawOnChartArea: true,
+                drawTicks: false,
+                borderDash: [5, 5],
+                color: 'rgba(000, 000, 000, .2)'
+              },
+              ticks: {
+                display: true,
+                color: '#000',
+                padding: 10,
+                font: {
+                  size: 14,
+                  weight: 300,
+                  family: "Roboto",
+                  style: 'normal',
+                  lineHeight: 2
+                },
+              }
+            },
+          },
+        },
+      });
+}
+else if(per_id == "VHI"){
+  new Chart(ctx, {
+      type: "bar",
+      data: { 
+        labels: result1.date_array,
+        datasets: [{
+          label: `${per_id}`+` `+`Temp`,
+          tension: 0,
+          borderWidth: 0,
+          borderRadius: 5,
+          borderSkipped: false,
+          backgroundColor: "rgba(106,122,106)",
+          data: result1.yearly_month_array,
+          maxBarThickness: 6
+        }, ],
+      },
+    
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: {
+          legend: {
+            display: true,
+          }
+        },
+        interaction: {
+          intersect: false,
+          mode: 'index',
+        },
+        scales: {
+          y: {
+            grid: {
+              drawBorder: false,
+              display: true,
+              drawOnChartArea: true,
+              drawTicks: false,
+              borderDash: [5, 5],
+              color: 'rgba(000, 000, 000, .2)'
+            },
+            ticks: {
+              suggestedMin: 0,
+              suggestedMax: 500,
+              beginAtZero: true,
+              padding: 10,
+              font: {
+                size: 14,
+                weight: 300,
+                family: "Roboto",
+                style: 'normal',
+                lineHeight: 2
+              },
+              color: "#000"
+            },
+          },
+          x: {
+            grid: {
+              drawBorder: false,
+              display: true,
+              drawOnChartArea: true,
+              drawTicks: false,
+              borderDash: [5, 5],
+              color: 'rgba(000, 000, 000, .2)'
+            },
+            ticks: {
+              display: true,
+              color: '#000',
+              padding: 10,
+              font: {
+                size: 14,
+                weight: 300,
+                family: "Roboto",
+                style: 'normal',
+                lineHeight: 2
+              },
+            }
+          },
+        },
+      },
+    });
+}
+else{
+  new Chart(ctx, {
+      type: "bar",
+      data: { 
+        labels: result1.date_array,
+        datasets: [{
+          label: `${per_id}`+` `+`Temp`,
+          tension: 0,
+          borderWidth: 0,
+          borderRadius: 5,
+          borderSkipped: false,
+          backgroundColor: "rgba(000,000,000, .8)",
+          data: result1.yearly_month_array,
+          maxBarThickness: 6
+        }, ],
+      },
+    
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: {
+          legend: {
+            display: true,
+          }
+        },
+        interaction: {
+          intersect: false,
+          mode: 'index',
+        },
+        scales: {
+          y: {
+            grid: {
+              drawBorder: false,
+              display: true,
+              drawOnChartArea: true,
+              drawTicks: false,
+              borderDash: [5, 5],
+              color: 'rgba(000, 000, 000, .2)'
+            },
+            ticks: {
+              suggestedMin: 0,
+              suggestedMax: 500,
+              beginAtZero: true,
+              padding: 10,
+              font: {
+                size: 14,
+                weight: 300,
+                family: "Roboto",
+                style: 'normal',
+                lineHeight: 2
+              },
+              color: "#000"
+            },
+          },
+          x: {
+            grid: {
+              drawBorder: false,
+              display: true,
+              drawOnChartArea: true,
+              drawTicks: false,
+              borderDash: [5, 5],
+              color: 'rgba(000, 000, 000, .2)'
+            },
+            ticks: {
+              display: true,
+              color: '#000',
+              padding: 10,
+              font: {
+                size: 14,
+                weight: 300,
+                family: "Roboto",
+                style: 'normal',
+                lineHeight: 2
+              },
+            }
+          },
+        },
+      },
+    });
+}
 }

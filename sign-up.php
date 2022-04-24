@@ -74,19 +74,19 @@
                   <form role="form" action="" method="POST">
                     <div class="input-group input-group-outline mb-3">
                       <label class="form-label">Username</label>
-                      <input type="text" class="form-control" name="username" required>
+                      <input type="text" class="form-control" name="username" required autocomplete="off">
                     </div>
                     <div class="input-group input-group-outline mb-3">
                       <label class="form-label">Email</label>
-                      <input type="email" class="form-control" name="email" required>
+                      <input type="email" class="form-control" name="email" required autocomplete="off">
                     </div>
                     <div class="input-group input-group-outline mb-3">
                       <label class="form-label">Password</label>
-                      <input type="password" class="form-control" name="password" required>
+                      <input type="password" class="form-control" name="password" required autocomplete="off">
                     </div>
                     <div class="input-group input-group-outline mb-3">
                       <label class="form-label">Confirm Password</label>
-                      <input type="password" name="cpassword" class="form-control" required>
+                      <input type="password" name="cpassword" class="form-control" required autocomplete="off">
                     </div>
                     <div class="form-check form-check-info text-start ps-0">
                       <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault" checked>

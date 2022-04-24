@@ -1,7 +1,7 @@
 <?php
     $date_id = $_POST['date_id'];
     $temp_id = $_POST['temp_id'];
-    $temp_id1 = $_POST['temp_id1'];
+    // $temp_id1 = $_POST['temp_id1'];
     // echo $date_id;
         $conn = mysqli_connect("localhost", "root", "", "admin_agro");
         if($temp_id === "max"){

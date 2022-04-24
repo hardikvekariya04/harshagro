@@ -1,5 +1,20 @@
 <?php  
+require_once '../config/function.php';
 $connect = mysqli_connect("localhost", "root", "", "admin_agro");
+$connect1 = mysqli_connect("localhost", "root", "", "agro");
+if (!isset($_SESSION['ID']) && !isset($_SESSION['EMAIL'])) {
+  header("location: index.php");
+}
+$id = $_SESSION['ID'];
+    $query = "select * from users where id='$id'";
+    $result = mysqli_query($connect1, $query);
+    $row = mysqli_fetch_assoc($result);
+    
+      if($row['admin'] == 0 || $row['admin'] == 0 ){
+      header("location: ../indexD.php");
+      }
+      
+$today = date("F j, Y G:i:s");
 if(isset($_POST["submit"]))
 {
  if($_FILES['file']['name'])
@@ -24,21 +39,24 @@ if(isset($_POST["submit"]))
                 $query = "INSERT into district_data(district_id,date,rainfall,max_temp,min_temp) values('$item1','$item2','$item3','$item4','$item5')";
                 mysqli_query($connect, $query);
    }
+   $queryhistory = "INSERT into upload_history(type,timestamp,filename) values('district_data','$today','$filename1[0]')";
+   mysqli_query($connect, $queryhistory);
    fclose($handle);
    echo "<script>alert('Import done');</script>";
+   header("Location: climate_district.php");
   }
  }
 }
 
 
-if(isset($_POST["submit5"]))
+if(isset($_POST["submit"]))
 {
- if($_FILES['file']['name'])
+ if($_FILES['file1']['name'])
  {
-  $filename = explode(".", $_FILES['file']['name']);
-  if($filename[1] == 'csv')
+  $filename1 = explode(".", $_FILES['file1']['name']);
+  if($filename1[1] == 'csv')
   {
-   $handle = fopen($_FILES['file']['tmp_name'], "r");
+   $handle = fopen($_FILES['file1']['tmp_name'], "r");
    while($data = fgetcsv($handle))
    {
     //    $item0 = '';
@@ -55,8 +73,11 @@ if(isset($_POST["submit5"]))
                 $query = "INSERT into taluka_data(taluka_id,date,rainfall,max_temp,min_temp) values('$item1','$item2','$item3','$item4','$item5')";
                 mysqli_query($connect, $query);
    }
+   $queryhistory = "INSERT into upload_history(type,timestamp,filename) values('taluka_data','$today','$filename1[0]')";
+   mysqli_query($connect, $queryhistory);
    fclose($handle);
    echo "<script>alert('Import done');</script>";
+   header("Location: climate_district.php");
   }
  }
 }
@@ -159,7 +180,7 @@ if(isset($_POST["submit5"]))
     <div class="collapse navbar-collapse  w-auto  max-height-vh-100" id="sidenav-collapse-main">
       <ul class="navbar-nav">
         <li class="nav-item">
-          <a class="nav-link text-white " href="climate_district.php">
+          <a class="nav-link text-white " href="#">
             <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
               <i class="material-icons opacity-10">dashboard</i>
             </div>
@@ -190,6 +211,14 @@ if(isset($_POST["submit5"]))
               <span class="nav-link-text ms-1">Heatmap</span>
             </a>
           </li>
+          <li class="nav-item">
+            <a class="nav-link text-white " href="subscriber.php">
+              <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
+                <i class="material-icons opacity-10">dashboard</i>
+              </div>
+              <span class="nav-link-text ms-1">Subscriber</span>
+            </a>
+          </li>
         <!-- <li class="nav-item">
           <a class="nav-link text-white " href="users.html">
             <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
@@ -202,7 +231,7 @@ if(isset($_POST["submit5"]))
     </div>
     <div class="sidenav-footer position-absolute w-100 bottom-0 ">
       <div class="mx-3">
-        <a class="btn bg-gradient-primary mt-4 w-100" href="" type="button">Log-out</a>
+        <a class="btn bg-gradient-primary mt-4 w-100" href="../logout.php" type="button">Log-out</a>
       </div>
     </div>
   </aside>
@@ -226,7 +255,7 @@ if(isset($_POST["submit5"]))
       </div>
     </nav>
     <!-- End Navbar -->
-    <div class="container-fluid py-4">
+    <div class="container-fluid py-4" style="width:95%;">
       <div class="row min-vh-80 h-100">
         <div class="col-12">
      
@@ -250,55 +279,43 @@ if(isset($_POST["submit5"]))
     <input type="file" name="file" style="width:300px;border : 2px solid #29C5F6;padding:5px;border-radius:10px;color:red;"/>
     <br />
     <br/>
-    <input type="submit" name="submit" value="Import" class="btn btn-info" style="width:200px;"/>
+    <!-- <input type="submit" name="submit" value="Import" class="btn btn-info" style="width:200px;"/> -->
     <h6>Taluka</h6>
-    <input type="file" name="file" style="width:300px;border : 2px solid #29C5F6;padding:5px;border-radius:10px;color:red;"/>
+    <input type="file" name="file1" style="width:300px;border : 2px solid #29C5F6;padding:5px;border-radius:10px;color:red;"/>
     <br />
     <br/>
-    <input type="submit" name="submit5" value="Import" class="btn btn-info" style="width:200px;"/>
+    <input type="submit" name="submit" value="Import" class="btn btn-info" style="width:200px;"/>
    </div>
    </div>
   </form>
 </div>
-</div>
 
-<h2>Climate DataTable</h2>
-<table id="example1" class="table table-striped" style="width:100%">
+<h2 >Climate DataTable</h2>
+<table id="example2" class="table table-striped" style="width:95%;"  data-order='[[ 0, "desc" ]]'>
   <thead>
       <tr>
           <th>ID</th>
-          <th>Year</th>
-          <th>Month</th>
-          <th>Date</th>
-          <th>Rainfall</th>
-          <th>Max Temp</th>
-                    <th>Min Temp</th>
+          <th>Type</th>
+          <th>Timestamp</th>
+          <th>Filename</th>
       </tr>
   </thead>
   <tbody>
-      <tr>
-        <td>1</td>
-        <td>1</td>
-        <td>1</td>
-        <td>1</td>
-        <td>1</td>
-        <td>1</td>
-        <td>1</td>
-
-      </tr>
+  <?php
+    $query2 = "select id,type,timestamp,filename from upload_history where type = 'district_data' OR type = 'taluka_data'";
+    // mysqli_query($connect, $query2);
+    $res = $connect->query($query2);       
+      if($res->num_rows > 0)
+        {
+          while($row1 = $res-> fetch_assoc())
+          {
+         echo  '<tr><td>'.$row1['id'].'</td><td>'.$row1['type'].'</td><td>'.$row1['timestamp'].'</td><td>'.$row1['filename'].'</td></tr>';
+          }
+        }
+  ?>
   </tbody>
-  <tfoot>
-      <tr>
-          <th>ID</th>
-          <th>Year</th>
-          <th>Month</th>
-          <th>Date</th>
-          <th>Rainfall</th>
-          <th>Max Temp</th>
-                    <th>Min Temp</th>
-      </tr>
-  </tfoot>
 </table>
+</div>
 
     <footer class="footer pt-5">
       <div class="container-fluid">

@@ -1,5 +1,10 @@
 <?php  
+require_once '../config/function.php';
 $connect = mysqli_connect("localhost", "root", "", "admin_agro");
+if (!isset($_SESSION['ID']) && !isset($_SESSION['EMAIL'])) {
+  header("location: index.php");
+}
+$today = date("F j, Y G:i:s");
 if(isset($_POST["submit"]))
 {
  if($_FILES['file']['name'])
@@ -21,23 +26,26 @@ if(isset($_POST["submit"]))
                 $item8 = mysqli_real_escape_string($connect, $data[7]);
                 // $item9 = mysqli_real_escape_string($connect, $data[8]);
                 // $item10 = mysqli_real_escape_string($connect, $data[9]);
-                $query = "INSERT into district_crop(year,week,t_id,NDVI,SMT,TCI,VCI,VHI) values('$item1','$item2','$item3','$item4','$item5','$item6','$item7','$item8')";
+                $query = "INSERT into district_crop(year,week,d_id,NDVI,SMT,TCI,VCI,VHI) values('$item1','$item2','$item3','$item4','$item5','$item6','$item7','$item8')";
                 mysqli_query($connect, $query);
    }
+   $queryhistory = "INSERT into upload_history(type,timestamp,filename) values('district_crop','$today','$filename[0]')";
+   mysqli_query($connect, $queryhistory);
    fclose($handle);
    echo "<script>alert('Import done');</script>";
+   header("Location: district_crop.php");
   }
  }
 }
 
-if(isset($_POST["submit5"]))
+if(isset($_POST["submit"]))
 {
- if($_FILES['file']['name'])
+ if($_FILES['file1']['name'])
  {
-  $filename = explode(".", $_FILES['file']['name']);
-  if($filename[1] == 'csv')
+  $filename1 = explode(".", $_FILES['file1']['name']);
+  if($filename1[1] == 'csv')
   {
-   $handle = fopen($_FILES['file']['tmp_name'], "r");
+   $handle = fopen($_FILES['file1']['tmp_name'], "r");
    while($data = fgetcsv($handle))
    {
     //    $item0 = '';
@@ -54,8 +62,11 @@ if(isset($_POST["submit5"]))
                 $query = "INSERT into taluka_crop(year,week,t_id,NDVI,SMT,TCI,VCI,VHI) values('$item1','$item2','$item3','$item4','$item5','$item6','$item7','$item8')";
                 mysqli_query($connect, $query);
    }
+   $queryhistory = "INSERT into upload_history(type,timestamp,filename) values('taluka_crop','$today','$filename1[0]')";
+   mysqli_query($connect, $queryhistory);
    fclose($handle);
    echo "<script>alert('Import done');</script>";
+   header("Location: district_crop.php");
   }
  }
 }
@@ -189,6 +200,14 @@ if(isset($_POST["submit5"]))
               <span class="nav-link-text ms-1">Heatmap</span>
             </a>
           </li>
+          <li class="nav-item">
+            <a class="nav-link text-white " href="subscriber.php">
+              <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
+                <i class="material-icons opacity-10">dashboard</i>
+              </div>
+              <span class="nav-link-text ms-1">Subscriber</span>
+            </a>
+          </li>
         <!-- <li class="nav-item">
           <a class="nav-link text-white " href="users.html">
             <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
@@ -201,7 +220,7 @@ if(isset($_POST["submit5"]))
     </div>
     <div class="sidenav-footer position-absolute w-100 bottom-0 ">
       <div class="mx-3">
-        <a class="btn bg-gradient-primary mt-4 w-100" href="" type="button">Log-out</a>
+        <a class="btn bg-gradient-primary mt-4 w-100" href="../logout.php" type="button">Log-out</a>
       </div>
     </div>
   </aside>
@@ -225,7 +244,7 @@ if(isset($_POST["submit5"]))
       </div>
     </nav>
     <!-- End Navbar -->
-    <div class="container-fluid py-4">
+    <div class="container-fluid py-4" style="width:95%">
       <div class="row min-vh-80 h-100">
         <div class="col-12">
      
@@ -246,16 +265,16 @@ if(isset($_POST["submit5"]))
    <div align="center">  
     <h1>Crop</h1>
     <h6>District</h6>
-    <input type="file" name="file" style="width:300px;border : 2px solid #29C5F6;padding:5px;border-radius:10px;color:red;"/>
+    <input type="file" name="file" style="width:300px;border : 2px solid #29C5F6;padding:5px;border-radius:10px;color:red;" required/>
+    <br />
+    <br/>
+    <!-- <input type="submit" name="submit" value="Import" class="btn btn-info" style="width:200px;"/> -->
+
+    <h6>Taluka</h6>
+    <input type="file" name="file1" style="width:300px;border : 2px solid #29C5F6;padding:5px;border-radius:10px;color:red;" required/>
     <br />
     <br/>
     <input type="submit" name="submit" value="Import" class="btn btn-info" style="width:200px;"/>
-
-    <h6>Taluka</h6>
-    <input type="file" name="file" style="width:300px;border : 2px solid #29C5F6;padding:5px;border-radius:10px;color:red;"/>
-    <br />
-    <br/>
-    <input type="submit" name="submit5" value="Import" class="btn btn-info" style="width:200px;"/>
    </div>
   </form>
 </div>
@@ -265,45 +284,29 @@ if(isset($_POST["submit5"]))
 <hr style="margin-top: 20px; margin-bottom: 20px;">
 
 <h2>Crop DataTable</h2>
-<table id="example2" class="table table-striped" style="width:100%">
+<table id="example2" class="table table-striped" style="width:100%;"  data-order='[[ 0, "desc" ]]'>
   <thead>
       <tr>
-          <th>Year</th>
-          <th>week</th>
           <th>ID</th>
-          <th>NDVI</th>
-          <th>SMT</th>
-          <th>TCI</th>
-          <th>VCI</th>
-          <th>VHI</th>
+          <th>Type</th>
+          <th>Timestamp</th>
+          <th>Filename</th>
       </tr>
   </thead>
-  <?php
-    
-  ?>
   <tbody>
-    <td>1</td>
-    <td>1</td>
-    <td>1</td>
-    <td>1</td>
-    <td>1</td>
-    <td>1</td>
-    <td>1</td>
-    <td>1</td>
-      
+  <?php
+    $query2 = "select id,type,timestamp,filename from upload_history where type = 'district_crop' OR type = 'taluka_crop'";
+    // mysqli_query($connect, $query2);
+    $res = $connect->query($query2);       
+      if($res->num_rows > 0)
+        {
+          while($row1 = $res-> fetch_assoc())
+          {
+         echo  '<tr><td>'.$row1['id'].'</td><td>'.$row1['type'].'</td><td>'.$row1['timestamp'].'</td><td>'.$row1['filename'].'</td></tr>';
+          }
+        }
+  ?>
   </tbody>
-  <tfoot>
-      <tr>
-          <th>Year</th>
-          <th>week</th>
-          <th>ID</th>
-          <th>NDVI</th>
-          <th>SMT</th>
-          <th>TCI</th>
-          <th>VCI</th>
-          <th>VHI</th>
-      </tr>
-  </tfoot>
 </table>
 
 

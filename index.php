@@ -4,6 +4,7 @@
     require_once 'config/function.php'; 
   
     login_user();
+    
     if(isset($_SESSION['ID']) || isset($_SESSION['EMAIL'])){
      header("location: indexD.php");
     }
@@ -52,8 +53,8 @@
               <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2">
                 <div class="bg-gradient-primary shadow-primary border-radius-lg py-3 pe-1">
                   <h4 class="text-white font-weight-bolder text-center mt-2 mb-0">
-                    <img src="assets/img/logo.png" width="250px"><br>
-                    Sign in</h4>
+                    <img src="assets/img/logo.png" width="250px" style="margin-bottom:10px;margin-top:10px;"><br>
+                    </h4>
                   
                 </div>
 
@@ -65,10 +66,13 @@
                 display_message();
               }
             ?>
+            <h4 class="text-black font-weight-bolder text-center mt-0 mb-0">SIGN IN</h4>
+            <hr>
+            
                 <form role="form" class="text-start" action="" method="POST" name="login">
                   <div class="input-group input-group-outline my-3">
                     <label class="form-label">Username</label>
-                    <input type="text" class="form-control" name="username" required>
+                    <input type="text" class="form-control" name="username" required autocomplete="off">
                   </div>
                   <div class="input-group input-group-outline mb-3">
                     <label class="form-label">Password</label>

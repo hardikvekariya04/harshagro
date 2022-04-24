@@ -2,12 +2,22 @@
 ob_start();
 require_once 'config/function.php';
 require_once 'config/db.php';
-
+$id = $_SESSION['ID'];
+$query = "select * from users where id='$id'";
+$result = mysqli_query($con, $query);
+$row = mysqli_fetch_assoc($result);
+if($row['admin'] == 1 ){
+  header("location: adminagro/climate_district.php");
+  }
+  // if($row['admin'] == 1 ){
+  //   header("location: indexD.php");
+  //   }
 // update();
 
 if (!isset($_SESSION['ID']) && !isset($_SESSION['EMAIL'])) {
   header("location: index.php");
 }
+ob_end_flush();
 ?>
 <!DOCTYPE html>
 <html lang="en">

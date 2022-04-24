@@ -110,7 +110,7 @@ if (!isset($_SESSION['ID']) && !isset($_SESSION['EMAIL'])) {
     <div class="sidenav-footer position-absolute w-100 bottom-0 ">
       <div class="mx-3">
 
-        <a class="btn bg-danger mt-0 w-100" href="" type="button" style="color: #fff;"><i
+        <a class="btn bg-danger mt-0 w-100" href="../logout.php" type="button" style="color: #fff;"><i
             class="material-icons opacity-10">login</i> Log Out</a>
       </div>
       <div class="mx-3">

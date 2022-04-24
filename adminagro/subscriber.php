@@ -1,59 +1,6 @@
-<?php
-require_once '../config/function.php';
-if (!isset($_SESSION['ID']) && !isset($_SESSION['EMAIL'])) {
-  header("location: index.php");
-}
-$msg = "";
-// check if the user has clicked the button "UPLOAD" 
-if (isset($_POST['uploadfile'])) {
-    $date = $_POST['date'];
-    $weather_max_heatmap = $_FILES["choosefile"]["name"];
-    $weather_min_heatmap = $_FILES["choosefile1"]["name"];
-    $weather_rain_heatmap = $_FILES["choosefile2"]["name"];
-
-    $crop_max_heatmap = $_FILES["choosefile3"]["name"];
-    $crop_min_heatmap = $_FILES["choosefile4"]["name"];
-    $crop_rain_heatmap = $_FILES["choosefile5"]["name"];
-
-    $tempname = $_FILES["choosefile"]["tmp_name"];  
-    $tempname1 = $_FILES["choosefile1"]["tmp_name"];  
-    $tempname2 = $_FILES["choosefile2"]["tmp_name"];  
-    $tempname3 = $_FILES["choosefile3"]["tmp_name"];  
-    $tempname4 = $_FILES["choosefile4"]["tmp_name"];  
-    $tempname5 = $_FILES["choosefile5"]["tmp_name"];  
-
-    $folder = "weather_max_image/".$weather_max_heatmap;
-    $folder1 = "weather_min_image/".$weather_min_heatmap;
-    $folder2 = "weather_rain_image/".$weather_rain_heatmap;
-
-    $folder3 = "crop_max_image/".$crop_max_heatmap;
-    $folder4 = "crop_min_image/".$crop_min_heatmap;
-    $folder5 = "crop_rain_image/".$crop_rain_heatmap;
-
-      // connect with the database
-    $db = mysqli_connect("localhost", "root", "", "admin_agro");
-        $sql = "INSERT INTO image (weather_max_heat,weather_min_heat,weather_rain_heat,crop_max_heat,crop_min_heat,crop_rain_heat,date) VALUES ('$weather_max_heatmap','$weather_min_heatmap','$weather_rain_heatmap','$crop_max_heatmap','$crop_min_heatmap','$crop_rain_heatmap','$date')";
-     // function to execute above query
-        mysqli_query($db, $sql);       
-        // Add the image to the "image" folder"
-        if (move_uploaded_file($tempname, $folder) && move_uploaded_file($tempname1, $folder1) && move_uploaded_file($tempname2, $folder2) && move_uploaded_file($tempname3, $folder3) && move_uploaded_file($tempname4, $folder4) && move_uploaded_file($tempname5, $folder5)) {
-            echo '<script language="javascript">';
-            echo 'alert("Successfully Registered")'; 
-            echo '</script>';
-            header("Location: heatmap.php");
-        }else{
-            $msg = "Failed to upload image";
-    }
-//     if (move_uploaded_file($tempname1, $folder1)) {
-//         $msg = "Image uploaded successfully";
-//     }else{
-//         $msg = "Failed to upload weather minimum temp image";
-// }
-}
-// $result = mysqli_query($db, "SELECT * FROM image");
-?> 
 <?php  
-$connect = mysqli_connect("localhost", "root", "", "admin_agro");
+// $connect = mysqli_connect("localhost", "root", "", "admin_agro");
+$connect1 = mysqli_connect("localhost", "root", "", "agro");
 
 ?>
 <!DOCTYPE html>
@@ -154,7 +101,7 @@ $connect = mysqli_connect("localhost", "root", "", "admin_agro");
     <div class="collapse navbar-collapse  w-auto  max-height-vh-100" id="sidenav-collapse-main">
       <ul class="navbar-nav">
         <li class="nav-item">
-          <a class="nav-link text-white " href="climate_district.php">
+          <a class="nav-link text-white " href="#">
             <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
               <i class="material-icons opacity-10">dashboard</i>
             </div>
@@ -174,7 +121,7 @@ $connect = mysqli_connect("localhost", "root", "", "admin_agro");
               <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
                 <i class="material-icons opacity-10">dashboard</i>
               </div>
-              <span class="nav-link-text ms-1">Crop</span>
+              <span class="nav-link-text ms-1">crop</span>
             </a>
           </li>
           <li class="nav-item">
@@ -205,7 +152,7 @@ $connect = mysqli_connect("localhost", "root", "", "admin_agro");
     </div>
     <div class="sidenav-footer position-absolute w-100 bottom-0 ">
       <div class="mx-3">
-        <a class="btn bg-gradient-primary mt-4 w-100" href="../logout.php" type="button" >Log-out</a>
+        <a class="btn bg-gradient-primary mt-4 w-100" href="../logout.php" type="button">Log-out</a>
       </div>
     </div>
   </aside>
@@ -216,9 +163,9 @@ $connect = mysqli_connect("localhost", "root", "", "admin_agro");
         <nav aria-label="breadcrumb">
           <ol class="breadcrumb bg-transparent mb-0 pb-0 pt-1 px-0 me-sm-6 me-5">
             <li class="breadcrumb-item text-sm"><a class="opacity-5 text-dark" href="javascript:;">Admin</a></li>
-            <li class="breadcrumb-item text-sm text-dark active" aria-current="page">Heatmap</li>
+            <li class="breadcrumb-item text-sm text-dark active" aria-current="page">Subscriber</li>
           </ol>
-          <h6 class="font-weight-bolder mb-0">Upload Heatmap image</h6>
+          <h6 class="font-weight-bolder mb-0">Table</h6>
         </nav>
         <div class="collapse navbar-collapse mt-sm-0 mt-2 me-md-0 me-sm-4" id="navbar">
           <div class="ms-md-auto pe-md-3 d-flex align-items-center">
@@ -229,58 +176,33 @@ $connect = mysqli_connect("localhost", "root", "", "admin_agro");
       </div>
     </nav>
     <!-- End Navbar -->
-    <div class="container-fluid py-4" style="width:95%">
-      <div class="row min-vh-80 h-100">
-        <div class="col-12">
-     
-  <!-- <form method="post" enctype="multipart/form-data">
-<div class="col-1">
-        <h2>Climate</h2>
+    <div class="container-fluid py-5" style="width:95%">
+<h2>Subscriber Details</h2>
+<table id="example2" class="table table-striped" style="width:100%;"  data-order='[[ 0, "desc" ]]'>
+  <thead>
+      <tr>
+          <th>ID</th>
+          <th>Username</th>
+          <th>Email</th>
+          <th>Create_datetime</th>
+      </tr>
+  </thead>
+  <tbody>
+  <?php
+    $query2 = "select id,username,email,create_datetime,admin from users where admin != 1";
+    // mysqli_query($connect, $query2);
+    $res = $connect1->query($query2);       
+      if($res->num_rows > 0)
+        {
+          while($row1 = $res-> fetch_assoc())
+          {
+         echo  '<tr><td>'.$row1['id'].'</td><td>'.$row1['username'].'</td><td>'.$row1['email'].'</td><td>'.$row1['create_datetime'].'</td></tr>';
+          }
+        }
+  ?>
+  </tbody>
+</table>
 
-        District
-        <div class="infile" style="border: 1px solid black; width: 25rem; background-color: rgb(255, 255, 255); margin-bottom: 50px; ">
-          <input  type="file" name="file" style="width: 50vw;" required>
-        </div>
-</div>
-
-<input class="submit-btn" type="submit" name="submit" value="Import" style="width: 150px !important; height: 50px; position: absolute; left: 45%; top: 50%; transform: translate(-50%, -50%); padding: 15px;">
-
-  </form> -->
-  <form method="post" enctype="multipart/form-data">
-   <div align="center">  
-    <h1>Climate and Crop</h1>
-    <h6>Heatmap photo upload</h6>
-    <div>
-        <label>Date</label>
-        <input type="date" name="date" class="form-control">
-    </div>
-    <br/>
-
-    <h2>Weather</h2>
-    <div style="display:flex">
-    <h6>Max : </h6>
-    <input type="file" name="choosefile" style="width:300px;border : 2px solid #29C5F6;padding:5px;border-radius:10px;color:red;" required/>
-    <h6>Min : </h6>
-    <input type="file" name="choosefile1" style="width:300px;border : 2px solid #29C5F6;padding:5px;border-radius:10px;color:red;" required/>
-    <h6>Rain : </h6>
-    <input type="file" name="choosefile2" style="width:300px;border : 2px solid #29C5F6;padding:5px;border-radius:10px;color:red;" required/>
-    </div>
-    <h2>crop</h2>
-  <div style="display:flex">
-    <h6>Max : </h6>
-    <input type="file" name="choosefile3" style="width:300px;border : 2px solid #29C5F6;padding:5px;border-radius:10px;color:red;"  required/>
-    <h6>Min : </h6>
-    <input type="file" name="choosefile4" style="width:300px;border : 2px solid #29C5F6;padding:5px;border-radius:10px;color:red;" required/>
-    <h6>Rain : </h6>
-    <input type="file" name="choosefile5" style="width:300px;border : 2px solid #29C5F6;padding:5px;border-radius:10px;color:red;" required/>
-  </div>
-    <br />
-    <br/>
-    <input type="submit" name="uploadfile" value="Upload" class="btn btn-info" style="width:200px;"/>
-   </div>
-  </form>
-</div>
-</div>
 
     <footer class="footer pt-5">
       <div class="container-fluid">

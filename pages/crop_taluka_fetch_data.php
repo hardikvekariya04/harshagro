@@ -116,126 +116,126 @@ $query5 =$con->query("SELECT NDVI,week from `taluka_crop` where t_id = ".$t_id."
 }
 
 
-elseif($per_id === 'SMT'){
-  $query1 =$con->query("SELECT SMT,week from `taluka_crop` where t_id = ".$t_id."  AND week = '$week' AND year = '$year' " );
-    while($row1 = $query1->fetch_assoc()){
-      $month[] = $row1['SMT'];
-    }
+// elseif($per_id === 'SMT'){
+//   $query1 =$con->query("SELECT SMT,week from `taluka_crop` where t_id = ".$t_id."  AND week = '$week' AND year = '$year' " );
+//     while($row1 = $query1->fetch_assoc()){
+//       $month[] = $row1['SMT'];
+//     }
   
-  $query2 =$con->query("SELECT SMT,week from `taluka_crop` where t_id = ".$t_id."  AND week = '$weeknumber1' AND year = '$select_year2' " );
-    while($row2 = $query2->fetch_assoc()){
-      $month1[] = $row2['SMT'];
-    }
+//   $query2 =$con->query("SELECT SMT,week from `taluka_crop` where t_id = ".$t_id."  AND week = '$weeknumber1' AND year = '$select_year2' " );
+//     while($row2 = $query2->fetch_assoc()){
+//       $month1[] = $row2['SMT'];
+//     }
   
-  $query3 =$con->query("SELECT SMT,week from `taluka_crop` where t_id = ".$t_id."  AND week = '$weeknumber2' AND year = '$select_year3' " );
-    while($row3 = $query3->fetch_assoc()){
-      $month2[] = $row3['SMT'];
-    }
+//   $query3 =$con->query("SELECT SMT,week from `taluka_crop` where t_id = ".$t_id."  AND week = '$weeknumber2' AND year = '$select_year3' " );
+//     while($row3 = $query3->fetch_assoc()){
+//       $month2[] = $row3['SMT'];
+//     }
   
-  $query4 =$con->query("SELECT SMT,week from `taluka_crop` where t_id = ".$t_id."  AND week = '$weeknumber3' AND year = '$select_year4' " );
-    while($row4 = $query4->fetch_assoc()){
-      $month3[] = $row4['SMT'];
-    }
+//   $query4 =$con->query("SELECT SMT,week from `taluka_crop` where t_id = ".$t_id."  AND week = '$weeknumber3' AND year = '$select_year4' " );
+//     while($row4 = $query4->fetch_assoc()){
+//       $month3[] = $row4['SMT'];
+//     }
   
-  $query5 =$con->query("SELECT SMT,week from `taluka_crop` where t_id = ".$t_id."  AND week = '$weeknumber4' AND year = '$select_year5' " );
-    while($row5 = $query5->fetch_assoc()){
-      $month4[] = $row5['SMT'];
-    }
+//   $query5 =$con->query("SELECT SMT,week from `taluka_crop` where t_id = ".$t_id."  AND week = '$weeknumber4' AND year = '$select_year5' " );
+//     while($row5 = $query5->fetch_assoc()){
+//       $month4[] = $row5['SMT'];
+//     }
   
-    $query6 =$con->query("SELECT SMT,week from `taluka_crop` where t_id = ".$t_id."  AND week = '$weeknumber5' AND year = '$select_year6' " );
-    while($row6 = $query6->fetch_assoc()){
-      $month5[] = $row6['SMT'];
-    }
+//     $query6 =$con->query("SELECT SMT,week from `taluka_crop` where t_id = ".$t_id."  AND week = '$weeknumber5' AND year = '$select_year6' " );
+//     while($row6 = $query6->fetch_assoc()){
+//       $month5[] = $row6['SMT'];
+//     }
   
-    $query7 =$con->query("SELECT SMT,week from `taluka_crop` where t_id = ".$t_id."  AND week = '$weeknumber6' AND year = '$select_year7' " );
-    while($row7 = $query7->fetch_assoc()){
-      $month6[] = $row7['SMT'];
-    }
+//     $query7 =$con->query("SELECT SMT,week from `taluka_crop` where t_id = ".$t_id."  AND week = '$weeknumber6' AND year = '$select_year7' " );
+//     while($row7 = $query7->fetch_assoc()){
+//       $month6[] = $row7['SMT'];
+//     }
   
-      $one_week_date = array();
-      $second_week_date =array();
-      $third_week_date = array();
-      $four_week_date = array();
-      $five_week_date = array();
-      $six_week_date = array();
-      $seven_week_date = array();
+//       $one_week_date = array();
+//       $second_week_date =array();
+//       $third_week_date = array();
+//       $four_week_date = array();
+//       $five_week_date = array();
+//       $six_week_date = array();
+//       $seven_week_date = array();
   
-      $one_week_date[] = strval($ret);
-      $second_week_date[] = strval($ret2);
-      $third_week_date[] = strval($ret3);
-      $four_week_date[] = strval($ret4);
-      $five_week_date[] = strval($ret5);
-      $six_week_date[] = strval($ret6);
-      $seven_week_date[] = strval($ret7);
+//       $one_week_date[] = strval($ret);
+//       $second_week_date[] = strval($ret2);
+//       $third_week_date[] = strval($ret3);
+//       $four_week_date[] = strval($ret4);
+//       $five_week_date[] = strval($ret5);
+//       $six_week_date[] = strval($ret6);
+//       $seven_week_date[] = strval($ret7);
   
-      $month_final = array_merge($month6,$month5,$month4,$month3,$month2,$month1,$month);
-      $final_array = array_merge($seven_week_date,$six_week_date,$five_week_date,$four_week_date,$third_week_date,$second_week_date,$one_week_date);
+//       $month_final = array_merge($month6,$month5,$month4,$month3,$month2,$month1,$month);
+//       $final_array = array_merge($seven_week_date,$six_week_date,$five_week_date,$four_week_date,$third_week_date,$second_week_date,$one_week_date);
   
-      $return_data = array();
-      $return_data['month_final'] = $month_final; 
-      $return_data['final_array'] = $final_array;
-      echo json_encode($return_data);
-  }
-elseif($per_id === 'TCI'){
-    $query1 =$con->query("SELECT TCI,week from `taluka_crop` where t_id = ".$t_id."  AND week = '$week' AND year = '$year' " );
-      while($row1 = $query1->fetch_assoc()){
-        $month[] = $row1['TCI'];
-      }
+//       $return_data = array();
+//       $return_data['month_final'] = $month_final; 
+//       $return_data['final_array'] = $final_array;
+//       echo json_encode($return_data);
+// }
+// elseif($per_id === 'TCI'){
+//     $query1 =$con->query("SELECT TCI,week from `taluka_crop` where t_id = ".$t_id."  AND week = '$week' AND year = '$year' " );
+//       while($row1 = $query1->fetch_assoc()){
+//         $month[] = $row1['TCI'];
+//       }
     
-    $query2 =$con->query("SELECT TCI,week from `taluka_crop` where t_id = ".$t_id."  AND week = '$weeknumber1' AND year = '$select_year2' " );
-      while($row2 = $query2->fetch_assoc()){
-        $month1[] = $row2['TCI'];
-      }
+//     $query2 =$con->query("SELECT TCI,week from `taluka_crop` where t_id = ".$t_id."  AND week = '$weeknumber1' AND year = '$select_year2' " );
+//       while($row2 = $query2->fetch_assoc()){
+//         $month1[] = $row2['TCI'];
+//       }
     
-    $query3 =$con->query("SELECT TCI,week from `taluka_crop` where t_id = ".$t_id."  AND week = '$weeknumber2' AND year = '$select_year3' " );
-      while($row3 = $query3->fetch_assoc()){
-        $month2[] = $row3['TCI'];
-      }
+//     $query3 =$con->query("SELECT TCI,week from `taluka_crop` where t_id = ".$t_id."  AND week = '$weeknumber2' AND year = '$select_year3' " );
+//       while($row3 = $query3->fetch_assoc()){
+//         $month2[] = $row3['TCI'];
+//       }
     
-    $query4 =$con->query("SELECT TCI,week from `taluka_crop` where t_id = ".$t_id."  AND week = '$weeknumber3' AND year = '$select_year4' " );
-      while($row4 = $query4->fetch_assoc()){
-        $month3[] = $row4['TCI'];
-      }
+//     $query4 =$con->query("SELECT TCI,week from `taluka_crop` where t_id = ".$t_id."  AND week = '$weeknumber3' AND year = '$select_year4' " );
+//       while($row4 = $query4->fetch_assoc()){
+//         $month3[] = $row4['TCI'];
+//       }
     
-    $query5 =$con->query("SELECT TCI,week from `taluka_crop` where t_id = ".$t_id."  AND week = '$weeknumber4' AND year = '$select_year5' " );
-      while($row5 = $query5->fetch_assoc()){
-        $month4[] = $row5['TCI'];
-      }
+//     $query5 =$con->query("SELECT TCI,week from `taluka_crop` where t_id = ".$t_id."  AND week = '$weeknumber4' AND year = '$select_year5' " );
+//       while($row5 = $query5->fetch_assoc()){
+//         $month4[] = $row5['TCI'];
+//       }
     
-      $query6 =$con->query("SELECT TCI,week from `taluka_crop` where t_id = ".$t_id."  AND week = '$weeknumber5' AND year = '$select_year6' " );
-      while($row6 = $query6->fetch_assoc()){
-        $month5[] = $row6['TCI'];
-      }
+//       $query6 =$con->query("SELECT TCI,week from `taluka_crop` where t_id = ".$t_id."  AND week = '$weeknumber5' AND year = '$select_year6' " );
+//       while($row6 = $query6->fetch_assoc()){
+//         $month5[] = $row6['TCI'];
+//       }
     
-      $query7 =$con->query("SELECT TCI,week from `taluka_crop` where t_id = ".$t_id."  AND week = '$weeknumber6' AND year = '$select_year7' " );
-      while($row7 = $query7->fetch_assoc()){
-        $month6[] = $row7['TCI'];
-      }
+//       $query7 =$con->query("SELECT TCI,week from `taluka_crop` where t_id = ".$t_id."  AND week = '$weeknumber6' AND year = '$select_year7' " );
+//       while($row7 = $query7->fetch_assoc()){
+//         $month6[] = $row7['TCI'];
+//       }
     
-        $one_week_date = array();
-        $second_week_date =array();
-        $third_week_date = array();
-        $four_week_date = array();
-        $five_week_date = array();
-        $six_week_date = array();
-        $seven_week_date = array();
+//         $one_week_date = array();
+//         $second_week_date =array();
+//         $third_week_date = array();
+//         $four_week_date = array();
+//         $five_week_date = array();
+//         $six_week_date = array();
+//         $seven_week_date = array();
     
-        $one_week_date[] = strval($ret);
-        $second_week_date[] = strval($ret2);
-        $third_week_date[] = strval($ret3);
-        $four_week_date[] = strval($ret4);
-        $five_week_date[] = strval($ret5);
-        $six_week_date[] = strval($ret6);
-        $seven_week_date[] = strval($ret7);
+//         $one_week_date[] = strval($ret);
+//         $second_week_date[] = strval($ret2);
+//         $third_week_date[] = strval($ret3);
+//         $four_week_date[] = strval($ret4);
+//         $five_week_date[] = strval($ret5);
+//         $six_week_date[] = strval($ret6);
+//         $seven_week_date[] = strval($ret7);
     
-        $month_final = array_merge($month6,$month5,$month4,$month3,$month2,$month1,$month);
-        $final_array = array_merge($seven_week_date,$six_week_date,$five_week_date,$four_week_date,$third_week_date,$second_week_date,$one_week_date);
+//         $month_final = array_merge($month6,$month5,$month4,$month3,$month2,$month1,$month);
+//         $final_array = array_merge($seven_week_date,$six_week_date,$five_week_date,$four_week_date,$third_week_date,$second_week_date,$one_week_date);
     
-        $return_data = array();
-        $return_data['month_final'] = $month_final; 
-        $return_data['final_array'] = $final_array;
-        echo json_encode($return_data);
-    }
+//         $return_data = array();
+//         $return_data['month_final'] = $month_final; 
+//         $return_data['final_array'] = $final_array;
+//         echo json_encode($return_data);
+// }
 elseif($per_id === 'VCI'){
       $query1 =$con->query("SELECT VCI,week from `taluka_crop` where t_id = ".$t_id."  AND week = '$week' AND year = '$year' " );
         while($row1 = $query1->fetch_assoc()){
