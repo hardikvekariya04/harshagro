@@ -732,7 +732,7 @@ ob_end_flush();
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
   <script src="https://code.highcharts.com/highcharts.js"></script>
   <script src="https://code.highcharts.com/modules/exporting.js"></script>
-
+    <script src="./pages/leaflet.browser.print.min.js"></script>
 
   <!-- <script src="./map/heatmap/heatleaf.js"></script>
   <script src="./map/heatmap/leaf.js"></script> -->
@@ -1248,6 +1248,7 @@ $('#downloadPdf1').click(function(event) {
   
   pdf.save('filename.pdf');
 });
+
   </script>
   <!-- Github buttons -->
   <script async defer src="https://buttons.github.io/buttons.js"></script>
