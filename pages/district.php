@@ -61,7 +61,7 @@ if (!isset($_SESSION['ID']) && !isset($_SESSION['EMAIL'])) {
         </li>
 
         <li class="nav-item" style="border: 2px solid rgb(168, 168, 168); border-radius: 10%;width:200px;">
-          <a class="nav-link text-dark active bg-gradient-info" href="#">
+          <a class="nav-link text-dark active bg-gradient-info" href="#" style="height: 41px !important;">
             <div class="text-dark text-center me-2 d-flex align-items-center justify-content-center">
               <i class="material-icons opacity-10">circle</i>
             </div>
@@ -70,7 +70,7 @@ if (!isset($_SESSION['ID']) && !isset($_SESSION['EMAIL'])) {
         </li>
 
         <li class="nav-item" style="width:200px;">
-          <a class="nav-link text-dark active bg-gradient-info" href="../indexD.php">
+          <a class="nav-link text-dark active bg-gradient-info" href="../indexD.php" style="height: 41px !important;">
             <div class="text-dark text-center me-2 d-flex align-items-center justify-content-center">
               <i class="material-icons opacity-10">circle</i>
             </div>
@@ -137,6 +137,7 @@ if (!isset($_SESSION['ID']) && !isset($_SESSION['EMAIL'])) {
               
                 <!-- <label>Select District:</label> -->
                 <select id="district" >
+                <option value="" disabled selected>Select District</option>
                     <option value="Ahmadabad" id="0">Ahmadabad</option>
                     <option value="Anand" id="1">Anand</option>
                     <option value="Banaskantha" id="2">Banaskantha</option>
@@ -175,7 +176,7 @@ if (!isset($_SESSION['ID']) && !isset($_SESSION['EMAIL'])) {
                     
                 </select>
               <select class="in" name="type" id="type">
-              <option value="">select</option>
+              <option value="">Select Type</option>
                 <option value="min">Min Temp</option>
                 <option value="max">Max Temp</option>
                 <option value="rain">Rainfall</option>
@@ -237,18 +238,24 @@ if (!isset($_SESSION['ID']) && !isset($_SESSION['EMAIL'])) {
           <!-- <div class="card z-index-2  ">
             <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2 bg-transparent"> -->
             <div class="bg-gradient-success shadow-success border-radius-lg py-3 pe-1">
-              <div class="chart" id="chart_data" style="width:550px;">
-                  <canvas id="chart-line" class="chart-canvas" height="270" width="300"></canvas>
+            <a href="#" id="downloadPdf"><i class="fa fa-download" style="font-size:30px;align-item:right;text-align:right;position:absolute;right:40px;"></i></a>
+              <div id="reportPage">
+                  <div class="chart" id="chart_data" style="width:550px;">
+                      <canvas id="chart-line" class="chart-canvas" height="270" width="300"></canvas>
+                  </div>
+                  <hr style="margin-top:-5px;margin-bottom:0px;">
               </div>
-              <hr style="margin-top:-5px;margin-bottom:0px;">
               <select class="in" name="period" id="per" style="margin-bottom:-20px;">
               <option value="">Select period </option>
                 <option value="last 6 month" >last 6 month</option>
                 <option value="last 3 year">last 3 year</option>
               </select>
+              <a href="#" id="downloadPdf1"><i class="fa fa-download" style="font-size:30px;align-item:right;text-align:right;position:absolute;right:40px;"></i></a>
+              <div id="reportPage1">
                 <div class="chart" id="chart_data1">
                   <canvas id="chart-bars" class="chart-canvas" height="280" width="300"></canvas>
                 </div>
+              </div>
                 <!-- <div class="chart">
                   <canvas id="chart-bars1" class="chart-canvas" height="300" width="300"></canvas>
                 </div> -->
@@ -800,6 +807,7 @@ new Chart(ctx, {
         $('.loader').delay(2000).fadeOut(1000);
     });
 </script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.3.3/jspdf.min.js"></script>
   <script>
     var win = navigator.platform.indexOf('Win') > -1;
     if (win && document.querySelector('#sidenav-scrollbar')) {
@@ -808,6 +816,75 @@ new Chart(ctx, {
       }
       Scrollbar.init(document.querySelector('#sidenav-scrollbar'), options);
     }
+
+    $('#downloadPdf').click(function(event) {
+  var reportPageHeight = $('#reportPage').innerHeight();
+  var reportPageWidth = $('#reportPage').innerWidth();
+  
+  var pdfCanvas = $('<canvas />').attr({
+    id: "canvaspdf",
+    width: reportPageWidth,
+    height: reportPageHeight
+  });
+  
+  var pdfctx = $(pdfCanvas)[0].getContext('2d');
+  var pdfctxX = 0;
+  var pdfctxY = 0;
+  var buffer = 100;
+  
+  $("canvas").each(function(index) {
+    var canvasHeight = $(this).innerHeight();
+    var canvasWidth = $(this).innerWidth();
+    
+    pdfctx.drawImage($(this)[0], pdfctxX, pdfctxY, canvasWidth, canvasHeight);
+    pdfctxX += canvasWidth + buffer;
+    
+    if (index % 2 === 1) {
+      pdfctxX = 0;
+      pdfctxY += canvasHeight + buffer;
+    }
+  });
+  
+  var pdf = new jsPDF('l', 'pt', [reportPageWidth, reportPageHeight]);
+  pdf.addImage($(pdfCanvas)[0], 'PNG', 0, 0);
+  
+  pdf.save('filename.pdf');
+});
+
+
+$('#downloadPdf1').click(function(event) {
+  var reportPageHeight = $('#reportPage1').innerHeight();
+  var reportPageWidth = $('#reportPage1').innerWidth();
+  
+  var pdfCanvas = $('<canvas />').attr({
+    id: "canvaspdf",
+    width: reportPageWidth,
+    height: reportPageHeight
+  });
+  
+  var pdfctx = $(pdfCanvas)[0].getContext('2d');
+  var pdfctxX = 0;
+  var pdfctxY = 0;
+  var buffer = 100;
+  
+  $("#chart-bars").each(function(index) {
+    var canvasHeight = $(this).innerHeight();
+    var canvasWidth = $(this).innerWidth();
+    
+    pdfctx.drawImage($(this)[0], pdfctxX, pdfctxY, canvasWidth, canvasHeight);
+    pdfctxX += canvasWidth + buffer;
+    
+    if (index % 2 === 1) {
+      pdfctxX = 0;
+      pdfctxY += canvasHeight + buffer;
+    }
+  });
+  
+  var pdf = new jsPDF('l', 'pt', [reportPageWidth, reportPageHeight]);
+  pdf.addImage($(pdfCanvas)[0], 'PNG', 0, 0);
+  
+  pdf.save('filename.pdf');
+});
   </script>
   <!-- Github buttons -->
   <script async defer src="https://buttons.github.io/buttons.js"></script>

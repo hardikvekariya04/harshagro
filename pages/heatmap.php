@@ -261,6 +261,7 @@ if (!isset($_SESSION['ID']) && !isset($_SESSION['EMAIL'])) {
     var path = "http://localhost/newagro/pages/";
     var date_id = '';
     var temp_id = '';
+    var temp_id1 = '';
     var date_id = document.getElementById("date").value;
     // console.log(date_id);
     fetch_data();

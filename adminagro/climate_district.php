@@ -19,13 +19,14 @@ if(isset($_POST["submit"]))
 {
  if($_FILES['file']['name'])
  {
+  //  $file_fullname = $_FILES['file'].$_FILES['name'];
   $filename = explode(".", $_FILES['file']['name']);
+  $full_filename = $filename[0].'.'.$filename[1];
   if($filename[1] == 'csv')
   {
    $handle = fopen($_FILES['file']['tmp_name'], "r");
    while($data = fgetcsv($handle))
    {
-    //    $item0 = '';
     $item1 = mysqli_real_escape_string($connect, $data[0]);  
                 $item2 = mysqli_real_escape_string($connect, $data[1]);
                 $item3 = mysqli_real_escape_string($connect, $data[2]);
@@ -39,7 +40,8 @@ if(isset($_POST["submit"]))
                 $query = "INSERT into district_data(district_id,date,rainfall,max_temp,min_temp) values('$item1','$item2','$item3','$item4','$item5')";
                 mysqli_query($connect, $query);
    }
-   $queryhistory = "INSERT into upload_history(type,timestamp,filename) values('district_data','$today','$filename1[0]')";
+
+   $queryhistory = "INSERT into upload_history(type,timestamp,filename) values('district_data','$today','$full_filename')";
    mysqli_query($connect, $queryhistory);
    fclose($handle);
    echo "<script>alert('Import done');</script>";
@@ -54,6 +56,7 @@ if(isset($_POST["submit"]))
  if($_FILES['file1']['name'])
  {
   $filename1 = explode(".", $_FILES['file1']['name']);
+  $full_filename = $filename1[0].'.'.$filename1[1];
   if($filename1[1] == 'csv')
   {
    $handle = fopen($_FILES['file1']['tmp_name'], "r");
@@ -73,7 +76,7 @@ if(isset($_POST["submit"]))
                 $query = "INSERT into taluka_data(taluka_id,date,rainfall,max_temp,min_temp) values('$item1','$item2','$item3','$item4','$item5')";
                 mysqli_query($connect, $query);
    }
-   $queryhistory = "INSERT into upload_history(type,timestamp,filename) values('taluka_data','$today','$filename1[0]')";
+   $queryhistory = "INSERT into upload_history(type,timestamp,filename) values('taluka_data','$today','$full_filename')";
    mysqli_query($connect, $queryhistory);
    fclose($handle);
    echo "<script>alert('Import done');</script>";

@@ -192,11 +192,11 @@ if (isset($_POST["reset"])) {
         <a href="index.php"> Do you have a problem?</br><span class="icons icon-arrow-down"></span></a>
         <h2 id="textid" style="color: rgb(7, 111, 248);">Forgot Password ?</h2>
         <!-- <p>Don't Worry</p> -->
-      <form method="post">
+      <!-- <form method="post">
         <input type="email" placeholder="Enter Your Email" name="email" required><br>
         <input type="submit" class="sub" name="reset">
-      </form>
-           <h4 class="bottom">Contact Us: sxcacoders@gmail.com</h4>
+      </form> -->
+           <h4 class="bottom">Contact Us: hardik@gmail.com</h4>
 
       </div>
     </center>

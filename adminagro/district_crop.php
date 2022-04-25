@@ -10,6 +10,7 @@ if(isset($_POST["submit"]))
  if($_FILES['file']['name'])
  {
   $filename = explode(".", $_FILES['file']['name']);
+  $full_filename = $filename[0].'.'.$filename[1];
   if($filename[1] == 'csv')
   {
    $handle = fopen($_FILES['file']['tmp_name'], "r");
@@ -29,7 +30,7 @@ if(isset($_POST["submit"]))
                 $query = "INSERT into district_crop(year,week,d_id,NDVI,SMT,TCI,VCI,VHI) values('$item1','$item2','$item3','$item4','$item5','$item6','$item7','$item8')";
                 mysqli_query($connect, $query);
    }
-   $queryhistory = "INSERT into upload_history(type,timestamp,filename) values('district_crop','$today','$filename[0]')";
+   $queryhistory = "INSERT into upload_history(type,timestamp,filename) values('district_crop','$today','$full_filename')";
    mysqli_query($connect, $queryhistory);
    fclose($handle);
    echo "<script>alert('Import done');</script>";
@@ -43,6 +44,7 @@ if(isset($_POST["submit"]))
  if($_FILES['file1']['name'])
  {
   $filename1 = explode(".", $_FILES['file1']['name']);
+  $full_filename = $filename[0].'.'.$filename[1];
   if($filename1[1] == 'csv')
   {
    $handle = fopen($_FILES['file1']['tmp_name'], "r");
@@ -62,7 +64,7 @@ if(isset($_POST["submit"]))
                 $query = "INSERT into taluka_crop(year,week,t_id,NDVI,SMT,TCI,VCI,VHI) values('$item1','$item2','$item3','$item4','$item5','$item6','$item7','$item8')";
                 mysqli_query($connect, $query);
    }
-   $queryhistory = "INSERT into upload_history(type,timestamp,filename) values('taluka_crop','$today','$filename1[0]')";
+   $queryhistory = "INSERT into upload_history(type,timestamp,filename) values('taluka_crop','$today','$full_filename')";
    mysqli_query($connect, $queryhistory);
    fclose($handle);
    echo "<script>alert('Import done');</script>";
