@@ -160,10 +160,10 @@ ob_end_flush();
 
 
               <select id="district">
-                <option value="" >select District</option>
-                <option value="Ahmedabad" id="0">Ahmedabad</option>
+                <option value="" selected disabled>Select District</option>
+                <option value="Ahmedabad" id="0">Ahmadabad</option>
                 <option value="Anand" id="1">Anand</option>
-                <option value="Banas Kantha" id="2">Banas kantha</option>
+                <option value="Banas Kantha" id="2">Banaskantha</option>
                 <option value="Bharuch" id="3">Bharuch</option>
                 <option value="Dahod" id="4">Dahod</option>
                 <option value="Gandhinagar" id="5">Gandhinagar</option>
@@ -200,7 +200,7 @@ ob_end_flush();
 
 
               <select class="in" name="Taluka" id="taluka">
-              <option value="" >select Taluka</option>
+              <option value="" disabled selected>Select Taluka</option>
                 <!-- <optgroup label="Ahmedabad" style="display: block;" > -->
                 <option value="Ahmedabad" id="1">Ahmedabad</option>
                 <option value="Ahmedabad" id="2" >Bavla</option>

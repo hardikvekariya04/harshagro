@@ -591,84 +591,84 @@ if (!isset($_SESSION['ID']) && !isset($_SESSION['EMAIL'])) {
               <select class="in" name="weeks" id="weeks">
               <option value="">Select Week </option>
 
-              <optgroup label="Jan :">
+              <!-- <optgroup label="Jan :"> -->
                 <option value="1">01</option>
                 <option value="2">02</option>
                 <option value="3">03</option>
                 <option value="4">04</option>
-              </optgroup>
-              <optgroup label="Feb :">
+              <!-- </optgroup> -->
+              <!-- <optgroup label="Feb :"> -->
                 <option value="5">05</option>
                 <option value="6">06</option>
                 <option value="7">07</option>
                 <option value="8">08</option>
-              </optgroup>
-              <optgroup label="Mar :">
+              <!-- </optgroup> -->
+              <!-- <optgroup label="Mar :"> -->
                 <option value="9">09</option>
                 <option value="10">10</option>
                 <option value="11" >11</option>
                 <option value="12">12</option>
-              </optgroup>
-              <optgroup label="Apr :">
+              <!-- </optgroup> -->
+              <!-- <optgroup label="Apr :"> -->
                 <option value="13">13</option>
                 <option value="14">14</option>
                 <option value="15">15</option>
                 <option value="16">16</option>
-                </optgroup>
-                <optgroup label="May :">
+                <!-- </optgroup> -->
+                <!-- <optgroup label="May :"> -->
                 <option value="17">17</option>
                 <option value="18">18</option>
                 <option value="19">19</option>
                 <option value="20">20</option>
-                </optgroup>
-                <optgroup label="Jun :">
+                <!-- </optgroup> -->
+                <!-- <optgroup label="Jun :"> -->
                 <option value="21">21</option>
                 <option value="22">22</option>
                 <option value="23">23</option>
                 <option value="24">24</option>
-                </optgroup>
-                <optgroup label="Jul :">
+                <!-- </optgroup> -->
+                <!-- <optgroup label="Jul :"> -->
                 <option value="25">25</option>
                 <option value="26">26</option>
                 <option value="27">27</option>
                 <option value="28">28</option>
-                </optgroup>
-                <optgroup label="Aug :">
+                <!-- </optgroup> -->
+                <!-- <optgroup label="Aug :"> -->
                 <option value="29">29</option>
                 <option value="30">30</option>
                 <option value="31">31</option>
                 <option value="32">32</option>
-                </optgroup>
-                <optgroup label="Sep :">
+                <!-- </optgroup> -->
+                <!-- <optgroup label="Sep :"> -->
                 <option value="33">33</option>
                 <option value="34">34</option>
                 <option value="35">35</option>
                 <option value="36">36</option>
-                </optgroup>
-                <optgroup label="Oct :">
+                <!-- </optgroup> -->
+                <!-- <optgroup label="Oct :"> -->
                 <option value="37">37</option>
                 <option value="38">38</option>
                 <option value="39">39</option>
                 <option value="40">40</option>
-                </optgroup>
-                <optgroup label="Nav :">
+                <!-- </optgroup> -->
+                <!-- <optgroup label="Nav :"> -->
                 <option value="41">41</option>
                 <option value="42">42</option>
                 <option value="43">43</option>
                 <option value="44">44</option>
-                </optgroup>
-                <optgroup label="Dec :">
+                <!-- </optgroup> -->
+                <!-- <optgroup label="Dec :"> -->
                 <option value="45">45</option>
                 <option value="46">46</option>
                 <option value="47">47</option>
                 <option value="48">48</option>
-                </optgroup>
-                <optgroup label="Jan">
+                <!-- </optgroup> -->
+                <!-- <optgroup label="Jan"> -->
                 <option value="49">49</option>
                 <option value="50">50</option>
                 <option value="51">51</option>
                 <option value="52">52</option>
-              </optgroup>
+              <!-- </optgroup> -->
                 
               </select>
 
