@@ -73,7 +73,9 @@ function display_message()
                         {
                             $hash = md5($password);
                             $token = md5(rand());
-                            $sql = "insert into users(username, email, password, token) values('$username', '$email', '$hash', '$token')";
+                            date_default_timezone_set('Asia/Kolkata');
+                            $datetime = date("F j, Y g:i:s a");
+                            $sql = "insert into users(username, email,create_datetime, password, token) values('$username', '$email', '$datetime', '$hash', '$token')";
                             $data = mysqli_query($con, $sql);
                             if($data)
                             {
@@ -98,7 +100,7 @@ function display_message()
             // }
         }
         }
-        function login_user()
+    function login_user()
     {
         
     global $con;
@@ -122,9 +124,6 @@ function display_message()
            if($row=mysqli_fetch_assoc($result))
            {
             $_SESSION['id']= $row['id'];
-            // $status =$rows1['status'];
-            $time=time()+10;
-            $res=mysqli_query($con,"update users set last_login=$time where id=".$_SESSION['ID']);
            $db_pass = $row['password'];
            
                 if(md5($password)==$db_pass  )

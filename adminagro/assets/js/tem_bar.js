@@ -74,6 +74,7 @@ function update_chart(result){
     $("canvas#chart-line").remove();
   $("div#chart_data").append('<canvas id="chart-line" class="chart-canvas" height="270" width="300"></canvas>');
       var ctx2 = document.getElementById("chart-line").getContext("2d");
+      if(temp_id === "rain"){
     new Chart(ctx2, {
       type: "line",
       data: {
@@ -83,10 +84,10 @@ function update_chart(result){
           tension: 0,
           borderWidth: 0,
           pointRadius: 5,
-          pointBackgroundColor: "rgba(000, 000, 000, .8)",
+          pointBackgroundColor: "rgba(30,144,255 , .8)",
           pointBorderColor: "transparent",
-          borderColor: "rgba(000, 000, 000, .8)",
-          borderColor: "rgba(000, 000, 000, .8)",
+          borderColor: "rgba(30,144,255 , .8)",
+          borderColor: "rgba(30,144,255 , .8)",
           borderWidth: 4,
           backgroundColor: "transparent",
           fill: true,
@@ -100,7 +101,7 @@ function update_chart(result){
         maintainAspectRatio: false,
         plugins: {
           legend: {
-            display: true,
+            display: false,
           }
         },
         interaction: {
@@ -109,6 +110,18 @@ function update_chart(result){
         },
         scales: {
           y: {
+            display: true,
+            title: {
+              display: true,
+              text: 'Rainfall(in mm)',
+          font: {
+            family: 'Times',
+            size: 15,
+            style: 'normal',
+          },
+          padding: {bottom: 0},
+        
+        },
             grid: {
               drawBorder: false,
               display: true,
@@ -143,11 +156,11 @@ function update_chart(result){
               color: '#000',
               padding: 10,
               font: {
-                size: 14,
+                size: 15,
                 weight: 300,
                 family: "Roboto",
                 style: 'normal',
-                lineHeight: 2
+                lineHeight: 1.5
               },
             }
           },
@@ -155,11 +168,294 @@ function update_chart(result){
       },
     });
 }
+else if(temp_id === "min"){
+  new Chart(ctx2, {
+    type: "line",
+    data: {
+      labels: result.amount,
+      datasets: [{
+        label: `${temp_id}`+ ` ` + `Temp`,
+        tension: 0,
+        borderWidth: 0,
+        pointRadius: 5,
+        pointBackgroundColor: "rgba(255,140,0, .8)",
+        pointBorderColor: "transparent",
+        borderColor: "rgba(255,140,0, .8)",
+        borderColor: "rgba(255,140,0, .8)",
+        borderWidth: 4,
+        backgroundColor: "transparent",
+        fill: true,
+        data: result.month,
+        maxBarThickness: 6
 
+      }],
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      plugins: {
+        legend: {
+          display: false,
+        }
+      },
+      interaction: {
+        intersect: false,
+        mode: 'index',
+      },
+      scales: {
+        y: {
+          display: true,
+            title: {
+              display: true,
+              text: 'Minimum Temp(in Celsius) ',
+          font: {
+            family: 'Times',
+            size: 15,
+            style: 'normal',
+          },
+          padding: {bottom: 0},
+        
+        },
+          grid: {
+            drawBorder: false,
+            display: true,
+            drawOnChartArea: true,
+            drawTicks: false,
+            borderDash: [5, 5],
+            color: 'rgba(000, 000, 000, .2)'
+          },
+          ticks: {
+            display: true,
+            color: '#000',
+            padding: 10,
+            font: {
+              size: 14,
+              weight: 300,
+              family: "Roboto",
+              style: 'normal',
+              lineHeight: 2
+            },
+          }
+        },
+        x: {
+          grid: {
+            drawBorder: false,
+            display: false,
+            drawOnChartArea: false,
+            drawTicks: false,
+            borderDash: [5, 5]
+          },
+          ticks: {
+            display: true,
+            color: '#000',
+            padding: 10,
+            font: {
+              size: 15,
+              weight: 300,
+              family: "Roboto",
+              style: 'normal',
+              lineHeight: 1.5
+            },
+          }
+        },
+      },
+    },
+  });
+}
+else if(temp_id === "max"){
+  new Chart(ctx2, {
+    type: "line",
+    data: {
+      labels: result.amount,
+      datasets: [{
+        label: `${temp_id}`+ ` ` + `Temp`,
+        tension: 0,
+        borderWidth: 0,
+        pointRadius: 5,
+        pointBackgroundColor: "rgba(255,0,0, .8)",
+        pointBorderColor: "transparent",
+        borderColor: "rgba(255,0,0, .8)",
+        borderColor: "rgba(255,0,0, .8)",
+        borderWidth: 4,
+        backgroundColor: "transparent",
+        fill: true,
+        data: result.month,
+        maxBarThickness: 6
+
+      }],
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      plugins: {
+        legend: {
+          display: false,
+        }
+      },
+      interaction: {
+        intersect: false,
+        mode: 'index',
+      },
+      scales: {
+        y: {
+          display: true,
+            title: {
+              display: true,
+              text: 'Maximum Temp(in Celsius) ',
+          font: {
+            family: 'Times',
+            size: 15,
+            style: 'normal',
+          },
+          padding: {bottom: 0},
+        
+        },
+          grid: {
+            drawBorder: false,
+            display: true,
+            drawOnChartArea: true,
+            drawTicks: false,
+            borderDash: [5, 5],
+            color: 'rgba(000, 000, 000, .2)'
+          },
+          ticks: {
+            display: true,
+            color: '#000',
+            padding: 10,
+            font: {
+              size: 14,
+              weight: 300,
+              family: "Roboto",
+              style: 'normal',
+              lineHeight: 2
+            },
+          }
+        },
+        x: {
+          grid: {
+            drawBorder: false,
+            display: false,
+            drawOnChartArea: false,
+            drawTicks: false,
+            borderDash: [5, 5]
+          },
+          ticks: {
+            display: true,
+            color: '#000',
+            padding: 10,
+            font: {
+              size: 15,
+              weight: 300,
+              family: "Roboto",
+              style: 'normal',
+              lineHeight: 1.5
+            },
+          }
+        },
+      },
+    },
+  });
+}
+else{
+  new Chart(ctx2, {
+    type: "line",
+    data: {
+      labels: result.amount,
+      datasets: [{
+        label: `${temp_id}`+ ` ` + `Temp`,
+        tension: 0,
+        borderWidth: 0,
+        pointRadius: 5,
+        pointBackgroundColor: "rgba(000,000,000, .8)",
+        pointBorderColor: "transparent",
+        borderColor: "rgba(000,000,000, .8)",
+        borderColor: "rgba(000,000,000, .8)",
+        borderWidth: 4,
+        backgroundColor: "transparent",
+        fill: true,
+        data: result.month,
+        maxBarThickness: 6
+
+      }],
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      plugins: {
+        legend: {
+          display: false,
+        }
+      },
+      interaction: {
+        intersect: false,
+        mode: 'index',
+      },
+      scales: {
+        y: {
+          display: true,
+            title: {
+              display: true,
+              text: 'Minimum Temp(in Celsius) ',
+          font: {
+            family: 'Times',
+            size: 15,
+            style: 'normal',
+          },
+          padding: {bottom: 0},
+        
+        },
+          grid: {
+            drawBorder: false,
+            display: true,
+            drawOnChartArea: true,
+            drawTicks: false,
+            borderDash: [5, 5],
+            color: 'rgba(000, 000, 000, .2)'
+          },
+          ticks: {
+            display: true,
+            color: '#000',
+            padding: 10,
+            font: {
+              size: 14,
+              weight: 300,
+              family: "Roboto",
+              style: 'normal',
+              lineHeight: 2
+            },
+          }
+        },
+        x: {
+          grid: {
+            drawBorder: false,
+            display: false,
+            drawOnChartArea: false,
+            drawTicks: false,
+            borderDash: [5, 5]
+          },
+          ticks: {
+            display: true,
+            color: '#000',
+            padding: 10,
+            font: {
+              size: 15,
+              weight: 300,
+              family: "Roboto",
+              style: 'normal',
+              lineHeight: 1.5
+            },
+          }
+        },
+      },
+    },
+  });
+}
+}
 function update_chart1(result1){
   $("canvas#chart-bars").remove();
 $("div#chart_data1").append('<canvas id="chart-bars" class="chart-canvas" height="280" width="300"></canvas>');
 var ctx = document.getElementById("chart-bars").getContext("2d");
+if(temp_id === "rain"){
   new Chart(ctx, {
       type: "bar",
       data: { 
@@ -168,11 +464,11 @@ var ctx = document.getElementById("chart-bars").getContext("2d");
           label: `${temp_id}`+ ` ` + `Temp`,
           tension: 0.4,
           borderWidth: 0,
-          borderRadius: 4,
+          borderRadius: 3,
           borderSkipped: false,
-          backgroundColor: "rgba(000, 000, 000, .8)",
+          backgroundColor: "rgba(30,144,255 ,.8)",
           data: result1.final_array,
-          maxBarThickness: 6
+          maxBarThickness: 15
         }, ],
       },
     
@@ -181,7 +477,7 @@ var ctx = document.getElementById("chart-bars").getContext("2d");
         maintainAspectRatio: false,
         plugins: {
           legend: {
-            display: true,
+            display: false,
           }
         },
         interaction: {
@@ -190,6 +486,18 @@ var ctx = document.getElementById("chart-bars").getContext("2d");
         },
         scales: {
           y: {
+            display: true,
+            title: {
+              display: true,
+              text: 'Rainfall(in mm)',
+          font: {
+            family: 'Times',
+            size: 15,
+            style: 'normal',
+          },
+          padding: {bottom: 0},
+        
+        },
             grid: {
               drawBorder: false,
               display: true,
@@ -227,6 +535,98 @@ var ctx = document.getElementById("chart-bars").getContext("2d");
               color: '#000',
               padding: 10,
               font: {
+                size: 15,
+                weight: 300,
+                family: "Roboto",
+                style: 'normal',
+                lineHeight: 1.5
+              },
+            }
+          },
+        },
+      },
+    });
+  }
+else if(temp_id === "min"){
+  new Chart(ctx, {
+      type: "bar",
+      data: { 
+        labels: result1.date_array,
+        datasets: [{
+          label: `${temp_id}`+ ` ` + `Temp`,
+          tension: 0.4,
+          borderWidth: 0,
+          borderRadius: 3,
+          borderSkipped: false,
+          backgroundColor: "rgba(255,140,0 ,.8)",
+          data: result1.final_array,
+          maxBarThickness: 15
+        }, ],
+      },
+    
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: {
+          legend: {
+            display: false,
+          }
+        },
+        interaction: {
+          intersect: false,
+          mode: 'index',
+        },
+        scales: {
+          y: {
+            display: true,
+            title: {
+              display: true,
+              text: 'Minimum Temp(in Celsius) ',
+          font: {
+            family: 'Times',
+            size: 15,
+            style: 'normal',
+          },
+          padding: {bottom: 0},
+        
+        },
+            grid: {
+              drawBorder: false,
+              display: true,
+              drawOnChartArea: true,
+              drawTicks: false,
+              borderDash: [5, 5],
+              color: 'rgba(000, 000, 000, .2)'
+            },
+            ticks: {
+              suggestedMin: 0,
+              suggestedMax: 500,
+              beginAtZero: true,
+              padding: 10,
+              font: {
+                size: 15,
+                weight: 300,
+                family: "Roboto",
+                style: 'normal',
+                lineHeight: 1.5
+              },
+              color: "#000"
+            },
+          },
+          x: {
+            grid: {
+              drawBorder: false,
+              display: true,
+              drawOnChartArea: true,
+              drawTicks: false,
+              borderDash: [5, 5],
+              color: 'rgba(000, 000, 000, .2)'
+            },
+            ticks: {
+              display: true,
+              color: '#000',
+              padding: 10,
+              font: {
                 size: 14,
                 weight: 300,
                 family: "Roboto",
@@ -238,5 +638,189 @@ var ctx = document.getElementById("chart-bars").getContext("2d");
         },
       },
     });
+  }
+  else if(temp_id === "max"){
+    new Chart(ctx, {
+        type: "bar",
+        data: { 
+          labels: result1.date_array,
+          datasets: [{
+            label: `${temp_id}`+ ` ` + `Temp`,
+            tension: 0.4,
+            borderWidth: 0,
+            borderRadius: 3,
+            borderSkipped: false,
+            backgroundColor: "rgba(255,0,0,.8)",
+            data: result1.final_array,
+            maxBarThickness: 15
+          }, ],
+        },
+      
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          plugins: {
+            legend: {
+              display: false,
+            }
+          },
+          interaction: {
+            intersect: false,
+            mode: 'index',
+          },
+          scales: {
+            y: {
+              display: true,
+            title: {
+              display: true,
+              text: 'Miximum Temp(in Celsius) ',
+          font: {
+            family: 'Times',
+            size: 15,
+            style: 'normal',
+          },
+          padding: {bottom: 0},
+        
+        },
+              grid: {
+                drawBorder: false,
+                display: true,
+                drawOnChartArea: true,
+                drawTicks: false,
+                borderDash: [5, 5],
+                color: 'rgba(000, 000, 000, .2)'
+              },
+              ticks: {
+                suggestedMin: 0,
+                suggestedMax: 500,
+                beginAtZero: true,
+                padding: 10,
+                font: {
+                  size: 14,
+                  weight: 300,
+                  family: "Roboto",
+                  style: 'normal',
+                  lineHeight: 2
+                },
+                color: "#000"
+              },
+            },
+            x: {
+              grid: {
+                drawBorder: false,
+                display: true,
+                drawOnChartArea: true,
+                drawTicks: false,
+                borderDash: [5, 5],
+                color: 'rgba(000, 000, 000, .2)'
+              },
+              ticks: {
+                display: true,
+                color: '#000',
+                padding: 10,
+                font: {
+                  size: 15,
+                  weight: 300,
+                  family: "Roboto",
+                  style: 'normal',
+                  lineHeight: 1.5
+                },
+              }
+            },
+          },
+        },
+      });
+    }
+  else{
+    new Chart(ctx, {
+      type: "bar",
+      data: { 
+        labels: result1.date_array,
+        datasets: [{
+          label: `${temp_id}`+ ` ` + `Temp`,
+          tension: 0.4,
+          borderWidth: 0,
+          borderRadius: 3,
+          borderSkipped: false,
+          backgroundColor: "rgba(000,000,000 ,.8)",
+          data: result1.final_array,
+          maxBarThickness: 15
+        }, ],
+      },
     
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: {
+          legend: {
+            display: false,
+          }
+        },
+        interaction: {
+          intersect: false,
+          mode: 'index',
+        },
+        scales: {
+          y: {
+            display: true,
+            title: {
+              display: true,
+              text: 'Minimum Temp(in Celsius) ',
+          font: {
+            family: 'Times',
+            size: 15,
+            style: 'normal',
+          },
+          padding: {bottom: 0},
+        
+        },
+            grid: {
+              drawBorder: false,
+              display: true,
+              drawOnChartArea: true,
+              drawTicks: false,
+              borderDash: [5, 5],
+              color: 'rgba(000, 000, 000, .2)'
+            },
+            ticks: {
+              suggestedMin: 0,
+              suggestedMax: 500,
+              beginAtZero: true,
+              padding: 10,
+              font: {
+                size: 14,
+                weight: 300,
+                family: "Roboto",
+                style: 'normal',
+                lineHeight: 2
+              },
+              color: "#000"
+            },
+          },
+          x: {
+            grid: {
+              drawBorder: false,
+              display: true,
+              drawOnChartArea: true,
+              drawTicks: false,
+              borderDash: [5, 5],
+              color: 'rgba(000, 000, 000, .2)'
+            },
+            ticks: {
+              display: true,
+              color: '#000',
+              padding: 10,
+              font: {
+                size: 15,
+                weight: 300,
+                family: "Roboto",
+                style: 'normal',
+                lineHeight: 1.5
+              },
+            }
+          },
+        },
+      },
+    });
+  }
 }
