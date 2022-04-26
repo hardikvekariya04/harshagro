@@ -73,7 +73,9 @@ function display_message()
                         {
                             $hash = md5($password);
                             $token = md5(rand());
-                            $sql = "insert into users(username, email, password, token) values('$username', '$email', '$hash', '$token')";
+                            date_default_timezone_set('Asia/Kolkata');
+                            $datetime = date("F j, Y g:i:s a");
+                            $sql = "insert into users(username, email,create_datetime, password, token) values('$username', '$email', '$datetime', '$hash', '$token')";
                             $data = mysqli_query($con, $sql);
                             if($data)
                             {

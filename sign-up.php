@@ -89,7 +89,7 @@
                       <input type="password" name="cpassword" class="form-control" required autocomplete="off">
                     </div>
                     <div class="form-check form-check-info text-start ps-0">
-                      <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault" checked>
+                      <input class="form-check-input" type="checkbox" required id="flexCheckDefault" checked >
                       <label class="form-check-label" for="flexCheckDefault">
                         I agree the <a href="javascript:;" class="text-dark font-weight-bolder">Terms and Conditions</a>
                       </label>
