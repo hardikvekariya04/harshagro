@@ -100,7 +100,7 @@ function display_message()
             // }
         }
         }
-        function login_user()
+    function login_user()
     {
         
     global $con;
@@ -124,9 +124,6 @@ function display_message()
            if($row=mysqli_fetch_assoc($result))
            {
             $_SESSION['id']= $row['id'];
-            // $status =$rows1['status'];
-            $time=time()+10;
-            $res=mysqli_query($con,"update users set last_login=$time where id=".$_SESSION['ID']);
            $db_pass = $row['password'];
            
                 if(md5($password)==$db_pass  )
