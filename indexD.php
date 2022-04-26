@@ -627,7 +627,7 @@ ob_end_flush();
           <!-- <div class="card z-index-2  "> -->
           <!-- <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2 bg-transparent"> -->
           <div class="bg-gradient-success shadow-success border-radius-lg py-3 pe-1">
-          <a href="#" id="downloadPdf"><i class="fa fa-download" style="font-size:30px;align-item:right;text-align:right;position:absolute;right:40px;"></i></a>
+          <a href="#" id="downloadPdf"><i class="fa fa-download" style="font-size:22px;align-item:right;text-align:right;position:absolute;right:40px;"></i></a>
               <div id="reportPage">
             <div class="chart" id="chart_data" style="width:550px;">
               <canvas id="chart-line" class="chart-canvas" height="270" width="300" style="margin-left:0px"></canvas>
@@ -639,7 +639,7 @@ ob_end_flush();
                 <option value="last 6 month" >last 6 month</option>
                 <option value="last 3 year" selected>last 3 year</option>
               </select>
-              <a href="#" id="downloadPdf1"><i class="fa fa-download" style="font-size:30px;align-item:right;text-align:right;position:absolute;right:40px;"></i></a>
+              <a href="#" id="downloadPdf1"><i class="fa fa-download" style="font-size:22px;align-item:right;text-align:right;position:absolute;right:40px;"></i></a>
               <div id="reportPage1">
             <div class="chart" id="chart_data1">
               <canvas id="chart-bars" class="chart-canvas" height="280" width="300"></canvas>
