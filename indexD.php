@@ -161,7 +161,7 @@ ob_end_flush();
 
               <select id="district">
                 <option value="" >select District</option>
-                <option value="Ahmedabad" id="0">Ahmedabad</option>
+                <option value="Ahmedabad" id="0" selected>Ahmedabad</option>
                 <option value="Anand" id="1">Anand</option>
                 <option value="Banas Kantha" id="2">Banas kantha</option>
                 <option value="Bharuch" id="3">Bharuch</option>
@@ -565,8 +565,8 @@ ob_end_flush();
 
 
               <select class="in" name="type" id="type">
-              <option value="">select temp</option>
-                <option value="min">Min Temp</option>
+              <!-- <option value="">select temp</option> -->
+                <option value="min" selected>Min Temp</option>
                 <option value="max">Max Temp</option>
                 <option value="rain">Rainfall</option>
               </select>
@@ -630,14 +630,14 @@ ob_end_flush();
           <a href="#" id="downloadPdf"><i class="fa fa-download" style="font-size:30px;align-item:right;text-align:right;position:absolute;right:40px;"></i></a>
               <div id="reportPage">
             <div class="chart" id="chart_data" style="width:550px;">
-              <canvas id="chart-line" class="chart-canvas" height="270" width="300"></canvas>
+              <canvas id="chart-line" class="chart-canvas" height="270" width="300" style="margin-left:0px"></canvas>
             </div>
           </div>
             <hr style="margin-top:-5px;margin-bottom:0px;">
               <select class="in" name="period" id="per" style="margin-bottom:-20px;">
-              <option value="">Select period </option>
+              <!-- <option value="">Select period </option> -->
                 <option value="last 6 month" >last 6 month</option>
-                <option value="last 3 year">last 3 year</option>
+                <option value="last 3 year" selected>last 3 year</option>
               </select>
               <a href="#" id="downloadPdf1"><i class="fa fa-download" style="font-size:30px;align-item:right;text-align:right;position:absolute;right:40px;"></i></a>
               <div id="reportPage1">
@@ -1013,10 +1013,10 @@ $avg_high_year_temp5 = $tot_year_temp5/$temp_array_year_length5;
         tension: 0,
         borderWidth: 0,
         pointRadius: 5,
-        pointBackgroundColor: "rgba(000, 000, 000, .8)",
+        pointBackgroundColor: "rgba(255,140,0, .8)",
         pointBorderColor: "transparent",
-        borderColor: "rgba(000, 000, 000, .8)",
-        borderColor: "rgba(000, 000, 000, .8)",
+        borderColor: "rgba(255,140,0, .8)",
+        borderColor: "rgba(255,140,0, .8)",
         borderWidth: 4,
         backgroundColor: "transparent",
         fill: true,
@@ -1029,7 +1029,7 @@ $avg_high_year_temp5 = $tot_year_temp5/$temp_array_year_length5;
       maintainAspectRatio: false,
       plugins: {
         legend: {
-          display: true,
+          display: false,
         }
       },
       interaction: {
@@ -1038,6 +1038,18 @@ $avg_high_year_temp5 = $tot_year_temp5/$temp_array_year_length5;
       },
       scales: {
         y: {
+          display: true,
+            title: {
+              display: true,
+              text: 'Minimum Temp(in Celsius)',
+          font: {
+            family: 'Times',
+            size: 15,
+            style: 'normal',
+          },
+          padding: {bottom: 0},
+        
+        },
           grid: {
             drawBorder: false,
             display: true,
@@ -1072,11 +1084,11 @@ $avg_high_year_temp5 = $tot_year_temp5/$temp_array_year_length5;
             color: '#000',
             padding: 10,
             font: {
-              size: 14,
+              size: 15,
               weight: 300,
               family: "Roboto",
               style: 'normal',
-              lineHeight: 2
+              lineHeight: 1.5
             },
           }
         },
@@ -1094,12 +1106,12 @@ $avg_high_year_temp5 = $tot_year_temp5/$temp_array_year_length5;
           label: "Temperature",
           tension: 0.4,
           borderWidth: 0,
-          borderRadius: 4,
+          borderRadius: 3,
           borderSkipped: false,
-          backgroundColor: "rgba(000, 000, 000, .8)",
+          backgroundColor: "rgba(255,140,0, .8)",
           //data: <?php //echo json_encode($month1) ?>,
           data: ['<?php echo json_encode($avg_high_temp6) ?>', '<?php echo json_encode($avg_high_temp5) ?>', '<?php echo json_encode($avg_high_temp4) ?>', '<?php echo json_encode($avg_high_temp3) ?>', '<?php echo json_encode($avg_high_temp2) ?>', '<?php echo json_encode($avg_high_temp1) ?>'],
-          maxBarThickness: 6
+          maxBarThickness: 15
         },],
       },
 
@@ -1108,7 +1120,7 @@ $avg_high_year_temp5 = $tot_year_temp5/$temp_array_year_length5;
         maintainAspectRatio: false,
         plugins: {
           legend: {
-            display: true,
+            display: false,
           }
         },
         interaction: {
@@ -1117,6 +1129,18 @@ $avg_high_year_temp5 = $tot_year_temp5/$temp_array_year_length5;
         },
         scales: {
           y: {
+            display: true,
+            title: {
+              display: true,
+              text: 'Minimum Temp(in Celsius)',
+          font: {
+            family: 'Times',
+            size: 15,
+            style: 'normal',
+          },
+          padding: {bottom: 0},
+        
+        },
             grid: {
               drawBorder: false,
               display: true,
@@ -1154,11 +1178,11 @@ $avg_high_year_temp5 = $tot_year_temp5/$temp_array_year_length5;
               color: '#000',
               padding: 10,
               font: {
-                size: 14,
+                size: 15,
                 weight: 300,
                 family: "Roboto",
                 style: 'normal',
-                lineHeight: 2
+                lineHeight: 1.5
               },
             }
           },

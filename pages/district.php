@@ -137,8 +137,8 @@ if (!isset($_SESSION['ID']) && !isset($_SESSION['EMAIL'])) {
               
                 <!-- <label>Select District:</label> -->
                 <select id="district" >
-                <option value="" disabled selected>Select District</option>
-                    <option value="Ahmadabad" id="0">Ahmadabad</option>
+                <!-- <option value="" disabled selected>Select District</option> -->
+                    <option value="Ahmadabad" id="0" selected>Ahmadabad</option>
                     <option value="Anand" id="1">Anand</option>
                     <option value="Banaskantha" id="2">Banaskantha</option>
                     <option value="Bharuch" id="3">Bharuch</option>
@@ -176,8 +176,8 @@ if (!isset($_SESSION['ID']) && !isset($_SESSION['EMAIL'])) {
                     
                 </select>
               <select class="in" name="type" id="type">
-              <option value="">Select Type</option>
-                <option value="min">Min Temp</option>
+              <!-- <option value="">Select Type</option> -->
+                <option value="min" selected>Min Temp</option>
                 <option value="max">Max Temp</option>
                 <option value="rain">Rainfall</option>
               </select>
@@ -241,19 +241,19 @@ if (!isset($_SESSION['ID']) && !isset($_SESSION['EMAIL'])) {
             <a href="#" id="downloadPdf"><i class="fa fa-download" style="font-size:30px;align-item:right;text-align:right;position:absolute;right:40px;"></i></a>
               <div id="reportPage">
                   <div class="chart" id="chart_data" style="width:550px;">
-                      <canvas id="chart-line" class="chart-canvas" height="270" width="300"></canvas>
+                      <canvas id="chart-line" class="chart-canvas" height="270" width="300" style="margin-left: -10px;"></canvas>
                   </div>
                   <hr style="margin-top:-5px;margin-bottom:0px;">
               </div>
               <select class="in" name="period" id="per" style="margin-bottom:-20px;">
-              <option value="">Select period </option>
-                <option value="last 6 month" >last 6 month</option>
-                <option value="last 3 year">last 3 year</option>
+              <!-- <option value="">Select period </option> -->
+                <option value="last 6 month" selected>last 6 month</option>
+                <option value="last 3 year" >last 3 year</option>
               </select>
               <a href="#" id="downloadPdf1"><i class="fa fa-download" style="font-size:30px;align-item:right;text-align:right;position:absolute;right:40px;"></i></a>
               <div id="reportPage1">
-                <div class="chart" id="chart_data1">
-                  <canvas id="chart-bars" class="chart-canvas" height="280" width="300"></canvas>
+                <div class="chart" id="chart_data1" >
+                  <canvas id="chart-bars" class="chart-canvas" height="280" width="300" ></canvas>
                 </div>
               </div>
                 <!-- <div class="chart">
@@ -647,15 +647,15 @@ new Chart(ctx, {
     // labels:<?php // echo json_encode($amount1) ?>,
     labels:['<?php echo json_encode($six_monthly) ?>','<?php echo json_encode($five_monthly) ?>','<?php echo json_encode($four_monthly) ?>','<?php echo json_encode($thrid_monthly) ?>','<?php echo json_encode($second_monthly) ?>','<?php echo json_encode($one_monthly) ?>'],
     datasets: [{
-      label: "Temperature",
+      label: "Min temp",
       tension: 0.4,
       borderWidth: 0,
-      borderRadius: 4,
+      borderRadius: 3,
       borderSkipped: false,
-      backgroundColor: "rgba(000, 000, 000, .8)",
+      backgroundColor: "rgba(255,140,0, .8)",
       //data: <?php //echo json_encode($month1) ?>,
       data : ['<?php echo json_encode($avg_high_temp6) ?>','<?php echo json_encode($avg_high_temp5) ?>','<?php echo json_encode($avg_high_temp4) ?>','<?php echo json_encode($avg_high_temp3) ?>','<?php echo json_encode($avg_high_temp2) ?>','<?php echo json_encode($avg_high_temp1) ?>'],
-      maxBarThickness: 6
+      maxBarThickness: 15
     }, ],
   },
 
@@ -664,7 +664,7 @@ new Chart(ctx, {
     maintainAspectRatio: false,
     plugins: {
       legend: {
-        display: true,
+        display: false,
       }
     },
     interaction: {
@@ -673,6 +673,18 @@ new Chart(ctx, {
     },
     scales: {
       y: {
+        display: true,
+            title: {
+              display: true,
+              text: 'Minimum Temp(in Celsius)',
+          font: {
+            family: 'Times',
+            size: 15,
+            style: 'normal',
+          },
+          padding: {bottom: 0},
+        
+        },
         grid: {
           drawBorder: false,
           display: true,
@@ -733,10 +745,10 @@ new Chart(ctx, {
           tension: 0,
           borderWidth: 0,
           pointRadius: 5,
-          pointBackgroundColor: "rgba(000, 000, 000, .8)",
+          pointBackgroundColor: "rgba(255,140,0, .8)",
           pointBorderColor: "transparent",
-          borderColor: "rgba(000, 000, 000, .8)",
-          borderColor: "rgba(000, 000, 000, .8)",
+          borderColor: "rgba(255,140,0, .8)",
+          borderColor: "rgba(255,140,0, .8)",
           borderWidth: 4,
           backgroundColor: "transparent",
           fill: true,
@@ -749,7 +761,7 @@ new Chart(ctx, {
         maintainAspectRatio: false,
         plugins: {
           legend: {
-            display: true,
+            display: false,
           }
         },
         interaction: {
@@ -758,6 +770,18 @@ new Chart(ctx, {
         },
         scales: {
           y: {
+            display: true,
+            title: {
+              display: true,
+              text: 'Minimum Temp(in Celsius)',
+          font: {
+            family: 'Times',
+            size: 15,
+            style: 'normal',
+          },
+          padding: {bottom: 0},
+        
+        },
             grid: {
               drawBorder: false,
               display: true,
@@ -765,6 +789,7 @@ new Chart(ctx, {
               drawTicks: false,
               borderDash: [5, 5],
               color: 'rgba(000, 000, 000, .2)'
+              
             },
             ticks: {
               display: true,
@@ -792,11 +817,11 @@ new Chart(ctx, {
               color: '#000',
               padding: 10,
               font: {
-                size: 14,
+                size: 15,
                 weight: 300,
                 family: "Roboto",
                 style: 'normal',
-                lineHeight: 2
+                lineHeight: 1.5
               },
             }
           },

@@ -101,7 +101,7 @@ function update_chart(result){
         maintainAspectRatio: false,
         plugins: {
           legend: {
-            display: true,
+            display: false,
           }
         },
         interaction: {
@@ -110,6 +110,18 @@ function update_chart(result){
         },
         scales: {
           y: {
+            display: true,
+            title: {
+              display: true,
+              text: 'Rainfall(in mm)',
+          font: {
+            family: 'Times',
+            size: 15,
+            style: 'normal',
+          },
+          padding: {bottom: 0},
+        
+        },
             grid: {
               drawBorder: false,
               display: true,
@@ -144,11 +156,11 @@ function update_chart(result){
               color: '#000',
               padding: 10,
               font: {
-                size: 14,
+                size: 15,
                 weight: 300,
                 family: "Roboto",
                 style: 'normal',
-                lineHeight: 2
+                lineHeight: 1.5
               },
             }
           },
@@ -183,7 +195,7 @@ else if(temp_id === "min"){
       maintainAspectRatio: false,
       plugins: {
         legend: {
-          display: true,
+          display: false,
         }
       },
       interaction: {
@@ -192,6 +204,18 @@ else if(temp_id === "min"){
       },
       scales: {
         y: {
+          display: true,
+            title: {
+              display: true,
+              text: 'Minimum Temp(in Celsius) ',
+          font: {
+            family: 'Times',
+            size: 15,
+            style: 'normal',
+          },
+          padding: {bottom: 0},
+        
+        },
           grid: {
             drawBorder: false,
             display: true,
@@ -226,11 +250,11 @@ else if(temp_id === "min"){
             color: '#000',
             padding: 10,
             font: {
-              size: 14,
+              size: 15,
               weight: 300,
               family: "Roboto",
               style: 'normal',
-              lineHeight: 2
+              lineHeight: 1.5
             },
           }
         },
@@ -265,7 +289,7 @@ else if(temp_id === "max"){
       maintainAspectRatio: false,
       plugins: {
         legend: {
-          display: true,
+          display: false,
         }
       },
       interaction: {
@@ -274,6 +298,18 @@ else if(temp_id === "max"){
       },
       scales: {
         y: {
+          display: true,
+            title: {
+              display: true,
+              text: 'Maximum Temp(in Celsius) ',
+          font: {
+            family: 'Times',
+            size: 15,
+            style: 'normal',
+          },
+          padding: {bottom: 0},
+        
+        },
           grid: {
             drawBorder: false,
             display: true,
@@ -308,11 +344,11 @@ else if(temp_id === "max"){
             color: '#000',
             padding: 10,
             font: {
-              size: 14,
+              size: 15,
               weight: 300,
               family: "Roboto",
               style: 'normal',
-              lineHeight: 2
+              lineHeight: 1.5
             },
           }
         },
@@ -347,7 +383,7 @@ else{
       maintainAspectRatio: false,
       plugins: {
         legend: {
-          display: true,
+          display: false,
         }
       },
       interaction: {
@@ -356,6 +392,18 @@ else{
       },
       scales: {
         y: {
+          display: true,
+            title: {
+              display: true,
+              text: 'Minimum Temp(in Celsius) ',
+          font: {
+            family: 'Times',
+            size: 15,
+            style: 'normal',
+          },
+          padding: {bottom: 0},
+        
+        },
           grid: {
             drawBorder: false,
             display: true,
@@ -390,11 +438,11 @@ else{
             color: '#000',
             padding: 10,
             font: {
-              size: 14,
+              size: 15,
               weight: 300,
               family: "Roboto",
               style: 'normal',
-              lineHeight: 2
+              lineHeight: 1.5
             },
           }
         },
@@ -416,11 +464,11 @@ if(temp_id === "rain"){
           label: `${temp_id}`+ ` ` + `Temp`,
           tension: 0.4,
           borderWidth: 0,
-          borderRadius: 4,
+          borderRadius: 3,
           borderSkipped: false,
           backgroundColor: "rgba(30,144,255 ,.8)",
           data: result1.final_array,
-          maxBarThickness: 6
+          maxBarThickness: 15
         }, ],
       },
     
@@ -429,7 +477,7 @@ if(temp_id === "rain"){
         maintainAspectRatio: false,
         plugins: {
           legend: {
-            display: true,
+            display: false,
           }
         },
         interaction: {
@@ -438,6 +486,18 @@ if(temp_id === "rain"){
         },
         scales: {
           y: {
+            display: true,
+            title: {
+              display: true,
+              text: 'Rainfall(in mm)',
+          font: {
+            family: 'Times',
+            size: 15,
+            style: 'normal',
+          },
+          padding: {bottom: 0},
+        
+        },
             grid: {
               drawBorder: false,
               display: true,
@@ -475,11 +535,11 @@ if(temp_id === "rain"){
               color: '#000',
               padding: 10,
               font: {
-                size: 14,
+                size: 15,
                 weight: 300,
                 family: "Roboto",
                 style: 'normal',
-                lineHeight: 2
+                lineHeight: 1.5
               },
             }
           },
@@ -496,11 +556,11 @@ else if(temp_id === "min"){
           label: `${temp_id}`+ ` ` + `Temp`,
           tension: 0.4,
           borderWidth: 0,
-          borderRadius: 4,
+          borderRadius: 3,
           borderSkipped: false,
           backgroundColor: "rgba(255,140,0 ,.8)",
           data: result1.final_array,
-          maxBarThickness: 6
+          maxBarThickness: 15
         }, ],
       },
     
@@ -509,7 +569,7 @@ else if(temp_id === "min"){
         maintainAspectRatio: false,
         plugins: {
           legend: {
-            display: true,
+            display: false,
           }
         },
         interaction: {
@@ -518,6 +578,18 @@ else if(temp_id === "min"){
         },
         scales: {
           y: {
+            display: true,
+            title: {
+              display: true,
+              text: 'Minimum Temp(in Celsius) ',
+          font: {
+            family: 'Times',
+            size: 15,
+            style: 'normal',
+          },
+          padding: {bottom: 0},
+        
+        },
             grid: {
               drawBorder: false,
               display: true,
@@ -532,11 +604,11 @@ else if(temp_id === "min"){
               beginAtZero: true,
               padding: 10,
               font: {
-                size: 14,
+                size: 15,
                 weight: 300,
                 family: "Roboto",
                 style: 'normal',
-                lineHeight: 2
+                lineHeight: 1.5
               },
               color: "#000"
             },
@@ -576,11 +648,11 @@ else if(temp_id === "min"){
             label: `${temp_id}`+ ` ` + `Temp`,
             tension: 0.4,
             borderWidth: 0,
-            borderRadius: 4,
+            borderRadius: 3,
             borderSkipped: false,
             backgroundColor: "rgba(255,0,0,.8)",
             data: result1.final_array,
-            maxBarThickness: 6
+            maxBarThickness: 15
           }, ],
         },
       
@@ -589,7 +661,7 @@ else if(temp_id === "min"){
           maintainAspectRatio: false,
           plugins: {
             legend: {
-              display: true,
+              display: false,
             }
           },
           interaction: {
@@ -598,6 +670,18 @@ else if(temp_id === "min"){
           },
           scales: {
             y: {
+              display: true,
+            title: {
+              display: true,
+              text: 'Miximum Temp(in Celsius) ',
+          font: {
+            family: 'Times',
+            size: 15,
+            style: 'normal',
+          },
+          padding: {bottom: 0},
+        
+        },
               grid: {
                 drawBorder: false,
                 display: true,
@@ -635,11 +719,11 @@ else if(temp_id === "min"){
                 color: '#000',
                 padding: 10,
                 font: {
-                  size: 14,
+                  size: 15,
                   weight: 300,
                   family: "Roboto",
                   style: 'normal',
-                  lineHeight: 2
+                  lineHeight: 1.5
                 },
               }
             },
@@ -656,11 +740,11 @@ else if(temp_id === "min"){
           label: `${temp_id}`+ ` ` + `Temp`,
           tension: 0.4,
           borderWidth: 0,
-          borderRadius: 4,
+          borderRadius: 3,
           borderSkipped: false,
           backgroundColor: "rgba(000,000,000 ,.8)",
           data: result1.final_array,
-          maxBarThickness: 6
+          maxBarThickness: 15
         }, ],
       },
     
@@ -669,7 +753,7 @@ else if(temp_id === "min"){
         maintainAspectRatio: false,
         plugins: {
           legend: {
-            display: true,
+            display: false,
           }
         },
         interaction: {
@@ -678,6 +762,18 @@ else if(temp_id === "min"){
         },
         scales: {
           y: {
+            display: true,
+            title: {
+              display: true,
+              text: 'Minimum Temp(in Celsius) ',
+          font: {
+            family: 'Times',
+            size: 15,
+            style: 'normal',
+          },
+          padding: {bottom: 0},
+        
+        },
             grid: {
               drawBorder: false,
               display: true,
@@ -715,11 +811,11 @@ else if(temp_id === "min"){
               color: '#000',
               padding: 10,
               font: {
-                size: 14,
+                size: 15,
                 weight: 300,
                 family: "Roboto",
                 style: 'normal',
-                lineHeight: 2
+                lineHeight: 1.5
               },
             }
           },

@@ -5,8 +5,11 @@ var week = '';
 var per_id = '';
 var period_id = '';
 
+var d_id = document.getElementById("district").value;
+fetch_data();
+console.log(d_id);
 var week = document.getElementById("weeks").value;
-
+console.log(week);
 fetch_data();
 var year = document.getElementById("years").value;
 
@@ -63,7 +66,7 @@ $.ajax({
 
 function update_chart(result){
     $("canvas#chart-line").remove();
-  $("div#chart_data").append('<canvas id="chart-line" class="chart-canvas" height="270" width="300"></canvas>');
+  $("div#chart_data").append('<canvas id="chart-line" class="chart-canvas" height="270" width="300" style="margin-left:-5px"></canvas>');
       var ctx2 = document.getElementById("chart-line").getContext("2d");
   if(per_id == "NDVI"){
     new Chart(ctx2, {
@@ -92,7 +95,7 @@ function update_chart(result){
         maintainAspectRatio: false,
         plugins: {
           legend: {
-            display: true,
+            display: false,
           }
         },
         interaction: {
@@ -101,6 +104,18 @@ function update_chart(result){
         },
         scales: {
           y: {
+            display: true,
+            title: {
+              display: true,
+              text: 'NDVI',
+          font: {
+            family: 'Times',
+            size: 15,
+            style: 'normal',
+          },
+          padding: {bottom: 0},
+        
+        },
             grid: {
               drawBorder: false,
               display: true,
@@ -118,7 +133,7 @@ function update_chart(result){
                 weight: 300,
                 family: "Roboto",
                 style: 'normal',
-                lineHeight: 2
+                lineHeight: 1.5
               },
             }
           },
@@ -135,11 +150,11 @@ function update_chart(result){
               color: '#000',
               padding: 10,
               font: {
-                size: 14,
+                size: 15,
                 weight: 300,
                 family: "Roboto",
                 style: 'normal',
-                lineHeight: 2
+                lineHeight: 1.5
               },
             }
           },
@@ -174,7 +189,7 @@ function update_chart(result){
         maintainAspectRatio: false,
         plugins: {
           legend: {
-            display: true,
+            display: false,
           }
         },
         interaction: {
@@ -183,6 +198,18 @@ function update_chart(result){
         },
         scales: {
           y: {
+            display: true,
+            title: {
+              display: true,
+              text: 'VCI',
+          font: {
+            family: 'Times',
+            size: 15,
+            style: 'normal',
+          },
+          padding: {bottom: 0},
+        
+        },
             grid: {
               drawBorder: false,
               display: true,
@@ -200,7 +227,7 @@ function update_chart(result){
                 weight: 300,
                 family: "Roboto",
                 style: 'normal',
-                lineHeight: 2
+                lineHeight: 1.5
               },
             }
           },
@@ -217,11 +244,11 @@ function update_chart(result){
               color: '#000',
               padding: 10,
               font: {
-                size: 14,
+                size: 15,
                 weight: 300,
                 family: "Roboto",
                 style: 'normal',
-                lineHeight: 2
+                lineHeight: 1.5
               },
             }
           },
@@ -256,7 +283,7 @@ function update_chart(result){
         maintainAspectRatio: false,
         plugins: {
           legend: {
-            display: true,
+            display: false,
           }
         },
         interaction: {
@@ -265,6 +292,18 @@ function update_chart(result){
         },
         scales: {
           y: {
+            display: true,
+            title: {
+              display: true,
+              text: 'VHI',
+          font: {
+            family: 'Times',
+            size: 15,
+            style: 'normal',
+          },
+          padding: {bottom: 0},
+        
+        },
             grid: {
               drawBorder: false,
               display: true,
@@ -282,7 +321,7 @@ function update_chart(result){
                 weight: 300,
                 family: "Roboto",
                 style: 'normal',
-                lineHeight: 2
+                lineHeight: 1.5
               },
             }
           },
@@ -299,11 +338,11 @@ function update_chart(result){
               color: '#000',
               padding: 10,
               font: {
-                size: 14,
+                size: 15,
                 weight: 300,
                 family: "Roboto",
                 style: 'normal',
-                lineHeight: 2
+                lineHeight: 1.5
               },
             }
           },
@@ -338,7 +377,7 @@ function update_chart(result){
         maintainAspectRatio: false,
         plugins: {
           legend: {
-            display: true,
+            display: false,
           }
         },
         interaction: {
@@ -347,6 +386,18 @@ function update_chart(result){
         },
         scales: {
           y: {
+            display: true,
+            title: {
+              display: true,
+              text: 'NDVI',
+          font: {
+            family: 'Times',
+            size: 15,
+            style: 'normal',
+          },
+          padding: {bottom: 0},
+        
+        },
             grid: {
               drawBorder: false,
               display: true,
@@ -364,7 +415,7 @@ function update_chart(result){
                 weight: 300,
                 family: "Roboto",
                 style: 'normal',
-                lineHeight: 2
+                lineHeight: 1.5
               },
             }
           },
@@ -381,11 +432,11 @@ function update_chart(result){
               color: '#000',
               padding: 10,
               font: {
-                size: 14,
+                size: 15,
                 weight: 300,
                 family: "Roboto",
                 style: 'normal',
-                lineHeight: 2
+                lineHeight: 1.5
               },
             }
           },
@@ -408,11 +459,11 @@ if(per_id == "NDVI"){
           label: `${per_id}`+` `+`Temp`,
           tension: 0,
           borderWidth: 0,
-          borderRadius: 5,
+          borderRadius: 3,
           borderSkipped: false,
           backgroundColor: "rgba(46, 204, 113)",
           data: result1.yearly_month_array,
-          maxBarThickness: 6
+          maxBarThickness: 15
         }, ],
       },
     
@@ -421,7 +472,7 @@ if(per_id == "NDVI"){
         maintainAspectRatio: false,
         plugins: {
           legend: {
-            display: true,
+            display: false,
           }
         },
         interaction: {
@@ -430,6 +481,18 @@ if(per_id == "NDVI"){
         },
         scales: {
           y: {
+            display: true,
+            title: {
+              display: true,
+              text: 'NDVI',
+          font: {
+            family: 'Times',
+            size: 15,
+            style: 'normal',
+          },
+          padding: {bottom: 0},
+        
+        },
             grid: {
               drawBorder: false,
               display: true,
@@ -448,7 +511,7 @@ if(per_id == "NDVI"){
                 weight: 300,
                 family: "Roboto",
                 style: 'normal',
-                lineHeight: 2
+                lineHeight: 1.5
               },
               color: "#000"
             },
@@ -467,11 +530,11 @@ if(per_id == "NDVI"){
               color: '#000',
               padding: 10,
               font: {
-                size: 14,
+                size: 15,
                 weight: 300,
                 family: "Roboto",
                 style: 'normal',
-                lineHeight: 2
+                lineHeight: 1.5
               },
             }
           },
@@ -488,11 +551,11 @@ else if(per_id == "VCI"){
             label: `${per_id}`+` `+`Temp`,
             tension: 0,
             borderWidth: 0,
-            borderRadius: 5,
+            borderRadius: 3,
             borderSkipped: false,
             backgroundColor: "rgba(76,152,107)",
             data: result1.yearly_month_array,
-            maxBarThickness: 6
+            maxBarThickness: 15
           }, ],
         },
       
@@ -501,7 +564,7 @@ else if(per_id == "VCI"){
           maintainAspectRatio: false,
           plugins: {
             legend: {
-              display: true,
+              display: false,
             }
           },
           interaction: {
@@ -510,6 +573,18 @@ else if(per_id == "VCI"){
           },
           scales: {
             y: {
+              display: true,
+            title: {
+              display: true,
+              text: 'VCI',
+          font: {
+            family: 'Times',
+            size: 15,
+            style: 'normal',
+          },
+          padding: {bottom: 0},
+        
+        },
               grid: {
                 drawBorder: false,
                 display: true,
@@ -528,7 +603,7 @@ else if(per_id == "VCI"){
                   weight: 300,
                   family: "Roboto",
                   style: 'normal',
-                  lineHeight: 2
+                  lineHeight: 1.5
                 },
                 color: "#000"
               },
@@ -547,11 +622,11 @@ else if(per_id == "VCI"){
                 color: '#000',
                 padding: 10,
                 font: {
-                  size: 14,
+                  size: 15,
                   weight: 300,
                   family: "Roboto",
                   style: 'normal',
-                  lineHeight: 2
+                  lineHeight: 1.5
                 },
               }
             },
@@ -568,11 +643,11 @@ else if(per_id == "VHI"){
           label: `${per_id}`+` `+`Temp`,
           tension: 0,
           borderWidth: 0,
-          borderRadius: 5,
+          borderRadius: 3,
           borderSkipped: false,
           backgroundColor: "rgba(106,122,106)",
           data: result1.yearly_month_array,
-          maxBarThickness: 6
+          maxBarThickness: 15
         }, ],
       },
     
@@ -581,7 +656,7 @@ else if(per_id == "VHI"){
         maintainAspectRatio: false,
         plugins: {
           legend: {
-            display: true,
+            display: false,
           }
         },
         interaction: {
@@ -590,6 +665,18 @@ else if(per_id == "VHI"){
         },
         scales: {
           y: {
+            display: true,
+            title: {
+              display: true,
+              text: 'VHI',
+          font: {
+            family: 'Times',
+            size: 15,
+            style: 'normal',
+          },
+          padding: {bottom: 0},
+        
+        },
             grid: {
               drawBorder: false,
               display: true,
@@ -608,7 +695,7 @@ else if(per_id == "VHI"){
                 weight: 300,
                 family: "Roboto",
                 style: 'normal',
-                lineHeight: 2
+                lineHeight: 1.5
               },
               color: "#000"
             },
@@ -627,11 +714,11 @@ else if(per_id == "VHI"){
               color: '#000',
               padding: 10,
               font: {
-                size: 14,
+                size: 15,
                 weight: 300,
                 family: "Roboto",
                 style: 'normal',
-                lineHeight: 2
+                lineHeight: 1.5
               },
             }
           },
@@ -648,11 +735,11 @@ else{
           label: `${per_id}`+` `+`Temp`,
           tension: 0,
           borderWidth: 0,
-          borderRadius: 5,
+          borderRadius: 3,
           borderSkipped: false,
           backgroundColor: "rgba(000,000,000, .8)",
           data: result1.yearly_month_array,
-          maxBarThickness: 6
+          maxBarThickness: 15
         }, ],
       },
     
@@ -661,7 +748,7 @@ else{
         maintainAspectRatio: false,
         plugins: {
           legend: {
-            display: true,
+            display: false,
           }
         },
         interaction: {
@@ -670,6 +757,18 @@ else{
         },
         scales: {
           y: {
+            display: true,
+            title: {
+              display: true,
+              text: 'NDVI',
+          font: {
+            family: 'Times',
+            size: 15,
+            style: 'normal',
+          },
+          padding: {bottom: 0},
+        
+        },
             grid: {
               drawBorder: false,
               display: true,
@@ -688,7 +787,7 @@ else{
                 weight: 300,
                 family: "Roboto",
                 style: 'normal',
-                lineHeight: 2
+                lineHeight: 1.5
               },
               color: "#000"
             },
@@ -707,11 +806,11 @@ else{
               color: '#000',
               padding: 10,
               font: {
-                size: 14,
+                size: 15,
                 weight: 300,
                 family: "Roboto",
                 style: 'normal',
-                lineHeight: 2
+                lineHeight: 1.5
               },
             }
           },

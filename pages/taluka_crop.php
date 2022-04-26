@@ -135,8 +135,8 @@ if (!isset($_SESSION['ID']) && !isset($_SESSION['EMAIL'])) {
               
                 <!-- <label>Select District:</label> -->
                 <select id="district" >
-                <option value="" disabled selected>Select District</option>
-                <option value="Ahmedabad" id="0">Ahmedabad</option>
+                <option value="" disabled >Select District</option>
+                <option value="Ahmedabad" id="0" selected>Ahmedabad</option>
                 <option value="Anand" id="1">Anand</option>
                 <option value="Banas Kantha" id="2">Banas kantha</option>
                 <option value="Bharuch" id="3">Bharuch</option>
@@ -175,7 +175,7 @@ if (!isset($_SESSION['ID']) && !isset($_SESSION['EMAIL'])) {
 
 
               <select class="in" name="Taluka" id="taluka">
-              <option value="" >Select Taluka</option>
+              <!-- <option value="" >Select Taluka</option> -->
                 <!-- <optgroup label="Ahmedabad" style="display: block;" > -->
                 <option value="Ahmedabad" id="1">Ahmedabad</option>
                 <option value="Ahmedabad" id="2" selected>Bavla</option>
@@ -606,7 +606,7 @@ if (!isset($_SESSION['ID']) && !isset($_SESSION['EMAIL'])) {
               <optgroup label="Mar :">
                 <option value="9">09</option>
                 <option value="10">10</option>
-                <option value="11" >11</option>
+                <option value="11" selected>11</option>
                 <option value="12">12</option>
               </optgroup>
               <optgroup label="Apr :">
@@ -674,9 +674,7 @@ if (!isset($_SESSION['ID']) && !isset($_SESSION['EMAIL'])) {
 
               <select class="in" name="type" id="type" style="border-top-right-radius:50px;border-bottom-right-radius:50px;">
               <option value="">Select Type </option>
-              <option value="NDVI">NDVI</option>
-                <!-- <option value="SMT">SMT</option> -->
-                <!-- <option value="TCI">TCI</option> -->
+              <option value="NDVI" selected>NDVI</option>
                 <option value="VCI">VCI</option>
                 <option value="VHI">VHI</option>
               </select>
@@ -718,7 +716,7 @@ if (!isset($_SESSION['ID']) && !isset($_SESSION['EMAIL'])) {
             <a href="#" id="downloadPdf"><i class="fa fa-download" style="font-size:30px;align-item:right;text-align:right;position:absolute;right:40px;"></i></a>
               <div id="reportPage">
               <div class="chart" id="chart_data" style="width:550px;">
-                  <canvas id="chart-line" class="chart-canvas" height="270" width="300"></canvas>
+                  <canvas id="chart-line" class="chart-canvas" height="270" width="300" style="margin-left:-5px;"></canvas>
               </div>
               <hr style="margin-top:-5px;margin-bottom:0px;">
             </div>
@@ -811,7 +809,7 @@ if (!isset($_SESSION['ID']) && !isset($_SESSION['EMAIL'])) {
 <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 <?php
 // last 7 days 
-  $weeknumber = '35';
+  $weeknumber = '11';
   $dto = new DateTime();
   $dto->setISODate(2013,$weeknumber);
   $ret = $dto->format('Y-m-d');
@@ -853,281 +851,81 @@ $date6 = new DateTime($ret7);
 $weeknumber6 = $date6->format("W");
 
         $con = new mysqli('localhost','root','','agro');
-        $query1 =$con->query("SELECT SMT from crop where d_id = 1 AND week IN('$weeknumber','$weeknumber1','$weeknumber2','$weeknumber3','$weeknumber4','$weeknumber5','$weeknumber6') AND year  = '2013'" );
+        $query1 =$con->query("SELECT NDVI from taluka_crop where t_id = 0 AND week IN('$weeknumber','$weeknumber1','$weeknumber2','$weeknumber3','$weeknumber4','$weeknumber5','$weeknumber6') AND year  = '1990'" );
         while($row1 = $query1->fetch_assoc()){
-          $month1[] = $row1['SMT'];
+          $month1[] = $row1['NDVI'];
         }
 
-$month_weeknumber = '38';
-$month_dto = new DateTime();
-$month_dto->setISODate(2013,$month_weeknumber);
-$month_ret = $month_dto->format('Y-m-d');
-echo $month_ret;
-echo '<br>';
-
-$month_dto->modify('-7 days');
-$month_ret2 = $month_dto->format('Y-m-d');
-echo $month_ret2;
-echo '<br>';
-$month_dto->modify('-7 days');
-$month_ret3 = $month_dto->format('Y-m-d');
-echo $month_ret3;
-echo '<br>';
-$month_dto->modify('-7 days');
-$month_ret4 = $month_dto->format('Y-m-d');
-echo $month_ret4;
-echo '<br>';
-$month_dto1 = new DateTime($month_ret2);
-$month_weeknumber1 = $month_dto1->format("W");
-echo $month_weeknumber1;
-echo '<br>';
-
-$month_dto2 = new DateTime($month_ret3);
-$month_weeknumber2 = $month_dto2->format("W");
-echo $month_weeknumber2;
-echo '<br>';
-$month_dto3 = new DateTime($month_ret4);
-$month_weeknumber3 = $month_dto3->format("W");
-echo $month_weeknumber3;
-echo '<br>';
-
-  $query =$con->query("SELECT SMT from crop where d_id = 2 AND week IN('$month_weeknumber','$month_weeknumber1','$month_weeknumber2','$month_weeknumber3') AND year = '2013'");
-  while($row = $query->fetch_assoc()){
-      $month[] = $row['SMT'];
-      // $amount[] = $row['date'];
-    }
-$months1 =  json_encode($month);
-echo $months1;
-$first_month =  implode (",",$month);  
-$month_temp1 = $first_month;//string
-$temp_array1 = explode(',', $month_temp1);
-$tot_temp1 = 0;
-$temp_array_length1 = count($temp_array1);
-foreach($temp_array1 as $temp1)
-{
- $tot_temp1 += $temp1;
-}
- $avg_high_temp1 = $tot_temp1/$temp_array_length1;
-
-
-$month_dto->modify('-7 days');
-$month_ret5 = $month_dto->format('Y-m-d');
-// echo $month_ret5;
-
-$month_dto->modify('-7 days');
-$month_ret6 = $month_dto->format('Y-m-d');
-// echo $month_ret6;
-$month_dto->modify('-7 days');
-$month_ret7 = $month_dto->format('Y-m-d');
-
-$month_dto->modify('-7 days');
-$month_ret8 = $month_dto->format('Y-m-d');
-
-$month_dto4 = new DateTime($month_ret5);
-$month_weeknumber4 = $month_dto4->format("W");
-// echo $month_weeknumber4;
-
-$month_dto5 = new DateTime($month_ret6);
-$month_weeknumber5 = $month_dto5->format("W");
-
-$month_dto6 = new DateTime($month_ret7);
-$month_weeknumber6 = $month_dto6->format("W");
-
-$month_dto7 = new DateTime($month_ret8);
-$month_weeknumber7 = $month_dto7->format("W");
-
-$query =$con->query("SELECT SMT from crop where d_id = 2 AND week IN('$month_weeknumber4','$month_weeknumber5','$month_weeknumber6','$month_weeknumber7') AND year = '2013'");
-  while($row = $query->fetch_assoc()){
-      $month3[] = $row['SMT'];
-      // $amount[] = $row['date'];
-    }
-    $months2 =  json_encode($month3);
-    $second_month =  implode (",",$month3);  
-  
-  $month_temp2 = $second_month;
-  $temp_array2 = explode(',', $month_temp2);
-  $tot_temp2 = 0;
-  $temp_array_length2 = count($temp_array2);
-  foreach($temp_array2 as $temp2)
-  {
-   $tot_temp2 += $temp2;
-  }
-   $avg_high_temp2 = $tot_temp2/$temp_array_length2;
-
-
-$month_dto->modify('-7 days');
-$month_ret9 = $month_dto->format('Y-m-d');
-
-$month_dto->modify('-7 days');
-$month_ret10 = $month_dto->format('Y-m-d');
-
-$month_dto->modify('-7 days');
-$month_ret11 = $month_dto->format('Y-m-d');
-
-$month_dto->modify('-7 days');
-$month_ret12 = $month_dto->format('Y-m-d');
-
-$month_dto8 = new DateTime($month_ret9);
-$month_weeknumber8 = $month_dto8->format("W");
-
-$month_dto9 = new DateTime($month_ret10);
-$month_weeknumber9 = $month_dto9->format("W");
-
-$month_dto10 = new DateTime($month_ret11);
-$month_weeknumber10 = $month_dto10->format("W");
-
-$month_dto11 = new DateTime($month_ret12);
-$month_weeknumber11 = $month_dto11->format("W");
-
-$query =$con->query("SELECT SMT from crop where d_id = 2 AND week IN('$month_weeknumber8','$month_weeknumber9','$month_weeknumber10','$month_weeknumber11') AND year = '2013'");
-  while($row = $query->fetch_assoc()){
-      $month4[] = $row['SMT'];
-    }
-
-$months4 =  json_encode($month4);
-  // echo '<br>';
-  $third_month =  implode (",",$month4);  
-
-$month_temp3 = $third_month;
-$temp_array3 = explode(',', $month_temp3);
-$tot_temp3 = 0;
-$temp_array_length3 = count($temp_array3);
-foreach($temp_array3 as $temp3)
-{
- $tot_temp3 += $temp3;
-}
- $avg_high_temp3 = $tot_temp3/$temp_array_length3;
-
-
-$month_dto->modify('-7 days');
-$month_ret13 = $month_dto->format('Y-m-d');
-
-$month_dto->modify('-7 days');
-$month_ret14 = $month_dto->format('Y-m-d');
-
-$month_dto->modify('-7 days');
-$month_ret15 = $month_dto->format('Y-m-d');
-
-$month_dto->modify('-7 days');
-$month_ret16 = $month_dto->format('Y-m-d');
-
-$month_dto12 = new DateTime($month_ret13);
-$month_weeknumber12 = $month_dto12->format("W");
-
-$month_dto13 = new DateTime($month_ret14);
-$month_weeknumber13 = $month_dto13->format("W");
-
-$month_dto14 = new DateTime($month_ret15);
-$month_weeknumber14 = $month_dto14->format("W");
-
-$month_dto16 = new DateTime($month_ret16);
-$month_weeknumber15 = $month_dto16->format("W");
-
-$query =$con->query("SELECT SMT from crop where d_id = 2 AND week IN('$month_weeknumber12','$month_weeknumber13','$month_weeknumber14','$month_weeknumber15') AND year = '2013'");
-  while($row = $query->fetch_assoc()){
-      $month5[] = $row['SMT'];
-    }
-
-    $months5 =  json_encode($month5);
-  // echo '<br>';
-  $four_month =  implode (",",$month5); 
-
-$month_temp4 = $four_month;
-$temp_array4 = explode(',', $month_temp4);
-$tot_temp4 = 0;
-$temp_array_length4 = count($temp_array4);
-foreach($temp_array4 as $temp4)
-{
- $tot_temp4 += $temp4;
-}
- $avg_high_temp4 = $tot_temp4/$temp_array_length4;
-
-
-$month_dto->modify('-7 days');
-$month_ret17 = $month_dto->format('Y-m-d');
-
-$month_dto->modify('-7 days');
-$month_ret18 = $month_dto->format('Y-m-d');
-
-$month_dto->modify('-7 days');
-$month_ret19 = $month_dto->format('Y-m-d');
-
-$month_dto->modify('-7 days');
-$month_ret20 = $month_dto->format('Y-m-d');
-
-$month_dto17 = new DateTime($month_ret17);
-$month_weeknumber16 = $month_dto17->format("W");
-
-$month_dto18 = new DateTime($month_ret18);
-$month_weeknumber17 = $month_dto18->format("W");
-
-$month_dto19 = new DateTime($month_ret19);
-$month_weeknumber18 = $month_dto19->format("W");
-
-$month_dto20 = new DateTime($month_ret20);
-$month_weeknumber19 = $month_dto20->format("W");
-
-  $query =$con->query("SELECT SMT from crop where d_id = 2 AND week IN('$month_weeknumber16','$month_weeknumber17','$month_weeknumber18','$month_weeknumber19') AND year = '2013'");
-
-  while($row = $query->fetch_assoc()){
-      $month6[] = $row['SMT'];
-    }
-    $months6 =  json_encode($month6);
-    // echo '<br>';
-    $five_month =  implode (",",$month6); 
-  $month_temp5 = $five_month;
-  $temp_array5 = explode(',', $month_temp5);
-  $tot_temp5 = 0;
-  $temp_array_length5 = count($temp_array5);
-  foreach($temp_array5 as $temp5)
-  {
-   $tot_temp5 += $temp5;
-  }
-   $avg_high_temp5 = $tot_temp5/$temp_array_length5;
-
-
-$month_dto->modify('-7 days');
-$month_ret21 = $month_dto->format('Y-m-d');
-
-$month_dto->modify('-7 days');
-$month_ret22 = $month_dto->format('Y-m-d');
-
-$month_dto->modify('-7 days');
-$month_ret23 = $month_dto->format('Y-m-d');
-
-$month_dto->modify('-7 days');
-$month_ret24 = $month_dto->format('Y-m-d');
-
-$month_dto21 = new DateTime($month_ret21);
-$month_weeknumber20 = $month_dto21->format("W");
-
-$month_dto22 = new DateTime($month_ret22);
-$month_weeknumber21 = $month_dto22->format("W");
-
-$month_dto23 = new DateTime($month_ret23);
-$month_weeknumber22 = $month_dto23->format("W");
-
-$month_dto24 = new DateTime($month_ret24);
-$month_weeknumber23 = $month_dto24->format("W");
-
-$query =$con->query("SELECT SMT from crop where d_id = 2 AND week IN('$month_weeknumber20','$month_weeknumber21','$month_weeknumber22','$month_weeknumber23') AND year = '2013'");
-
-  while($row = $query->fetch_assoc()){
-      $month7[] = $row['SMT'];
-    }
-
-    $months7 =  json_encode($month7);
-  // echo '<br>';
-  $six_month =  implode (",",$month7); 
-$month_temp6 =$six_month;
-$temp_array6 = explode(',', $month_temp6);
-$tot_temp6 = 0;
-$temp_array_length6 = count($temp_array6);
-foreach($temp_array6 as $temp6)
-{
- $tot_temp6 += $temp6;
-}
- $avg_high_temp6 = $tot_temp6/$temp_array_length6;
+        $month_weeknumber = '11';
+        $year = '1990';
+        $dto = new DateTime();
+        $dto->setISODate(1990,$month_weeknumber);
+        $ret_0 = $dto->format('Y-m-d');
+        $month_date1 = $dto->format('Y');
+        $one_monthly =date("Y - M",strtotime($ret_0));
+        
+        $ret_1 = date("Y - M",strtotime($one_monthly . ' - 1 year'));
+        $month_date2 =date("Y",strtotime($ret_1));
+        
+        $ret_2 = date("Y - M",strtotime($ret_1 . ' - 1 year'));
+        $month_date3 =date("Y",strtotime($ret_2));
+        
+            $query1 =$con->query("SELECT NDVI  from `taluka_crop` where t_id = 0  AND week BETWEEN 1 AND 52 AND year = '$year'" );
+            while($row1 = $query1->fetch_assoc()){
+              $month_1[] = $row1['NDVI'];
+            }
+          
+            $months1 =  json_encode($month_1);
+          // echo '<br>';
+          $first_month =  implode (",",$month_1);  
+          // echo $hardik;
+        $month_temp1 = $first_month;//string
+        $temp_array1 = explode(',', $month_temp1);
+        $tot_temp1 = 0;
+        $temp_array_length1 = count($temp_array1);
+        foreach($temp_array1 as $temp1)
+        {
+         $tot_temp1 += $temp1;
+        }
+         $avg_high_temp1 = $tot_temp1/$temp_array_length1;
+        
+        
+          $query2 =$con->query("SELECT NDVI  from `taluka_crop` where t_id = 0  AND week BETWEEN 1 AND 52 AND year = '$month_date2'" );
+            while($row2 = $query2->fetch_assoc()){
+              $month2[] = $row2['NDVI'];
+            }
+            $months2 =  json_encode($month2);
+            $second_month =  implode (",",$month2);  
+          
+          $month_temp2 = $second_month;
+          $temp_array2 = explode(',', $month_temp2);
+          $tot_temp2 = 0;
+          $temp_array_length2 = count($temp_array2);
+          foreach($temp_array2 as $temp2)
+          {
+           $tot_temp2 += $temp2;
+          }
+           $avg_high_temp2 = $tot_temp2/$temp_array_length2;
+        
+        
+            $query3 =$con->query("SELECT NDVI  from `taluka_crop` where t_id = 0  AND week BETWEEN 1 AND 52 AND year = '$month_date3'" );
+            while($row3 = $query3->fetch_assoc()){
+              $month3[] = $row3['NDVI'];
+            }
+            
+            $months4 =  json_encode($month3);
+          // echo '<br>';
+          $third_month =  implode (",",$month3);  
+        
+        $month_temp3 = $third_month;
+        $temp_array3 = explode(',', $month_temp3);
+        $tot_temp3 = 0;
+        $temp_array_length3 = count($temp_array3);
+        foreach($temp_array3 as $temp3)
+        {
+         $tot_temp3 += $temp3;
+        }
+         $avg_high_temp3 = $tot_temp3/$temp_array_length3;
 ?>
 <script>
 
@@ -1215,17 +1013,17 @@ new Chart(ctx, {
   type: "bar",
   data: { 
     // labels:<?php // echo json_encode($amount1) ?>,
-    labels:['<?php echo json_encode($month_ret) ?>','<?php echo json_encode($month_ret5) ?>','<?php echo json_encode($month_ret9) ?>','<?php echo json_encode($month_ret13) ?>','<?php echo json_encode($month_ret17) ?>','<?php echo json_encode($month_ret21) ?>'],
+    labels:['<?php echo json_encode($month_date3) ?>','<?php echo json_encode($month_date2) ?>','<?php echo json_encode($month_date1) ?>'],
     datasets: [{
       label: "Temperature",
       tension: 0.4,
       borderWidth: 0,
-      borderRadius: 4,
+      borderRadius: 3,
       borderSkipped: false,
-      backgroundColor: "rgba(000, 000, 000, .8)",
+      backgroundColor: "rgba(46, 204, 113)",
       //data: <?php //echo json_encode($month1) ?>,
-      data : ['<?php echo json_encode($avg_high_temp1) ?>','<?php echo json_encode($avg_high_temp2) ?>','<?php echo json_encode($avg_high_temp3) ?>','<?php echo json_encode($avg_high_temp4) ?>','<?php echo json_encode($avg_high_temp5) ?>','<?php echo json_encode($avg_high_temp6) ?>'],
-      maxBarThickness: 6
+      data : ['<?php echo json_encode($avg_high_temp3) ?>','<?php echo json_encode($avg_high_temp2) ?>','<?php echo json_encode($avg_high_temp1) ?>'],
+      maxBarThickness: 15
     }, ],
   },
 
@@ -1234,7 +1032,7 @@ new Chart(ctx, {
     maintainAspectRatio: false,
     plugins: {
       legend: {
-        display: true,
+        display: false,
       }
     },
     interaction: {
@@ -1243,6 +1041,18 @@ new Chart(ctx, {
     },
     scales: {
       y: {
+        display: true,
+            title: {
+              display: true,
+              text: 'NDVI',
+          font: {
+            family: 'Times',
+            size: 15,
+            style: 'normal',
+          },
+          padding: {bottom: 0},
+        
+        },
         grid: {
           drawBorder: false,
           display: true,
@@ -1261,7 +1071,7 @@ new Chart(ctx, {
             weight: 300,
             family: "Roboto",
             style: 'normal',
-            lineHeight: 2
+            lineHeight: 1.5
           },
           color: "#000"
         },
@@ -1280,11 +1090,11 @@ new Chart(ctx, {
           color: '#000',
           padding: 10,
           font: {
-            size: 14,
+            size: 15,
             weight: 300,
             family: "Roboto",
             style: 'normal',
-            lineHeight: 2
+            lineHeight: 1.5
           },
         }
       },
@@ -1303,15 +1113,15 @@ new Chart(ctx, {
           tension: 0,
           borderWidth: 0,
           pointRadius: 5,
-          pointBackgroundColor: "rgba(000, 000, 000, .8)",
+          pointBackgroundColor: "rgba(46, 204, 113)",
           pointBorderColor: "transparent",
-          borderColor: "rgba(000, 000, 000, .8)",
-          borderColor: "rgba(000, 000, 000, .8)",
-          borderWidth: 4,
+          borderColor: "rgba(46, 204, 113)",
+          borderColor: "rgba(46, 204, 113)",
+          borderWidth: 3,
           backgroundColor: "transparent",
           fill: true,
           data: <?php echo json_encode($month1)?>,
-          maxBarThickness: 6
+          maxBarThickness: 15
         }],
       },
       options: {
@@ -1319,7 +1129,7 @@ new Chart(ctx, {
         maintainAspectRatio: false,
         plugins: {
           legend: {
-            display: true,
+            display: false,
           }
         },
         interaction: {
@@ -1328,6 +1138,18 @@ new Chart(ctx, {
         },
         scales: {
           y: {
+            display: true,
+            title: {
+              display: true,
+              text: 'NDVI',
+          font: {
+            family: 'Times',
+            size: 15,
+            style: 'normal',
+          },
+          padding: {bottom: 0},
+        
+        },
             grid: {
               drawBorder: false,
               display: true,
@@ -1345,7 +1167,7 @@ new Chart(ctx, {
                 weight: 300,
                 family: "Roboto",
                 style: 'normal',
-                lineHeight: 2
+                lineHeight: 1.5
               },
             }
           },
@@ -1362,11 +1184,11 @@ new Chart(ctx, {
               color: '#000',
               padding: 10,
               font: {
-                size: 14,
+                size: 15,
                 weight: 300,
                 family: "Roboto",
                 style: 'normal',
-                lineHeight: 2
+                lineHeight: 1.5
               },
             }
           },
