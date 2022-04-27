@@ -135,7 +135,7 @@ if (!isset($_SESSION['ID']) && !isset($_SESSION['EMAIL'])) {
               
                 <!-- <label>Select District:</label> -->
                 <select id="district" >
-                <option value="" disabled >Select District</option>
+                <!-- <option value="" disabled >Select District</option> -->
                 <option value="Ahmedabad" id="0" selected>Ahmedabad</option>
                 <option value="Anand" id="1">Anand</option>
                 <option value="Banas Kantha" id="2">Banas kantha</option>
@@ -589,7 +589,7 @@ if (!isset($_SESSION['ID']) && !isset($_SESSION['EMAIL'])) {
 
               </select>
               <select class="in" name="weeks" id="weeks">
-              <option value="" selected disabled>Select Week </option>
+              <!-- <option value="" selected disabled>Select Week </option> -->
 
                 <option value="1">01</option>
                 <option value="2">02</option>
@@ -647,7 +647,7 @@ if (!isset($_SESSION['ID']) && !isset($_SESSION['EMAIL'])) {
               </select>
 
               <select class="in" name="type" id="type" style="border-top-right-radius:50px;border-bottom-right-radius:50px;">
-              <option value="">Select Type </option>
+              <!-- <option value="">Select Type </option> -->
               <option value="NDVI" selected>NDVI</option>
                 <option value="VCI">VCI</option>
                 <option value="VHI">VHI</option>
@@ -695,7 +695,7 @@ if (!isset($_SESSION['ID']) && !isset($_SESSION['EMAIL'])) {
               <hr style="margin-top:-5px;margin-bottom:0px;">
             </div>
               <select class="in" name="period" id="per" style="margin-bottom:-20px;">
-              <option value="">Select period </option>
+              <!-- <option value="">Select period </option> -->
                 <option value="last 6 month">last 6 month</option>
                 <option value="last 3 year">last 3 year</option>
               </select>
