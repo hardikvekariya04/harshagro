@@ -173,7 +173,7 @@ if (!isset($_SESSION['ID']) && !isset($_SESSION['EMAIL'])) {
                 <option value="rain">Rainfall</option>
               </select>
               <input class="in" id="date" type="date" placeholder="DD-MM-YYYY" min="1997-01-01" max="2020-02-15"
-                value="2018-02-07" style="border-top-left-radius:50px;border-bottom-left-radius:50px;width:150px;padding:3px;margin-bottom:-10px;position:absolute;top:10px;left:340px;">
+                value="2019-02-06" style="border-top-left-radius:50px;border-bottom-left-radius:50px;width:150px;padding:3px;margin-bottom:-10px;position:absolute;top:10px;left:340px;">
             </div>
             <hr class="dark horizontal" style="margin-top:-30px;margin-bottom:-10px;">
             <div id="chart-line1" class="img-magnifier-container"></div>
@@ -189,7 +189,7 @@ if (!isset($_SESSION['ID']) && !isset($_SESSION['EMAIL'])) {
                 <option value="VCI">VCI</option>
                 <option value="VHI">VHI</option>
               </select>
-              <input type="week" name="week" id="week" style="position:absolute;top:10px;left:340px;border-radius:50px;width:150px;padding:3px;border:1px solid gray;" required>
+              <input type="week" name="week" id="week" value="2022-W15" style="position:absolute;top:10px;left:340px;border-radius:50px;width:150px;padding:3px;border:1px solid gray;" required>
             </div>
             <hr class="dark horizontal" style="margin-top:-30px;margin-bottom:-10px;">
             <div id="chart-line2"></div>
