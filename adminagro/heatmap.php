@@ -274,6 +274,12 @@ $connect = mysqli_connect("localhost", "root", "", "admin_agro");
     <input type="file" name="choosefile2" style="width:300px;border : 2px solid #29C5F6;padding:5px;border-radius:10px;color:red;" required/>
     </div>
     <h2>crop</h2>
+    <div align = "center" style="display:flex;">
+        <label>Year : </label>
+        <input type="date" name="date" class="form-control" style="width:400px;">
+        <label>Week : </label>
+        <input type="date" name="date" class="form-control" style="width:400px;">
+    </div>
   <div style="display:flex">
     <h6>Max : </h6>
     <input type="file" name="choosefile3" style="width:300px;border : 2px solid #29C5F6;padding:5px;border-radius:10px;color:red;"  required/>

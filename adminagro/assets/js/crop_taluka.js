@@ -1,5 +1,6 @@
 var path = "http://localhost/newagro/pages/";
 var t_id = '';
+var d_id = '';
 var date_id = '';
 var temp_id = '';
 var per_id = '';
@@ -23,6 +24,7 @@ var period_id = document.getElementById("per").value;
 fetch_data();
 
 $(function () {
+
   $(document).on('change', '#taluka', function () {
     t_id = $(this).children(":selected").attr("id");
     fetch_data();
