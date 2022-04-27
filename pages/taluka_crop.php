@@ -66,7 +66,7 @@ if (!isset($_SESSION['ID']) && !isset($_SESSION['EMAIL'])) {
             <div class="text-dark text-center me-2 d-flex align-items-center justify-content-center">
               <i class="material-icons opacity-10">table_view</i>
             </div>
-            <span class="nav-link-text ms-1" style="width:200px;font-size:20px;font-weight:bold;">Crops</span>
+            <span class="nav-link-text ms-1" style="width:200px;font-size:20px;font-weight:bold;">Vegetation</span>
             
           </a>
         </li>
@@ -554,7 +554,7 @@ if (!isset($_SESSION['ID']) && !isset($_SESSION['EMAIL'])) {
               </select> -->
 
               <!-- <select class="in" name="weeks" id="weeks"> -->
-              <input type="week" name="weeks" id="weeks" class="in" required>
+              <input type="week" name="weeks" id="weeks" value="2017-W01" class="in" required>
               <!-- <option value="" selected disabled>Select Week </option> -->
 
                 <!-- <option value="1" selected>01</option>

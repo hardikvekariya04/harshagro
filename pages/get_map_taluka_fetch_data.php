@@ -1,10 +1,11 @@
 <?php
 $con = new mysqli('localhost','root','','agro');
 $weeks = $_POST['weeks'];
-$years = $_POST['years'];
+$trim_year = explode('-',trim($weeks))[0];
+
 $type_id = $_POST['type_id'];
 if($type_id === "VHI"){
-  $query1 =$con->query("SELECT VHI from `taluka_crop` where  year = '$years'" );
+  $query1 =$con->query("SELECT VHI from `taluka_crop` where  year = '$trim_year'" );
   $NDVI = array();
   while($row1 = $query1->fetch_assoc()){
     $NDVI[] = $row1['VHI'];
@@ -15,7 +16,7 @@ if($type_id === "VHI"){
     echo json_encode($return_data);
 }
 elseif($type_id === "VCI"){
-  $query1 =$con->query("SELECT VCI from `taluka_crop` where  year = '$years'" );
+  $query1 =$con->query("SELECT VCI from `taluka_crop` where  year = '$trim_year'" );
   $NDVI = array();
   while($row1 = $query1->fetch_assoc()){
     $NDVI[] = $row1['VCI'];
@@ -25,7 +26,7 @@ elseif($type_id === "VCI"){
     echo json_encode($return_data);
 }
 else{
-  $query1 =$con->query("SELECT NDVI,year,week from `taluka_crop` where  year = '$years'" );
+  $query1 =$con->query("SELECT NDVI,year,week from `taluka_crop` where  year = '$trim_year'" );
   $NDVI = array();
   while($row1 = $query1->fetch_assoc()){
     $NDVI[] = $row1['NDVI'];

@@ -93,7 +93,7 @@ if (!isset($_SESSION['ID']) && !isset($_SESSION['EMAIL'])) {
             <div class="text-dark text-center me-2 d-flex align-items-center justify-content-center">
               <i class="material-icons opacity-10">table_view</i>
             </div>
-            <span class="nav-link-text ms-1">Crops</span>
+            <span class="nav-link-text ms-1">Vegetation</span>
 
           </a>
         </li>
@@ -182,7 +182,7 @@ if (!isset($_SESSION['ID']) && !isset($_SESSION['EMAIL'])) {
         <div class="col-lg-5.5 col-md-6 mt-4 mb-0" style="margin-left : 20px">
           <div class="card z-index-2  ">
           <div class="card-body" style="margin-top:-20px;">
-              <h3 class="mb-0 "> Crop </h3>
+              <h3 class="mb-0 "> Vegetation </h3>
               <p class="text-sm "> Heatmap Data </p>
               <select class="in" name="type" id="type1" style="position:absolute;top:10px;left:180px;border-radius:50px;width:150px;">
                 <option value="NDVI">NDVI</option>
