@@ -110,12 +110,18 @@ if (!isset($_SESSION['ID']) && !isset($_SESSION['EMAIL'])) {
       </ul>
     </div>
     <div class="sidenav-footer position-absolute w-100 bottom-0 ">
-      <div class="mx-3">
-              
-              <a class="btn bg-danger mt-0 w-100" href="../logout.php" type="button" style="color: #fff;"><i class="material-icons opacity-10">login</i> Log Out</a>
+    <div class="mx-3">
+        <a class="btn bg-info mt-0 w-100" href="dataset.php" type="button" style="color: #fff;"><i
+            class="material-icons opacity-10">info </i> Dataset</a>
       </div>
       <div class="mx-3">
-        <a class="btn bg-gradient-primary mt-0 w-100" href="" type="button">Visit Home page</a>
+        <a class="btn bg-gradient-primary mt-0 w-100" href="https://www.agrocastanalytics.com/index.html" type="button"><i
+            class="material-icons opacity-10">home </i> Visit Home page</a>
+      </div>
+      <div class="mx-3">
+
+        <a class="btn bg-danger mt-0 w-100" href="../logout.php" type="button" style="color: #fff;"><i
+            class="material-icons opacity-10">login</i> Log Out</a>
       </div>
     </div>
   </aside>
@@ -188,7 +194,7 @@ if (!isset($_SESSION['ID']) && !isset($_SESSION['EMAIL'])) {
                 <option value="last 3 year">last 3 year</option>
               </select> -->
 
-              <input class="in" id="date" type="date" placeholder="DD-MM-YYYY" min="1997-01-01" max="2020-02-15" value="2020-05-30" selected>
+              <input class="in" id="date" type="date" placeholder="DD-MM-YYYY" min="1997-01-01" max="2020-02-15" value="2020-02-15" selected>
               
             </div>
           </div>
@@ -377,7 +383,7 @@ if (!isset($_SESSION['ID']) && !isset($_SESSION['EMAIL'])) {
 // print_r($week_array);
 
 
-$date1 = '2018-07-30';
+$date1 = '2020-02-15';
 $date1 = strtotime($date1);
 
 $date1 = strtotime("+0 day", $date1);
@@ -395,23 +401,19 @@ $dates5  =date('Y-m-d', $date5 );
 $dates6  =date('Y-m-d', $date6 );
 $dates7  =date('Y-m-d', $date7 );
 
-// echo '<br>';
-// echo  date('Y-m-d', $date3);
+
   $con = new mysqli('localhost','root','','agro');
-  // $currDate = "2018-01-07";
-  //$query =$con->query("SELECT max_temp,date from district_data where taluka_id = 2 AND date >= CURDATE() - INTERVAL 7 DAY");
   $query1 =$con->query("SELECT max_temp,date from district_data where taluka_id = 1 AND date IN('$dates1','$dates2','$dates3','$dates4','$dates5','$dates6','$dates7')" );
-  // // $query =$con->query("SELECT max_temp,date from district_data where taluka_id = 2 AND date > date_sub('2018-09-30',Interval 1 month)" );
   while($row1 = $query1->fetch_assoc()){
     $month1[] = $row1['max_temp'];
     $amount1[] = $row1['date'];
   }
-  // echo '<br>';
+
 
 
 // last  6 month 
-$query_Date = '2018-09-30';
-$final_date = '2018-09-30';
+$query_Date = '2020-02-15';
+$final_date = '2020-02-15';
 $monthly = date('Y-m-d', strtotime($final_date. ' - 1 month')); 
 $monthly1 = date('Y-m-d', strtotime($monthly. ' - 1 month')); 
 $monthly2 =date('Y-m-d', strtotime($monthly1. ' - 1 month')); 
@@ -699,7 +701,7 @@ new Chart(ctx, {
           beginAtZero: true,
           padding: 10,
           font: {
-            size: 14,
+            size: 15,
             weight: 300,
             family: "Roboto",
             style: 'normal',

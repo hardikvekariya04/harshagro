@@ -4,7 +4,7 @@ var d_id = '';
 var date_id = '';
 var temp_id = '';
 var per_id = '';
-var period_id = " ";
+
 var year = '';
 var $district = $('#district'),
   $taluka = $('#taluka'),
@@ -20,8 +20,7 @@ var year = document.getElementById("years").value;
 fetch_data();
 var per_id = document.getElementById("type").value;
 fetch_data();
-var period_id = document.getElementById("per").value;
-fetch_data();
+
 
 $(function () {
 
@@ -41,10 +40,6 @@ $(function () {
     per_id = $(this).val();
     fetch_data();
   })
-  $(document).on('change', '#per', function () {
-    period_id = $(this).val();
-    fetch_data();
-  })
 });
 
 function fetch_data() {
@@ -60,7 +55,7 @@ function fetch_data() {
   $.ajax({
     url: path + "crop_taluka_fetch_bar_data.php",
     type: 'post',
-    data: { t_id: t_id, week: week, year: year, per_id: per_id, period_id: period_id },
+    data: { t_id: t_id, week: week, year: year, per_id: per_id},
     success: function (result1) {
       result1 = JSON.parse(result1);
       update_chart1(result1);

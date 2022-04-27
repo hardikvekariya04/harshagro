@@ -128,7 +128,7 @@ ob_end_flush();
             
           </a>
         </li>
-        <li class="nav-item">
+        <!-- <li class="nav-item">
           <a class="nav-link text-dark " href="./pages/dataset.php">
             <div class="text-dark text-center me-2 d-flex align-items-center justify-content-center">
               <i class="material-icons opacity-10">table_view</i>
@@ -136,19 +136,25 @@ ob_end_flush();
             <span class="nav-link-text ms-1">Dataset</span>
             
           </a>
-        </li>
+        </li> -->
 
       </ul>
     </div>
     <div class="sidenav-footer position-absolute w-100 bottom-0 ">
+    <div class="mx-3">
+        <a class="btn bg-info mt-0 w-100" href="./pages/dataset.php" type="button" style="color: #fff;"><i
+            class="material-icons opacity-10">info </i> Dataset</a>
+      </div>
+      <div class="mx-3">
+        <a class="btn bg-gradient-primary mt-0 w-100" href="https://www.agrocastanalytics.com/index.html" type="button"><i
+            class="material-icons opacity-10">home </i> Visit Home page</a>
+      </div>
       <div class="mx-3">
 
         <a class="btn bg-danger mt-0 w-100" href="logout.php" type="button" style="color: #fff;"><i
             class="material-icons opacity-10">login</i> Log Out</a>
       </div>
-      <div class="mx-3">
-        <a class="btn bg-gradient-primary mt-0 w-100" href="" type="button">Visit Home page</a>
-      </div>
+      
     </div>
   </aside>
   <main class="main-content position-relative max-height-vh-100 h-100 border-radius-lg ">
@@ -586,7 +592,7 @@ ob_end_flush();
                 <option value="last 3 year">last 3 year</option>
               </select> -->
 
-              <input class="in" id="date" type="date" placeholder="DD-MM-YYYY" min="1997-01-01" max="2023-02-15"
+              <input class="in" id="date" type="date" placeholder="DD-MM-YYYY" min="1997-01-01" max="2020-02-15"
                 value="2020-12-15">
 
             </div>
@@ -645,8 +651,8 @@ ob_end_flush();
             <hr style="margin-top:-5px;margin-bottom:0px;">
               <select class="in" name="period" id="per" style="margin-bottom:-20px;">
               <!-- <option value="">Select period </option> -->
-                <option value="last 6 month" >last 6 month</option>
-                <option value="last 3 year" selected>last 3 year</option>
+                <option value="last 6 month" selected>last 6 month</option>
+                <option value="last 3 year" >last 3 year</option>
               </select>
               <a href="#" id="downloadPdf1"><i class="fa fa-download" style="font-size:22px;align-item:right;text-align:right;position:absolute;right:40px;"></i></a>
               <div id="reportPage1">
@@ -747,7 +753,7 @@ ob_end_flush();
   <script src="./map/heatmap/leaf.js"></script> -->
   <?php
 // last 7 days 
-$date1 = '2018-07-30';
+$date1 = '2020-02-15';
 $date1 = strtotime($date1);
 
 $date1 = strtotime("+0 day", $date1);
@@ -780,8 +786,8 @@ $dates7  =date('Y-m-d', $date7 );
 
 
 // last  6 month 
-$query_Date = '2018-09-30';
-$final_date = '2018-09-30';
+$query_Date = '2020-02-15';
+$final_date = '2020-02-15';
 $monthly = date('Y-m-d', strtotime($final_date. ' - 1 month')); 
 $monthly1 = date('Y-m-d', strtotime($monthly. ' - 1 month')); 
 $monthly2 =date('Y-m-d', strtotime($monthly1. ' - 1 month')); 
@@ -1199,7 +1205,7 @@ $avg_high_year_temp5 = $tot_year_temp5/$temp_array_year_length5;
       },
     });
     $( window ).on( "load", function() {
-        $('.loader').delay(2000).fadeOut(1000);
+        $('.loader').delay(400).fadeOut(1000);
     });
   </script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.3.3/jspdf.min.js"></script>

@@ -4,7 +4,7 @@ $d_id = $_POST['d_id'];
 $week = $_POST['week'];
 $year = $_POST['year'];
 $per_id = $_POST['per_id'];
-$period_id = $_POST['period_id'];
+// $period_id = $_POST['period_id'];
 
 $dto = new DateTime();
 $dto->setISODate($year,$week);

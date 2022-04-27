@@ -110,12 +110,18 @@ if (!isset($_SESSION['ID']) && !isset($_SESSION['EMAIL'])) {
       </ul>
     </div>
     <div class="sidenav-footer position-absolute w-100 bottom-0 ">
-      <div class="mx-3">
-              
-              <a class="btn bg-danger mt-0 w-100" href="../logout.php" type="button" style="color: #fff;"><i class="material-icons opacity-10">login</i> Log Out</a>
+    <div class="mx-3">
+        <a class="btn bg-info mt-0 w-100" href="dataset.php" type="button" style="color: #fff;"><i
+            class="material-icons opacity-10">info </i> Dataset</a>
       </div>
       <div class="mx-3">
-        <a class="btn bg-gradient-primary mt-0 w-100" href="" type="button">Visit Home page</a>
+        <a class="btn bg-gradient-primary mt-0 w-100" href="https://www.agrocastanalytics.com/index.html" type="button"><i
+            class="material-icons opacity-10">home </i> Visit Home page</a>
+      </div>
+      <div class="mx-3">
+
+        <a class="btn bg-danger mt-0 w-100" href="../logout.php" type="button" style="color: #fff;"><i
+            class="material-icons opacity-10">login</i> Log Out</a>
       </div>
     </div>
 
@@ -185,7 +191,7 @@ if (!isset($_SESSION['ID']) && !isset($_SESSION['EMAIL'])) {
 
               </select>
               <select class="in" name="weeks" id="weeks">
-              <option value="" disabled >Select Week</option>
+              <!-- <option value="" disabled >Select Week</option> -->
                 <option value="1" selected>01</option>
                 <option value="2">02</option>
                 <option value="3">03</option>
@@ -309,18 +315,16 @@ if (!isset($_SESSION['ID']) && !isset($_SESSION['EMAIL'])) {
             <a href="#" id="downloadPdf"><i class="fa fa-download" style="font-size:22px;align-item:right;text-align:right;position:absolute;right:40px;"></i></a>
               <div id="reportPage">
               <div class="chart" id="chart_data" style="width:550px;">
-                  <canvas id="chart-line" class="chart-canvas" height="270" width="300" style="margin-left:-10px"></canvas>
+                  <canvas id="chart-line" class="chart-canvas" height="270" width="290" style="margin-left:-11px"></canvas>
               </div>
           </div>
               <hr style="margin-top:-5px;margin-bottom:0px;">
-              <select class="in" name="period" id="per" style="margin-bottom:-20px;">
-              <option value="">Select period </option>
-                <option value="last 6 month">last 6 month</option>
-                <option value="last 3 year" selected>last 3 year</option>
-              </select>
-              <a href="#" id="downloadPdf1"><i class="fa fa-download" style="font-size:22px;align-item:right;text-align:right;position:absolute;right:40px;"></i></a>
+             
+                <h6 name="period" id="per" align="center" style="border:1px dashed gray;">LAST 3 YEAR</h6>
+
+              <a href="#" id="downloadPdf1"><i class="fa fa-download" style="font-size:22px;align-item:right;text-align:right;position:absolute;right:40px;margin-top:-10px;"></i></a>
               <div id="reportPage1">
-                <div class="chart" id="chart_data1">
+                <div class="chart" id="chart_data1" style="margin-top:-10px;">
                   <canvas id="chart-bars" class="chart-canvas" height="280" width="300" ></canvas>
                 </div>
             </div>
@@ -428,9 +432,9 @@ if (!isset($_SESSION['ID']) && !isset($_SESSION['EMAIL'])) {
 
 <?php
 // last 7 days 
-  $weeknumber = '11';
+  $weeknumber = '01';
   $dto = new DateTime();
-  $dto->setISODate(2013,$weeknumber);
+  $dto->setISODate(2018,$weeknumber);
   $ret = $dto->format('Y-m-d');
 
   $dto->modify('-7 days');
@@ -475,9 +479,9 @@ $weeknumber6 = $date6->format("W");
           $month1[] = $row1['SMT'];
         }
 
-$month_weeknumber = '11';
+$month_weeknumber = '01';
 $dto = new DateTime();
-$dto->setISODate(1990,$month_weeknumber);
+$dto->setISODate(2018,$month_weeknumber);
 $ret_0 = $dto->format('Y-m-d');
 $month_date1 = $dto->format('Y');
 $one_monthly =date("Y - M",strtotime($ret_0));
@@ -636,11 +640,11 @@ new Chart(ctx, {
       label: "NDVI",
       tension: 0.4,
       borderWidth: 0,
-      borderRadius: 4,
+      borderRadius: 3,
       borderSkipped: false,
       backgroundColor: "rgba(46, 204, 113)",
       data : ['<?php echo json_encode($avg_high_temp3)?>','<?php echo json_encode($avg_high_temp2)?>','<?php echo json_encode($avg_high_temp1)?>'],
-      maxBarThickness: 6
+      maxBarThickness: 15
     }, ],
   },
 

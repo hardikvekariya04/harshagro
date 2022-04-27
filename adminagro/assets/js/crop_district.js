@@ -3,21 +3,16 @@ var d_id ='';
 var year = '';
 var week = '';
 var per_id = '';
-var period_id = '';
+
 
 var d_id = document.getElementById("district").value;
 fetch_data();
-console.log(d_id);
 var week = document.getElementById("weeks").value;
-console.log(week);
 fetch_data();
 var year = document.getElementById("years").value;
-
 fetch_data();
 var per_id = document.getElementById("type").value;
-
 fetch_data();
-var period_id = document.getElementById("per").value;
 
 $(function(){
     $(document).on('change','#district',function(){
@@ -36,16 +31,12 @@ $(function(){
       per_id = $(this).val();
       fetch_data();
   })
-  $(document).on('change','#per',function(){
-    period_id = $(this).val();
-    fetch_data();
-})
 });
 function fetch_data(){
 $.ajax({
     url: path +"crop_district_fetch_data.php"  ,
     type: 'post',
-    data: { d_id: d_id , week: week, year: year ,per_id: per_id,period_id: period_id},
+    data: { d_id: d_id , week: week, year: year ,per_id: per_id},
     success: function (result) {
         result = JSON.parse(result); 
         update_chart(result);  
@@ -55,7 +46,7 @@ $.ajax({
 $.ajax({
   url: path +"crop_district_fetch_bar_data.php"  ,
   type: 'post',
-  data: { d_id: d_id , week: week , year: year ,per_id: per_id,period_id: period_id},
+  data: { d_id: d_id , week: week , year: year ,per_id: per_id},
   success: function (result1) {
       result1 = JSON.parse(result1);
       update_chart1(result1); 
@@ -65,7 +56,7 @@ $.ajax({
 
 function update_chart(result){
     $("canvas#chart-line").remove();
-  $("div#chart_data").append('<canvas id="chart-line" class="chart-canvas" height="270" width="300" style="margin-left:-5px"></canvas>');
+  $("div#chart_data").append('<canvas id="chart-line" class="chart-canvas" height="270" width="250" style="margin-left:20px"></canvas>');
       var ctx2 = document.getElementById("chart-line").getContext("2d");
   if(per_id == "NDVI"){
     new Chart(ctx2, {

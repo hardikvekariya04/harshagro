@@ -23,6 +23,8 @@ fetch_data();
 var temp_id = document.getElementById("type").value;
 // console.log(temp_id);
 fetch_data();
+var per_id = document.getElementById("per").value;
+fetch_data();
 $(function(){
     $(document).on('change','#taluka',function(){
         taluka_id = $(this).children(":selected").attr("id");

@@ -141,11 +141,11 @@ $connect1 = mysqli_connect("localhost", "root", "", "agro");
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link text-white " href="content.php">
+            <a class="nav-link text-white " href="dataset_admin.php">
               <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
                 <i class="material-icons opacity-10">dashboard</i>
               </div>
-              <span class="nav-link-text ms-1">About</span>
+              <span class="nav-link-text ms-1">About dataset</span>
             </a>
           </li>
         <!-- <li class="nav-item">

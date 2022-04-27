@@ -108,12 +108,18 @@ if (!isset($_SESSION['ID']) && !isset($_SESSION['EMAIL'])) {
       </ul>
     </div>
     <div class="sidenav-footer position-absolute w-100 bottom-0 ">
-      <div class="mx-3">
-              
-              <a class="btn bg-danger mt-0 w-100" href="../logout.php" type="button" style="color: #fff;"><i class="material-icons opacity-10">login</i> Log Out</a>
+    <div class="mx-3">
+        <a class="btn bg-info mt-0 w-100" href="dataset.php" type="button" style="color: #fff;"><i
+            class="material-icons opacity-10">info </i> Dataset</a>
       </div>
       <div class="mx-3">
-        <a class="btn bg-gradient-primary mt-0 w-100" href="" type="button">Visit Home page</a>
+        <a class="btn bg-gradient-primary mt-0 w-100" href="https://www.agrocastanalytics.com/index.html" type="button"><i
+            class="material-icons opacity-10">home </i> Visit Home page</a>
+      </div>
+      <div class="mx-3">
+
+        <a class="btn bg-danger mt-0 w-100" href="../logout.php" type="button" style="color: #fff;"><i
+            class="material-icons opacity-10">login</i> Log Out</a>
       </div>
     </div>
   </aside>
@@ -536,62 +542,17 @@ if (!isset($_SESSION['ID']) && !isset($_SESSION['EMAIL'])) {
                
               </select>
               <select class="in" name="years" id="years">
-                <option value="1981">1981</option>
-                <option value="1982">1982</option>
-                <option value="1983">1983</option>
-                <option value="1984" selected>1984</option>
-                <option value="1985">1985</option>
-                <option value="1986">1986</option>
-                <option value="1987">1987</option>
-                <option value="1988">1988</option>
-                <option value="1989">1989</option>
-                <option value="1990">1990</option>
-                <option value="1991">1991</option>
-                <option value="1992">1992</option>
-                <option value="1993">1993</option>
-                <option value="1994">1994</option>
-                <option value="1995">1995</option>
-                <option value="1996">1996</option>
-                <option value="1997">1997</option>
-                <option value="1998">1998</option>
-                <option value="1999">1999</option>
-                <option value="2000">2000</option>
-                <option value="2001">2001</option>
-                <option value="2002">2002</option>
-                <option value="2003">2003</option>
-                <option value="2004">2004</option>
-                <option value="2005">2005</option>
-                <option value="2006">2006</option>
-                <option value="2007">2007</option>
-                <option value="2008">2008</option>
-                <option value="2009">2009</option>
-                <option value="2010">2010</option>
-                <option value="2011">2011</option>
-                <option value="2012">2012</option>
-                <option value="2013">2013</option>
-                <option value="2014">2014</option>
-                <option value="2015">2015</option>
-                <option value="2016">2016</option>
-                <option value="2017">2017</option>
-                <option value="2018">2018</option>
+                <option value="2018" selected>2018</option>
                 <option value="2019">2019</option>
                 <option value="2020">2020</option>
                 <option value="2021">2021</option>
                 <option value="2022">2022</option>
                 <option value="2023">2023</option>
-                <option value="2024">2024</option>
-                <option value="2025">2025</option>
-                <option value="2026">2026</option>
-                <option value="2027">2027</option>
-                <option value="2028">2028</option>
-                <option value="2029">2029</option>
-                <option value="2030">2030</option>
-
               </select>
               <select class="in" name="weeks" id="weeks">
-              <option value="" selected disabled>Select Week </option>
+              <!-- <option value="" selected disabled>Select Week </option> -->
 
-                <option value="1">01</option>
+                <option value="1" selected>01</option>
                 <option value="2">02</option>
                 <option value="3">03</option>
                 <option value="4">04</option>
@@ -694,11 +655,7 @@ if (!isset($_SESSION['ID']) && !isset($_SESSION['EMAIL'])) {
               </div>
               <hr style="margin-top:-5px;margin-bottom:0px;">
             </div>
-              <select class="in" name="period" id="per" style="margin-bottom:-20px;">
-              <option value="">Select period </option>
-                <option value="last 6 month">last 6 month</option>
-                <option value="last 3 year">last 3 year</option>
-              </select>
+            <h6 name="period" id="per" align="center" style="border:1px dashed gray;">LAST 3 YEAR</h6>
               <a href="#" id="downloadPdf1"><i class="fa fa-download" style="font-size:22px;align-item:right;text-align:right;position:absolute;right:40px;"></i></a>
               <div id="reportPage1">
                 <div class="chart" id="chart_data1">
@@ -783,9 +740,9 @@ if (!isset($_SESSION['ID']) && !isset($_SESSION['EMAIL'])) {
 <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 <?php
 // last 7 days 
-  $weeknumber = '11';
+  $weeknumber = '01';
   $dto = new DateTime();
-  $dto->setISODate(2013,$weeknumber);
+  $dto->setISODate(2018,$weeknumber);
   $ret = $dto->format('Y-m-d');
 
   $dto->modify('-7 days');
@@ -830,10 +787,10 @@ $weeknumber6 = $date6->format("W");
           $month1[] = $row1['NDVI'];
         }
 
-        $month_weeknumber = '11';
-        $year = '1990';
+        $month_weeknumber = '01';
+        $year = '2018';
         $dto = new DateTime();
-        $dto->setISODate(1990,$month_weeknumber);
+        $dto->setISODate(2018,$month_weeknumber);
         $ret_0 = $dto->format('Y-m-d');
         $month_date1 = $dto->format('Y');
         $one_monthly =date("Y - M",strtotime($ret_0));
