@@ -128,6 +128,15 @@ ob_end_flush();
             
           </a>
         </li>
+        <li class="nav-item">
+          <a class="nav-link text-dark " href="./pages/dataset.php">
+            <div class="text-dark text-center me-2 d-flex align-items-center justify-content-center">
+              <i class="material-icons opacity-10">table_view</i>
+            </div>
+            <span class="nav-link-text ms-1">Dataset</span>
+            
+          </a>
+        </li>
 
       </ul>
     </div>
@@ -602,7 +611,7 @@ ob_end_flush();
 
 
       <div class="row mt-0" style="margin-bottom:-80px">
-        <div class="col-lg-0 col-md-6 mt-0 mb-4">
+        <div class="col-sm-12 col-md-6 mt-0 mb-4">
           <!-- <div class="card z-index-2 " style="background-color:#43A047 "> -->
 
           <!-- <div class="card-header p-0 position-relative mt-n4 mx-0 z-index-2 bg-transparent"> -->
@@ -664,10 +673,10 @@ ob_end_flush();
         </div>
       </div>
 
-      <footer class="footer py-4  ">
+      <footer class="footer py-4 mt-5">
         <div class="container-fluid">
           <div class="row align-items-center justify-content-lg-between">
-            <div class="col-lg-5 mb-lg-0 mb-0">
+            <div class="col-lg-5 mb-lg-0 mb-0 mt-5">
               <div class="copyright text-center text-sm text-muted text-lg-start">
                 ©
                 <script>
