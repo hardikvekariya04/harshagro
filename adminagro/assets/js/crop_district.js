@@ -19,7 +19,6 @@ var per_id = document.getElementById("type").value;
 fetch_data();
 var period_id = document.getElementById("per").value;
 
-fetch_data();
 $(function(){
     $(document).on('change','#district',function(){
         d_id = $(this).children(":selected").attr("id");
