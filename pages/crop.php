@@ -145,53 +145,54 @@ if (!isset($_SESSION['ID']) && !isset($_SESSION['EMAIL'])) {
                 <!-- <label>Select District:</label> -->
                 <select id="district" >
                 <!-- <option value="" disabled >Select District</option> -->
-                    <option  id="0" selected>Ahmadabad</option>
-                    <option  id="1">Anand</option>
-                    <option  id="2">Banaskantha</option>
-                    <option  id="3">Bharuch</option>
-                    <option  id="4">Dahod</option>
-                    <option  id="5">Gandhinagar</option>
-                    <option  id="6">Jamnagar</option>
-                    <option  id="7">Junagadh</option>
-                    <option  id="8">Kachchh</option>
-                    <option  id="9">Kheda</option>
-                    <option  id="10">Mahesana</option>
-                    <option  id="11">Narmada</option>
-                    <option  id="12">Navsari</option>
-                    <option  id="13">Panchmahal</option>
-                    <option  id="14">Patan</option>
-                    <option  id="15">Porbandar</option>
-                    <option  id="16">Rajkot</option>
-                    <option  id="17">Sabarkantha</option>
-                    <option  id="18">Surat</option>
-                    <option  id="19">Surendrangar</option>
-                    <option  id="20">Dang</option>
-                    <option  id="21">Vadodara</option>
-                    <option  id="22">Valsad</option>
-                    <option  id="23">Tapi</option>
-                    <option  id="24">Devbhumi Dwarka</option>
-                    <option  id="25">Morbi</option>
-                    <option  id="26">Aravalli</option>
-                    <option  id="27">Chhota Udaipur</option>
-                    <option  id="28">Amreli</option>
-                    <option  id="29">Girsomnath</option>
-                    <option  id="30">Mahisagar</option>
-                    <option  id="31">Bhavnagar</option>
-                    <option  id="32">Botad</option>
+                <option value="Ahmadabad" id="0" selected>Ahmadabad</option>
+                    <option value="Anand" id="1">Anand</option>
+                    <option value="Banaskantha" id="2">Banaskantha</option>
+                    <option value="Bharuch" id="3">Bharuch</option>
+                    <option value="Dahod" id="4">Dahod</option>
+                    <option value="Gandhinagar" id="5">Gandhinagar</option>
+                    <option value="Jamnagar" id="6">Jamnagar</option>
+                    <option value="Junagadh" id="7">Junagadh</option>
+                    <option value="Kachchh" id="8">Kachchh</option>
+                    <option value="Kheda" id="9">Kheda</option>
+                    <option value="Mahesana" id="10">Mahesana</option>
+                    <option value="Narmada" id="11">Narmada</option>
+                    <option value="Navsari" id="12">Navsari</option>
+                    <option value="Panchmahal" id="13">Panchmahal</option>
+                    <option value="Patan" id="14">Patan</option>
+                    <option value="Porbandar" id="15">Porbandar</option>
+                    <option value="Rajkot" id="16">Rajkot</option>
+                    <option value="Sabarkantha" id="17">Sabarkantha</option>
+                    <option value="Surat" id="18">Surat</option>
+                    <option value="Surendrangar" id="19">Surendrangar</option>
+                    <option value="Dang" id="20">Dang</option>
+                    <option value="Vadodara" id="21">Vadodara</option>
+                    <option value="Valsad" id="22">Valsad</option>
+                    <option value="Tapi" id="23">Tapi</option>
+                    <option value="Devbhumi Dwarka" id="24">Devbhumi Dwarka</option>
+                    <option value="Morbi" id="25">Morbi</option>
+                    <option value="Aravalli" id="26">Aravalli</option>
+                    <option value="Chhota Udaipur" id="27">Chhota Udaipur</option>
+                    <option value="Amreli" id="28">Amreli</option>
+                    <option value="Girsomnath" id="29">Girsomnath</option>
+                    <option value="Mahisagar" id="30">Mahisagar</option>
+                    <option value="Bhavnagar" id="31">Bhavnagar</option>
+                    <option value="Botad" id="32">Botad</option>
                     
                    
                     
                 </select>
-                <select class="in" name="years" id="years">
+
+                <!-- <select class="in" name="years" id="years">
                 <option value="2018" selected>2018</option>
                 <option value="2019">2019</option>
                 <option value="2020">2020</option>
                 <option value="2021">2021</option>
                 <option value="2022">2022</option>
 
-              </select>
-              <select class="in" name="weeks" id="weeks">
-                <option value="1" selected>01</option>
+              </select> -->
+              <!-- <select class="in" name="weeks" id="weeks"> -->
+                <!-- <option value="1" selected>01</option>
                 <option value="2">02</option>
                 <option value="3">03</option>
                 <option value="4">04</option>
@@ -242,8 +243,9 @@ if (!isset($_SESSION['ID']) && !isset($_SESSION['EMAIL'])) {
                 <option value="49">49</option>
                 <option value="50">50</option>
                 <option value="51">51</option>
-                <option value="52">52</option>
-              </select>
+                <option value="52">52</option> -->
+                <input type="week" name="weeks" id="weeks" class="in" required>
+              <!-- </select> -->
 
               <select class="in" name="type" id="type" style="border-top-right-radius:50px;border-bottom-right-radius:50px;">
               <!-- <option value=""  >Select period </option> -->
@@ -439,24 +441,31 @@ if (!isset($_SESSION['ID']) && !isset($_SESSION['EMAIL'])) {
   $dto = new DateTime();
   $dto->setISODate(2018,$weeknumber);
   $ret = $dto->format('Y-m-d');
+  $first_year = $dto->format('Y');
 
   $dto->modify('-7 days');
   $ret2 = $dto->format('Y-m-d');
+  $second_year = $dto->format('Y');
 
   $dto->modify('-7 days');
   $ret3 = $dto->format('Y-m-d');
+  $third_year = $dto->format('Y');
 
   $dto->modify('-7 days');
   $ret4 = $dto->format('Y-m-d');
+  $four_year = $dto->format('Y');
 
   $dto->modify('-7 days');
   $ret5 = $dto->format('Y-m-d');
+  $five_year = $dto->format('Y');
 
   $dto->modify('-7 days');
   $ret6 = $dto->format('Y-m-d');
+  $six_year = $dto->format('Y');
 
   $dto->modify('-7 days');
   $ret7 = $dto->format('Y-m-d');
+  $seven_year = $dto->format('Y');
 
 $date = new DateTime($ret2);
 $weeknumber1 = $date->format("W");
@@ -475,6 +484,15 @@ $weeknumber5 = $date5->format("W");
 
 $date6 = new DateTime($ret7);
 $weeknumber6 = $date6->format("W");
+
+$final_first_year = $first_year."-".$weeknumber;
+$final_second_year = $second_year."-".$weeknumber1;
+$final_third_year = $third_year."-".$weeknumber2;
+$final_four_year = $four_year."-".$weeknumber3;
+$final_five_year = $five_year."-".$weeknumber4;
+$final_six_year = $six_year."-".$weeknumber5;
+$final_seven_year = $seven_year."-".$weeknumber6;
+
 
         $con = new mysqli('localhost','root','','agro');
         $query1 =$con->query("SELECT SMT from crop where d_id = 0 AND week IN('$weeknumber','$weeknumber1','$weeknumber2','$weeknumber3','$weeknumber4','$weeknumber5','$weeknumber6') AND year  = '1990'" );
@@ -731,7 +749,7 @@ new Chart(ctx, {
     new Chart(ctx2, {
       type: "line",
       data: {
-        labels: ['<?php echo json_encode($ret7)?>','<?php echo json_encode($ret6)?>','<?php echo json_encode($ret5)?>','<?php echo json_encode($ret4)?>','<?php echo json_encode($ret3)?>','<?php echo json_encode($ret2)?>','<?php echo json_encode($ret)?>'],
+        labels: ['<?php echo json_encode($final_seven_year)?>','<?php echo json_encode($final_six_year)?>','<?php echo json_encode($final_five_year)?>','<?php echo json_encode($final_four_year)?>','<?php echo json_encode($final_third_year)?>','<?php echo json_encode($final_second_year)?>','<?php echo json_encode($final_first_year)?>'],
         datasets: [{
           label: "NDVI",
           tension: 0,
@@ -834,6 +852,13 @@ new Chart(ctx, {
       Scrollbar.init(document.querySelector('#sidenav-scrollbar'), options);
     }
 
+    $(document).on("change", "#district", function () {
+    taluka_id1 = $(this).children(":selected").attr("value");
+  });
+  $(document).on("change", "#weeks", function () {
+    year = $(this).val();
+
+  });
     $('#downloadPdf').click(function(event) {
   var reportPageHeight = $('#reportPage').innerHeight();
   var reportPageWidth = $('#reportPage').innerWidth();
@@ -865,7 +890,7 @@ new Chart(ctx, {
   var pdf = new jsPDF('l', 'pt', [reportPageWidth, reportPageHeight]);
   pdf.addImage($(pdfCanvas)[0], 'PNG', 0, 0);
   
-  pdf.save('filename.pdf');
+  pdf.save(taluka_id1+"_"+year+'.pdf');
 });
 
 
@@ -900,7 +925,7 @@ $('#downloadPdf1').click(function(event) {
   var pdf = new jsPDF('l', 'pt', [reportPageWidth, reportPageHeight]);
   pdf.addImage($(pdfCanvas)[0], 'PNG', 0, 0);
   
-  pdf.save('filename.pdf');
+  pdf.save(taluka_id1+"_"+year+'.pdf');
 });
   </script>
   <!-- Github buttons -->

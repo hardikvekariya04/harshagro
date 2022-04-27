@@ -844,6 +844,16 @@ new Chart(ctx, {
       Scrollbar.init(document.querySelector('#sidenav-scrollbar'), options);
     }
 
+    // var d_id = document.getElementById("district").value;
+    // var date_id = document.getElementById("date").value;
+    $(document).on("change", "#district", function () {
+    taluka_id1 = $(this).children(":selected").attr("value");
+  });
+
+  $(document).on("change", "#date", function () {
+    date_id1 = $(this).val();
+  });
+    
     $('#downloadPdf').click(function(event) {
   var reportPageHeight = $('#reportPage').innerHeight();
   var reportPageWidth = $('#reportPage').innerWidth();
@@ -875,7 +885,7 @@ new Chart(ctx, {
   var pdf = new jsPDF('l', 'pt', [reportPageWidth, reportPageHeight]);
   pdf.addImage($(pdfCanvas)[0], 'PNG', 0, 0);
   
-  pdf.save('filename.pdf');
+  pdf.save(taluka_id1+"_"+date_id1+'.pdf');
 });
 
 
@@ -910,7 +920,7 @@ $('#downloadPdf1').click(function(event) {
   var pdf = new jsPDF('l', 'pt', [reportPageWidth, reportPageHeight]);
   pdf.addImage($(pdfCanvas)[0], 'PNG', 0, 0);
   
-  pdf.save('filename.pdf');
+  pdf.save(taluka_id1+"_"+date_id1+'.pdf');
 });
   </script>
   <!-- Github buttons -->

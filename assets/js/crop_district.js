@@ -7,12 +7,9 @@ var period_id = "";
 
 var d_id = document.getElementById("district").value;
 fetch_data();
-console.log(d_id);
+// console.log(d_id);
 var week = document.getElementById("weeks").value;
-console.log(week);
-fetch_data();
-var year = document.getElementById("years").value;
-
+// console.log(week);
 fetch_data();
 var per_id = document.getElementById("type").value;
 
@@ -27,10 +24,6 @@ $(function () {
   });
   $(document).on("change", "#weeks", function () {
     week = $(this).val();
-    fetch_data();
-  });
-  $(document).on("change", "#years", function () {
-    year = $(this).val();
     fetch_data();
   });
   $(document).on("change", "#type", function () {
@@ -49,7 +42,6 @@ function fetch_data() {
     data: {
       d_id: d_id,
       week: week,
-      year: year,
       per_id: per_id,
       period_id: period_id,
     },
@@ -65,7 +57,6 @@ function fetch_data() {
     data: {
       d_id: d_id,
       week: week,
-      year: year,
       per_id: per_id,
       period_id: period_id,
     },

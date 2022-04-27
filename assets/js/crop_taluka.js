@@ -17,8 +17,6 @@ $district
 
 var week = document.getElementById("weeks").value;
 fetch_data();
-var year = document.getElementById("years").value;
-fetch_data();
 var per_id = document.getElementById("type").value;
 fetch_data();
 var period_id = document.getElementById("per").value;
@@ -31,10 +29,6 @@ $(function () {
   });
   $(document).on("change", "#weeks", function () {
     week = $(this).val();
-    fetch_data();
-  });
-  $(document).on("change", "#years", function () {
-    year = $(this).val();
     fetch_data();
   });
   $(document).on("change", "#type", function () {
@@ -51,7 +45,7 @@ function fetch_data() {
   $.ajax({
     url: path + "crop_taluka_fetch_data.php",
     type: "post",
-    data: { t_id: t_id, week: week, year: year, per_id: per_id },
+    data: { t_id: t_id, week: week, per_id: per_id },
     success: function (result) {
       result = JSON.parse(result);
       update_chart(result);
@@ -63,7 +57,6 @@ function fetch_data() {
     data: {
       t_id: t_id,
       week: week,
-      year: year,
       per_id: per_id,
       period_id: period_id,
     },

@@ -36,6 +36,9 @@ if (!isset($_SESSION['ID']) && !isset($_SESSION['EMAIL'])) {
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"
   integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A=="
   crossorigin=""/>
+  <link href="https://cdn.datatables.net/1.11.5/css/jquery.dataTables.min.css" rel="stylesheet">
+  <!-- <link href="https://netdna.bootstrapcdn.com/bootstrap/2.3.2/css/bootstrap.min.css" rel="stylesheet"> -->
+
 </head>
 <body class="g-sidenav-show  bg-gray-200">
 <div class="loader"></div>
@@ -541,18 +544,20 @@ if (!isset($_SESSION['ID']) && !isset($_SESSION['EMAIL'])) {
                 <!-- </optgroup> -->
                
               </select>
-              <select class="in" name="years" id="years">
+              <!-- <select class="in" name="years" id="years">
                 <option value="2018" selected>2018</option>
                 <option value="2019">2019</option>
                 <option value="2020">2020</option>
                 <option value="2021">2021</option>
                 <option value="2022">2022</option>
                 <option value="2023">2023</option>
-              </select>
-              <select class="in" name="weeks" id="weeks">
+              </select> -->
+
+              <!-- <select class="in" name="weeks" id="weeks"> -->
+              <input type="week" name="weeks" id="weeks" class="in" required>
               <!-- <option value="" selected disabled>Select Week </option> -->
 
-                <option value="1" selected>01</option>
+                <!-- <option value="1" selected>01</option>
                 <option value="2">02</option>
                 <option value="3">03</option>
                 <option value="4">04</option>
@@ -605,7 +610,7 @@ if (!isset($_SESSION['ID']) && !isset($_SESSION['EMAIL'])) {
                 <option value="51">51</option>
                 <option value="52">52</option>
                 
-              </select>
+              </select> -->
 
               <select class="in" name="type" id="type" style="border-top-right-radius:50px;border-bottom-right-radius:50px;">
               <!-- <option value="">Select Type </option> -->
@@ -738,30 +743,38 @@ if (!isset($_SESSION['ID']) && !isset($_SESSION['EMAIL'])) {
   <script src="https://code.highcharts.com/modules/exporting.js"></script>
   
 <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+
 <?php
 // last 7 days 
   $weeknumber = '01';
   $dto = new DateTime();
   $dto->setISODate(2018,$weeknumber);
   $ret = $dto->format('Y-m-d');
+  $first_year = $dto->format('Y');
 
   $dto->modify('-7 days');
   $ret2 = $dto->format('Y-m-d');
+ $second_year = $dto->format('Y');
 
   $dto->modify('-7 days');
   $ret3 = $dto->format('Y-m-d');
+ $third_year = $dto->format('Y');
 
   $dto->modify('-7 days');
   $ret4 = $dto->format('Y-m-d');
+ $four_year = $dto->format('Y');
 
   $dto->modify('-7 days');
   $ret5 = $dto->format('Y-m-d');
+ $five_year = $dto->format('Y');
 
   $dto->modify('-7 days');
   $ret6 = $dto->format('Y-m-d');
+ $six_year = $dto->format('Y');
 
   $dto->modify('-7 days');
   $ret7 = $dto->format('Y-m-d');
+ $seven_year = $dto->format('Y');
 
 $date = new DateTime($ret2);
 $weeknumber1 = $date->format("W");
@@ -780,6 +793,14 @@ $weeknumber5 = $date5->format("W");
 
 $date6 = new DateTime($ret7);
 $weeknumber6 = $date6->format("W");
+
+$final_first_year = $first_year."-".$weeknumber;
+$final_second_year = $second_year."-".$weeknumber1;
+$final_third_year = $third_year."-".$weeknumber2;
+$final_four_year = $four_year."-".$weeknumber3;
+$final_five_year = $five_year."-".$weeknumber4;
+$final_six_year = $six_year."-".$weeknumber5;
+$final_seven_year = $seven_year."-".$weeknumber6;
 
         $con = new mysqli('localhost','root','','agro');
         $query1 =$con->query("SELECT NDVI from taluka_crop where t_id = 0 AND week IN('$weeknumber','$weeknumber1','$weeknumber2','$weeknumber3','$weeknumber4','$weeknumber5','$weeknumber6') AND year  = '1990'" );
@@ -1038,7 +1059,7 @@ new Chart(ctx, {
     new Chart(ctx2, {
       type: "line",
       data: {
-        labels: ['<?php echo json_encode($ret7)?>','<?php echo json_encode($ret6)?>','<?php echo json_encode($ret5)?>','<?php echo json_encode($ret4)?>','<?php echo json_encode($ret3)?>','<?php echo json_encode($ret2)?>','<?php echo json_encode($ret)?>'],
+        labels: ['<?php echo json_encode($final_seven_year)?>','<?php echo json_encode($final_six_year)?>','<?php echo json_encode($final_five_year)?>','<?php echo json_encode($final_four_year)?>','<?php echo json_encode($final_third_year)?>','<?php echo json_encode($final_second_year)?>','<?php echo json_encode($final_first_year)?>'],
         datasets: [{
           label: "NDVI",
           tension: 0,
@@ -1142,6 +1163,15 @@ new Chart(ctx, {
       Scrollbar.init(document.querySelector('#sidenav-scrollbar'), options);
     }
 
+    $('#taluka').on("change", function () {
+    taluka_id1 = $(this).children(":selected").text();
+    console.log(taluka_id1);
+  });
+  $(document).on("change", "#weeks", function () {
+    year = $(this).val();
+
+  });
+
     $('#downloadPdf').click(function(event) {
   var reportPageHeight = $('#reportPage').innerHeight();
   var reportPageWidth = $('#reportPage').innerWidth();
@@ -1173,7 +1203,7 @@ new Chart(ctx, {
   var pdf = new jsPDF('l', 'pt', [reportPageWidth, reportPageHeight]);
   pdf.addImage($(pdfCanvas)[0], 'PNG', 0, 0);
   
-  pdf.save('filename.pdf');
+  pdf.save(taluka_id1+"_"+year+'.pdf');
 });
 
 
@@ -1208,8 +1238,10 @@ $('#downloadPdf1').click(function(event) {
   var pdf = new jsPDF('l', 'pt', [reportPageWidth, reportPageHeight]);
   pdf.addImage($(pdfCanvas)[0], 'PNG', 0, 0);
   
-  pdf.save('filename.pdf');
+  pdf.save(taluka_id1+"_"+year+'.pdf');
 });
+
+
   </script>
   <!-- Github buttons -->
   <script async defer src="https://buttons.github.io/buttons.js"></script>

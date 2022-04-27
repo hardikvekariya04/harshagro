@@ -344,14 +344,14 @@ $connect = mysqli_connect("localhost", "root", "", "admin_agro");
       }
       Scrollbar.init(document.querySelector('#sidenav-scrollbar'), options);
     }
-    $(document).ready(function(){
-  $("#datepicker").datepicker({
-     format: "yyyy",
-     viewMode: "years", 
-     minViewMode: "years",
-     autoclose:true
-  });   
-})
+//     $(document).ready(function(){
+//   $("#datepicker").datepicker({
+//      format: "yyyy",
+//      viewMode: "years", 
+//      minViewMode: "years",
+//      autoclose:true
+//   });   
+// })
   </script>
   <!-- Github buttons -->
   <script async defer src="https://buttons.github.io/buttons.js"></script>

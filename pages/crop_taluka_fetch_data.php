@@ -2,13 +2,14 @@
 $con = new mysqli('localhost','root','','agro');
 $t_id = $_POST['t_id'];
 $week = $_POST['week'];
-$year = $_POST['year'];
 $per_id = $_POST['per_id'];
 //last 7 days data fetch :
-
+$select_week = substr($week, strpos($week, "W") + 1);
+// echo $select_week;
+$trim_year = explode('-',trim($week))[0];
 // if($week > '7'){
 $dto = new DateTime();
-$dto->setISODate($year,$week);
+$dto->setISODate($trim_year,$select_week);
 $ret = $dto->format('Y-m-d');
 $select_year1 = $dto->format('Y');
 
@@ -54,8 +55,16 @@ $date5 = new DateTime($ret6);
 $date6 = new DateTime($ret7);
  $weeknumber6 = $date6->format("W");
 
+$final_first_year = $select_year1."-".$select_week;
+$final_second_year = $select_year2."-".$weeknumber1;
+$final_third_year = $select_year3."-".$weeknumber2;
+$final_four_year = $select_year4."-".$weeknumber3;
+$final_five_year = $select_year5."-".$weeknumber4;
+$final_six_year = $select_year6."-".$weeknumber5;
+$final_seven_year = $select_year7."-".$weeknumber6;
+
 if($per_id === 'NDVI'){
-$query1 =$con->query("SELECT NDVI,week from `taluka_crop` where t_id = ".$t_id."  AND week = '$week' AND year = '$year' " );
+$query1 =$con->query("SELECT NDVI,week from `taluka_crop` where t_id = ".$t_id."  AND week = '$select_week' AND year = '$trim_year' " );
   while($row1 = $query1->fetch_assoc()){
     $month[] = $row1['NDVI'];
   }
@@ -98,13 +107,13 @@ $query5 =$con->query("SELECT NDVI,week from `taluka_crop` where t_id = ".$t_id."
     $six_week_date = array();
     $seven_week_date = array();
 
-    $one_week_date[] = strval($ret);
-    $second_week_date[] = strval($ret2);
-    $third_week_date[] = strval($ret3);
-    $four_week_date[] = strval($ret4);
-    $five_week_date[] = strval($ret5);
-    $six_week_date[] = strval($ret6);
-    $seven_week_date[] = strval($ret7);
+    $one_week_date[] = strval($final_first_year);
+    $second_week_date[] = strval($final_second_year);
+    $third_week_date[] = strval($final_third_year);
+    $four_week_date[] = strval($final_four_year);
+    $five_week_date[] = strval($final_five_year);
+    $six_week_date[] = strval($final_six_year);
+    $seven_week_date[] = strval($final_seven_year);
 
     $month_final = array_merge($month6,$month5,$month4,$month3,$month2,$month1,$month);
     $final_array = array_merge($seven_week_date,$six_week_date,$five_week_date,$four_week_date,$third_week_date,$second_week_date,$one_week_date);
@@ -115,7 +124,7 @@ $query5 =$con->query("SELECT NDVI,week from `taluka_crop` where t_id = ".$t_id."
     echo json_encode($return_data);
 }
 elseif($per_id === 'VCI'){
-      $query1 =$con->query("SELECT VCI,week from `taluka_crop` where t_id = ".$t_id."  AND week = '$week' AND year = '$year' " );
+      $query1 =$con->query("SELECT VCI,week from `taluka_crop` where t_id = ".$t_id."  AND week = '$select_week' AND year = '$trim_year' " );
         while($row1 = $query1->fetch_assoc()){
           $month[] = $row1['VCI'];
         }
@@ -158,13 +167,13 @@ elseif($per_id === 'VCI'){
           $six_week_date = array();
           $seven_week_date = array();
       
-          $one_week_date[] = strval($ret);
-          $second_week_date[] = strval($ret2);
-          $third_week_date[] = strval($ret3);
-          $four_week_date[] = strval($ret4);
-          $five_week_date[] = strval($ret5);
-          $six_week_date[] = strval($ret6);
-          $seven_week_date[] = strval($ret7);
+          $one_week_date[] = strval($final_first_year);
+          $second_week_date[] = strval($final_second_year);
+          $third_week_date[] = strval($final_third_year);
+          $four_week_date[] = strval($final_four_year);
+          $five_week_date[] = strval($final_five_year);
+          $six_week_date[] = strval($final_six_year);
+          $seven_week_date[] = strval($final_seven_year);
       
           $month_final = array_merge($month6,$month5,$month4,$month3,$month2,$month1,$month);
           $final_array = array_merge($seven_week_date,$six_week_date,$five_week_date,$four_week_date,$third_week_date,$second_week_date,$one_week_date);
@@ -175,7 +184,7 @@ elseif($per_id === 'VCI'){
           echo json_encode($return_data);
       }
 else{
-        $query1 =$con->query("SELECT VHI,week from `taluka_crop` where t_id = ".$t_id."  AND week = '$week' AND year = '$year' " );
+        $query1 =$con->query("SELECT VHI,week from `taluka_crop` where t_id = ".$t_id."  AND week = '$select_week' AND year = '$trim_year' " );
           while($row1 = $query1->fetch_assoc()){
             $month[] = $row1['VHI'];
           }
@@ -218,13 +227,13 @@ else{
             $six_week_date = array();
             $seven_week_date = array();
         
-            $one_week_date[] = strval($ret);
-            $second_week_date[] = strval($ret2);
-            $third_week_date[] = strval($ret3);
-            $four_week_date[] = strval($ret4);
-            $five_week_date[] = strval($ret5);
-            $six_week_date[] = strval($ret6);
-            $seven_week_date[] = strval($ret7);
+            $one_week_date[] = strval($final_first_year);
+            $second_week_date[] = strval($final_second_year);
+            $third_week_date[] = strval($final_third_year);
+            $four_week_date[] = strval($final_four_year);
+            $five_week_date[] = strval($final_five_year);
+            $six_week_date[] = strval($final_six_year);
+            $seven_week_date[] = strval($final_seven_year);
         
             $month_final = array_merge($month6,$month5,$month4,$month3,$month2,$month1,$month);
             $final_array = array_merge($seven_week_date,$six_week_date,$five_week_date,$four_week_date,$third_week_date,$second_week_date,$one_week_date);

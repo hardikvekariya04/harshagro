@@ -1221,6 +1221,15 @@ $avg_high_year_temp5 = $tot_year_temp5/$temp_array_year_length5;
       Scrollbar.init(document.querySelector('#sidenav-scrollbar'), options);
     }
 
+    $('#taluka').on("change", function () {
+    taluka_id1 = $(this).children(":selected").text();
+    console.log(taluka_id1);
+  });
+
+  $(document).on("change", "#date", function () {
+    date_id1 = $(this).val();
+  });
+
     $('#downloadPdf').click(function(event) {
   var reportPageHeight = $('#reportPage').innerHeight();
   var reportPageWidth = $('#reportPage').innerWidth();
@@ -1252,7 +1261,7 @@ $avg_high_year_temp5 = $tot_year_temp5/$temp_array_year_length5;
   var pdf = new jsPDF('l', 'pt', [reportPageWidth, reportPageHeight]);
   pdf.addImage($(pdfCanvas)[0], 'PNG', 0, 0);
   
-  pdf.save('filename.pdf');
+  pdf.save(taluka_id1+"_"+date_id1+'.pdf');
 });
 
 
@@ -1287,7 +1296,7 @@ $('#downloadPdf1').click(function(event) {
   var pdf = new jsPDF('l', 'pt', [reportPageWidth, reportPageHeight]);
   pdf.addImage($(pdfCanvas)[0], 'PNG', 0, 0);
   
-  pdf.save('filename.pdf');
+  pdf.save(taluka_id1+"_"+date_id1+'.pdf');
 });
 
   </script>
