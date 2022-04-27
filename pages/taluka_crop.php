@@ -141,7 +141,7 @@ if (!isset($_SESSION['ID']) && !isset($_SESSION['EMAIL'])) {
               
                 <!-- <label>Select District:</label> -->
                 <select id="district" >
-                <option value="" disabled >Select District</option>
+                <!-- <option value="" disabled >Select District</option> -->
                 <option value="Ahmedabad" id="0" selected>Ahmedabad</option>
                 <option value="Anand" id="1">Anand</option>
                 <option value="Banas Kantha" id="2">Banas kantha</option>
@@ -608,7 +608,7 @@ if (!isset($_SESSION['ID']) && !isset($_SESSION['EMAIL'])) {
               </select>
 
               <select class="in" name="type" id="type" style="border-top-right-radius:50px;border-bottom-right-radius:50px;">
-              <option value="">Select Type </option>
+              <!-- <option value="">Select Type </option> -->
               <option value="NDVI" selected>NDVI</option>
                 <option value="VCI">VCI</option>
                 <option value="VHI">VHI</option>

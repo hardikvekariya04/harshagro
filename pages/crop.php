@@ -191,7 +191,6 @@ if (!isset($_SESSION['ID']) && !isset($_SESSION['EMAIL'])) {
 
               </select>
               <select class="in" name="weeks" id="weeks">
-              <!-- <option value="" disabled >Select Week</option> -->
                 <option value="1" selected>01</option>
                 <option value="2">02</option>
                 <option value="3">03</option>
@@ -247,7 +246,7 @@ if (!isset($_SESSION['ID']) && !isset($_SESSION['EMAIL'])) {
               </select>
 
               <select class="in" name="type" id="type" style="border-top-right-radius:50px;border-bottom-right-radius:50px;">
-              <option value=""  >Select period </option>
+              <!-- <option value=""  >Select period </option> -->
               <option value="NDVI" selected>NDVI</option>
                 <!-- <option value="SMT">SMT</option> -->
                 <!-- <option value="TCI">TCI</option> -->
@@ -319,10 +318,14 @@ if (!isset($_SESSION['ID']) && !isset($_SESSION['EMAIL'])) {
               </div>
           </div>
               <hr style="margin-top:-5px;margin-bottom:0px;">
+
              
                 <h6 name="period" id="per" align="center" style="border:1px dashed gray;">LAST 3 YEAR</h6>
 
-              <a href="#" id="downloadPdf1"><i class="fa fa-download" style="font-size:22px;align-item:right;text-align:right;position:absolute;right:40px;margin-top:-10px;"></i></a>
+              <!-- <a href="#" id="downloadPdf1"><i class="fa fa-download" style="font-size:22px;align-item:right;text-align:right;position:absolute;right:40px;margin-top:-10px;"></i></a> -->
+
+              <a href="#" id="downloadPdf1"><i class="fa fa-download" style="font-size:22px;align-item:right;text-align:right;position:absolute;right:40px;"></i></a>
+
               <div id="reportPage1">
                 <div class="chart" id="chart_data1" style="margin-top:-10px;">
                   <canvas id="chart-bars" class="chart-canvas" height="280" width="300" ></canvas>

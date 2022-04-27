@@ -1,5 +1,4 @@
-
-let map = L.map("map").setView([23.017054, 71.760498], 7.3);
+let map = L.map("map").setView([23.059516, 71.279297], 6.6);
 
 L.tileLayer(
   "https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token=pk.eyJ1IjoibmlraGlsbW90d2FuaTUiLCJhIjoiY2t5cmFhYnR5MHJ4NzJ2bzd1NHhlbGtsNiJ9.WrJN5gd8bmtsdA2af0iMvw",

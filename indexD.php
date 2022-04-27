@@ -175,7 +175,7 @@ ob_end_flush();
 
 
               <select id="district">
-                <option value="" >select District</option>
+                <!-- <option value="" >select District</option> -->
                 <option value="Ahmedabad" id="0" selected>Ahmedabad</option>
                 <option value="Anand" id="1">Anand</option>
                 <option value="Banas Kantha" id="2">Banas kantha</option>
@@ -1056,13 +1056,14 @@ $avg_high_year_temp5 = $tot_year_temp5/$temp_array_year_length5;
           display: true,
             title: {
               display: true,
-              text: 'Minimum Temp(in Celsius)',
+              text: 'Minimum Temperature(in Celsius)',
           font: {
-            family: 'Times',
+            family: 'Roboto',
             size: 15,
-            style: 'normal',
+            style: 'bold',
+            weight: 10
           },
-          padding: {bottom: 0},
+          padding: {bottom: 3},
         
         },
           grid: {
@@ -1144,16 +1145,17 @@ $avg_high_year_temp5 = $tot_year_temp5/$temp_array_year_length5;
         },
         scales: {
           y: {
-            display: true,
+          display: true,
             title: {
               display: true,
-              text: 'Minimum Temp(in Celsius)',
+              text: 'Minimum Temperature(in Celsius)',
           font: {
-            family: 'Times',
+            family: 'Roboto',
             size: 15,
-            style: 'normal',
+            style: 'bold',
+            weight: 10
           },
-          padding: {bottom: 0},
+          padding: {bottom: 3},
         
         },
             grid: {
