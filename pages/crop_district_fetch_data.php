@@ -9,31 +9,31 @@ $per_id = $_POST['per_id'];
 // if($week > '7'){
 $dto = new DateTime();
 $dto->setISODate($year,$week);
-$ret = $dto->format('Y-m-d');
+$ret = $dto->format('d-m-Y');
 $select_year1 = $dto->format('Y');
 
 $dto->modify('-7 days');
-$ret2 = $dto->format('Y-m-d');
+$ret2 = $dto->format('d-m-Y');
  $select_year2 = $dto->format('Y');
 
 $dto->modify('-7 days');
-$ret3 = $dto->format('Y-m-d');
+$ret3 = $dto->format('d-m-Y');
  $select_year3 = $dto->format('Y');
 
 $dto->modify('-7 days');
-$ret4 = $dto->format('Y-m-d');
+$ret4 = $dto->format('d-m-Y');
  $select_year4 = $dto->format('Y');
 
 $dto->modify('-7 days');
-$ret5 = $dto->format('Y-m-d');
+$ret5 = $dto->format('d-m-Y');
  $select_year5 = $dto->format('Y');
 
 $dto->modify('-7 days');
-$ret6 = $dto->format('Y-m-d');
+$ret6 = $dto->format('d-m-Y');
  $select_year6 = $dto->format('Y');
 
 $dto->modify('-7 days');
-$ret7 = $dto->format('Y-m-d');
+$ret7 = $dto->format('d-m-Y');
  $select_year7 = $dto->format('Y');
 
 $date = new DateTime($ret2);

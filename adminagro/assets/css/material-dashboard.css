@@ -17640,3 +17640,20 @@ pre[class*="language-"] {
     #district{
       border-radius:  50px 0px 0px 50px;
     }
+
+    aside {
+      z-index: 1000 !important;
+    }
+    #sidenav-main{
+      z-index: 1000 !important;
+    }
+
+    @media screen and (min-width : 600px) {
+      #chart-data{
+        width: 297px !important;
+      }
+      #chart-line{
+        width: 297px !important;
+      }
+    }
+    

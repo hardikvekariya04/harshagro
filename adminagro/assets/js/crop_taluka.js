@@ -1,8 +1,11 @@
 var path = "http://localhost/newagro/pages/";
-var t_id = "";
-var date_id = "";
-var temp_id = "";
-var per_id = "";
+
+var t_id = '';
+var d_id = '';
+var date_id = '';
+var temp_id = '';
+var per_id = '';
+
 var period_id = " ";
 var year = "";
 var $district = $("#district"),
@@ -25,7 +28,12 @@ var period_id = document.getElementById("per").value;
 fetch_data();
 
 $(function () {
+<<<<<<< HEAD
   $(document).on("change", "#taluka", function () {
+=======
+
+  $(document).on('change', '#taluka', function () {
+>>>>>>> e3cb1fa6aadbce31f5f53803f9c291ed07e6aa63
     t_id = $(this).children(":selected").attr("id");
     fetch_data();
   });

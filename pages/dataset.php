@@ -4,7 +4,6 @@ require_once '../config/function.php';
 require_once '../config/db.php';
 
 // update();
-
 if (!isset($_SESSION['ID']) && !isset($_SESSION['EMAIL'])) {
   header("location: ../index.php");
 }

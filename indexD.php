@@ -638,7 +638,7 @@ ob_end_flush();
           <div class="bg-gradient-success shadow-success border-radius-lg py-3 pe-1">
           <a href="#" id="downloadPdf"><i class="fa fa-download" style="font-size:22px;align-item:right;text-align:right;position:absolute;right:40px;"></i></a>
               <div id="reportPage">
-            <div class="chart" id="chart_data" style="width:550px;">
+            <div class="chart" id="chart_data" >
               <canvas id="chart-line" class="chart-canvas" height="270" width="300" style="margin-left:0px"></canvas>
             </div>
           </div>
