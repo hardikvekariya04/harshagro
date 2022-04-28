@@ -79,7 +79,7 @@ function update_chart(result) {
         labels: result.final_array,
         datasets: [
           {
-            label: `${per_id}` + ` ` + `Temp`,
+            label: `${per_id}`,
             tension: 0,
             borderWidth: 0,
             pointRadius: 5,
@@ -173,7 +173,7 @@ function update_chart(result) {
         labels: result.final_array,
         datasets: [
           {
-            label: `${per_id}` + ` ` + `Temp`,
+            label: `${per_id}`,
             tension: 0,
             borderWidth: 0,
             pointRadius: 5,
@@ -267,7 +267,7 @@ function update_chart(result) {
         labels: result.final_array,
         datasets: [
           {
-            label: `${per_id}` + ` ` + `Temp`,
+            label: `${per_id}`,
             tension: 0,
             borderWidth: 0,
             pointRadius: 5,
@@ -361,7 +361,7 @@ function update_chart(result) {
         labels: result.final_array,
         datasets: [
           {
-            label: `${per_id}` + ` ` + `Temp`,
+            label: `${per_id}`,
             tension: 0,
             borderWidth: 0,
             pointRadius: 5,
@@ -463,14 +463,14 @@ function update_chart1(result1) {
         labels: result1.date_array,
         datasets: [
           {
-            label: `${per_id}` + ` ` + `Temp`,
+            label: `${per_id}`,
             tension: 0,
             borderWidth: 0,
             borderRadius: 3,
             borderSkipped: false,
             backgroundColor: "rgba(46, 204, 113)",
             data: result1.yearly_month_array,
-            maxBarThickness: 15,
+            maxBarThickness: 22,
           },
         ],
       },
@@ -556,14 +556,14 @@ function update_chart1(result1) {
         labels: result1.date_array,
         datasets: [
           {
-            label: `${per_id}` + ` ` + `Temp`,
+            label: `${per_id}`,
             tension: 0,
             borderWidth: 0,
             borderRadius: 3,
             borderSkipped: false,
             backgroundColor: "rgba(76,152,107)",
             data: result1.yearly_month_array,
-            maxBarThickness: 15,
+            maxBarThickness: 22,
           },
         ],
       },
@@ -649,14 +649,14 @@ function update_chart1(result1) {
         labels: result1.date_array,
         datasets: [
           {
-            label: `${per_id}` + ` ` + `Temp`,
+            label: `${per_id}`,
             tension: 0,
             borderWidth: 0,
             borderRadius: 3,
             borderSkipped: false,
             backgroundColor: "rgba(106,122,106)",
             data: result1.yearly_month_array,
-            maxBarThickness: 15,
+            maxBarThickness: 22,
           },
         ],
       },
@@ -742,14 +742,14 @@ function update_chart1(result1) {
         labels: result1.date_array,
         datasets: [
           {
-            label: `${per_id}` + ` ` + `Temp`,
+            label: `${per_id}`,
             tension: 0,
             borderWidth: 0,
             borderRadius: 3,
             borderSkipped: false,
             backgroundColor: "rgba(000, 000, 000, .8)",
             data: result1.yearly_month_array,
-            maxBarThickness: 15,
+            maxBarThickness: 22,
           },
         ],
       },

@@ -164,7 +164,7 @@ if(isset($_POST['submit']) )
         <div class="container-fluid" style="width: 95%;">
             <div class="card">
             <div class="col-12 px-3 py-5">
-            <h1>Dataset</h1>
+            <h1>About Dataset</h1>
             <form method="post">
                 <input class="form-control" type="text" name="title" style="font-size: 2rem;" placeholder="Title" value="<?php echo $title ?>" required>
                 <textarea name="content" id="mytextarea" rows="20" ><?php echo $content ?></textarea>

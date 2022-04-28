@@ -1,17 +1,9 @@
 var path = "http://localhost/newagro/pages/";
-<<<<<<< HEAD
 var d_id ='';
 var year = '';
 var week = '';
 var per_id = '';
 
-=======
-var d_id = "";
-var year = "";
-var week = "";
-var per_id = "";
-var period_id = "";
->>>>>>> 5e4e1cd005daeea96e784b7dfe02fea2d306f21e
 
 var d_id = document.getElementById("district").value;
 fetch_data();
@@ -22,7 +14,6 @@ fetch_data();
 var per_id = document.getElementById("type").value;
 fetch_data();
 
-<<<<<<< HEAD
 $(function(){
     $(document).on('change','#district',function(){
         d_id = $(this).children(":selected").attr("id");
@@ -46,95 +37,35 @@ $.ajax({
     url: path +"crop_district_fetch_data.php"  ,
     type: 'post',
     data: { d_id: d_id , week: week, year: year ,per_id: per_id},
-=======
-fetch_data();
-$(function () {
-  $(document).on("change", "#district", function () {
-    d_id = $(this).children(":selected").attr("id");
-    fetch_data();
-  });
-  $(document).on("change", "#weeks", function () {
-    week = $(this).val();
-    fetch_data();
-  });
-  $(document).on("change", "#years", function () {
-    year = $(this).val();
-    fetch_data();
-  });
-  $(document).on("change", "#type", function () {
-    per_id = $(this).val();
-    fetch_data();
-  });
-  $(document).on("change", "#per", function () {
-    period_id = $(this).val();
-    fetch_data();
-  });
-});
-function fetch_data() {
-  $.ajax({
-    url: path + "crop_district_fetch_data.php",
-    type: "post",
-    data: {
-      d_id: d_id,
-      week: week,
-      year: year,
-      per_id: per_id,
-      period_id: period_id,
-    },
->>>>>>> 5e4e1cd005daeea96e784b7dfe02fea2d306f21e
     success: function (result) {
       result = JSON.parse(result);
       update_chart(result);
     },
   });
 
-<<<<<<< HEAD
 $.ajax({
   url: path +"crop_district_fetch_bar_data.php"  ,
   type: 'post',
   data: { d_id: d_id , week: week , year: year ,per_id: per_id},
   success: function (result1) {
-=======
-  $.ajax({
-    url: path + "crop_district_fetch_bar_data.php",
-    type: "post",
-    data: {
-      d_id: d_id,
-      week: week,
-      year: year,
-      per_id: per_id,
-      period_id: period_id,
-    },
-    success: function (result1) {
->>>>>>> 5e4e1cd005daeea96e784b7dfe02fea2d306f21e
       result1 = JSON.parse(result1);
       update_chart1(result1);
     },
   });
 }
 
-<<<<<<< HEAD
 function update_chart(result){
     $("canvas#chart-line").remove();
   $("div#chart_data").append('<canvas id="chart-line" class="chart-canvas" height="270" width="250" style="margin-left:20px"></canvas>');
       var ctx2 = document.getElementById("chart-line").getContext("2d");
   if(per_id == "NDVI"){
-=======
-function update_chart(result) {
-  $("canvas#chart-line").remove();
-  $("div#chart_data").append(
-    '<canvas id="chart-line" class="chart-canvas" height="270" width="300" style="margin-left:-5px"></canvas>'
-  );
-  var ctx2 = document.getElementById("chart-line").getContext("2d");
-  if (per_id == "NDVI") {
->>>>>>> 5e4e1cd005daeea96e784b7dfe02fea2d306f21e
     new Chart(ctx2, {
       type: "line",
       data: {
         labels: result.final_array,
         datasets: [
           {
-            label: `${per_id}` + ` ` + `Temp`,
+            label: `${per_id}`,
             tension: 0,
             borderWidth: 0,
             pointRadius: 5,
@@ -228,7 +159,7 @@ function update_chart(result) {
         labels: result.final_array,
         datasets: [
           {
-            label: `${per_id}` + ` ` + `Temp`,
+            label: `${per_id}`,
             tension: 0,
             borderWidth: 0,
             pointRadius: 5,
@@ -322,7 +253,7 @@ function update_chart(result) {
         labels: result.final_array,
         datasets: [
           {
-            label: `${per_id}` + ` ` + `Temp`,
+            label: `${per_id}`,
             tension: 0,
             borderWidth: 0,
             pointRadius: 5,
@@ -416,7 +347,7 @@ function update_chart(result) {
         labels: result.final_array,
         datasets: [
           {
-            label: `${per_id}` + ` ` + `Temp`,
+            label: `${per_id}`,
             tension: 0,
             borderWidth: 0,
             pointRadius: 5,
@@ -519,7 +450,7 @@ function update_chart1(result1) {
         labels: result1.date_array,
         datasets: [
           {
-            label: `${per_id}` + ` ` + `Temp`,
+            label: `${per_id}`,
             tension: 0,
             borderWidth: 0,
             borderRadius: 3,
@@ -610,7 +541,7 @@ function update_chart1(result1) {
         labels: result1.date_array,
         datasets: [
           {
-            label: `${per_id}` + ` ` + `Temp`,
+            label: `${per_id}`,
             tension: 0,
             borderWidth: 0,
             borderRadius: 3,
@@ -703,7 +634,7 @@ function update_chart1(result1) {
         labels: result1.date_array,
         datasets: [
           {
-            label: `${per_id}` + ` ` + `Temp`,
+            label: `${per_id}`,
             tension: 0,
             borderWidth: 0,
             borderRadius: 3,
@@ -796,7 +727,7 @@ function update_chart1(result1) {
         labels: result1.date_array,
         datasets: [
           {
-            label: `${per_id}` + ` ` + `Temp`,
+            label: `${per_id}`,
             tension: 0,
             borderWidth: 0,
             borderRadius: 3,

@@ -171,7 +171,7 @@ function update_chart(result) {
               color: "#000",
               padding: 10,
               font: {
-                size: 15,
+                size: 16,
                 weight: 300,
                 family: "Roboto",
                 style: "normal",
@@ -222,7 +222,7 @@ function update_chart(result) {
             display: true,
             title: {
               display: true,
-              text: "Minimum Temp(in Celsius) ",
+              text: "Minimum Temp(°C) ",
               font: {
                 family: "Times",
                 size: 15,
@@ -264,7 +264,7 @@ function update_chart(result) {
               color: "#000",
               padding: 10,
               font: {
-                size: 15,
+                size: 16,
                 weight: 300,
                 family: "Roboto",
                 style: "normal",
@@ -315,7 +315,7 @@ function update_chart(result) {
             display: true,
             title: {
               display: true,
-              text: "Maximum Temp(in Celsius) ",
+              text: "Maximum Temp(°C) ",
               font: {
                 family: "Times",
                 size: 15,
@@ -357,7 +357,7 @@ function update_chart(result) {
               color: "#000",
               padding: 10,
               font: {
-                size: 15,
+                size: 16,
                 weight: 300,
                 family: "Roboto",
                 style: "normal",
@@ -408,7 +408,7 @@ function update_chart(result) {
             display: true,
             title: {
               display: true,
-              text: "Minimum Temp(in Celsius) ",
+              text: "Minimum Temp(°C) ",
               font: {
                 family: "Times",
                 size: 15,
@@ -450,7 +450,7 @@ function update_chart(result) {
               color: "#000",
               padding: 10,
               font: {
-                size: 15,
+                size: 16,
                 weight: 300,
                 family: "Roboto",
                 style: "normal",
@@ -483,7 +483,7 @@ function update_chart1(result1) {
             borderSkipped: false,
             backgroundColor: "rgba(30,144,255 ,.8)",
             data: result1.final_array,
-            maxBarThickness: 15,
+            maxBarThickness: 22,
           },
         ],
       },
@@ -550,7 +550,7 @@ function update_chart1(result1) {
               color: "#000",
               padding: 10,
               font: {
-                size: 15,
+                size: 16,
                 weight: 300,
                 family: "Roboto",
                 style: "normal",
@@ -575,7 +575,7 @@ function update_chart1(result1) {
             borderSkipped: false,
             backgroundColor: "rgba(255,140,0 ,.8)",
             data: result1.final_array,
-            maxBarThickness: 15,
+            maxBarThickness: 22,
           },
         ],
       },
@@ -597,7 +597,7 @@ function update_chart1(result1) {
             display: true,
             title: {
               display: true,
-              text: "Minimum Temp(in Celsius) ",
+              text: "Minimum Temp(°C) ",
               font: {
                 family: "Times",
                 size: 15,
@@ -642,7 +642,7 @@ function update_chart1(result1) {
               color: "#000",
               padding: 10,
               font: {
-                size: 14,
+                size: 16,
                 weight: 300,
                 family: "Roboto",
                 style: "normal",
@@ -667,7 +667,7 @@ function update_chart1(result1) {
             borderSkipped: false,
             backgroundColor: "rgba(255,0,0,.8)",
             data: result1.final_array,
-            maxBarThickness: 15,
+            maxBarThickness: 22,
           },
         ],
       },
@@ -734,7 +734,7 @@ function update_chart1(result1) {
               color: "#000",
               padding: 10,
               font: {
-                size: 15,
+                size: 16,
                 weight: 300,
                 family: "Roboto",
                 style: "normal",
@@ -759,7 +759,7 @@ function update_chart1(result1) {
             borderSkipped: false,
             backgroundColor: "rgba(000,000,000 ,.8)",
             data: result1.final_array,
-            maxBarThickness: 15,
+            maxBarThickness: 22,
           },
         ],
       },
@@ -781,7 +781,7 @@ function update_chart1(result1) {
             display: true,
             title: {
               display: true,
-              text: "Minimum Temp(in Celsius) ",
+              text: "Minimum Temp(°C) ",
               font: {
                 family: "Times",
                 size: 15,
@@ -826,7 +826,7 @@ function update_chart1(result1) {
               color: "#000",
               padding: 10,
               font: {
-                size: 15,
+                size: 16,
                 weight: 300,
                 family: "Roboto",
                 style: "normal",

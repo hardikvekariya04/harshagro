@@ -54,7 +54,7 @@ if (!isset($_SESSION['ID']) && !isset($_SESSION['EMAIL'])) {
     border-radius: 7px;
     border: 2px dashed gray;
     width: 50vw;
-    height: 65vh;
+    height: 70vh;
     /* margin-bottom: -20px; */
     margin-top:10px;
   }
@@ -110,7 +110,7 @@ if (!isset($_SESSION['ID']) && !isset($_SESSION['EMAIL'])) {
     <div class="sidenav-footer position-absolute w-100 bottom-0 ">
     <div class="mx-3">
         <a class="btn bg-info mt-0 w-100" href="dataset.php" type="button" style="color: #fff;"><i
-            class="material-icons opacity-10">info </i> Dataset</a>
+            class="material-icons opacity-10">info </i>About Dataset</a>
       </div>
       <div class="mx-3">
         <a class="btn bg-gradient-primary mt-0 w-100" href="https://www.agrocastanalytics.com/index.html" type="button"><i
@@ -129,10 +129,10 @@ if (!isset($_SESSION['ID']) && !isset($_SESSION['EMAIL'])) {
       navbar-scroll="true">
       <div class="container-fluid py-1 px-3">
         <nav aria-label="breadcrumb">
-          <ol class="breadcrumb bg-transparent mb-0 pb-0 pt-1 px-0 me-sm-6 me-5">
+          <!-- <ol class="breadcrumb bg-transparent mb-0 pb-0 pt-1 px-0 me-sm-6 me-5">
             <li class="breadcrumb-item text-sm"><a class="opacity-5 text-dark" href="javascript:;">Climate</a></li>
             <li class="breadcrumb-item text-sm text-dark active" aria-current="page">Heatmap</li>
-          </ol>
+          </ol> -->
         </nav>
         <div class="collapse navbar-collapse mt-sm-0 mt-2 me-md-0 me-sm-4" id="navbar">
           <div class="ms-md-auto pe-md-3 d-flex align-items-center">
@@ -165,25 +165,25 @@ if (!isset($_SESSION['ID']) && !isset($_SESSION['EMAIL'])) {
         <div class="col-lg-5.5 col-md-6 mt-4 mb-0">
           <div class="card z-index-2 ">
           <div class="card-body" style="margin-top:-20px;">
-              <h3 class="mb-0 ">Weather</h3>
-              <p class="text-sm ">Heatmap Data</p>
+              <h3 class="mb-4 ">Weather</h3>
+              <!-- <p class="text-sm ">Heatmap Data</p> -->
               <select class="in" name="type" id="type" style="position:absolute;top:10px;left:180px;border-radius:50px;width:150px;">
-                <option value="min">Min Temp</option>
-                <option value="max">Max Temp</option>
+                <option value="min">Minimum Temperature</option>
+                <option value="max">Maximum Temperature</option>
                 <option value="rain">Rainfall</option>
               </select>
               <input class="in" id="date" type="date" placeholder="DD-MM-YYYY" min="1997-01-01" max="2020-02-15"
                 value="2019-02-06" style="border-top-left-radius:50px;border-bottom-left-radius:50px;width:150px;padding:3px;margin-bottom:-10px;position:absolute;top:10px;left:340px;">
             </div>
             <hr class="dark horizontal" style="margin-top:-30px;margin-bottom:-10px;">
-            <div id="chart-line1" class="img-magnifier-container"></div>
+            <div id="chart-line1" class="img-magnifier-container" style="min-height:440px"></div>
           </div>
         </div>
         <div class="col-lg-5.5 col-md-6 mt-4 mb-0" style="margin-left : 20px">
           <div class="card z-index-2  ">
           <div class="card-body" style="margin-top:-20px;">
-              <h3 class="mb-0 "> Vegetation </h3>
-              <p class="text-sm "> Heatmap Data </p>
+              <h3 class="mb-4 "> Vegetation </h3>
+              <!-- <p class="text-sm "> Heatmap Data </p> -->
               <select class="in" name="type" id="type1" style="position:absolute;top:10px;left:180px;border-radius:50px;width:150px;">
                 <option value="NDVI">NDVI</option>
                 <option value="VCI">VCI</option>
@@ -192,7 +192,7 @@ if (!isset($_SESSION['ID']) && !isset($_SESSION['EMAIL'])) {
               <input type="week" name="week" id="week" value="2022-W15" style="position:absolute;top:10px;left:340px;border-radius:50px;width:150px;padding:3px;border:1px solid gray;" required>
             </div>
             <hr class="dark horizontal" style="margin-top:-30px;margin-bottom:-10px;">
-            <div id="chart-line2"></div>
+            <div id="chart-line2" style="min-height:440px"></div>
           </div>
         </div>
       </div>

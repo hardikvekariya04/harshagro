@@ -36,6 +36,7 @@ function display_message()
             $email = $_POST['email'];
             $password = $_POST['password'];
             $cpassword =$_POST['cpassword'];
+            $phone = $_POST['phone'];
     
             if(empty($username) || empty($email) || empty($password) || empty($cpassword))
             {
@@ -75,13 +76,13 @@ function display_message()
                             $token = md5(rand());
                             date_default_timezone_set('Asia/Kolkata');
                             $datetime = date("F j, Y g:i:s a");
-                            $sql = "insert into users(username, email,create_datetime, password, token) values('$username', '$email', '$datetime', '$hash', '$token')";
+                            $sql = "insert into users(username, phone, email,create_datetime, password, token) values('$username', '$phone', '$email', '$datetime', '$hash', '$token')";
                             $data = mysqli_query($con, $sql);
                             if($data)
                             {
+                            echo "<script>alert('Registration Successful')</script>";    
                             $error = "<div style='color:red'> Record Successfully Registered :) </div>";
                             set_message($error);
-                                
                             }
                             else
                             {

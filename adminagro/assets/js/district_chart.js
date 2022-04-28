@@ -76,7 +76,7 @@ function update_chart(result) {
         labels: result.amount,
         datasets: [
           {
-            label: `${temp_id}` + ` ` + `Temp`,
+            label: `${temp_id}`+`fall`,
             tension: 0,
             borderWidth: 0,
             pointRadius: 5,
@@ -458,7 +458,7 @@ function update_chart1(result1) {
         labels: result1.date_array,
         datasets: [
           {
-            label: `${temp_id}` + ` ` + `Temp`,
+            label: `${temp_id}`+`fall`,
             tension: 0,
             borderWidth: 0,
             borderRadius: 3,

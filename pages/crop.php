@@ -8,6 +8,42 @@ require_once '../config/db.php';
 if (!isset($_SESSION['ID']) && !isset($_SESSION['EMAIL'])) {
   header("location: ../index.php");
 }
+$current_date = "select max(year) AS year from crop LIMIT 1";
+$date_result = mysqli_query($con, $current_date);
+$row_date = mysqli_fetch_assoc($date_result);
+
+$date_current = $row_date['year']; 
+
+$current_week = "select max(week) AS week from crop WHERE year = (select max(year) AS year from crop) ";
+$week_result = mysqli_query($con, $current_week);
+$row_week = mysqli_fetch_assoc($week_result);
+$week_current = $row_week['week']; 
+
+if($row_week['week'] > 10){
+$full_weeks = $date_current."-W".$week_current;
+}
+else{
+  $full_weeks = $date_current."-W0".$week_current;
+}
+
+
+$current_min_date = "select min(year) AS year from crop LIMIT 1";
+$date_min_result = mysqli_query($con, $current_min_date);
+$row_min_date = mysqli_fetch_assoc($date_min_result);
+
+$date_min_current = $row_min_date['year']; 
+
+$current_min_week = "select min(week) AS week from crop WHERE year = (select min(year) AS year from crop) ";
+$week_min_result = mysqli_query($con, $current_min_week);
+$row_min_week = mysqli_fetch_assoc($week_min_result);
+$week_min_current = $row_min_week['week']; 
+
+if($row_min_week['week'] > 10){
+$full_min_weeks = $date_min_current."-W".$week_min_current;
+}
+else{
+  $full_min_weeks = $date_min_current."-W0".$week_min_current;
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -131,10 +167,10 @@ if (!isset($_SESSION['ID']) && !isset($_SESSION['EMAIL'])) {
     <nav class="navbar navbar-main navbar-expand-lg px-0 mx-4 shadow-none border-radius-xl" id="navbarBlur" navbar-scroll="true">
       <div class="container-fluid py-1 px-3">
         <nav aria-label="breadcrumb">
-          <ol class="breadcrumb bg-transparent mb-0 pb-0 pt-1 px-0 me-sm-6 me-5">
+          <!-- <ol class="breadcrumb bg-transparent mb-0 pb-0 pt-1 px-0 me-sm-6 me-5">
             <li class="breadcrumb-item text-sm"><a class="opacity-5 text-dark" href="javascript:;">Climate</a></li>
             <li class="breadcrumb-item text-sm text-dark active" aria-current="page">Districts</li>
-          </ol>
+          </ol> -->
         </nav>
         <div class="collapse navbar-collapse mt-sm-0 mt-2 me-md-0 me-sm-4" id="navbar">
           <div class="ms-md-auto pe-md-3 d-flex align-items-center">
@@ -244,17 +280,16 @@ if (!isset($_SESSION['ID']) && !isset($_SESSION['EMAIL'])) {
                 <option value="50">50</option>
                 <option value="51">51</option>
                 <option value="52">52</option> -->
-                <input type="week" name="weeks" id="weeks" value="2017-W01" class="in" required>
-              <!-- </select> -->
-
-              <select class="in" name="type" id="type" style="border-top-right-radius:50px;border-bottom-right-radius:50px;">
-              <!-- <option value=""  >Select period </option> -->
+                <select class="in" name="type" id="type">
               <option value="NDVI" selected>NDVI</option>
                 <!-- <option value="SMT">SMT</option> -->
                 <!-- <option value="TCI">TCI</option> -->
                 <option value="VCI">VCI</option>
                 <option value="VHI">VHI</option>
               </select>
+                <input type="week" name="weeks" id="weeks"  min="<?php echo $full_min_weeks?>" max="<?php echo $full_weeks?>" value="<?php echo $full_weeks?>" class="in" style="border:1px solid gray;border-top-right-radius:50px;border-bottom-right-radius:50px;" required>
+              <!-- </select> -->
+
 
               <!-- <select class="in" name="period" id="per">
               <option value="">Select period </option>
@@ -316,7 +351,7 @@ if (!isset($_SESSION['ID']) && !isset($_SESSION['EMAIL'])) {
             <a href="#" id="downloadPdf"><i class="fa fa-download" style="font-size:22px;align-item:right;text-align:right;position:absolute;right:40px;"></i></a>
               <div id="reportPage">
               <div class="chart" id="chart_data" style="width:550px;">
-                  <canvas id="chart-line" class="chart-canvas" height="270" width="290" style="margin-left:-11px"></canvas>
+                  <canvas id="chart-line" class="chart-canvas" height="270" width="290" style="margin-left:0px"></canvas>
               </div>
           </div>
               <hr style="margin-top:-5px;margin-bottom:0px;">
@@ -437,9 +472,10 @@ if (!isset($_SESSION['ID']) && !isset($_SESSION['EMAIL'])) {
 
 <?php
 // last 7 days 
-  $weeknumber = '01';
+
+$weeknumber = substr($full_weeks, strpos($full_weeks,"W") + 1);
   $dto = new DateTime();
-  $dto->setISODate(2018,$weeknumber);
+  $dto->setISODate($date_current,$weeknumber);
   $ret = $dto->format('Y-m-d');
   $first_year = $dto->format('Y');
 
@@ -485,6 +521,12 @@ $weeknumber5 = $date5->format("W");
 $date6 = new DateTime($ret7);
 $weeknumber6 = $date6->format("W");
 
+// if($week_current > 10){
+// $final_first_year = $first_year."-".$week_current;
+// }
+// else{
+//   $final_first_year = $first_year."-0".$week_current;
+// }
 $final_first_year = $first_year."-".$weeknumber;
 $final_second_year = $second_year."-".$weeknumber1;
 $final_third_year = $third_year."-".$weeknumber2;
@@ -495,14 +537,13 @@ $final_seven_year = $seven_year."-".$weeknumber6;
 
 
         $con = new mysqli('localhost','root','','agro');
-        $query1 =$con->query("SELECT SMT from crop where d_id = 0 AND week IN('$weeknumber','$weeknumber1','$weeknumber2','$weeknumber3','$weeknumber4','$weeknumber5','$weeknumber6') AND year  = '1990'" );
+        $query1 =$con->query("SELECT NDVI from crop where d_id = 0 AND week IN('$weeknumber','$weeknumber1','$weeknumber2','$weeknumber3','$weeknumber4','$weeknumber5','$weeknumber6') AND year  = $date_current" );
         while($row1 = $query1->fetch_assoc()){
-          $month1[] = $row1['SMT'];
+          $month1[] = $row1['NDVI'];
         }
 
-$month_weeknumber = '01';
 $dto = new DateTime();
-$dto->setISODate(2018,$month_weeknumber);
+$dto->setISODate($date_current,$weeknumber);
 $ret_0 = $dto->format('Y-m-d');
 $month_date1 = $dto->format('Y');
 $one_monthly =date("Y - M",strtotime($ret_0));
@@ -665,7 +706,7 @@ new Chart(ctx, {
       borderSkipped: false,
       backgroundColor: "rgba(46, 204, 113)",
       data : ['<?php echo json_encode($avg_high_temp3)?>','<?php echo json_encode($avg_high_temp2)?>','<?php echo json_encode($avg_high_temp1)?>'],
-      maxBarThickness: 15
+      maxBarThickness: 22
     }, ],
   },
 
@@ -852,6 +893,7 @@ new Chart(ctx, {
       Scrollbar.init(document.querySelector('#sidenav-scrollbar'), options);
     }
 
+    var taluka_id1 = document.getElementById("district").value;
     $(document).on("change", "#district", function () {
     taluka_id1 = $(this).children(":selected").attr("value");
   });

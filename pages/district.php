@@ -8,6 +8,18 @@ require_once '../config/db.php';
 if (!isset($_SESSION['ID']) && !isset($_SESSION['EMAIL'])) {
   header("location: ../index.php");
 }
+
+$current_date = "select max(date) AS date from district_data LIMIT 1";
+$date_result = mysqli_query($con, $current_date);
+$row_date = mysqli_fetch_assoc($date_result);
+
+$date_current = $row_date['date']; 
+
+$current_min_date = "select min(date) AS date from district_data LIMIT 1";
+$date_min_result = mysqli_query($con, $current_min_date);
+$row_min_date = mysqli_fetch_assoc($date_min_result);
+
+$date_min_current = $row_min_date['date']; 
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -112,7 +124,7 @@ if (!isset($_SESSION['ID']) && !isset($_SESSION['EMAIL'])) {
     <div class="sidenav-footer position-absolute w-100 bottom-0 ">
     <div class="mx-3">
         <a class="btn bg-info mt-0 w-100" href="dataset.php" type="button" style="color: #fff;"><i
-            class="material-icons opacity-10">info </i> Dataset</a>
+            class="material-icons opacity-10">info </i>About Dataset</a>
       </div>
       <div class="mx-3">
         <a class="btn bg-gradient-primary mt-0 w-100" href="https://www.agrocastanalytics.com/index.html" type="button"><i
@@ -130,10 +142,10 @@ if (!isset($_SESSION['ID']) && !isset($_SESSION['EMAIL'])) {
     <nav class="navbar navbar-main navbar-expand-lg px-0 mx-4 shadow-none border-radius-xl" id="navbarBlur" navbar-scroll="true">
       <div class="container-fluid py-1 px-3">
         <nav aria-label="breadcrumb">
-          <ol class="breadcrumb bg-transparent mb-0 pb-0 pt-1 px-0 me-sm-6 me-5">
+          <!-- <ol class="breadcrumb bg-transparent mb-0 pb-0 pt-1 px-0 me-sm-6 me-5">
             <li class="breadcrumb-item text-sm"><a class="opacity-5 text-dark" href="javascript:;">Climate</a></li>
             <li class="breadcrumb-item text-sm text-dark active" aria-current="page">Districts</li>
-          </ol>
+          </ol> -->
         </nav>
         <div class="collapse navbar-collapse mt-sm-0 mt-2 me-md-0 me-sm-4" id="navbar">
           <div class="ms-md-auto pe-md-3 d-flex align-items-center">
@@ -183,8 +195,8 @@ if (!isset($_SESSION['ID']) && !isset($_SESSION['EMAIL'])) {
                 </select>
               <select class="in" name="type" id="type">
               <!-- <option value="">Select Type</option> -->
-                <option value="min" selected>Min Temp</option>
-                <option value="max">Max Temp</option>
+                <option value="min" selected>Minimum Temperature</option>
+                <option value="max">Maximum Temperature</option>
                 <option value="rain">Rainfall</option>
               </select>
 
@@ -194,7 +206,8 @@ if (!isset($_SESSION['ID']) && !isset($_SESSION['EMAIL'])) {
                 <option value="last 3 year">last 3 year</option>
               </select> -->
 
-              <input class="in" id="date" type="date" placeholder="DD-MM-YYYY" min="1997-01-01" max="2020-02-15" value="2020-02-15" selected>
+              <input class="in" id="date" type="date" placeholder="DD-MM-YYYY" min="<?php echo $date_min_current?>" max="<?php echo $date_current?>"
+                value="<?php echo $date_current?>" selected>
               
             </div>
           </div>
@@ -253,8 +266,8 @@ if (!isset($_SESSION['ID']) && !isset($_SESSION['EMAIL'])) {
               </div>
               <select class="in" name="period" id="per" style="margin-bottom:-20px;">
               <!-- <option value="">Select period </option> -->
-                <option value="last 6 month" selected>last 6 month</option>
-                <option value="last 3 year" >last 3 year</option>
+                <option value="last 6 month" selected>Last 6 Months</option>
+                <option value="last 3 year" >Last 3 Years</option>
               </select>
               <a href="#" id="downloadPdf1"><i class="fa fa-download" style="font-size:22px;align-item:right;text-align:right;position:absolute;right:40px;"></i></a>
               <div id="reportPage1">
@@ -383,7 +396,7 @@ if (!isset($_SESSION['ID']) && !isset($_SESSION['EMAIL'])) {
 // print_r($week_array);
 
 
-$date1 = '2020-02-15';
+$date1 = $date_current;
 $date1 = strtotime($date1);
 
 $date1 = strtotime("+0 day", $date1);
@@ -412,8 +425,8 @@ $dates7  =date('Y-m-d', $date7 );
 
 
 // last  6 month 
-$query_Date = '2020-02-15';
-$final_date = '2020-02-15';
+$query_Date = $date_current;
+$final_date = $date_current;
 $monthly = date('Y-m-d', strtotime($final_date. ' - 1 month')); 
 $monthly1 = date('Y-m-d', strtotime($monthly. ' - 1 month')); 
 $monthly2 =date('Y-m-d', strtotime($monthly1. ' - 1 month')); 
@@ -657,7 +670,7 @@ new Chart(ctx, {
       backgroundColor: "rgba(255,140,0, .8)",
       //data: <?php //echo json_encode($month1) ?>,
       data : ['<?php echo json_encode($avg_high_temp6) ?>','<?php echo json_encode($avg_high_temp5) ?>','<?php echo json_encode($avg_high_temp4) ?>','<?php echo json_encode($avg_high_temp3) ?>','<?php echo json_encode($avg_high_temp2) ?>','<?php echo json_encode($avg_high_temp1) ?>'],
-      maxBarThickness: 15
+      maxBarThickness: 22
     }, ],
   },
 
@@ -678,7 +691,7 @@ new Chart(ctx, {
         display: true,
             title: {
               display: true,
-              text: 'Minimum Temp(in Celsius)',
+              text: 'Minimum Temp(°C)',
           font: {
             family: 'Times',
             size: 15,
@@ -724,11 +737,11 @@ new Chart(ctx, {
           color: '#000',
           padding: 10,
           font: {
-            size: 14,
+            size: 15,
             weight: 300,
             family: "Roboto",
             style: 'normal',
-            lineHeight: 2
+            lineHeight: 1.5
           },
         }
       },
@@ -775,7 +788,7 @@ new Chart(ctx, {
             display: true,
             title: {
               display: true,
-              text: 'Minimum Temp(in Celsius)',
+              text: 'Minimum Temp(°C)',
           font: {
             family: 'Times',
             size: 15,
@@ -798,7 +811,7 @@ new Chart(ctx, {
               color: '#000',
               padding: 10,
               font: {
-                size: 14,
+                size: 15,
                 weight: 300,
                 family: "Roboto",
                 style: 'normal',
@@ -819,7 +832,7 @@ new Chart(ctx, {
               color: '#000',
               padding: 10,
               font: {
-                size: 15,
+                size: 16,
                 weight: 300,
                 family: "Roboto",
                 style: 'normal',
@@ -844,7 +857,7 @@ new Chart(ctx, {
       Scrollbar.init(document.querySelector('#sidenav-scrollbar'), options);
     }
 
-    // var d_id = document.getElementById("district").value;
+    var taluka_id1 = document.getElementById("district").value;
     // var date_id = document.getElementById("date").value;
     $(document).on("change", "#district", function () {
     taluka_id1 = $(this).children(":selected").attr("value");

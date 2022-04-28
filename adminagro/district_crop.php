@@ -38,7 +38,6 @@ if(isset($_POST["submit"]))
   }
  }
 }
-
 if(isset($_POST["submit"]))
 {
  if($_FILES['file1']['name'])

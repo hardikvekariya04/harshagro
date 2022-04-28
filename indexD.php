@@ -17,6 +17,18 @@ if($row['admin'] == 1 ){
 if (!isset($_SESSION['ID']) && !isset($_SESSION['EMAIL'])) {
   header("location: index.php");
 }
+
+$current_date = "select max(date) AS date from newdata LIMIT 1";
+$date_result = mysqli_query($con, $current_date);
+$row_date = mysqli_fetch_assoc($date_result);
+
+$date_current = $row_date['date']; 
+
+$current_min_date = "select min(date) AS date from newdata LIMIT 1";
+$date_min_result = mysqli_query($con, $current_min_date);
+$row_min_date = mysqli_fetch_assoc($date_min_result);
+
+$date_min_current = $row_min_date['date']; 
 ob_end_flush();
 ?>
 <!DOCTYPE html>
@@ -143,7 +155,7 @@ ob_end_flush();
     <div class="sidenav-footer position-absolute w-100 bottom-0 ">
     <div class="mx-3">
         <a class="btn bg-info mt-0 w-100" href="./pages/dataset.php" type="button" style="color: #fff;"><i
-            class="material-icons opacity-10">info </i> Dataset</a>
+            class="material-icons opacity-10">info </i>About Dataset</a>
       </div>
       <div class="mx-3">
         <a class="btn bg-gradient-primary mt-0 w-100" href="https://www.agrocastanalytics.com/index.html" type="button"><i
@@ -163,10 +175,10 @@ ob_end_flush();
       navbar-scroll="true">
       <div class="container-fluid py-1 px-3">
         <nav aria-label="breadcrumb">
-          <ol class="breadcrumb bg-transparent mb-0 pb-0 pt-1 px-0 me-sm-6 me-5">
+          <!-- <ol class="breadcrumb bg-transparent mb-0 pb-0 pt-1 px-0 me-sm-6 me-5">
             <li class="breadcrumb-item text-sm"><a class="opacity-5 text-dark" href="javascript:;">Climate</a></li>
             <li class="breadcrumb-item text-sm text-dark active" aria-current="page">Talukas</li>
-          </ol>
+          </ol> -->
         </nav>
         <div class="collapse navbar-collapse mt-sm-0 mt-2 me-md-0 me-sm-4" id="navbar">
           <div class="ms-md-auto pe-md-3 d-flex align-items-center">
@@ -581,8 +593,8 @@ ob_end_flush();
 
               <select class="in" name="type" id="type">
               <!-- <option value="">select temp</option> -->
-                <option value="min" selected>Min Temp</option>
-                <option value="max">Max Temp</option>
+                <option value="min" selected>Minimum Temperature</option>
+                <option value="max">Maximum Temperature</option>
                 <option value="rain">Rainfall</option>
               </select>
 
@@ -592,8 +604,8 @@ ob_end_flush();
                 <option value="last 3 year">last 3 year</option>
               </select> -->
 
-              <input class="in" id="date" type="date" placeholder="DD-MM-YYYY" min="1997-01-01" max="2020-02-15"
-                value="2020-12-15">
+              <input class="in" id="date" type="date" placeholder="DD-MM-YYYY" min="<?php echo $date_min_current?>" max="<?php echo $date_current?>"
+                value="<?php echo $date_current?>">
 
             </div>
           </div>
@@ -651,8 +663,8 @@ ob_end_flush();
             <hr style="margin-top:-5px;margin-bottom:0px;">
               <select class="in" name="period" id="per" style="margin-bottom:-20px;">
               <!-- <option value="">Select period </option> -->
-                <option value="last 6 month" selected>last 6 month</option>
-                <option value="last 3 year" >last 3 year</option>
+                <option value="last 6 month" selected>Last 6 Months</option>
+                <option value="last 3 year" >Last 3 Years</option>
               </select>
               <a href="#" id="downloadPdf1"><i class="fa fa-download" style="font-size:22px;align-item:right;text-align:right;position:absolute;right:40px;"></i></a>
               <div id="reportPage1">
@@ -753,7 +765,7 @@ ob_end_flush();
   <script src="./map/heatmap/leaf.js"></script> -->
   <?php
 // last 7 days 
-$date1 = '2020-02-15';
+$date1 = $date_current;
 $date1 = strtotime($date1);
 
 $date1 = strtotime("+0 day", $date1);
@@ -786,8 +798,8 @@ $dates7  =date('Y-m-d', $date7 );
 
 
 // last  6 month 
-$query_Date = '2020-02-15';
-$final_date = '2020-02-15';
+$query_Date = $date_current;
+$final_date = $date_current;
 $monthly = date('Y-m-d', strtotime($final_date. ' - 1 month')); 
 $monthly1 = date('Y-m-d', strtotime($monthly. ' - 1 month')); 
 $monthly2 =date('Y-m-d', strtotime($monthly1. ' - 1 month')); 
@@ -1056,7 +1068,7 @@ $avg_high_year_temp5 = $tot_year_temp5/$temp_array_year_length5;
           display: true,
             title: {
               display: true,
-              text: 'Minimum Temperature(in Celsius)',
+              text: 'Minimum Temperature(°C)',
           font: {
             family: 'Roboto',
             size: 15,
@@ -1100,7 +1112,7 @@ $avg_high_year_temp5 = $tot_year_temp5/$temp_array_year_length5;
             color: '#000',
             padding: 10,
             font: {
-              size: 15,
+              size: 16,
               weight: 300,
               family: "Roboto",
               style: 'normal',
@@ -1127,7 +1139,7 @@ $avg_high_year_temp5 = $tot_year_temp5/$temp_array_year_length5;
           backgroundColor: "rgba(255,140,0, .8)",
           //data: <?php //echo json_encode($month1) ?>,
           data: ['<?php echo json_encode($avg_high_temp6) ?>', '<?php echo json_encode($avg_high_temp5) ?>', '<?php echo json_encode($avg_high_temp4) ?>', '<?php echo json_encode($avg_high_temp3) ?>', '<?php echo json_encode($avg_high_temp2) ?>', '<?php echo json_encode($avg_high_temp1) ?>'],
-          maxBarThickness: 15
+          maxBarThickness: 22
         },],
       },
 
@@ -1148,7 +1160,7 @@ $avg_high_year_temp5 = $tot_year_temp5/$temp_array_year_length5;
           display: true,
             title: {
               display: true,
-              text: 'Minimum Temperature(in Celsius)',
+              text: 'Minimum Temperature(°C)',
           font: {
             family: 'Roboto',
             size: 15,
@@ -1221,9 +1233,16 @@ $avg_high_year_temp5 = $tot_year_temp5/$temp_array_year_length5;
       Scrollbar.init(document.querySelector('#sidenav-scrollbar'), options);
     }
 
+    var d_id1 = document.getElementById("district").value;
+    $('#district').on("change", function () {
+    d_id1 = $(this).children(":selected").text();
+    
+  });
+
+    var taluka_id1 = document.getElementById("taluka").value;
     $('#taluka').on("change", function () {
     taluka_id1 = $(this).children(":selected").text();
-    console.log(taluka_id1);
+    
   });
 
   $(document).on("change", "#date", function () {
@@ -1261,7 +1280,7 @@ $avg_high_year_temp5 = $tot_year_temp5/$temp_array_year_length5;
   var pdf = new jsPDF('l', 'pt', [reportPageWidth, reportPageHeight]);
   pdf.addImage($(pdfCanvas)[0], 'PNG', 0, 0);
   
-  pdf.save(taluka_id1+"_"+date_id1+'.pdf');
+  pdf.save(d_id1+"_"+taluka_id1+"_"+date_id1+'.pdf');
 });
 
 
@@ -1296,7 +1315,7 @@ $('#downloadPdf1').click(function(event) {
   var pdf = new jsPDF('l', 'pt', [reportPageWidth, reportPageHeight]);
   pdf.addImage($(pdfCanvas)[0], 'PNG', 0, 0);
   
-  pdf.save(taluka_id1+"_"+date_id1+'.pdf');
+  pdf.save(d_id1+"_"+taluka_id1+"_"+date_id1+'.pdf');
 });
 
   </script>
