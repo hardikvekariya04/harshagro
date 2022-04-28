@@ -7,13 +7,15 @@ $msg = "";
 // check if the user has clicked the button "UPLOAD" 
 if (isset($_POST['uploadfile'])) {
     $date = $_POST['date'];
+    // $datepicker = $_POST['datepicker'];
+    $week = $_POST['week'];
     $weather_max_heatmap = $_FILES["choosefile"]["name"];
     $weather_min_heatmap = $_FILES["choosefile1"]["name"];
     $weather_rain_heatmap = $_FILES["choosefile2"]["name"];
 
-    $crop_max_heatmap = $_FILES["choosefile3"]["name"];
-    $crop_min_heatmap = $_FILES["choosefile4"]["name"];
-    $crop_rain_heatmap = $_FILES["choosefile5"]["name"];
+    $crop_ndvi = $_FILES["choosefile3"]["name"];
+    $crop_vci = $_FILES["choosefile4"]["name"];
+    $crop_vhi = $_FILES["choosefile5"]["name"];
 
     $tempname = $_FILES["choosefile"]["tmp_name"];  
     $tempname1 = $_FILES["choosefile1"]["tmp_name"];  
@@ -26,21 +28,25 @@ if (isset($_POST['uploadfile'])) {
     $folder1 = "weather_min_image/".$weather_min_heatmap;
     $folder2 = "weather_rain_image/".$weather_rain_heatmap;
 
-    $folder3 = "crop_max_image/".$crop_max_heatmap;
-    $folder4 = "crop_min_image/".$crop_min_heatmap;
-    $folder5 = "crop_rain_image/".$crop_rain_heatmap;
+    $folder3 = "crop_ndvi/".$crop_ndvi;
+    $folder4 = "crop_vci/".$crop_vci;
+    $folder5 = "crop_vhi/".$crop_vhi;
 
       // connect with the database
     $db = mysqli_connect("localhost", "root", "", "admin_agro");
-        $sql = "INSERT INTO image (weather_max_heat,weather_min_heat,weather_rain_heat,crop_max_heat,crop_min_heat,crop_rain_heat,date) VALUES ('$weather_max_heatmap','$weather_min_heatmap','$weather_rain_heatmap','$crop_max_heatmap','$crop_min_heatmap','$crop_rain_heatmap','$date')";
+        $sql = "INSERT INTO image (weather_max_heat,weather_min_heat,weather_rain_heat,crop_ndvi,crop_vci,crop_vhi,date,week) VALUES ('$weather_max_heatmap','$weather_min_heatmap','$weather_rain_heatmap','$crop_ndvi','$crop_vci','$crop_vhi','$date','$week')";
      // function to execute above query
         mysqli_query($db, $sql);       
         // Add the image to the "image" folder"
         if (move_uploaded_file($tempname, $folder) && move_uploaded_file($tempname1, $folder1) && move_uploaded_file($tempname2, $folder2) && move_uploaded_file($tempname3, $folder3) && move_uploaded_file($tempname4, $folder4) && move_uploaded_file($tempname5, $folder5)) {
             echo '<script language="javascript">';
-            echo 'alert("Successfully Registered")'; 
+            echo 'alert("Successfully Added")'; 
             echo '</script>';
-            header("Location: heatmap.php");
+           ?>
+             <script>
+                window.location.href = "heatmap.php";
+                </script>
+           <?php
         }else{
             $msg = "Failed to upload image";
     }
@@ -84,6 +90,11 @@ $connect = mysqli_connect("localhost", "root", "", "admin_agro");
   <link href="https://cdn.datatables.net/1.11.5/css/dataTables.bootstrap5.min.css" rel="stylesheet">
   <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.0.1/css/bootstrap.min.css" rel="stylesheet"> 
   <link href="https://cdn.datatables.net/1.11.5/css/jquery.dataTables.min.css" rel="stylesheet">
+  <!-- <link href="https://netdna.bootstrapcdn.com/bootstrap/2.3.2/css/bootstrap.min.css" rel="stylesheet"> -->
+<link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.2.0/css/datepicker.min.css" rel="stylesheet">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+<script src="https://netdna.bootstrapcdn.com/bootstrap/2.3.2/js/bootstrap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.2.0/js/bootstrap-datepicker.min.js"></script>
   <style>
     .vrLine {
       border-left: 5px solid green;
@@ -194,11 +205,11 @@ $connect = mysqli_connect("localhost", "root", "", "admin_agro");
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link text-white " href="content.php">
+            <a class="nav-link text-white " href="dataset_admin.php">
               <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
                 <i class="material-icons opacity-10">dashboard</i>
               </div>
-              <span class="nav-link-text ms-1">About</span>
+              <span class="nav-link-text ms-1">About dataset</span>
             </a>
           </li>
         <!-- <li class="nav-item">
@@ -255,41 +266,46 @@ $connect = mysqli_connect("localhost", "root", "", "admin_agro");
 
   </form> -->
   <form method="post" enctype="multipart/form-data">
-   <div align="center">  
-    <h1>Climate and Crop</h1>
+   <div align="center" style="margin-top:-50px;">  
+    <h3>Climate and Crop</h3>
     <h6>Heatmap photo upload</h6>
+    <hr>
+    <h2>Weather</h2>
     <div>
         <label>Date</label>
-        <input type="date" name="date" class="form-control">
+        <input type="date" name="date" class="form-control" style="width: 500px;" required/>
     </div>
     <br/>
 
-    <h2>Weather</h2>
+   
     <div style="display:flex">
-    <h6>Max : </h6>
-    <input type="file" name="choosefile" style="width:300px;border : 2px solid #29C5F6;padding:5px;border-radius:10px;color:red;" required/>
-    <h6>Min : </h6>
-    <input type="file" name="choosefile1" style="width:300px;border : 2px solid #29C5F6;padding:5px;border-radius:10px;color:red;" required/>
-    <h6>Rain : </h6>
-    <input type="file" name="choosefile2" style="width:300px;border : 2px solid #29C5F6;padding:5px;border-radius:10px;color:red;" required/>
+    <h6 style="margin-right:5px;">Max : </h6>
+    <input type="file" name="choosefile" style="width:280px;border : 2px solid #29C5F6;padding:5px;border-radius:10px;color:red;" required/>
+    <h6 style="margin-right:5px;margin-left:20px;">Min : </h6>
+    <input type="file" name="choosefile1" style="width:280px;border : 2px solid #29C5F6;padding:5px;border-radius:10px;color:red;" required/>
+    <h6 style="margin-right:5px;margin-left:20px;">Rain : </h6>
+    <input type="file" name="choosefile2" style="width:280px;border : 2px solid #29C5F6;padding:5px;border-radius:10px;color:red;" required/>
     </div>
+    <hr> 
     <h2>crop</h2>
-    <div align = "center" style="display:flex;">
-        <label>Year : </label>
-        <input type="date" name="date" class="form-control" style="width:400px;">
-        <label>Week : </label>
-        <input type="date" name="date" class="form-control" style="width:400px;">
+   
+    <div align = "center" >
+        <!-- <h6>Year : </h6>
+        <input type="text" class="form-control" name="datepicker" id="datepicker" style="width:400px;" /> -->
+        <label >Week : </label>
+                <input type="week" name="week" class="form-control" style="width: 500px;" required>
     </div>
+    <br>
   <div style="display:flex">
-    <h6>Max : </h6>
-    <input type="file" name="choosefile3" style="width:300px;border : 2px solid #29C5F6;padding:5px;border-radius:10px;color:red;"  required/>
-    <h6>Min : </h6>
-    <input type="file" name="choosefile4" style="width:300px;border : 2px solid #29C5F6;padding:5px;border-radius:10px;color:red;" required/>
-    <h6>Rain : </h6>
-    <input type="file" name="choosefile5" style="width:300px;border : 2px solid #29C5F6;padding:5px;border-radius:10px;color:red;" required/>
+    <h6 style="margin-right:5px;">NDVI : </h6>
+    <input type="file" name="choosefile3" style="width:280px;border : 2px solid #29C5F6;padding:5px;border-radius:10px;color:red;"  required/>
+    <h6 style="margin-right:5px;margin-left:20px;">VCI : </h6>
+    <input type="file" name="choosefile4" style="width:280px;border : 2px solid #29C5F6;padding:5px;border-radius:10px;color:red;" required/>
+    <h6 style="margin-right:5px;margin-left:20px;">VHI : </h6>
+    <input type="file" name="choosefile5" style="width:280px;border : 2px solid #29C5F6;padding:5px;border-radius:10px;color:red;" required/>
   </div>
-    <br />
-    <br/>
+  <hr>
+
     <input type="submit" name="uploadfile" value="Upload" class="btn btn-info" style="width:200px;"/>
    </div>
   </form>
@@ -328,6 +344,14 @@ $connect = mysqli_connect("localhost", "root", "", "admin_agro");
       }
       Scrollbar.init(document.querySelector('#sidenav-scrollbar'), options);
     }
+//     $(document).ready(function(){
+//   $("#datepicker").datepicker({
+//      format: "yyyy",
+//      viewMode: "years", 
+//      minViewMode: "years",
+//      autoclose:true
+//   });   
+// })
   </script>
   <!-- Github buttons -->
   <script async defer src="https://buttons.github.io/buttons.js"></script>

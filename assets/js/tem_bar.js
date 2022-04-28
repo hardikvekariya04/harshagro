@@ -7,8 +7,7 @@ var $district = $("#district"),
   $taluka = $("#taluka"),
   $options = $taluka.find("option");
 
-$district
-  .on("change", function () {
+$district.on("change", function () {
     $taluka.html($options.filter('[value="' + this.value + '"]'));
   })
   .trigger("change");
@@ -25,27 +24,29 @@ fetch_data();
 var temp_id = document.getElementById("type").value;
 // console.log(temp_id);
 fetch_data();
-$(function () {
-  $(document).on("change", "#taluka", function () {
-    taluka_id = $(this).children(":selected").attr("id");
-    // console.log(taluka_id);
-    fetch_data();
-  });
-  $(document).on("change", "#date", function () {
-    date_id = $(this).val();
-    // console.log(date_id);
-    fetch_data();
-  });
-  $(document).on("change", "#type", function () {
-    temp_id = $(this).val();
-    // console.log(temp_id);
-    fetch_data();
-  });
-  $(document).on("change", "#per", function () {
-    per_id = $(this).val();
-    // console.log(per_id);
-    fetch_data();
-  });
+var per_id = document.getElementById("per").value;
+fetch_data();
+$(function(){
+    $(document).on('change','#taluka',function(){
+        taluka_id = $(this).children(":selected").attr("id");
+        // console.log(taluka_id);
+        fetch_data();
+    })
+    $(document).on('change','#date',function(){
+        date_id = $(this).val();
+        // console.log(date_id);
+        fetch_data();
+    })
+    $(document).on('change','#type',function(){
+        temp_id = $(this).val();
+        // console.log(temp_id);
+        fetch_data();
+    })
+    $(document).on('change','#per',function(){
+      per_id = $(this).val();
+      // console.log(per_id);
+      fetch_data();
+  })
 });
 function fetch_data() {
   $.ajax({

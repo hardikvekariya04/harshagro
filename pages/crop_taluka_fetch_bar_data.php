@@ -2,12 +2,14 @@
 $con = new mysqli('localhost','root','','agro');
 $t_id = $_POST['t_id'];
 $week = $_POST['week'];
-$year = $_POST['year'];
 $per_id = $_POST['per_id'];
-$period_id = $_POST['period_id'];
+// $period_id = $_POST['period_id'];
+$select_week = substr($week, strpos($week, "W") + 1);
+// echo $select_week;
+$trim_year = explode('-',trim($week))[0];
 
 $dto = new DateTime();
-$dto->setISODate($year,$week);
+$dto->setISODate($trim_year,$select_week);
 $ret = $dto->format('Y-m-d');
 $month_date1 = $dto->format('Y');
 $one_monthly =date("Y - M",strtotime($ret));

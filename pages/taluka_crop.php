@@ -36,6 +36,9 @@ if (!isset($_SESSION['ID']) && !isset($_SESSION['EMAIL'])) {
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"
   integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A=="
   crossorigin=""/>
+  <link href="https://cdn.datatables.net/1.11.5/css/jquery.dataTables.min.css" rel="stylesheet">
+  <!-- <link href="https://netdna.bootstrapcdn.com/bootstrap/2.3.2/css/bootstrap.min.css" rel="stylesheet"> -->
+
 </head>
 <body class="g-sidenav-show  bg-gray-200">
 <div class="loader"></div>
@@ -63,7 +66,7 @@ if (!isset($_SESSION['ID']) && !isset($_SESSION['EMAIL'])) {
             <div class="text-dark text-center me-2 d-flex align-items-center justify-content-center">
               <i class="material-icons opacity-10">table_view</i>
             </div>
-            <span class="nav-link-text ms-1" style="width:200px;font-size:20px;font-weight:bold;">Crops</span>
+            <span class="nav-link-text ms-1" style="width:200px;font-size:20px;font-weight:bold;">Vegetation</span>
             
           </a>
         </li>
@@ -108,12 +111,18 @@ if (!isset($_SESSION['ID']) && !isset($_SESSION['EMAIL'])) {
       </ul>
     </div>
     <div class="sidenav-footer position-absolute w-100 bottom-0 ">
-      <div class="mx-3">
-              
-              <a class="btn bg-danger mt-0 w-100" href="../logout.php" type="button" style="color: #fff;"><i class="material-icons opacity-10">login</i> Log Out</a>
+    <div class="mx-3">
+        <a class="btn bg-info mt-0 w-100" href="dataset.php" type="button" style="color: #fff;"><i
+            class="material-icons opacity-10">info </i> Dataset</a>
       </div>
       <div class="mx-3">
-        <a class="btn bg-gradient-primary mt-0 w-100" href="" type="button">Visit Home page</a>
+        <a class="btn bg-gradient-primary mt-0 w-100" href="https://www.agrocastanalytics.com/index.html" type="button"><i
+            class="material-icons opacity-10">home </i> Visit Home page</a>
+      </div>
+      <div class="mx-3">
+
+        <a class="btn bg-danger mt-0 w-100" href="../logout.php" type="button" style="color: #fff;"><i
+            class="material-icons opacity-10">login</i> Log Out</a>
       </div>
     </div>
   </aside>
@@ -535,63 +544,20 @@ if (!isset($_SESSION['ID']) && !isset($_SESSION['EMAIL'])) {
                 <!-- </optgroup> -->
                
               </select>
-              <select class="in" name="years" id="years">
-                <option value="1981">1981</option>
-                <option value="1982">1982</option>
-                <option value="1983">1983</option>
-                <option value="1984" selected>1984</option>
-                <option value="1985">1985</option>
-                <option value="1986">1986</option>
-                <option value="1987">1987</option>
-                <option value="1988">1988</option>
-                <option value="1989">1989</option>
-                <option value="1990">1990</option>
-                <option value="1991">1991</option>
-                <option value="1992">1992</option>
-                <option value="1993">1993</option>
-                <option value="1994">1994</option>
-                <option value="1995">1995</option>
-                <option value="1996">1996</option>
-                <option value="1997">1997</option>
-                <option value="1998">1998</option>
-                <option value="1999">1999</option>
-                <option value="2000">2000</option>
-                <option value="2001">2001</option>
-                <option value="2002">2002</option>
-                <option value="2003">2003</option>
-                <option value="2004">2004</option>
-                <option value="2005">2005</option>
-                <option value="2006">2006</option>
-                <option value="2007">2007</option>
-                <option value="2008">2008</option>
-                <option value="2009">2009</option>
-                <option value="2010">2010</option>
-                <option value="2011">2011</option>
-                <option value="2012">2012</option>
-                <option value="2013">2013</option>
-                <option value="2014">2014</option>
-                <option value="2015">2015</option>
-                <option value="2016">2016</option>
-                <option value="2017">2017</option>
-                <option value="2018">2018</option>
+              <!-- <select class="in" name="years" id="years">
+                <option value="2018" selected>2018</option>
                 <option value="2019">2019</option>
                 <option value="2020">2020</option>
                 <option value="2021">2021</option>
                 <option value="2022">2022</option>
                 <option value="2023">2023</option>
-                <option value="2024">2024</option>
-                <option value="2025">2025</option>
-                <option value="2026">2026</option>
-                <option value="2027">2027</option>
-                <option value="2028">2028</option>
-                <option value="2029">2029</option>
-                <option value="2030">2030</option>
+              </select> -->
 
-              </select>
-              <select class="in" name="weeks" id="weeks">
+              <!-- <select class="in" name="weeks" id="weeks"> -->
+              <input type="week" name="weeks" id="weeks" value="2017-W01" class="in" required>
               <!-- <option value="" selected disabled>Select Week </option> -->
 
-                <option value="1">01</option>
+                <!-- <option value="1" selected>01</option>
                 <option value="2">02</option>
                 <option value="3">03</option>
                 <option value="4">04</option>
@@ -644,7 +610,7 @@ if (!isset($_SESSION['ID']) && !isset($_SESSION['EMAIL'])) {
                 <option value="51">51</option>
                 <option value="52">52</option>
                 
-              </select>
+              </select> -->
 
               <select class="in" name="type" id="type" style="border-top-right-radius:50px;border-bottom-right-radius:50px;">
               <!-- <option value="">Select Type </option> -->
@@ -694,11 +660,7 @@ if (!isset($_SESSION['ID']) && !isset($_SESSION['EMAIL'])) {
               </div>
               <hr style="margin-top:-5px;margin-bottom:0px;">
             </div>
-              <select class="in" name="period" id="per" style="margin-bottom:-20px;">
-              <!-- <option value="">Select period </option> -->
-                <option value="last 6 month">last 6 month</option>
-                <option value="last 3 year">last 3 year</option>
-              </select>
+            <h6 name="period" id="per" align="center" style="border:1px dashed gray;">LAST 3 YEAR</h6>
               <a href="#" id="downloadPdf1"><i class="fa fa-download" style="font-size:22px;align-item:right;text-align:right;position:absolute;right:40px;"></i></a>
               <div id="reportPage1">
                 <div class="chart" id="chart_data1">
@@ -781,30 +743,38 @@ if (!isset($_SESSION['ID']) && !isset($_SESSION['EMAIL'])) {
   <script src="https://code.highcharts.com/modules/exporting.js"></script>
   
 <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+
 <?php
 // last 7 days 
-  $weeknumber = '11';
+  $weeknumber = '01';
   $dto = new DateTime();
-  $dto->setISODate(2013,$weeknumber);
+  $dto->setISODate(2018,$weeknumber);
   $ret = $dto->format('Y-m-d');
+  $first_year = $dto->format('Y');
 
   $dto->modify('-7 days');
   $ret2 = $dto->format('Y-m-d');
+ $second_year = $dto->format('Y');
 
   $dto->modify('-7 days');
   $ret3 = $dto->format('Y-m-d');
+ $third_year = $dto->format('Y');
 
   $dto->modify('-7 days');
   $ret4 = $dto->format('Y-m-d');
+ $four_year = $dto->format('Y');
 
   $dto->modify('-7 days');
   $ret5 = $dto->format('Y-m-d');
+ $five_year = $dto->format('Y');
 
   $dto->modify('-7 days');
   $ret6 = $dto->format('Y-m-d');
+ $six_year = $dto->format('Y');
 
   $dto->modify('-7 days');
   $ret7 = $dto->format('Y-m-d');
+ $seven_year = $dto->format('Y');
 
 $date = new DateTime($ret2);
 $weeknumber1 = $date->format("W");
@@ -824,16 +794,24 @@ $weeknumber5 = $date5->format("W");
 $date6 = new DateTime($ret7);
 $weeknumber6 = $date6->format("W");
 
+$final_first_year = $first_year."-".$weeknumber;
+$final_second_year = $second_year."-".$weeknumber1;
+$final_third_year = $third_year."-".$weeknumber2;
+$final_four_year = $four_year."-".$weeknumber3;
+$final_five_year = $five_year."-".$weeknumber4;
+$final_six_year = $six_year."-".$weeknumber5;
+$final_seven_year = $seven_year."-".$weeknumber6;
+
         $con = new mysqli('localhost','root','','agro');
         $query1 =$con->query("SELECT NDVI from taluka_crop where t_id = 0 AND week IN('$weeknumber','$weeknumber1','$weeknumber2','$weeknumber3','$weeknumber4','$weeknumber5','$weeknumber6') AND year  = '1990'" );
         while($row1 = $query1->fetch_assoc()){
           $month1[] = $row1['NDVI'];
         }
 
-        $month_weeknumber = '11';
-        $year = '1990';
+        $month_weeknumber = '01';
+        $year = '2018';
         $dto = new DateTime();
-        $dto->setISODate(1990,$month_weeknumber);
+        $dto->setISODate(2018,$month_weeknumber);
         $ret_0 = $dto->format('Y-m-d');
         $month_date1 = $dto->format('Y');
         $one_monthly =date("Y - M",strtotime($ret_0));
@@ -1081,7 +1059,7 @@ new Chart(ctx, {
     new Chart(ctx2, {
       type: "line",
       data: {
-        labels: ['<?php echo json_encode($ret7)?>','<?php echo json_encode($ret6)?>','<?php echo json_encode($ret5)?>','<?php echo json_encode($ret4)?>','<?php echo json_encode($ret3)?>','<?php echo json_encode($ret2)?>','<?php echo json_encode($ret)?>'],
+        labels: ['<?php echo json_encode($final_seven_year)?>','<?php echo json_encode($final_six_year)?>','<?php echo json_encode($final_five_year)?>','<?php echo json_encode($final_four_year)?>','<?php echo json_encode($final_third_year)?>','<?php echo json_encode($final_second_year)?>','<?php echo json_encode($final_first_year)?>'],
         datasets: [{
           label: "NDVI",
           tension: 0,
@@ -1185,6 +1163,15 @@ new Chart(ctx, {
       Scrollbar.init(document.querySelector('#sidenav-scrollbar'), options);
     }
 
+    $('#taluka').on("change", function () {
+    taluka_id1 = $(this).children(":selected").text();
+    console.log(taluka_id1);
+  });
+  $(document).on("change", "#weeks", function () {
+    year = $(this).val();
+
+  });
+
     $('#downloadPdf').click(function(event) {
   var reportPageHeight = $('#reportPage').innerHeight();
   var reportPageWidth = $('#reportPage').innerWidth();
@@ -1216,7 +1203,7 @@ new Chart(ctx, {
   var pdf = new jsPDF('l', 'pt', [reportPageWidth, reportPageHeight]);
   pdf.addImage($(pdfCanvas)[0], 'PNG', 0, 0);
   
-  pdf.save('filename.pdf');
+  pdf.save(taluka_id1+"_"+year+'.pdf');
 });
 
 
@@ -1251,8 +1238,10 @@ $('#downloadPdf1').click(function(event) {
   var pdf = new jsPDF('l', 'pt', [reportPageWidth, reportPageHeight]);
   pdf.addImage($(pdfCanvas)[0], 'PNG', 0, 0);
   
-  pdf.save('filename.pdf');
+  pdf.save(taluka_id1+"_"+year+'.pdf');
 });
+
+
   </script>
   <!-- Github buttons -->
   <script async defer src="https://buttons.github.io/buttons.js"></script>

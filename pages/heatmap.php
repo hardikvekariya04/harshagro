@@ -93,7 +93,7 @@ if (!isset($_SESSION['ID']) && !isset($_SESSION['EMAIL'])) {
             <div class="text-dark text-center me-2 d-flex align-items-center justify-content-center">
               <i class="material-icons opacity-10">table_view</i>
             </div>
-            <span class="nav-link-text ms-1">Crops</span>
+            <span class="nav-link-text ms-1">Vegetation</span>
 
           </a>
         </li>
@@ -108,13 +108,18 @@ if (!isset($_SESSION['ID']) && !isset($_SESSION['EMAIL'])) {
       </ul>
     </div>
     <div class="sidenav-footer position-absolute w-100 bottom-0 ">
+    <div class="mx-3">
+        <a class="btn bg-info mt-0 w-100" href="dataset.php" type="button" style="color: #fff;"><i
+            class="material-icons opacity-10">info </i> Dataset</a>
+      </div>
+      <div class="mx-3">
+        <a class="btn bg-gradient-primary mt-0 w-100" href="https://www.agrocastanalytics.com/index.html" type="button"><i
+            class="material-icons opacity-10">home </i> Visit Home page</a>
+      </div>
       <div class="mx-3">
 
         <a class="btn bg-danger mt-0 w-100" href="../logout.php" type="button" style="color: #fff;"><i
             class="material-icons opacity-10">login</i> Log Out</a>
-      </div>
-      <div class="mx-3">
-        <a class="btn bg-gradient-primary mt-0 w-100" href="" type="button">Visit Home page</a>
       </div>
     </div>
   </aside>
@@ -133,8 +138,8 @@ if (!isset($_SESSION['ID']) && !isset($_SESSION['EMAIL'])) {
           <div class="ms-md-auto pe-md-3 d-flex align-items-center">
             <div class="input-group input-group-outline">
 
-              <input class="in" id="date" type="date" placeholder="DD-MM-YYYY" min="1997-01-01" max="2020-02-15"
-                value="" style="border-top-left-radius:50px;border-bottom-left-radius:50px;width:200px;padding:7px;margin-bottom:-10px;">
+              <!-- <input class="in" id="date" type="date" placeholder="DD-MM-YYYY" min="1997-01-01" max="2020-02-15"
+                value="" style="border-top-left-radius:50px;border-bottom-left-radius:50px;width:200px;padding:7px;margin-bottom:-10px;"> -->
 
             </div>
           </div>
@@ -162,11 +167,13 @@ if (!isset($_SESSION['ID']) && !isset($_SESSION['EMAIL'])) {
           <div class="card-body" style="margin-top:-20px;">
               <h3 class="mb-0 ">Weather</h3>
               <p class="text-sm ">Heatmap Data</p>
-              <select class="in" name="type" id="type" style="position:absolute;top:10px;left:300px;border-radius:50px;width:150px;">
+              <select class="in" name="type" id="type" style="position:absolute;top:10px;left:180px;border-radius:50px;width:150px;">
                 <option value="min">Min Temp</option>
                 <option value="max">Max Temp</option>
                 <option value="rain">Rainfall</option>
               </select>
+              <input class="in" id="date" type="date" placeholder="DD-MM-YYYY" min="1997-01-01" max="2020-02-15"
+                value="2019-02-06" style="border-top-left-radius:50px;border-bottom-left-radius:50px;width:150px;padding:3px;margin-bottom:-10px;position:absolute;top:10px;left:340px;">
             </div>
             <hr class="dark horizontal" style="margin-top:-30px;margin-bottom:-10px;">
             <div id="chart-line1" class="img-magnifier-container"></div>
@@ -175,13 +182,14 @@ if (!isset($_SESSION['ID']) && !isset($_SESSION['EMAIL'])) {
         <div class="col-lg-5.5 col-md-6 mt-4 mb-0" style="margin-left : 20px">
           <div class="card z-index-2  ">
           <div class="card-body" style="margin-top:-20px;">
-              <h3 class="mb-0 "> Crop </h3>
+              <h3 class="mb-0 "> Vegetation </h3>
               <p class="text-sm "> Heatmap Data </p>
-              <select class="in" name="type" id="type1" style="position:absolute;top:10px;left:300px;border-radius:50px;width:150px;">
-                <option value="min">Min Temp</option>
-                <option value="max">Max Temp</option>
-                <option value="rain">Rainfall</option>
+              <select class="in" name="type" id="type1" style="position:absolute;top:10px;left:180px;border-radius:50px;width:150px;">
+                <option value="NDVI">NDVI</option>
+                <option value="VCI">VCI</option>
+                <option value="VHI">VHI</option>
               </select>
+              <input type="week" name="week" id="week" value="2022-W15" style="position:absolute;top:10px;left:340px;border-radius:50px;width:150px;padding:3px;border:1px solid gray;" required>
             </div>
             <hr class="dark horizontal" style="margin-top:-30px;margin-bottom:-10px;">
             <div id="chart-line2"></div>
@@ -262,12 +270,15 @@ if (!isset($_SESSION['ID']) && !isset($_SESSION['EMAIL'])) {
     var date_id = '';
     var temp_id = '';
     var temp_id1 = '';
+    var week = '';
     var date_id = document.getElementById("date").value;
     // console.log(date_id);
     fetch_data();
     var temp_id = document.getElementById("type").value;
     fetch_data();
     var temp_id1 = document.getElementById("type1").value;
+    fetch_data();
+    var week = document.getElementById("week").value;
     fetch_data();
     $(function () {
       $(document).on('change', '#date', function () {
@@ -281,6 +292,11 @@ if (!isset($_SESSION['ID']) && !isset($_SESSION['EMAIL'])) {
     })
     $(document).on('change','#type1',function(){
         temp_id1 = $(this).val();
+        fetch_data();
+    })
+    $(document).on('change','#week',function(){
+        week = $(this).val();
+        // console.log(week);
         fetch_data();
     })
     });
@@ -297,7 +313,7 @@ if (!isset($_SESSION['ID']) && !isset($_SESSION['EMAIL'])) {
       $.ajax({
         url: path + "crop_heatmap_fetch_data.php",
         type: 'POST',
-        data: { date_id: date_id,temp_id:temp_id,temp_id1 :temp_id1 },
+        data: { date_id: date_id,temp_id:temp_id,temp_id1 :temp_id1,week :week },
         success: function (result) {
           $("#chart-line2").html(result);
         }

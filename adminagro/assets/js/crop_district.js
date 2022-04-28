@@ -1,24 +1,52 @@
 var path = "http://localhost/newagro/pages/";
+<<<<<<< HEAD
+var d_id ='';
+var year = '';
+var week = '';
+var per_id = '';
+
+=======
 var d_id = "";
 var year = "";
 var week = "";
 var per_id = "";
 var period_id = "";
+>>>>>>> 5e4e1cd005daeea96e784b7dfe02fea2d306f21e
 
 var d_id = document.getElementById("district").value;
 fetch_data();
-console.log(d_id);
 var week = document.getElementById("weeks").value;
-console.log(week);
 fetch_data();
 var year = document.getElementById("years").value;
-
 fetch_data();
 var per_id = document.getElementById("type").value;
-
 fetch_data();
-var period_id = document.getElementById("per").value;
 
+<<<<<<< HEAD
+$(function(){
+    $(document).on('change','#district',function(){
+        d_id = $(this).children(":selected").attr("id");
+        fetch_data();
+    })
+    $(document).on('change','#weeks',function(){
+      week = $(this).val();
+      fetch_data();
+  })
+    $(document).on('change','#years',function(){
+        year = $(this).val();
+        fetch_data();
+    })
+    $(document).on('change','#type',function(){
+      per_id = $(this).val();
+      fetch_data();
+  })
+});
+function fetch_data(){
+$.ajax({
+    url: path +"crop_district_fetch_data.php"  ,
+    type: 'post',
+    data: { d_id: d_id , week: week, year: year ,per_id: per_id},
+=======
 fetch_data();
 $(function () {
   $(document).on("change", "#district", function () {
@@ -53,12 +81,20 @@ function fetch_data() {
       per_id: per_id,
       period_id: period_id,
     },
+>>>>>>> 5e4e1cd005daeea96e784b7dfe02fea2d306f21e
     success: function (result) {
       result = JSON.parse(result);
       update_chart(result);
     },
   });
 
+<<<<<<< HEAD
+$.ajax({
+  url: path +"crop_district_fetch_bar_data.php"  ,
+  type: 'post',
+  data: { d_id: d_id , week: week , year: year ,per_id: per_id},
+  success: function (result1) {
+=======
   $.ajax({
     url: path + "crop_district_fetch_bar_data.php",
     type: "post",
@@ -70,12 +106,20 @@ function fetch_data() {
       period_id: period_id,
     },
     success: function (result1) {
+>>>>>>> 5e4e1cd005daeea96e784b7dfe02fea2d306f21e
       result1 = JSON.parse(result1);
       update_chart1(result1);
     },
   });
 }
 
+<<<<<<< HEAD
+function update_chart(result){
+    $("canvas#chart-line").remove();
+  $("div#chart_data").append('<canvas id="chart-line" class="chart-canvas" height="270" width="250" style="margin-left:20px"></canvas>');
+      var ctx2 = document.getElementById("chart-line").getContext("2d");
+  if(per_id == "NDVI"){
+=======
 function update_chart(result) {
   $("canvas#chart-line").remove();
   $("div#chart_data").append(
@@ -83,6 +127,7 @@ function update_chart(result) {
   );
   var ctx2 = document.getElementById("chart-line").getContext("2d");
   if (per_id == "NDVI") {
+>>>>>>> 5e4e1cd005daeea96e784b7dfe02fea2d306f21e
     new Chart(ctx2, {
       type: "line",
       data: {

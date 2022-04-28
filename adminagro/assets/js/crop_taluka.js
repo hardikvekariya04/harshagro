@@ -6,11 +6,18 @@ var date_id = "";
 var temp_id = "";
 var per_id = "";
 
+<<<<<<< HEAD
+var year = '';
+var $district = $('#district'),
+  $taluka = $('#taluka'),
+  $options = $taluka.find('option');
+=======
 var period_id = " ";
 var year = "";
 var $district = $("#district"),
   $taluka = $("#taluka"),
   $options = $taluka.find("option");
+>>>>>>> 5e4e1cd005daeea96e784b7dfe02fea2d306f21e
 
 $district
   .on("change", function () {
@@ -24,8 +31,7 @@ var year = document.getElementById("years").value;
 fetch_data();
 var per_id = document.getElementById("type").value;
 fetch_data();
-var period_id = document.getElementById("per").value;
-fetch_data();
+
 
 $(function () {
   $(document).on("change", "#taluka", function () {
@@ -43,11 +49,15 @@ $(function () {
   $(document).on("change", "#type", function () {
     per_id = $(this).val();
     fetch_data();
+<<<<<<< HEAD
+  })
+=======
   });
   $(document).on("change", "#per", function () {
     period_id = $(this).val();
     fetch_data();
   });
+>>>>>>> 5e4e1cd005daeea96e784b7dfe02fea2d306f21e
 });
 
 function fetch_data() {
@@ -62,6 +72,10 @@ function fetch_data() {
   });
   $.ajax({
     url: path + "crop_taluka_fetch_bar_data.php",
+<<<<<<< HEAD
+    type: 'post',
+    data: { t_id: t_id, week: week, year: year, per_id: per_id},
+=======
     type: "post",
     data: {
       t_id: t_id,
@@ -70,6 +84,7 @@ function fetch_data() {
       per_id: per_id,
       period_id: period_id,
     },
+>>>>>>> 5e4e1cd005daeea96e784b7dfe02fea2d306f21e
     success: function (result1) {
       result1 = JSON.parse(result1);
       update_chart1(result1);

@@ -101,7 +101,7 @@ if($row=mysqli_fetch_assoc($result))
             <div class="text-dark text-center me-2 d-flex align-items-center justify-content-center">
               <i class="material-icons opacity-10">table_view</i>
             </div>
-            <span class="nav-link-text ms-1">Crops</span>
+            <span class="nav-link-text ms-1">Vegetation</span>
 
           </a>
         </li>
@@ -113,24 +113,29 @@ if($row=mysqli_fetch_assoc($result))
             <span class="nav-link-text ms-1" >Heatmap</span>
           </a>
         </li>
-        <li class="nav-item">
+        <!-- <li class="nav-item">
           <a class="nav-link text-dark active bg-gradient-primary" href=" ">
             <div class="text-dark text-center me-2 d-flex align-items-center justify-content-center">
               <i class="material-icons opacity-10">table_view</i>
             </div>
             <span class="nav-link-text ms-1" style="font-size:20px;font-weight:bold;">Dataset</span>
           </a>
-        </li>
+        </li> -->
       </ul>
     </div>
     <div class="sidenav-footer position-absolute w-100 bottom-0 ">
+    <div class="mx-3">
+        <a class="btn bg-info mt-0 w-100" href="dataset.php" type="button" style="color: #fff;"><i
+            class="material-icons opacity-10">info </i> Dataset</a>
+      </div>
+      <div class="mx-3">
+        <a class="btn bg-gradient-primary mt-0 w-100" href="https://www.agrocastanalytics.com/index.html" type="button"><i
+            class="material-icons opacity-10">home </i> Visit Home page</a>
+      </div>
       <div class="mx-3">
 
         <a class="btn bg-danger mt-0 w-100" href="../logout.php" type="button" style="color: #fff;"><i
             class="material-icons opacity-10">login</i> Log Out</a>
-      </div>
-      <div class="mx-3">
-        <a class="btn bg-gradient-primary mt-0 w-100" href="" type="button">Visit Home page</a>
       </div>
     </div>
   </aside>
