@@ -1,10 +1,10 @@
 var path = "http://localhost/newagro/pages/";
 
-var t_id = '';
-var d_id = '';
-var date_id = '';
-var temp_id = '';
-var per_id = '';
+var t_id = "";
+var d_id = "";
+var date_id = "";
+var temp_id = "";
+var per_id = "";
 
 <<<<<<< HEAD
 var year = '';
@@ -34,12 +34,7 @@ fetch_data();
 
 
 $(function () {
-<<<<<<< HEAD
   $(document).on("change", "#taluka", function () {
-=======
-
-  $(document).on('change', '#taluka', function () {
->>>>>>> e3cb1fa6aadbce31f5f53803f9c291ed07e6aa63
     t_id = $(this).children(":selected").attr("id");
     fetch_data();
   });
@@ -238,9 +233,10 @@ function update_chart(result) {
               display: true,
               text: "VCI",
               font: {
-                family: "Times",
+                family: "Roboto",
                 size: 15,
-                style: "normal",
+                style: "bold",
+                weight: 100,
               },
               padding: { bottom: 0 },
             },
@@ -331,9 +327,10 @@ function update_chart(result) {
               display: true,
               text: "VHI",
               font: {
-                family: "Times",
+                family: "Roboto",
                 size: 15,
-                style: "normal",
+                style: "bold",
+                weight: 100,
               },
               padding: { bottom: 0 },
             },
@@ -613,9 +610,10 @@ function update_chart1(result1) {
               display: true,
               text: "VCI",
               font: {
-                family: "Times",
+                family: "Roboto",
                 size: 15,
-                style: "normal",
+                style: "bold",
+                weight: 100,
               },
               padding: { bottom: 0 },
             },
@@ -705,9 +703,10 @@ function update_chart1(result1) {
               display: true,
               text: "VHI",
               font: {
-                family: "Times",
+                family: "Roboto",
                 size: 15,
-                style: "normal",
+                style: "bold",
+                weight: 100,
               },
               padding: { bottom: 0 },
             },
