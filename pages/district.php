@@ -49,7 +49,17 @@ $date_min_current = $row_min_date['date'];
   integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A=="
   crossorigin=""/>
 </head>
-
+<style>
+  .in{
+    margin-right:20px;
+    height:30px;
+  }
+  .heading{
+    margin-right:7px;
+    margin-top:3px;
+    font-weight:bold;
+  }
+  </style>
 <body class="g-sidenav-show  bg-gray-200">
 <div class="loader"></div>
   <!-- <div class="circle"></div> -->
@@ -151,10 +161,8 @@ $date_min_current = $row_min_date['date'];
           <div class="ms-md-auto pe-md-3 d-flex align-items-center">
             <div class="input-group input-group-outline">
            
-
-              
-                <!-- <label>Select District:</label> -->
-                <select id="district" >
+                <label class="heading">District:</label>
+                <select id="district" class="in" style="border-radius:50px">
                 <!-- <option value="" disabled selected>Select District</option> -->
                     <option value="Ahmadabad" id="0" selected>Ahmadabad</option>
                     <option value="Anand" id="1">Anand</option>
@@ -193,7 +201,8 @@ $date_min_current = $row_min_date['date'];
                    
                     
                 </select>
-              <select class="in" name="type" id="type">
+                <label class="heading">Climate Variable:  </label>
+              <select class="in" name="type" id="type" style="border-radius:50px;">
               <!-- <option value="">Select Type</option> -->
                 <option value="min" selected>Minimum Temperature</option>
                 <option value="max">Maximum Temperature</option>
@@ -205,10 +214,9 @@ $date_min_current = $row_min_date['date'];
                 <option value="last 6 month">last 6 month</option>
                 <option value="last 3 year">last 3 year</option>
               </select> -->
-
+                <label class="heading">Date:</label>
               <input class="in" id="date" type="date" placeholder="DD-MM-YYYY" min="<?php echo $date_min_current?>" max="<?php echo $date_current?>"
-                value="<?php echo $date_current?>" selected>
-              
+                value="<?php echo $date_current?>" style="border-radius:50px" selected>
             </div>
           </div>
           <ul class="navbar-nav  justify-content-end">
@@ -259,8 +267,8 @@ $date_min_current = $row_min_date['date'];
             <div class="bg-gradient-success shadow-success border-radius-lg py-3 pe-1">
             <a href="#" id="downloadPdf"><i class="fa fa-download" style="font-size:22px;align-item:right;text-align:right;position:absolute;right:40px;"></i></a>
               <div id="reportPage">
-                  <div class="chart" id="chart_data" style="width:550px;">
-                      <canvas id="chart-line" class="chart-canvas" height="270" width="300" style="margin-left: -10px;"></canvas>
+                  <div class="chart" id="chart_data">
+                      <canvas id="chart-line" class="chart-canvas" height="270" width="300" style="margin-left: -17px;"></canvas>
                   </div>
                   <hr style="margin-top:-5px;margin-bottom:0px;">
               </div>
@@ -416,9 +424,9 @@ $dates7  =date('Y-m-d', $date7 );
 
 
   $con = new mysqli('localhost','root','','agro');
-  $query1 =$con->query("SELECT max_temp,date from district_data where taluka_id = 1 AND date IN('$dates1','$dates2','$dates3','$dates4','$dates5','$dates6','$dates7')" );
+  $query1 =$con->query("SELECT min_temp,date from district_data where taluka_id = 0 AND date IN('$dates1','$dates2','$dates3','$dates4','$dates5','$dates6','$dates7')" );
   while($row1 = $query1->fetch_assoc()){
-    $month1[] = $row1['max_temp'];
+    $month1[] = $row1['min_temp'];
     $amount1[] = $row1['date'];
   }
 
@@ -440,10 +448,10 @@ $thrid_monthly =date("Y - M",strtotime($monthly2));
 $four_monthly =date("Y - M",strtotime($monthly3));
 $five_monthly =date("Y - M",strtotime($monthly4));
 $six_monthly =date("Y - M",strtotime($monthly5));
-  //$query =$con->query("SELECT max_temp,date from district_data where taluka_id = 2 AND date IN(date_sub('$query_Date',Interval 1 month))" );
-  $query =$con->query("SELECT max_temp,date from district_data where taluka_id = 2 AND (date_sub('2018-09-30',Interval 1 month)) < date && date <= '2018-09-30'");
+  //$query =$con->query("SELECT min_temp,date from district_data where taluka_id = 0 AND date IN(date_sub('$query_Date',Interval 1 month))" );
+  $query =$con->query("SELECT min_temp,date from district_data where taluka_id = 0 AND (date_sub('2018-09-30',Interval 1 month)) < date && date <= '2018-09-30'");
   while($row = $query->fetch_assoc()){
-      $month[] = $row['max_temp'];
+      $month[] = $row['min_temp'];
       $amount[] = $row['date'];
     }
   $months1 =  json_encode($month);
@@ -463,9 +471,9 @@ foreach($temp_array1 as $temp1)
 //  echo "Average Temperature is : ".$avg_high_temp1.""; 
 
 
-$query3 =$con->query("SELECT max_temp,date from district_data where taluka_id = 2 AND  (date_sub('$monthly',Interval 1 month)) < date && date <= '$monthly'" );
+$query3 =$con->query("SELECT min_temp,date from district_data where taluka_id = 0 AND  (date_sub('$monthly',Interval 1 month)) < date && date <= '$monthly'" );
   while($row3 = $query3->fetch_assoc()){
-      $month3[] = $row3['max_temp'];
+      $month3[] = $row3['min_temp'];
       $amount3[] = $row3['date'];
     }
   $months2 =  json_encode($month3);
@@ -484,9 +492,9 @@ foreach($temp_array2 as $temp2)
 
 
 
-$query4 =$con->query("SELECT max_temp,date from district_data where taluka_id = 2 AND (date_sub('$monthly1',Interval 1 month)) < date && date <= '$monthly1'" );
+$query4 =$con->query("SELECT min_temp,date from district_data where taluka_id = 0 AND (date_sub('$monthly1',Interval 1 month)) < date && date <= '$monthly1'" );
   while($row4 = $query4->fetch_assoc()){
-      $month4[] = $row4['max_temp'];
+      $month4[] = $row4['min_temp'];
       $amount4[] = $row4['date'];
     }
   $months4 =  json_encode($month4);
@@ -505,9 +513,9 @@ foreach($temp_array3 as $temp3)
  //echo "Average Temperature is : ".$avg_high_temp3."";
 
 
-$query5 =$con->query("SELECT max_temp,date from district_data where taluka_id = 2 AND (date_sub('$monthly2',Interval 1 month)) < date && date <= '$monthly2'" );
+$query5 =$con->query("SELECT min_temp,date from district_data where taluka_id = 0 AND (date_sub('$monthly2',Interval 1 month)) < date && date <= '$monthly2'" );
   while($row5 = $query5->fetch_assoc()){
-      $month5[] = $row5['max_temp'];
+      $month5[] = $row5['min_temp'];
       $amount5[] = $row5['date'];
     }
   $months5 =  json_encode($month5);
@@ -526,9 +534,9 @@ foreach($temp_array4 as $temp4)
  //echo "Average Temperature is : ".$avg_high_temp4."";
 
 
-$query6 =$con->query("SELECT max_temp,date from district_data where taluka_id = 2 AND (date_sub('$monthly3',Interval 1 month)) < date && date <= '$monthly3'" );
+$query6 =$con->query("SELECT min_temp,date from district_data where taluka_id = 0 AND (date_sub('$monthly3',Interval 1 month)) < date && date <= '$monthly3'" );
   while($row6 = $query6->fetch_assoc()){
-      $month6[] = $row6['max_temp'];
+      $month6[] = $row6['min_temp'];
       $amount6[] = $row6['date'];
     }
   $months6 =  json_encode($month6);
@@ -546,9 +554,9 @@ foreach($temp_array5 as $temp5)
  //echo "Average Temperature is : ".$avg_high_temp5."";
 
 
-$query7 =$con->query("SELECT max_temp,date from district_data where taluka_id = 2 AND (date_sub('$monthly4',Interval 1 month)) < date && date <= '$monthly4'" );
+$query7 =$con->query("SELECT min_temp,date from district_data where taluka_id = 0 AND (date_sub('$monthly4',Interval 1 month)) < date && date <= '$monthly4'" );
   while($row7 = $query7->fetch_assoc()){
-      $month7[] = $row7['max_temp'];
+      $month7[] = $row7['min_temp'];
       $amount7[] = $row7['date'];
     }
   $months7 =  json_encode($month7);
@@ -566,9 +574,9 @@ foreach($temp_array6 as $temp6)
  //echo "Average Temperature is : ".$avg_high_temp6."";
 
 
-$query8 =$con->query("SELECT max_temp,date from district_data where taluka_id = 2 AND (date_sub('$monthly5',Interval 1 month)) < date && date <= '$monthly5'" );
+$query8 =$con->query("SELECT min_temp,date from district_data where taluka_id = 0 AND (date_sub('$monthly5',Interval 1 month)) < date && date <= '$monthly5'" );
   while($row8 = $query8->fetch_assoc()){
-      $month8[] = $row8['max_temp'];
+      $month8[] = $row8['min_temp'];
       $amount8[] = $row8['date'];
     }
   $months8 =  json_encode($month8);
@@ -591,9 +599,9 @@ foreach($temp_array7 as $temp7)
 $year_date_store = '2020-12-30';
 $yearly_one_date = date('Y-m-d', strtotime($year_date_store. ' - 1 year'));
 $yearly_second_date = date('Y-m-d', strtotime($yearly_one_date. ' - 1 year'));
-$query3 =$con->query("SELECT max_temp,date from district_data where taluka_id = 1 AND (date_sub('2020-12-30',Interval 1 year)) < date && date <= '2020-12-30'");
+$query3 =$con->query("SELECT min_temp,date from district_data where taluka_id = 0 AND (date_sub('2020-12-30',Interval 1 year)) < date && date <= '2020-12-30'");
   while($row3 = $query3->fetch_assoc()){
-      $year[] = $row3['max_temp'];
+      $year[] = $row3['min_temp'];
       $year_date[] = $row3['date'];
     }
     $years1 =  json_encode($year);
@@ -613,9 +621,9 @@ foreach($year_array as $year_temp)
 
 
 
-$query4 =$con->query("SELECT max_temp,date from district_data where taluka_id = 1 AND (date_sub('$yearly_one_date',Interval 1 year)) < date && date <= '$yearly_one_date'");
+$query4 =$con->query("SELECT min_temp,date from district_data where taluka_id = 0 AND (date_sub('$yearly_one_date',Interval 1 year)) < date && date <= '$yearly_one_date'");
   while($row4 = $query4->fetch_assoc()){
-      $year1[] = $row4['max_temp'];
+      $year1[] = $row4['min_temp'];
       $year_date1[] = $row4['date'];
     }
     $years2 =  json_encode($year1);
@@ -634,9 +642,9 @@ foreach($year_array1 as $year_temp1)
 //  echo $avg_high_year_temp1;
 
 
- $query5 =$con->query("SELECT max_temp,date from district_data where taluka_id = 1 AND (date_sub('$yearly_one_date',Interval 1 year)) < date && date <= '$yearly_one_date'");
+ $query5 =$con->query("SELECT min_temp,date from district_data where taluka_id = 0 AND (date_sub('$yearly_one_date',Interval 1 year)) < date && date <= '$yearly_one_date'");
  while($row5 = $query5->fetch_assoc()){
-     $year5[] = $row5['max_temp'];
+     $year5[] = $row5['min_temp'];
      $year_date5[] = $row5['date'];
    }
    $years5 =  json_encode($year5);
@@ -691,7 +699,7 @@ new Chart(ctx, {
         display: true,
             title: {
               display: true,
-              text: 'Minimum Temp(°C)',
+              text: 'Minimum Temperature(°C)',
           font: {
             family: 'Times',
             size: 15,
@@ -718,7 +726,7 @@ new Chart(ctx, {
             weight: 300,
             family: "Roboto",
             style: 'normal',
-            lineHeight: 2
+            lineHeight: 1.5
           },
           color: "#000"
         },
@@ -788,13 +796,13 @@ new Chart(ctx, {
             display: true,
             title: {
               display: true,
-              text: 'Minimum Temp(°C)',
+              text: 'Minimum Temperature(°C)',
           font: {
             family: 'Times',
             size: 15,
             style: 'normal',
           },
-          padding: {bottom: 0},
+          padding: {bottom: 5},
         
         },
             grid: {
@@ -811,7 +819,7 @@ new Chart(ctx, {
               color: '#000',
               padding: 10,
               font: {
-                size: 15,
+                size: 14,
                 weight: 300,
                 family: "Roboto",
                 style: 'normal',
@@ -832,11 +840,11 @@ new Chart(ctx, {
               color: '#000',
               padding: 10,
               font: {
-                size: 16,
+                size: 15,
                 weight: 300,
                 family: "Roboto",
                 style: 'normal',
-                lineHeight: 1.5
+                lineHeight: 2
               },
             }
           },

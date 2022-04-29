@@ -12,6 +12,7 @@ $dates4  =date('Y-m-d', strtotime($date_id.'-3 day'));
 $dates5  =date('Y-m-d', strtotime($date_id.'-4 day'));
 $dates6  =date('Y-m-d', strtotime($date_id.'-5 day'));
 $dates7  =date('Y-m-d', strtotime($date_id.'-6 day'));
+
 if($temp_id === 'max' ){
   $query1 =$con->query("SELECT max_temp,date from district_data where taluka_id = ".$taluka_id." AND date IN('$dates1','$dates2','$dates3','$dates4','$dates5','$dates6','$dates7')" );
   $month = array();

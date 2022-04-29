@@ -37,6 +37,7 @@ function display_message()
             $password = $_POST['password'];
             $cpassword =$_POST['cpassword'];
             $phone = $_POST['phone'];
+            $organization = $_POST['organization'];
     
             if(empty($username) || empty($email) || empty($password) || empty($cpassword))
             {
@@ -76,7 +77,7 @@ function display_message()
                             $token = md5(rand());
                             date_default_timezone_set('Asia/Kolkata');
                             $datetime = date("F j, Y g:i:s a");
-                            $sql = "insert into users(username, phone, email,create_datetime, password, token) values('$username', '$phone', '$email', '$datetime', '$hash', '$token')";
+                            $sql = "insert into users(username, phone, email,organization,create_datetime, password, token) values('$username', '$phone', '$email','$organization', '$datetime', '$hash', '$token')";
                             $data = mysqli_query($con, $sql);
                             if($data)
                             {

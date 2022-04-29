@@ -73,7 +73,18 @@ else{
   integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A=="
   crossorigin=""/>
 </head>
-
+<style>
+  .in{
+    margin-right:20px;
+    height:30px;
+    border-radius:50px !important;
+  }
+  .heading{
+    margin-right:7px;
+    margin-top:3px;
+    font-weight:bold;
+  }
+  </style>
 <body class="g-sidenav-show  bg-gray-200">
 <div class="loader"></div>
   <!-- <div class="circle"></div> -->
@@ -179,7 +190,8 @@ else{
 
               
                 <!-- <label>Select District:</label> -->
-                <select id="district" >
+                <label class="heading">District:</label>
+                <select id="district" class="in">
                 <!-- <option value="" disabled >Select District</option> -->
                 <option value="Ahmadabad" id="0" selected>Ahmadabad</option>
                     <option value="Anand" id="1">Anand</option>
@@ -280,14 +292,16 @@ else{
                 <option value="50">50</option>
                 <option value="51">51</option>
                 <option value="52">52</option> -->
-                <select class="in" name="type" id="type">
+                <label class="heading">Vegetation Index:</label>
+                <select class="in" name="type" id="type" style="width:130px;" >
               <option value="NDVI" selected>NDVI</option>
                 <!-- <option value="SMT">SMT</option> -->
                 <!-- <option value="TCI">TCI</option> -->
                 <option value="VCI">VCI</option>
                 <option value="VHI">VHI</option>
               </select>
-                <input type="week" name="weeks" id="weeks"  min="<?php echo $full_min_weeks?>" max="<?php echo $full_weeks?>" value="<?php echo $full_weeks?>" class="in" style="border:1px solid gray;border-top-right-radius:50px;border-bottom-right-radius:50px;" required>
+              <label class="heading">Week:</label>
+                <input type="week" class="in" name="weeks" id="weeks"  min="<?php echo $full_min_weeks?>" max="<?php echo $full_weeks?>" value="<?php echo $full_weeks?>" class="in" style="border:1px solid gray;border-top-right-radius:50px;border-bottom-right-radius:50px;" required>
               <!-- </select> -->
 
 

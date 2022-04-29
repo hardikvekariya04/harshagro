@@ -73,7 +73,7 @@
 
 
             ?>
-                <div class="card-body">
+                <div class="card-body" style="margin-top:-20px;">
                   <form role="form" action="" method="POST">
                     <div class="input-group input-group-outline mb-3">
                       <label class="form-label">Full Name</label>
@@ -86,6 +86,10 @@
                     <div class="input-group input-group-outline mb-3">
                       <label class="form-label">Email</label>
                       <input type="email" class="form-control" name="email" required autocomplete="off">
+                    </div>
+                    <div class="input-group input-group-outline mb-3">
+                      <label class="form-label">Organization</label>
+                      <input type="organization" class="form-control" name="organization" required autocomplete="off">
                     </div>
                     <div class="input-group input-group-outline mb-3">
                       <label class="form-label">Password</label>
@@ -102,7 +106,7 @@
                       </label>
                     </div>
                     <div class="text-center">
-                      <button type="submit" class="btn btn-lg bg-gradient-primary btn-lg w-100 mt-4 mb-0" name="submit">Sign Up</button>
+                      <button type="submit"  class="btn btn-lg bg-gradient-primary btn-lg w-100 mt-0 mb-0" name="submit">Sign Up</button>
                     </div>
                   </form>
                 </div>

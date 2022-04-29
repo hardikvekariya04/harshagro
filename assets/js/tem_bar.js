@@ -31,21 +31,25 @@ $(function(){
         taluka_id = $(this).children(":selected").attr("id");
         // console.log(taluka_id);
         fetch_data();
+        fetch_data1();
     })
     $(document).on('change','#date',function(){
         date_id = $(this).val();
         // console.log(date_id);
         fetch_data();
+        fetch_data1();
     })
     $(document).on('change','#type',function(){
         temp_id = $(this).val();
         // console.log(temp_id);
         fetch_data();
+        fetch_data1();
     })
     $(document).on('change','#per',function(){
       per_id = $(this).val();
       // console.log(per_id);
-      fetch_data();
+      fetch_data1();
+      
   })
 });
 function fetch_data() {
@@ -56,7 +60,6 @@ function fetch_data() {
       taluka_id: taluka_id,
       date_id: date_id,
       temp_id: temp_id,
-      per_id: per_id,
     },
     success: function (result) {
       result = JSON.parse(result);
@@ -65,7 +68,8 @@ function fetch_data() {
       // update_chart1(result);
     },
   });
-
+}
+function fetch_data1(){
   $.ajax({
     url: path + "fetch_bar_data.php",
     type: "post",
@@ -82,11 +86,10 @@ function fetch_data() {
     },
   });
 }
-
 function update_chart(result) {
   $("canvas#chart-line").remove();
   $("div#chart_data").append(
-    '<canvas id="chart-line" class="chart-canvas" height="270" width="300"></canvas>'
+    '<canvas id="chart-line" class="chart-canvas" height="270" width="300" style="margin-left:-12px;"></canvas>'
   );
   var ctx2 = document.getElementById("chart-line").getContext("2d");
   if (temp_id === "rain") {
@@ -133,7 +136,7 @@ function update_chart(result) {
               font: {
                 family: "Roboto",
                 size: 15,
-                style: "bold",
+                style: "normal",
               },
               padding: { bottom: 3 },
             },
@@ -222,7 +225,7 @@ function update_chart(result) {
             display: true,
             title: {
               display: true,
-              text: "Minimum Temp(°C) ",
+              text: "Minimum Temperature(°C) ",
               font: {
                 family: "Times",
                 size: 15,
@@ -315,7 +318,7 @@ function update_chart(result) {
             display: true,
             title: {
               display: true,
-              text: "Maximum Temp(°C) ",
+              text: "Maximum Temperature(°C) ",
               font: {
                 family: "Times",
                 size: 15,
@@ -408,7 +411,7 @@ function update_chart(result) {
             display: true,
             title: {
               display: true,
-              text: "Minimum Temp(°C) ",
+              text: "Minimum Temperature(°C) ",
               font: {
                 family: "Times",
                 size: 15,
@@ -509,7 +512,7 @@ function update_chart1(result1) {
               font: {
                 family: "Roboto",
                 size: 15,
-                style: "bold",
+                style: "normal",
               },
               padding: { bottom: 3 },
             },
@@ -597,7 +600,7 @@ function update_chart1(result1) {
             display: true,
             title: {
               display: true,
-              text: "Minimum Temp(°C) ",
+              text: "Minimum Temperature(°C) ",
               font: {
                 family: "Times",
                 size: 15,
@@ -689,7 +692,7 @@ function update_chart1(result1) {
             display: true,
             title: {
               display: true,
-              text: "Miximum Temp(in Celsius) ",
+              text: "Miximum Temperature(in Celsius) ",
               font: {
                 family: "Times",
                 size: 15,
@@ -781,7 +784,7 @@ function update_chart1(result1) {
             display: true,
             title: {
               display: true,
-              text: "Minimum Temp(°C) ",
+              text: "Minimum Temperature(°C) ",
               font: {
                 family: "Times",
                 size: 15,

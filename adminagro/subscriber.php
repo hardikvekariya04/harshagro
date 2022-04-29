@@ -191,20 +191,22 @@ $connect1 = mysqli_connect("localhost", "root", "", "agro");
       <tr>
           <th>ID</th>
           <th>Username</th>
+          <th>Phone No</th>
           <th>Email</th>
+          <th>Organization</th>
           <th>Create_datetime</th>
       </tr>
   </thead>
   <tbody>
   <?php
-    $query2 = "select id,username,email,create_datetime,admin from users where admin != 1";
+    $query2 = "select id,username,phone,email,organization,create_datetime,admin from users where admin != 1";
     // mysqli_query($connect, $query2);
     $res = $connect1->query($query2);       
       if($res->num_rows > 0)
         {
           while($row1 = $res-> fetch_assoc())
           {
-         echo  '<tr><td>'.$row1['id'].'</td><td>'.$row1['username'].'</td><td>'.$row1['email'].'</td><td>'.$row1['create_datetime'].'</td></tr>';
+         echo  '<tr><td>'.$row1['id'].'</td><td>'.$row1['username'].'</td><td>'.$row1['phone'].'</td><td>'.$row1['email'].'</td><td>'.$row1['organization'].'</td><td>'.$row1['create_datetime'].'</td></tr>';
           }
         }
   ?>

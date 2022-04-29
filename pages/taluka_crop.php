@@ -78,6 +78,18 @@ else{
   <!-- <link href="https://netdna.bootstrapcdn.com/bootstrap/2.3.2/css/bootstrap.min.css" rel="stylesheet"> -->
 
 </head>
+<style>
+  .in{
+    margin-right:20px;
+    height:30px;
+    border-radius:50px !important;
+  }
+  .heading{
+    margin-right:7px;
+    margin-top:3px;
+    font-weight:bold;
+  }
+  </style>
 <body class="g-sidenav-show  bg-gray-200">
 <!-- <div class="loader"></div> -->
   <!-- <div class="circle"></div> -->
@@ -180,8 +192,8 @@ else{
            
 
               
-                <!-- <label>Select District:</label> -->
-                <select id="district" >
+                <label class="heading">District:</label>
+                <select id="district" class="in">
                 <!-- <option value="" disabled >Select District</option> -->
                 <option value="Ahmedabad" id="0" selected>Ahmedabad</option>
                 <option value="Anand" id="1">Anand</option>
@@ -220,12 +232,12 @@ else{
                 
             </select>
 
-
+            <label class="heading">Taluka:</label>
               <select class="in" name="Taluka" id="taluka">
               <!-- <option value="" >Select Taluka</option> -->
                 <!-- <optgroup label="Ahmedabad" style="display: block;" > -->
-                <option value="Ahmedabad" id="1">Ahmedabad</option>
-                <option value="Ahmedabad" id="2" selected>Bavla</option>
+                <option value="Ahmedabad" id="1" selected>Ahmedabad</option>
+                <option value="Ahmedabad" id="2" >Bavla</option>
                 <option value="Ahmedabad" id="3">Daskroi</option>
                 <option value="Ahmedabad" id="4">Detroj-Rampura</option>
                 <option value="Ahmedabad" id="5">Dhandhuka</option>
@@ -592,14 +604,16 @@ else{
               </select> -->
 
               <!-- <select class="in" name="weeks" id="weeks"> -->
-              <select class="in" name="type" id="type">
+              <label class="heading">Vegetation Index:</label>
+              <select class="in" name="type" id="type" style="width: 130px;">
               <option value="NDVI" selected>NDVI</option>
                 <!-- <option value="SMT">SMT</option> -->
                 <!-- <option value="TCI">TCI</option> -->
                 <option value="VCI">VCI</option>
                 <option value="VHI">VHI</option>
               </select>
-                <input type="week" name="weeks" id="weeks"  min="<?php echo $full_min_weeks?>" max="<?php echo $full_weeks?>" value="<?php echo $full_weeks?>" class="in" style="border:1px solid gray;border-top-right-radius:50px;border-bottom-right-radius:50px;" required>              <!-- <option value="" selected disabled>Select Week </option> -->
+              <label class="heading">Week:</label>
+                <input type="week" class="in" name="weeks" id="weeks"  min="<?php echo $full_min_weeks?>" max="<?php echo $full_weeks?>" value="<?php echo $full_weeks?>" class="in" style="border:1px solid gray;border-top-right-radius:50px;border-bottom-right-radius:50px;" required>              <!-- <option value="" selected disabled>Select Week </option> -->
 
                 <!-- <option value="1" selected>01</option>
                 <option value="2">02</option>
@@ -846,7 +860,7 @@ $final_six_year = $six_year."-".$weeknumber5;
 $final_seven_year = $seven_year."-".$weeknumber6;
 
         $con = new mysqli('localhost','root','','agro');
-        $query1 =$con->query("SELECT NDVI from taluka_crop where t_id = 2 AND week IN('$weeknumber','$weeknumber1','$weeknumber2','$weeknumber3','$weeknumber4','$weeknumber5','$weeknumber6') AND year  = $date_current" );
+        $query1 =$con->query("SELECT NDVI from taluka_crop where t_id = 1 AND week IN('$weeknumber','$weeknumber1','$weeknumber2','$weeknumber3','$weeknumber4','$weeknumber5','$weeknumber6') AND year  = $date_current" );
         while($row1 = $query1->fetch_assoc()){
           $month1[] = $row1['NDVI'];
         }
@@ -865,7 +879,7 @@ $final_seven_year = $seven_year."-".$weeknumber6;
         $ret_2 = date("Y - M",strtotime($ret_1 . ' - 1 year'));
         $month_date3 =date("Y",strtotime($ret_2));
         
-            $query1 =$con->query("SELECT NDVI  from `taluka_crop` where t_id = 2  AND week BETWEEN 1 AND 52 AND year = '$month_date1'" );
+            $query1 =$con->query("SELECT NDVI  from `taluka_crop` where t_id = 1  AND week BETWEEN 1 AND 52 AND year = '$month_date1'" );
             while($row1 = $query1->fetch_assoc()){
               $month_1[] = $row1['NDVI'];
             }
@@ -885,7 +899,7 @@ $final_seven_year = $seven_year."-".$weeknumber6;
          $avg_high_temp1 = $tot_temp1/$temp_array_length1;
         
         
-          $query2 =$con->query("SELECT NDVI  from `taluka_crop` where t_id = 2  AND week BETWEEN 1 AND 52 AND year = '$month_date2'" );
+          $query2 =$con->query("SELECT NDVI  from `taluka_crop` where t_id = 1  AND week BETWEEN 1 AND 52 AND year = '$month_date2'" );
             while($row2 = $query2->fetch_assoc()){
               $month2[] = $row2['NDVI'];
             }
@@ -903,7 +917,7 @@ $final_seven_year = $seven_year."-".$weeknumber6;
            $avg_high_temp2 = $tot_temp2/$temp_array_length2;
         
         
-            $query3 =$con->query("SELECT NDVI  from `taluka_crop` where t_id = 2  AND week BETWEEN 1 AND 52 AND year = '$month_date3'" );
+            $query3 =$con->query("SELECT NDVI  from `taluka_crop` where t_id = 1  AND week BETWEEN 1 AND 52 AND year = '$month_date3'" );
             while($row3 = $query3->fetch_assoc()){
               $month3[] = $row3['NDVI'];
             }

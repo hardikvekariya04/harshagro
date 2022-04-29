@@ -167,13 +167,15 @@ if (!isset($_SESSION['ID']) && !isset($_SESSION['EMAIL'])) {
           <div class="card-body" style="margin-top:-20px;">
               <h3 class="mb-4 ">Weather</h3>
               <!-- <p class="text-sm ">Heatmap Data</p> -->
-              <select class="in" name="type" id="type" style="position:absolute;top:10px;left:180px;border-radius:50px;width:150px;">
+              <label class="heading" style="position:absolute;top:10px;left:180px;border-radius:50px;width:150px;">Climate Variable:</label>
+              <select class="in" name="type" id="type" style="position:absolute;top:30px;left:180px;border-radius:50px;width:150px;">
                 <option value="min">Minimum Temperature</option>
                 <option value="max">Maximum Temperature</option>
                 <option value="rain">Rainfall</option>
               </select>
+              <label class="heading" style="position:absolute;top:10px;left:340px;border-radius:50px;width:150px;">Date:</label>
               <input class="in" id="date" type="date" placeholder="DD-MM-YYYY" min="1997-01-01" max="2020-02-15"
-                value="2019-02-06" style="border-top-left-radius:50px;border-bottom-left-radius:50px;width:150px;padding:3px;margin-bottom:-10px;position:absolute;top:10px;left:340px;">
+                value="2019-02-06" style="border-top-left-radius:50px;border-bottom-left-radius:50px;width:150px;padding:3px;margin-bottom:-10px;position:absolute;top:30px;left:340px;">
             </div>
             <hr class="dark horizontal" style="margin-top:-30px;margin-bottom:-10px;">
             <div id="chart-line1" class="img-magnifier-container" style="min-height:440px"></div>
@@ -184,12 +186,14 @@ if (!isset($_SESSION['ID']) && !isset($_SESSION['EMAIL'])) {
           <div class="card-body" style="margin-top:-20px;">
               <h3 class="mb-4 "> Vegetation </h3>
               <!-- <p class="text-sm "> Heatmap Data </p> -->
-              <select class="in" name="type" id="type1" style="position:absolute;top:10px;left:180px;border-radius:50px;width:150px;">
+              <label class="heading" style="position:absolute;top:10px;left:180px;border-radius:50px;width:150px;">Vegetation Index:</label>
+              <select class="in" name="type" id="type1" style="position:absolute;top:30px;left:180px;border-radius:50px;width:150px;">
                 <option value="NDVI">NDVI</option>
                 <option value="VCI">VCI</option>
                 <option value="VHI">VHI</option>
               </select>
-              <input type="week" name="week" id="week" value="2022-W15" style="position:absolute;top:10px;left:340px;border-radius:50px;width:150px;padding:3px;border:1px solid gray;" required>
+              <label class="heading" style="position:absolute;top:10px;left:340px;border-radius:50px;width:150px;">Week:</label>
+              <input type="week" name="week" id="week" value="2022-W15" style="position:absolute;top:30px;left:340px;border-radius:50px;width:150px;padding:3px;border:1px solid gray;" required>
             </div>
             <hr class="dark horizontal" style="margin-top:-30px;margin-bottom:-10px;">
             <div id="chart-line2" style="min-height:440px"></div>
