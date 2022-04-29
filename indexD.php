@@ -66,13 +66,22 @@ ob_end_flush();
       overflow-y: hidden !important;
     }
     .in{
-    margin-right:20px;
+    margin-right:15px;
     height:30px;
   }
   .heading{
     margin-right:7px;
     margin-top:3px;
     font-weight:bold;
+  }
+  .sub{
+    border:1px solid white;
+    border-radius:10px;
+    width:100px;
+    height:35px;
+    font-weight:bold;
+    background-color:#4CAF50;
+    color:white;
   }
   </style>
 </head>
@@ -193,9 +202,9 @@ ob_end_flush();
           <div class="ms-md-auto pe-md-3 d-flex align-items-center">
             <div class="input-group input-group-outline">
 
-
+            <form method="POST" action="#" style="position:relative;left:-75px;">
             <label class="heading">District:  </label>
-              <select class="in" id="district"  style="border-radius:50px;">
+              <select class="in" id="district"  style="border-radius:50px;width:130px;">
                 <!-- <option value="" >select District</option> -->
                 <option value="Ahmedabad" id="0" selected>Ahmedabad</option>
                 <option value="Anand" id="1">Anand</option>
@@ -235,7 +244,7 @@ ob_end_flush();
               </select>
 
               <label class="heading">Taluka:  </label>
-              <select class="in" name="Taluka" id="taluka"  style="border-radius:50px;">
+              <select class="in" name="Taluka" id="taluka"  style="border-radius:50px;width:130px;">
               <option value="" >select Taluka</option>
                 <!-- <optgroup label="Ahmedabad" style="display: block;" > -->
                 <option value="Ahmedabad" id="1">Ahmedabad</option>
@@ -598,7 +607,7 @@ ob_end_flush();
               </select>
 
               <label class="heading">Climate Variable:  </label>
-              <select class="in" name="type" id="type" style="border-radius:50px;">
+              <select class="in" name="type" id="type" style="border-radius:50px;width:150px;">
               <!-- <option value="">select temp</option> -->
                 <option value="min" selected>Minimum Temperature</option>
                 <option value="max">Maximum Temperature</option>
@@ -612,10 +621,12 @@ ob_end_flush();
               </select> -->
               <label class="heading">Date:  </label>
               <input class="in" id="date" type="date" style="border-radius:50px;" placeholder="DD-MM-YYYY" min="<?php echo $date_min_current?>" max="<?php echo $date_current?>"
-                value="<?php echo $date_current?>">
-
-            </div>
+                value="<?php echo $date_current?>" selected>
+                <input name="submit" type="submit" class="sub" id="submit" value="Search" style="position:absolute;right:-100px;">
+</form>
+              </div>
           </div>
+
           <ul class="navbar-nav  justify-content-end">
 
             <li class="nav-item d-xl-block ps-3 d-flex align-items-center">
@@ -673,6 +684,7 @@ ob_end_flush();
                 <option value="last 6 month" selected>Last 6 Months</option>
                 <option value="last 3 year" >Last 3 Years</option>
               </select>
+              <input name="submit" type="submit" id="submit1" class="sub" value="Search" style="position:absolute;right:80px;">
               <a href="#" id="downloadPdf1"><i class="fa fa-download" style="font-size:22px;align-item:right;text-align:right;position:absolute;right:40px;"></i></a>
               <div id="reportPage1">
             <div class="chart" id="chart_data1">

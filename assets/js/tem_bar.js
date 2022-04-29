@@ -53,6 +53,8 @@ $(function(){
   })
 });
 function fetch_data() {
+  $('#submit').click(function(e) {
+    e.preventDefault();
   $.ajax({
     url: path + "fetch_data.php",
     type: "post",
@@ -68,8 +70,11 @@ function fetch_data() {
       // update_chart1(result);
     },
   });
+})
 }
 function fetch_data1(){
+  $('#submit1').click(function(e) {
+    e.preventDefault();
   $.ajax({
     url: path + "fetch_bar_data.php",
     type: "post",
@@ -85,6 +90,7 @@ function fetch_data1(){
       update_chart1(result1);
     },
   });
+})
 }
 function update_chart(result) {
   $("canvas#chart-line").remove();

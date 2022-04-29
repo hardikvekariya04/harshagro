@@ -59,9 +59,18 @@ $date_min_current = $row_min_date['date'];
     margin-top:3px;
     font-weight:bold;
   }
+  .sub{
+    border:1px solid white;
+    border-radius:10px;
+    width:100px;
+    height:35px;
+    font-weight:bold;
+    background-color:#4CAF50;
+    color:white;
+  }
   </style>
 <body class="g-sidenav-show  bg-gray-200">
-<div class="loader"></div>
+<!-- <div class="loader"></div> -->
   <!-- <div class="circle"></div> -->
   <aside class="sidenav navbar navbar-vertical navbar-expand-xs border-0 border-radius-xl my-3 fixed-start ms-3 ps bg-white" id="sidenav-main">
     <div class="sidenav-header">
@@ -160,7 +169,7 @@ $date_min_current = $row_min_date['date'];
         <div class="collapse navbar-collapse mt-sm-0 mt-2 me-md-0 me-sm-4" id="navbar">
           <div class="ms-md-auto pe-md-3 d-flex align-items-center">
             <div class="input-group input-group-outline">
-           
+           <form method="POST" action="#">
                 <label class="heading">District:</label>
                 <select id="district" class="in" style="border-radius:50px">
                 <!-- <option value="" disabled selected>Select District</option> -->
@@ -217,6 +226,8 @@ $date_min_current = $row_min_date['date'];
                 <label class="heading">Date:</label>
               <input class="in" id="date" type="date" placeholder="DD-MM-YYYY" min="<?php echo $date_min_current?>" max="<?php echo $date_current?>"
                 value="<?php echo $date_current?>" style="border-radius:50px" selected>
+                <input name="submit" type="submit" class="sub" id="submit" value="Search">
+              </form>
             </div>
           </div>
           <ul class="navbar-nav  justify-content-end">
@@ -277,6 +288,7 @@ $date_min_current = $row_min_date['date'];
                 <option value="last 6 month" selected>Last 6 Months</option>
                 <option value="last 3 year" >Last 3 Years</option>
               </select>
+              <input name="submit" type="submit" id="submit1" class="sub" value="Search" style="position:absolute;right:80px;">
               <a href="#" id="downloadPdf1"><i class="fa fa-download" style="font-size:22px;align-item:right;text-align:right;position:absolute;right:40px;"></i></a>
               <div id="reportPage1">
                 <div class="chart" id="chart_data1" >

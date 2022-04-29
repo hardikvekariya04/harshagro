@@ -21,21 +21,30 @@ $(function () {
   $(document).on("change", "#district", function () {
     d_id = $(this).children(":selected").attr("id");
     fetch_data();
+    fetch_data1();
   });
   $(document).on("change", "#weeks", function () {
     week = $(this).val();
     fetch_data();
+    fetch_data1();
+
   });
   $(document).on("change", "#type", function () {
     per_id = $(this).val();
     fetch_data();
+    fetch_data1();
+
   });
   $(document).on("change", "#per", function () {
     period_id = $(this).val();
     fetch_data();
+    fetch_data1();
+
   });
 });
 function fetch_data() {
+  $('#submit').click(function(e) {
+    e.preventDefault();
   $.ajax({
     url: path + "crop_district_fetch_data.php",
     type: "post",
@@ -43,14 +52,17 @@ function fetch_data() {
       d_id: d_id,
       week: week,
       per_id: per_id,
-      period_id: period_id,
     },
     success: function (result) {
       result = JSON.parse(result);
       update_chart(result);
     },
   });
-
+})
+}
+function fetch_data1() {
+  $('#submit').click(function(e) {
+    e.preventDefault();
   $.ajax({
     url: path + "crop_district_fetch_bar_data.php",
     type: "post",
@@ -58,13 +70,13 @@ function fetch_data() {
       d_id: d_id,
       week: week,
       per_id: per_id,
-      period_id: period_id,
     },
     success: function (result1) {
       result1 = JSON.parse(result1);
       update_chart1(result1);
     },
   });
+})
 }
 
 function update_chart(result) {

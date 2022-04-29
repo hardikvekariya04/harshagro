@@ -89,6 +89,15 @@ else{
     margin-top:3px;
     font-weight:bold;
   }
+  .sub{
+    border:1px solid white;
+    border-radius:10px;
+    width:100px;
+    height:35px;
+    font-weight:bold;
+    background-color:#4CAF50;
+    color:white;
+  }
   </style>
 <body class="g-sidenav-show  bg-gray-200">
 <!-- <div class="loader"></div> -->
@@ -180,18 +189,10 @@ else{
     <!-- Navbar -->
     <nav class="navbar navbar-main navbar-expand-lg px-0 mx-4 shadow-none border-radius-xl" id="navbarBlur" navbar-scroll="true">
       <div class="container-fluid py-1 px-3">
-        <nav aria-label="breadcrumb">
-          <!-- <ol class="breadcrumb bg-transparent mb-0 pb-0 pt-1 px-0 me-sm-6 me-5">
-            <li class="breadcrumb-item text-sm"><a class="opacity-5 text-dark" href="javascript:;">Climate</a></li>
-            <li class="breadcrumb-item text-sm text-dark active" aria-current="page">Districts</li>
-          </ol> -->
-        </nav>
         <div class="collapse navbar-collapse mt-sm-0 mt-2 me-md-0 me-sm-4" id="navbar">
           <div class="ms-md-auto pe-md-3 d-flex align-items-center">
             <div class="input-group input-group-outline">
-           
-
-              
+            <form  style="position:relative;left:-75px;">
                 <label class="heading">District:</label>
                 <select id="district" class="in">
                 <!-- <option value="" disabled >Select District</option> -->
@@ -234,7 +235,7 @@ else{
 
             <label class="heading">Taluka:</label>
               <select class="in" name="Taluka" id="taluka">
-              <!-- <option value="" >Select Taluka</option> -->
+                <!-- <option value="" >Select Taluka</option> -->
                 <!-- <optgroup label="Ahmedabad" style="display: block;" > -->
                 <option value="Ahmedabad" id="1" selected>Ahmedabad</option>
                 <option value="Ahmedabad" id="2" >Bavla</option>
@@ -613,63 +614,10 @@ else{
                 <option value="VHI">VHI</option>
               </select>
               <label class="heading">Week:</label>
-                <input type="week" class="in" name="weeks" id="weeks"  min="<?php echo $full_min_weeks?>" max="<?php echo $full_weeks?>" value="<?php echo $full_weeks?>" class="in" style="border:1px solid gray;border-top-right-radius:50px;border-bottom-right-radius:50px;" required>              <!-- <option value="" selected disabled>Select Week </option> -->
-
-                <!-- <option value="1" selected>01</option>
-                <option value="2">02</option>
-                <option value="3">03</option>
-                <option value="4">04</option>
-                <option value="5">05</option>
-                <option value="6">06</option>
-                <option value="7">07</option>
-                <option value="8">08</option>
-                <option value="9">09</option>
-                <option value="10">10</option>
-                <option value="11" >11</option>
-                <option value="12">12</option>
-                <option value="13">13</option>
-                <option value="14">14</option>
-                <option value="15">15</option>
-                <option value="16">16</option>
-                <option value="17">17</option>
-                <option value="18">18</option>
-                <option value="19">19</option>
-                <option value="20">20</option>
-                <option value="21">21</option>
-                <option value="22">22</option>
-                <option value="23">23</option>
-                <option value="24">24</option>
-                <option value="25">25</option>
-                <option value="26">26</option>
-                <option value="27">27</option>
-                <option value="28">28</option>
-                <option value="29">29</option>
-                <option value="30">30</option>
-                <option value="31">31</option>
-                <option value="32">32</option>
-                <option value="33">33</option>
-                <option value="34">34</option>
-                <option value="35">35</option>
-                <option value="36">36</option>
-                <option value="37">37</option>
-                <option value="38">38</option>
-                <option value="39">39</option>
-                <option value="40">40</option>
-                <option value="41">41</option>
-                <option value="42">42</option>
-                <option value="43">43</option>
-                <option value="44">44</option>
-                <option value="45">45</option>
-                <option value="46">46</option>
-                <option value="47">47</option>
-                <option value="48">48</option>
-                <option value="49">49</option>
-                <option value="50">50</option>
-                <option value="51">51</option>
-                <option value="52">52</option>
+                <input type="week" class="in" name="weeks" id="weeks"  min="<?php echo $full_min_weeks?>" max="<?php echo $full_weeks?>" value="<?php echo $full_weeks?>" class="in" style="border:1px solid gray;border-top-right-radius:50px;border-bottom-right-radius:50px;" required/> 
+                <input name="submit" type="submit" class="sub" id="submit" value="Search" style="position:absolute;right:-100px;">
+            </form>
                 
-              </select> -->
-
               <!-- <input class="in" id="date" type="date" placeholder="DD-MM-YYYY" min="1997-01-01" max="2020-02-15" value="2020-05-30" selected> -->
             </div>
           </div>

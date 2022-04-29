@@ -26,22 +26,32 @@ $(function () {
   $(document).on("change", "#taluka", function () {
     t_id = $(this).children(":selected").attr("id");
     fetch_data();
+    fetch_data1();
+
   });
   $(document).on("change", "#weeks", function () {
     week = $(this).val();
     fetch_data();
+    fetch_data1();
+
   });
   $(document).on("change", "#type", function () {
     per_id = $(this).val();
     fetch_data();
+    fetch_data1();
+
   });
   $(document).on("change", "#per", function () {
     period_id = $(this).val();
     fetch_data();
+    fetch_data1();
+
   });
 });
 
 function fetch_data() {
+  $('#submit').click(function(e) {
+    e.preventDefault();
   $.ajax({
     url: path + "crop_taluka_fetch_data.php",
     type: "post",
@@ -51,6 +61,11 @@ function fetch_data() {
       update_chart(result);
     },
   });
+})
+}
+function fetch_data1() {
+  $('#submit').click(function(e) {
+    e.preventDefault();
   $.ajax({
     url: path + "crop_taluka_fetch_bar_data.php",
     type: "post",
@@ -65,6 +80,7 @@ function fetch_data() {
       update_chart1(result1);
     },
   });
+})
 }
 function update_chart(result) {
   $("canvas#chart-line").remove();

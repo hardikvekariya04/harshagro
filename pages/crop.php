@@ -84,6 +84,15 @@ else{
     margin-top:3px;
     font-weight:bold;
   }
+  .sub{
+    border:1px solid white;
+    border-radius:10px;
+    width:100px;
+    height:35px;
+    font-weight:bold;
+    background-color:#4CAF50;
+    color:white;
+  }
   </style>
 <body class="g-sidenav-show  bg-gray-200">
 <div class="loader"></div>
@@ -188,7 +197,7 @@ else{
             <div class="input-group input-group-outline">
            
 
-              
+            <form>      
                 <!-- <label>Select District:</label> -->
                 <label class="heading">District:</label>
                 <select id="district" class="in">
@@ -301,7 +310,9 @@ else{
                 <option value="VHI">VHI</option>
               </select>
               <label class="heading">Week:</label>
-                <input type="week" class="in" name="weeks" id="weeks"  min="<?php echo $full_min_weeks?>" max="<?php echo $full_weeks?>" value="<?php echo $full_weeks?>" class="in" style="border:1px solid gray;border-top-right-radius:50px;border-bottom-right-radius:50px;" required>
+                <input type="week" class="in" name="weeks" id="weeks"  min="<?php echo $full_min_weeks?>" max="<?php echo $full_weeks?>" value="<?php echo $full_weeks?>" class="in" style="border:1px solid gray;border-top-right-radius:50px;border-bottom-right-radius:50px;" required/>
+                <input name="submit" type="submit" class="sub" id="submit" value="Search"/>
+</form>
               <!-- </select> -->
 
 
