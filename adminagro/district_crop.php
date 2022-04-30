@@ -1,6 +1,6 @@
 <?php  
 require_once '../config/function.php';
-$connect = mysqli_connect("localhost", "root", "", "admin_agro");
+$connect = mysqli_connect("localhost", "root", "", "agro");
 if (!isset($_SESSION['ID']) && !isset($_SESSION['EMAIL'])) {
   header("location: index.php");
 }

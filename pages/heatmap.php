@@ -324,7 +324,7 @@ if (!isset($_SESSION['ID']) && !isset($_SESSION['EMAIL'])) {
       });
     }
     $( window ).on( "load", function() {
-        $('.loader').delay(2000).fadeOut(1000);
+        $('.loader').fadeOut(1000);
     });
   </script>
   <!-- Github buttons -->

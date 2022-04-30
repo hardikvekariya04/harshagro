@@ -2,7 +2,7 @@
     $week = $_POST['week'];
     $temp_id1 = $_POST['temp_id1'];
 
-        $conn = mysqli_connect("localhost", "root", "", "admin_agro");
+        $conn = mysqli_connect("localhost", "root", "", "agro");
         if($temp_id1 === "NDVI"){
             $img = mysqli_query($conn, "SELECT crop_ndvi,week FROM image where week = '$week'");
             // echo $img;

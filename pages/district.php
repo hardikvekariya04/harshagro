@@ -864,7 +864,7 @@ new Chart(ctx, {
       },
     });
     $( window ).on( "load", function() {
-        $('.loader').delay(2000).fadeOut(1000);
+        $('.loader').fadeOut(1000);
     });
 </script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.3.3/jspdf.min.js"></script>

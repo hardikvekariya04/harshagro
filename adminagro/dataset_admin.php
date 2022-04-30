@@ -1,22 +1,22 @@
 <?php  
 // $connect = mysqli_connect("localhost", "root", "", "admin_agro");
-$connect1 = mysqli_connect("localhost", "root", "", "agro");
+$connect_main = mysqli_connect("localhost", "root", "", "agro");
 
 $querydataset = "select * from dataset where id = 1";
-$result = mysqli_query($connect1,$querydataset);
+$result = mysqli_query($connect_mian,$querydataset);
 if($row=mysqli_fetch_assoc($result))
 {
     $title = $row['title'];
     $content = $row['content'];
 }
-
+s
 // on submit post data
 if(isset($_POST['submit']) )
 {
     $title = $_POST['title'];
     $content = $_POST['content'];
     $querydataset = "UPDATE `dataset` SET `id`='1',`title`='$title',`content`='$content' WHERE 1";
-    $result = mysqli_query($connect1,$querydataset);
+    $result = mysqli_query($connect_main,$querydataset);
 }
 
 

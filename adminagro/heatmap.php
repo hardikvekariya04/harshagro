@@ -1,10 +1,11 @@
 <?php
 require_once '../config/function.php';
+$db = mysqli_connect("localhost", "root", "", "agro");
+
 if (!isset($_SESSION['ID']) && !isset($_SESSION['EMAIL'])) {
   header("location: index.php");
 }
 $msg = "";
-// check if the user has clicked the button "UPLOAD" 
 if (isset($_POST['uploadfile'])) {
     $date = $_POST['date'];
     // $datepicker = $_POST['datepicker'];
@@ -33,7 +34,6 @@ if (isset($_POST['uploadfile'])) {
     $folder5 = "crop_vhi/".$crop_vhi;
 
       // connect with the database
-    $db = mysqli_connect("localhost", "root", "", "admin_agro");
         $sql = "INSERT INTO image (weather_max_heat,weather_min_heat,weather_rain_heat,crop_ndvi,crop_vci,crop_vhi,date,week) VALUES ('$weather_max_heatmap','$weather_min_heatmap','$weather_rain_heatmap','$crop_ndvi','$crop_vci','$crop_vhi','$date','$week')";
      // function to execute above query
         mysqli_query($db, $sql);       
@@ -42,11 +42,6 @@ if (isset($_POST['uploadfile'])) {
             echo '<script language="javascript">';
             echo 'alert("Successfully Added")'; 
             echo '</script>';
-           ?>
-             <script>
-                window.location.href = "heatmap.php";
-                </script>
-           <?php
         }else{
             $msg = "Failed to upload image";
     }
@@ -56,12 +51,9 @@ if (isset($_POST['uploadfile'])) {
 //         $msg = "Failed to upload weather minimum temp image";
 // }
 }
-// $result = mysqli_query($db, "SELECT * FROM image");
-?> 
-<?php  
-$connect = mysqli_connect("localhost", "root", "", "admin_agro");
+$result = mysqli_query($db, "SELECT * FROM image");
 
-?>
+?> 
 <!DOCTYPE html>
 <html lang="en">
 
@@ -273,18 +265,18 @@ $connect = mysqli_connect("localhost", "root", "", "admin_agro");
     <h2>Weather</h2>
     <div>
         <label>Date</label>
-        <input type="date" name="date" class="form-control" style="width: 500px;" required/>
+        <input type="date" name="date" class="form-control" style="width: 500px;" />
     </div>
     <br/>
 
    
     <div style="display:flex">
     <h6 style="margin-right:5px;">Max : </h6>
-    <input type="file" name="choosefile" style="width:280px;border : 2px solid #29C5F6;padding:5px;border-radius:10px;color:red;" required/>
+    <input type="file" name="choosefile" style="width:280px;border : 2px solid #29C5F6;padding:5px;border-radius:10px;color:red;" />
     <h6 style="margin-right:5px;margin-left:20px;">Min : </h6>
-    <input type="file" name="choosefile1" style="width:280px;border : 2px solid #29C5F6;padding:5px;border-radius:10px;color:red;" required/>
+    <input type="file" name="choosefile1" style="width:280px;border : 2px solid #29C5F6;padding:5px;border-radius:10px;color:red;" />
     <h6 style="margin-right:5px;margin-left:20px;">Rain : </h6>
-    <input type="file" name="choosefile2" style="width:280px;border : 2px solid #29C5F6;padding:5px;border-radius:10px;color:red;" required/>
+    <input type="file" name="choosefile2" style="width:280px;border : 2px solid #29C5F6;padding:5px;border-radius:10px;color:red;" />
     </div>
     <hr> 
     <h2>crop</h2>
@@ -293,16 +285,16 @@ $connect = mysqli_connect("localhost", "root", "", "admin_agro");
         <!-- <h6>Year : </h6>
         <input type="text" class="form-control" name="datepicker" id="datepicker" style="width:400px;" /> -->
         <label >Week : </label>
-                <input type="week" name="week" class="form-control" style="width: 500px;" required>
+                <input type="week" name="week" class="form-control" style="width: 500px;" >
     </div>
     <br>
   <div style="display:flex">
     <h6 style="margin-right:5px;">NDVI : </h6>
-    <input type="file" name="choosefile3" style="width:280px;border : 2px solid #29C5F6;padding:5px;border-radius:10px;color:red;"  required/>
+    <input type="file" name="choosefile3" style="width:280px;border : 2px solid #29C5F6;padding:5px;border-radius:10px;color:red;"  />
     <h6 style="margin-right:5px;margin-left:20px;">VCI : </h6>
-    <input type="file" name="choosefile4" style="width:280px;border : 2px solid #29C5F6;padding:5px;border-radius:10px;color:red;" required/>
+    <input type="file" name="choosefile4" style="width:280px;border : 2px solid #29C5F6;padding:5px;border-radius:10px;color:red;" />
     <h6 style="margin-right:5px;margin-left:20px;">VHI : </h6>
-    <input type="file" name="choosefile5" style="width:280px;border : 2px solid #29C5F6;padding:5px;border-radius:10px;color:red;" required/>
+    <input type="file" name="choosefile5" style="width:280px;border : 2px solid #29C5F6;padding:5px;border-radius:10px;color:red;" />
   </div>
   <hr>
 

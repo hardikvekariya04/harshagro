@@ -778,7 +778,6 @@ ob_end_flush();
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
   <script src="https://code.highcharts.com/highcharts.js"></script>
   <script src="https://code.highcharts.com/modules/exporting.js"></script>
-    <script src="./pages/leaflet.browser.print.min.js"></script>
 
   <!-- <script src="./map/heatmap/heatleaf.js"></script>
   <script src="./map/heatmap/leaf.js"></script> -->
@@ -1236,7 +1235,7 @@ $avg_high_year_temp5 = $tot_year_temp5/$temp_array_year_length5;
       },
     });
     $( window ).on( "load", function() {
-        $('.loader').delay(400).fadeOut(1000);
+        $('.loader').fadeOut(1000);
     });
   </script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.3.3/jspdf.min.js"></script>

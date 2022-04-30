@@ -1,13 +1,13 @@
 <?php  
 require_once '../config/function.php';
-$connect = mysqli_connect("localhost", "root", "", "admin_agro");
-$connect1 = mysqli_connect("localhost", "root", "", "agro");
+$connect = mysqli_connect("localhost", "root", "", "agro");
+$connect_main = mysqli_connect("localhost", "root", "", "agro");
 if (!isset($_SESSION['ID']) && !isset($_SESSION['EMAIL'])) {
   header("location: index.php");
 }
 $id = $_SESSION['ID'];
     $query = "select * from users where id='$id'";
-    $result = mysqli_query($connect1, $query);
+    $result = mysqli_query($connect_main, $query);
     $row = mysqli_fetch_assoc($result);
     
       if($row['admin'] == 0 || $row['admin'] == 0 ){
