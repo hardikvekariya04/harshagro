@@ -22,17 +22,17 @@ $ret2 = date("Y - M",strtotime($ret1 . ' - 1 year'));
 $month_date3 =date("Y",strtotime($ret2));
 
 if($per_id === "VCI"){
-    $query1 =$con->query("SELECT AVG(VCI) as VCI from `crop` where d_id = ".$d_id."  AND week BETWEEN 1 AND 52 AND year = '$month_date1'" );
+    $query1 =$con->query("SELECT AVG(VCI) as VCI from `district_crop` where d_id = ".$d_id."  AND week BETWEEN 1 AND 52 AND year = '$month_date1'" );
     while($row1 = $query1->fetch_assoc()){
       $month1[] = $row1['VCI'];
     }
   
-  $query2 =$con->query("SELECT AVG(VCI) as VCI  from `crop` where d_id = ".$d_id."  AND week BETWEEN 1 AND 52 AND year = '$month_date2'" );
+  $query2 =$con->query("SELECT AVG(VCI) as VCI  from `district_crop` where d_id = ".$d_id."  AND week BETWEEN 1 AND 52 AND year = '$month_date2'" );
     while($row2 = $query2->fetch_assoc()){
       $month2[] = $row2['VCI'];
     }
 
-    $query3 =$con->query("SELECT AVG(VCI) as VCI  from `crop` where d_id = ".$d_id."  AND week BETWEEN 1 AND 52 AND year = '$month_date3'" );
+    $query3 =$con->query("SELECT AVG(VCI) as VCI  from `district_crop` where d_id = ".$d_id."  AND week BETWEEN 1 AND 52 AND year = '$month_date3'" );
     while($row3 = $query3->fetch_assoc()){
       $month3[] = $row3['VCI'];
     }
@@ -55,17 +55,17 @@ if($per_id === "VCI"){
   
 }
 elseif($per_id === "VHI"){
-  $query1 =$con->query("SELECT AVG(VHI) as VHI from `crop` where d_id = ".$d_id."  AND week BETWEEN 1 AND 52 AND year = '$month_date1'" );
+  $query1 =$con->query("SELECT AVG(VHI) as VHI from `district_crop` where d_id = ".$d_id."  AND week BETWEEN 1 AND 52 AND year = '$month_date1'" );
   while($row1 = $query1->fetch_assoc()){
     $month1[] = $row1['VHI'];
   }
 
-$query2 =$con->query("SELECT AVG(VHI) as VHI  from `crop` where d_id = ".$d_id."  AND week BETWEEN 1 AND 52 AND year = '$month_date2'" );
+$query2 =$con->query("SELECT AVG(VHI) as VHI  from `district_crop` where d_id = ".$d_id."  AND week BETWEEN 1 AND 52 AND year = '$month_date2'" );
   while($row2 = $query2->fetch_assoc()){
     $month2[] = $row2['VHI'];
   }
 
-  $query3 =$con->query("SELECT AVG(VHI) as VHI  from `crop` where d_id = ".$d_id."  AND week BETWEEN 1 AND 52 AND year = '$month_date3'" );
+  $query3 =$con->query("SELECT AVG(VHI) as VHI  from `district_crop` where d_id = ".$d_id."  AND week BETWEEN 1 AND 52 AND year = '$month_date3'" );
   while($row3 = $query3->fetch_assoc()){
     $month3[] = $row3['VHI'];
   }
@@ -88,17 +88,17 @@ $query2 =$con->query("SELECT AVG(VHI) as VHI  from `crop` where d_id = ".$d_id."
 
 }
 elseif($per_id === "NDVI"){
-  $query1 =$con->query("SELECT AVG(NDVI) as NDVI from `crop` where d_id = ".$d_id."  AND week BETWEEN 1 AND 52 AND year = '$month_date1'" );
+  $query1 =$con->query("SELECT AVG(NDVI) as NDVI from `district_crop` where d_id = ".$d_id."  AND week BETWEEN 1 AND 52 AND year = '$month_date1'" );
   while($row1 = $query1->fetch_assoc()){
     $month1[] = $row1['NDVI'];
   }
 
-$query2 =$con->query("SELECT AVG(NDVI) as NDVI  from `crop` where d_id = ".$d_id."  AND week BETWEEN 1 AND 52 AND year = '$month_date2'" );
+$query2 =$con->query("SELECT AVG(NDVI) as NDVI  from `district_crop` where d_id = ".$d_id."  AND week BETWEEN 1 AND 52 AND year = '$month_date2'" );
   while($row2 = $query2->fetch_assoc()){
     $month2[] = $row2['NDVI'];
   }
 
-  $query3 =$con->query("SELECT AVG(NDVI) as NDVI  from `crop` where d_id = ".$d_id."  AND week BETWEEN 1 AND 52 AND year = '$month_date3'" );
+  $query3 =$con->query("SELECT AVG(NDVI) as NDVI  from `district_crop` where d_id = ".$d_id."  AND week BETWEEN 1 AND 52 AND year = '$month_date3'" );
   while($row3 = $query3->fetch_assoc()){
     $month3[] = $row3['NDVI'];
   }
@@ -121,17 +121,17 @@ $query2 =$con->query("SELECT AVG(NDVI) as NDVI  from `crop` where d_id = ".$d_id
 
 }
 else{
-  $query1 =$con->query("SELECT AVG(NDVI) as NDVI from `crop` where d_id = ".$d_id."  AND week BETWEEN 1 AND 52 AND year = '$month_date1'" );
+  $query1 =$con->query("SELECT AVG(NDVI) as NDVI from `district_crop` where d_id = ".$d_id."  AND week BETWEEN 1 AND 52 AND year = '$month_date1'" );
   while($row1 = $query1->fetch_assoc()){
     $month1[] = $row1['NDVI'];
   }
 
-$query2 =$con->query("SELECT AVG(NDVI) as NDVI  from `crop` where d_id = ".$d_id."  AND week BETWEEN 1 AND 52 AND year = '$month_date2'" );
+$query2 =$con->query("SELECT AVG(NDVI) as NDVI  from `district_crop` where d_id = ".$d_id."  AND week BETWEEN 1 AND 52 AND year = '$month_date2'" );
   while($row2 = $query2->fetch_assoc()){
     $month2[] = $row2['NDVI'];
   }
 
-  $query3 =$con->query("SELECT AVG(NDVI) as NDVI  from `crop` where d_id = ".$d_id."  AND week BETWEEN 1 AND 52 AND year = '$month_date3'" );
+  $query3 =$con->query("SELECT AVG(NDVI) as NDVI  from `district_crop` where d_id = ".$d_id."  AND week BETWEEN 1 AND 52 AND year = '$month_date3'" );
   while($row3 = $query3->fetch_assoc()){
     $month3[] = $row3['NDVI'];
   }

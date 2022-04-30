@@ -42,13 +42,13 @@ $five_monthly =date("Y - M",strtotime($six_month_start));
 $six_monthly =date("Y - M",strtotime($seven_month_start));
 
 if($temp_id === 'max' && $per_id === 'last 6 month'){
-  $query =$con->query("SELECT AVG(max_temp) as max_temp,date from newdata where taluka_id = ".$taluka_id." AND date BETWEEN '$first_month_start' AND '$first_month_end'");
+  $query =$con->query("SELECT AVG(max_temp) as max_temp,date from taluka_data where taluka_id = ".$taluka_id." AND date BETWEEN '$first_month_start' AND '$first_month_end'");
 while($row = $query->fetch_assoc()){
     $month1[] = $row['max_temp'];
     $amount1[] = $row['date'];
   }
 
-$query3 =$con->query("SELECT AVG(max_temp) as max_temp,date from newdata where taluka_id = ".$taluka_id." AND date BETWEEN '$second_month_start' AND '$second_month_end'");
+$query3 =$con->query("SELECT AVG(max_temp) as max_temp,date from taluka_data where taluka_id = ".$taluka_id." AND date BETWEEN '$second_month_start' AND '$second_month_end'");
 $month3 = array();
 
   while($row3 = $query3->fetch_assoc()){
@@ -56,25 +56,25 @@ $month3 = array();
       $amount3[] = $row3['date'];
     }
 
-$query4 =$con->query("SELECT AVG(max_temp) as max_temp,date from newdata where taluka_id = ".$taluka_id." AND date BETWEEN '$third_month_start' AND '$third_month_end'");
+$query4 =$con->query("SELECT AVG(max_temp) as max_temp,date from taluka_data where taluka_id = ".$taluka_id." AND date BETWEEN '$third_month_start' AND '$third_month_end'");
 while($row4 = $query4->fetch_assoc()){
         $month4[] = $row4['max_temp'];
         $amount4[] = $row4['date'];
       }
 
-$query5 =$con->query("SELECT AVG(max_temp) as max_temp,date from newdata where taluka_id = ".$taluka_id." AND date BETWEEN '$four_month_start' AND '$four_month_end'");
+$query5 =$con->query("SELECT AVG(max_temp) as max_temp,date from taluka_data where taluka_id = ".$taluka_id." AND date BETWEEN '$four_month_start' AND '$four_month_end'");
   while($row5 = $query5->fetch_assoc()){
       $month5[] = $row5['max_temp'];
       $amount5[] = $row5['date'];
     }
   
-$query6 =$con->query("SELECT AVG(max_temp) as max_temp,date from newdata where taluka_id = ".$taluka_id." AND date BETWEEN '$five_month_start' AND '$five_month_end'");
+$query6 =$con->query("SELECT AVG(max_temp) as max_temp,date from taluka_data where taluka_id = ".$taluka_id." AND date BETWEEN '$five_month_start' AND '$five_month_end'");
   while($row6 = $query6->fetch_assoc()){
       $month6[] = $row6['max_temp'];
       $amount6[] = $row6['date'];
     }
 
-$query7 =$con->query("SELECT AVG(max_temp) as max_temp,date from newdata where taluka_id = ".$taluka_id." AND date BETWEEN '$six_month_start' AND '$six_month_end'");
+$query7 =$con->query("SELECT AVG(max_temp) as max_temp,date from taluka_data where taluka_id = ".$taluka_id." AND date BETWEEN '$six_month_start' AND '$six_month_end'");
   while($row7 = $query7->fetch_assoc()){
       $month7[] = $row7['max_temp'];
       $amount7[] = $row7['date'];
@@ -107,13 +107,13 @@ $query7 =$con->query("SELECT AVG(max_temp) as max_temp,date from newdata where t
   }
 
 elseif($temp_id === 'min' && $per_id === 'last 6 month'){
-  $query =$con->query("SELECT AVG(min_temp) as min_temp,date from newdata where taluka_id = ".$taluka_id." AND date BETWEEN '$first_month_start' AND '$first_month_end'");
+  $query =$con->query("SELECT AVG(min_temp) as min_temp,date from taluka_data where taluka_id = ".$taluka_id." AND date BETWEEN '$first_month_start' AND '$first_month_end'");
   while($row = $query->fetch_assoc()){
       $month1[] = $row['min_temp'];
       $amount1[] = $row['date'];
     }
   
-  $query3 =$con->query("SELECT AVG(min_temp) as min_temp,date from newdata where taluka_id = ".$taluka_id." AND date BETWEEN '$second_month_start' AND '$second_month_end'");
+  $query3 =$con->query("SELECT AVG(min_temp) as min_temp,date from taluka_data where taluka_id = ".$taluka_id." AND date BETWEEN '$second_month_start' AND '$second_month_end'");
   $month3 = array();
   
     while($row3 = $query3->fetch_assoc()){
@@ -121,25 +121,25 @@ elseif($temp_id === 'min' && $per_id === 'last 6 month'){
         $amount3[] = $row3['date'];
       }
   
-  $query4 =$con->query("SELECT AVG(min_temp) as min_temp,date from newdata where taluka_id = ".$taluka_id." AND date BETWEEN '$third_month_start' AND '$third_month_end'");
+  $query4 =$con->query("SELECT AVG(min_temp) as min_temp,date from taluka_data where taluka_id = ".$taluka_id." AND date BETWEEN '$third_month_start' AND '$third_month_end'");
   while($row4 = $query4->fetch_assoc()){
           $month4[] = $row4['min_temp'];
           $amount4[] = $row4['date'];
         }
   
-  $query5 =$con->query("SELECT AVG(min_temp) as min_temp,date from newdata where taluka_id = ".$taluka_id." AND date BETWEEN '$four_month_start' AND '$four_month_end'");
+  $query5 =$con->query("SELECT AVG(min_temp) as min_temp,date from taluka_data where taluka_id = ".$taluka_id." AND date BETWEEN '$four_month_start' AND '$four_month_end'");
     while($row5 = $query5->fetch_assoc()){
         $month5[] = $row5['min_temp'];
         $amount5[] = $row5['date'];
       }
     
-  $query6 =$con->query("SELECT AVG(min_temp) as min_temp,date from newdata where taluka_id = ".$taluka_id." AND date BETWEEN '$five_month_start' AND '$five_month_end'");
+  $query6 =$con->query("SELECT AVG(min_temp) as min_temp,date from taluka_data where taluka_id = ".$taluka_id." AND date BETWEEN '$five_month_start' AND '$five_month_end'");
     while($row6 = $query6->fetch_assoc()){
         $month6[] = $row6['min_temp'];
         $amount6[] = $row6['date'];
       }
   
-  $query7 =$con->query("SELECT AVG(min_temp) as min_temp,date from newdata where taluka_id = ".$taluka_id." AND date BETWEEN '$six_month_start' AND '$six_month_end'");
+  $query7 =$con->query("SELECT AVG(min_temp) as min_temp,date from taluka_data where taluka_id = ".$taluka_id." AND date BETWEEN '$six_month_start' AND '$six_month_end'");
     while($row7 = $query7->fetch_assoc()){
         $month7[] = $row7['min_temp'];
         $amount7[] = $row7['date'];
@@ -171,13 +171,13 @@ elseif($temp_id === 'min' && $per_id === 'last 6 month'){
       echo json_encode($return_data);
   }
   elseif($per_id === 'last 6 month'){
-    $query =$con->query("SELECT AVG(max_temp) as max_temp,date from newdata where taluka_id = ".$taluka_id." AND date BETWEEN '$first_month_start' AND '$first_month_end'");
+    $query =$con->query("SELECT AVG(max_temp) as max_temp,date from taluka_data where taluka_id = ".$taluka_id." AND date BETWEEN '$first_month_start' AND '$first_month_end'");
 while($row = $query->fetch_assoc()){
     $month1[] = $row['max_temp'];
     $amount1[] = $row['date'];
   }
 
-$query3 =$con->query("SELECT AVG(max_temp) as max_temp,date from newdata where taluka_id = ".$taluka_id." AND date BETWEEN '$second_month_start' AND '$second_month_end'");
+$query3 =$con->query("SELECT AVG(max_temp) as max_temp,date from taluka_data where taluka_id = ".$taluka_id." AND date BETWEEN '$second_month_start' AND '$second_month_end'");
 $month3 = array();
 
   while($row3 = $query3->fetch_assoc()){
@@ -185,25 +185,25 @@ $month3 = array();
       $amount3[] = $row3['date'];
     }
 
-$query4 =$con->query("SELECT AVG(max_temp) as max_temp,date from newdata where taluka_id = ".$taluka_id." AND date BETWEEN '$third_month_start' AND '$third_month_end'");
+$query4 =$con->query("SELECT AVG(max_temp) as max_temp,date from taluka_data where taluka_id = ".$taluka_id." AND date BETWEEN '$third_month_start' AND '$third_month_end'");
 while($row4 = $query4->fetch_assoc()){
         $month4[] = $row4['max_temp'];
         $amount4[] = $row4['date'];
       }
 
-$query5 =$con->query("SELECT AVG(max_temp) as max_temp,date from newdata where taluka_id = ".$taluka_id." AND date BETWEEN '$four_month_start' AND '$four_month_end'");
+$query5 =$con->query("SELECT AVG(max_temp) as max_temp,date from taluka_data where taluka_id = ".$taluka_id." AND date BETWEEN '$four_month_start' AND '$four_month_end'");
   while($row5 = $query5->fetch_assoc()){
       $month5[] = $row5['max_temp'];
       $amount5[] = $row5['date'];
     }
   
-$query6 =$con->query("SELECT AVG(max_temp) as max_temp,date from newdata where taluka_id = ".$taluka_id." AND date BETWEEN '$five_month_start' AND '$five_month_end'");
+$query6 =$con->query("SELECT AVG(max_temp) as max_temp,date from taluka_data where taluka_id = ".$taluka_id." AND date BETWEEN '$five_month_start' AND '$five_month_end'");
   while($row6 = $query6->fetch_assoc()){
       $month6[] = $row6['max_temp'];
       $amount6[] = $row6['date'];
     }
 
-$query7 =$con->query("SELECT AVG(max_temp) as max_temp,date from newdata where taluka_id = ".$taluka_id." AND date BETWEEN '$six_month_start' AND '$six_month_end'");
+$query7 =$con->query("SELECT AVG(max_temp) as max_temp,date from taluka_data where taluka_id = ".$taluka_id." AND date BETWEEN '$six_month_start' AND '$six_month_end'");
   while($row7 = $query7->fetch_assoc()){
       $month7[] = $row7['max_temp'];
       $amount7[] = $row7['date'];
@@ -254,20 +254,20 @@ $query7 =$con->query("SELECT AVG(max_temp) as max_temp,date from newdata where t
 $second_month_dates =date("Y - M",strtotime($second_date));
 $thrid_month_dates =date("Y - M",strtotime($third_date));
 
-    $query3 =$con->query("SELECT AVG(max_temp) as max_temp,date from newdata where taluka_id = ".$taluka_id." AND date BETWEEN '$first_start_date' AND '$first_end_date'");
+    $query3 =$con->query("SELECT AVG(max_temp) as max_temp,date from taluka_data where taluka_id = ".$taluka_id." AND date BETWEEN '$first_start_date' AND '$first_end_date'");
   while($row3 = $query3->fetch_assoc()){
       $year[] = $row3['max_temp'];
       $year_date[] = $row3['date'];
     }
 
 
-    $query4 =$con->query("SELECT AVG(max_temp) as max_temp,date from newdata where taluka_id = ".$taluka_id." AND date BETWEEN '$second_start_date' AND '$second_end_date'");
+    $query4 =$con->query("SELECT AVG(max_temp) as max_temp,date from taluka_data where taluka_id = ".$taluka_id." AND date BETWEEN '$second_start_date' AND '$second_end_date'");
   while($row4 = $query4->fetch_assoc()){
       $year1[] = $row4['max_temp'];
       $year_date1[] = $row4['date'];
     }
 
-    $query5 =$con->query("SELECT AVG(max_temp) as max_temp,date from newdata where taluka_id = ".$taluka_id." AND date BETWEEN '$third_start_date' AND '$third_end_date'");
+    $query5 =$con->query("SELECT AVG(max_temp) as max_temp,date from taluka_data where taluka_id = ".$taluka_id." AND date BETWEEN '$third_start_date' AND '$third_end_date'");
     while($row5 = $query5->fetch_assoc()){
         $year5[] = $row5['max_temp'];
         $year_date5[] = $row5['date'];
@@ -310,20 +310,20 @@ $thrid_month_dates =date("Y - M",strtotime($third_date));
 $second_month_dates =date("Y - M",strtotime($second_date));
 $thrid_month_dates =date("Y - M",strtotime($third_date));
 
-    $query3 =$con->query("SELECT AVG(min_temp) as min_temp,date from newdata where taluka_id = ".$taluka_id." AND date BETWEEN '$first_start_date' AND '$first_end_date'");
+    $query3 =$con->query("SELECT AVG(min_temp) as min_temp,date from taluka_data where taluka_id = ".$taluka_id." AND date BETWEEN '$first_start_date' AND '$first_end_date'");
   while($row3 = $query3->fetch_assoc()){
       $year[] = $row3['min_temp'];
       $year_date[] = $row3['date'];
     }
 
 
-    $query4 =$con->query("SELECT AVG(min_temp) as min_temp,date from newdata where taluka_id = ".$taluka_id." AND date BETWEEN '$second_start_date' AND '$second_end_date'");
+    $query4 =$con->query("SELECT AVG(min_temp) as min_temp,date from taluka_data where taluka_id = ".$taluka_id." AND date BETWEEN '$second_start_date' AND '$second_end_date'");
   while($row4 = $query4->fetch_assoc()){
       $year1[] = $row4['min_temp'];
       $year_date1[] = $row4['date'];
     }
 
-    $query5 =$con->query("SELECT AVG(min_temp) as min_temp,date from newdata where taluka_id = ".$taluka_id." AND date BETWEEN '$third_start_date' AND '$third_end_date'");
+    $query5 =$con->query("SELECT AVG(min_temp) as min_temp,date from taluka_data where taluka_id = ".$taluka_id." AND date BETWEEN '$third_start_date' AND '$third_end_date'");
     while($row5 = $query5->fetch_assoc()){
         $year5[] = $row5['min_temp'];
         $year_date5[] = $row5['date'];
@@ -366,20 +366,20 @@ $thrid_month_dates =date("Y - M",strtotime($third_date));
 $second_month_dates =date("Y - M",strtotime($second_date));
 $thrid_month_dates =date("Y - M",strtotime($third_date));
 
-    $query3 =$con->query("SELECT AVG(min_temp) as min_temp,date from newdata where taluka_id = ".$taluka_id." AND date BETWEEN '$first_start_date' AND '$first_end_date'");
+    $query3 =$con->query("SELECT AVG(min_temp) as min_temp,date from taluka_data where taluka_id = ".$taluka_id." AND date BETWEEN '$first_start_date' AND '$first_end_date'");
   while($row3 = $query3->fetch_assoc()){
       $year[] = $row3['min_temp'];
       $year_date[] = $row3['date'];
     }
 
 
-    $query4 =$con->query("SELECT AVG(min_temp) as min_temp,date from newdata where taluka_id = ".$taluka_id." AND date BETWEEN '$second_start_date' AND '$second_end_date'");
+    $query4 =$con->query("SELECT AVG(min_temp) as min_temp,date from taluka_data where taluka_id = ".$taluka_id." AND date BETWEEN '$second_start_date' AND '$second_end_date'");
   while($row4 = $query4->fetch_assoc()){
       $year1[] = $row4['min_temp'];
       $year_date1[] = $row4['date'];
     }
 
-    $query5 =$con->query("SELECT AVG(min_temp) as min_temp,date from newdata where taluka_id = ".$taluka_id." AND date BETWEEN '$third_start_date' AND '$third_end_date'");
+    $query5 =$con->query("SELECT AVG(min_temp) as min_temp,date from taluka_data where taluka_id = ".$taluka_id." AND date BETWEEN '$third_start_date' AND '$third_end_date'");
     while($row5 = $query5->fetch_assoc()){
         $year5[] = $row5['min_temp'];
         $year_date5[] = $row5['date'];
@@ -422,20 +422,20 @@ $thrid_month_dates =date("Y - M",strtotime($third_date));
 $second_month_dates =date("Y - M",strtotime($second_date));
 $thrid_month_dates =date("Y - M",strtotime($third_date));
 
-    $query3 =$con->query("SELECT AVG(max_temp) as max_temp,date from newdata where taluka_id = ".$taluka_id." AND date BETWEEN '$first_start_date' AND '$first_end_date'");
+    $query3 =$con->query("SELECT AVG(max_temp) as max_temp,date from taluka_data where taluka_id = ".$taluka_id." AND date BETWEEN '$first_start_date' AND '$first_end_date'");
   while($row3 = $query3->fetch_assoc()){
       $year[] = $row3['max_temp'];
       $year_date[] = $row3['date'];
     }
 
 
-    $query4 =$con->query("SELECT AVG(max_temp) as max_temp,date from newdata where taluka_id = ".$taluka_id." AND date BETWEEN '$second_start_date' AND '$second_end_date'");
+    $query4 =$con->query("SELECT AVG(max_temp) as max_temp,date from taluka_data where taluka_id = ".$taluka_id." AND date BETWEEN '$second_start_date' AND '$second_end_date'");
   while($row4 = $query4->fetch_assoc()){
       $year1[] = $row4['max_temp'];
       $year_date1[] = $row4['date'];
     }
 
-    $query5 =$con->query("SELECT AVG(max_temp) as max_temp,date from newdata where taluka_id = ".$taluka_id." AND date BETWEEN '$third_start_date' AND '$third_end_date'");
+    $query5 =$con->query("SELECT AVG(max_temp) as max_temp,date from taluka_data where taluka_id = ".$taluka_id." AND date BETWEEN '$third_start_date' AND '$third_end_date'");
     while($row5 = $query5->fetch_assoc()){
         $year5[] = $row5['max_temp'];
         $year_date5[] = $row5['date'];
@@ -478,20 +478,20 @@ $thrid_month_dates =date("Y - M",strtotime($third_date));
 $second_month_dates =date("Y - M",strtotime($second_date));
 $thrid_month_dates =date("Y - M",strtotime($third_date));
 
-    $query3 =$con->query("SELECT AVG(min_temp) as min_temp,date from newdata where taluka_id = ".$taluka_id." AND date BETWEEN '$first_start_date' AND '$first_end_date'");
+    $query3 =$con->query("SELECT AVG(min_temp) as min_temp,date from taluka_data where taluka_id = ".$taluka_id." AND date BETWEEN '$first_start_date' AND '$first_end_date'");
   while($row3 = $query3->fetch_assoc()){
       $year[] = $row3['min_temp'];
       $year_date[] = $row3['date'];
     }
 
 
-    $query4 =$con->query("SELECT AVG(min_temp) as min_temp,date from newdata where taluka_id = ".$taluka_id." AND date BETWEEN '$second_start_date' AND '$second_end_date'");
+    $query4 =$con->query("SELECT AVG(min_temp) as min_temp,date from taluka_data where taluka_id = ".$taluka_id." AND date BETWEEN '$second_start_date' AND '$second_end_date'");
   while($row4 = $query4->fetch_assoc()){
       $year1[] = $row4['min_temp'];
       $year_date1[] = $row4['date'];
     }
 
-    $query5 =$con->query("SELECT AVG(min_temp) as min_temp,date from newdata where taluka_id = ".$taluka_id." AND date BETWEEN '$third_start_date' AND '$third_end_date'");
+    $query5 =$con->query("SELECT AVG(min_temp) as min_temp,date from taluka_data where taluka_id = ".$taluka_id." AND date BETWEEN '$third_start_date' AND '$third_end_date'");
     while($row5 = $query5->fetch_assoc()){
         $year5[] = $row5['min_temp'];
         $year_date5[] = $row5['date'];

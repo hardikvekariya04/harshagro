@@ -192,7 +192,7 @@ else{
         <div class="collapse navbar-collapse mt-sm-0 mt-2 me-md-0 me-sm-4" id="navbar">
           <div class="ms-md-auto pe-md-3 d-flex align-items-center">
             <div class="input-group input-group-outline">
-            <form  style="position:relative;left:-75px;">
+            <form method="POST" action="#" style="position:relative;left:-75px;">
                 <label class="heading">District:</label>
                 <select id="district" class="in">
                 <!-- <option value="" disabled >Select District</option> -->
@@ -659,8 +659,10 @@ else{
               </div>
               <hr style="margin-top:-5px;margin-bottom:0px;">
             </div>
-            <h6 name="period" id="per" align="center" style="border:1px dashed gray;">LAST 3 YEAR</h6>
-              <a href="#" id="downloadPdf1"><i class="fa fa-download" style="font-size:22px;align-item:right;text-align:right;position:absolute;right:40px;"></i></a>
+            <h6 name="period" id="per" align="center" style="text-decoration:underline">LAST 3 YEAR</h6>
+            <!-- <input name="submit" type="submit" id="submit1" class="sub" value="Search" style="position:absolute;right:70px;top:315px;"> -->
+
+              <a href="#" id="downloadPdf1"><i class="fa fa-download" style="font-size:22px;align-item:right;text-align:right;position:absolute;right:40px;top:315px;"></i></a>
               <div id="reportPage1">
                 <div class="chart" id="chart_data1">
                   <canvas id="chart-bars" class="chart-canvas" height="280" width="300"></canvas>

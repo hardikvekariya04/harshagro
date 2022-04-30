@@ -6,17 +6,17 @@ var per_id = "";
 var period_id = "";
 
 var d_id = document.getElementById("district").value;
-fetch_data();
+//fetch_data();
 // console.log(d_id);
 var week = document.getElementById("weeks").value;
 // console.log(week);
-fetch_data();
+// fetch_data();
 var per_id = document.getElementById("type").value;
 
-fetch_data();
+// fetch_data();
 var period_id = document.getElementById("per").value;
 
-fetch_data();
+// fetch_data();
 $(function () {
   $(document).on("change", "#district", function () {
     d_id = $(this).children(":selected").attr("id");
@@ -35,13 +35,14 @@ $(function () {
     fetch_data1();
 
   });
-  $(document).on("change", "#per", function () {
-    period_id = $(this).val();
-    fetch_data();
-    fetch_data1();
+  // $(document).on("change", "#per", function () {
+  //   period_id = $(this).val();
+  //   fetch_data();
+  //   fetch_data1();
 
-  });
+  // });
 });
+
 function fetch_data() {
   $('#submit').click(function(e) {
     e.preventDefault();
@@ -60,6 +61,8 @@ function fetch_data() {
   });
 })
 }
+
+
 function fetch_data1() {
   $('#submit').click(function(e) {
     e.preventDefault();

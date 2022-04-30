@@ -14,7 +14,7 @@ $dates6  =date('Y-m-d', strtotime($date_id.'-5 day'));
 $dates7  =date('Y-m-d', strtotime($date_id.'-6 day'));
 
 if($temp_id === 'max' ){
-  $query1 =$con->query("SELECT max_temp,date from district_data where taluka_id = ".$taluka_id." AND date IN('$dates1','$dates2','$dates3','$dates4','$dates5','$dates6','$dates7')" );
+  $query1 =$con->query("SELECT max_temp,date from district_data where district_id = ".$taluka_id." AND date IN('$dates1','$dates2','$dates3','$dates4','$dates5','$dates6','$dates7')" );
   $month = array();
   $amount = array();
   while($row1 = $query1->fetch_assoc()){
@@ -27,7 +27,7 @@ if($temp_id === 'max' ){
     echo json_encode($return_data);
 }
 elseif($temp_id === 'rain' ){
-  $query1 =$con->query("SELECT rainfall,date from district_data where taluka_id = ".$taluka_id." AND date IN('$dates1','$dates2','$dates3','$dates4','$dates5','$dates6','$dates7')" );
+  $query1 =$con->query("SELECT rainfall,date from district_data where district_id = ".$taluka_id." AND date IN('$dates1','$dates2','$dates3','$dates4','$dates5','$dates6','$dates7')" );
   $month = array();
   $amount = array();
   while($row1 = $query1->fetch_assoc()){
@@ -41,7 +41,7 @@ elseif($temp_id === 'rain' ){
     echo json_encode($return_data);
 }
 else{
-  $query1 =$con->query("SELECT min_temp,date from district_data where taluka_id = ".$taluka_id." AND date IN('$dates1','$dates2','$dates3','$dates4','$dates5','$dates6','$dates7')" );
+  $query1 =$con->query("SELECT min_temp,date from district_data where district_id = ".$taluka_id." AND date IN('$dates1','$dates2','$dates3','$dates4','$dates5','$dates6','$dates7')" );
   $month = array();
   $amount = array();
   while($row1 = $query1->fetch_assoc()){

@@ -16,11 +16,11 @@ $district
   .trigger("change");
 
 var week = document.getElementById("weeks").value;
-fetch_data();
+// fetch_data();
 var per_id = document.getElementById("type").value;
-fetch_data();
+// fetch_data();
 var period_id = document.getElementById("per").value;
-fetch_data();
+//fetch_data();
 
 $(function () {
   $(document).on("change", "#taluka", function () {
@@ -64,7 +64,7 @@ function fetch_data() {
 })
 }
 function fetch_data1() {
-  $('#submit').click(function(e) {
+  $('#submit1').click(function(e) {
     e.preventDefault();
   $.ajax({
     url: path + "crop_taluka_fetch_bar_data.php",

@@ -8,13 +8,13 @@ require_once '../config/db.php';
 if (!isset($_SESSION['ID']) && !isset($_SESSION['EMAIL'])) {
   header("location: ../index.php");
 }
-$current_date = "select max(year) AS year from crop LIMIT 1";
+$current_date = "select max(year) AS year from district_crop LIMIT 1";
 $date_result = mysqli_query($con, $current_date);
 $row_date = mysqli_fetch_assoc($date_result);
 
 $date_current = $row_date['year']; 
 
-$current_week = "select max(week) AS week from crop WHERE year = (select max(year) AS year from crop) ";
+$current_week = "select max(week) AS week from district_crop WHERE year = (select max(year) AS year from district_crop) ";
 $week_result = mysqli_query($con, $current_week);
 $row_week = mysqli_fetch_assoc($week_result);
 $week_current = $row_week['week']; 
@@ -27,13 +27,13 @@ else{
 }
 
 
-$current_min_date = "select min(year) AS year from crop LIMIT 1";
+$current_min_date = "select min(year) AS year from district_crop LIMIT 1";
 $date_min_result = mysqli_query($con, $current_min_date);
 $row_min_date = mysqli_fetch_assoc($date_min_result);
 
 $date_min_current = $row_min_date['year']; 
 
-$current_min_week = "select min(week) AS week from crop WHERE year = (select min(year) AS year from crop) ";
+$current_min_week = "select min(week) AS week from district_crop WHERE year = (select min(year) AS year from district_crop) ";
 $week_min_result = mysqli_query($con, $current_min_week);
 $row_min_week = mysqli_fetch_assoc($week_min_result);
 $week_min_current = $row_min_week['week']; 
@@ -116,7 +116,7 @@ else{
           </a>
         </li>
         <li class="nav-item">
-          <a class="nav-link text-dark active bg-gradient-primary" href="../pages/crop.php">
+          <a class="nav-link text-dark active bg-gradient-primary" href="../pages/district_crop.php">
             <div class="text-dark text-center me-2 d-flex align-items-center justify-content-center">
               <i class="material-icons opacity-10">table_view</i>
             </div>
@@ -197,7 +197,7 @@ else{
             <div class="input-group input-group-outline">
            
 
-            <form>      
+            <form method="POST" action="#">      
                 <!-- <label>Select District:</label> -->
                 <label class="heading">District:</label>
                 <select id="district" class="in">
@@ -239,68 +239,6 @@ else{
                    
                     
                 </select>
-
-                <!-- <select class="in" name="years" id="years">
-                <option value="2018" selected>2018</option>
-                <option value="2019">2019</option>
-                <option value="2020">2020</option>
-                <option value="2021">2021</option>
-                <option value="2022">2022</option>
-
-              </select> -->
-              <!-- <select class="in" name="weeks" id="weeks"> -->
-                <!-- <option value="1" selected>01</option>
-                <option value="2">02</option>
-                <option value="3">03</option>
-                <option value="4">04</option>
-                <option value="5">05</option>
-                <option value="6">06</option>
-                <option value="7">07</option>
-                <option value="8">08</option>
-                <option value="9">09</option>
-                <option value="10">10</option>
-                <option value="11" >11</option>
-                <option value="12">12</option>
-                <option value="13">13</option>
-                <option value="14">14</option>
-                <option value="15">15</option>
-                <option value="16">16</option>
-                <option value="17">17</option>
-                <option value="18">18</option>
-                <option value="19">19</option>
-                <option value="20">20</option>
-                <option value="21">21</option>
-                <option value="22">22</option>
-                <option value="23">23</option>
-                <option value="24">24</option>
-                <option value="25">25</option>
-                <option value="26">26</option>
-                <option value="27">27</option>
-                <option value="28">28</option>
-                <option value="29">29</option>
-                <option value="30">30</option>
-                <option value="31">31</option>
-                <option value="32">32</option>
-                <option value="33">33</option>
-                <option value="34">34</option>
-                <option value="35">35</option>
-                <option value="36">36</option>
-                <option value="37">37</option>
-                <option value="38">38</option>
-                <option value="39">39</option>
-                <option value="40">40</option>
-                <option value="41">41</option>
-                <option value="42">42</option>
-                <option value="43">43</option>
-                <option value="44">44</option>
-                <option value="45">45</option>
-                <option value="46">46</option>
-                <option value="47">47</option>
-                <option value="48">48</option>
-                <option value="49">49</option>
-                <option value="50">50</option>
-                <option value="51">51</option>
-                <option value="52">52</option> -->
                 <label class="heading">Vegetation Index:</label>
                 <select class="in" name="type" id="type" style="width:130px;" >
               <option value="NDVI" selected>NDVI</option>
@@ -310,8 +248,8 @@ else{
                 <option value="VHI">VHI</option>
               </select>
               <label class="heading">Week:</label>
-                <input type="week" class="in" name="weeks" id="weeks"  min="<?php echo $full_min_weeks?>" max="<?php echo $full_weeks?>" value="<?php echo $full_weeks?>" class="in" style="border:1px solid gray;border-top-right-radius:50px;border-bottom-right-radius:50px;" required/>
-                <input name="submit" type="submit" class="sub" id="submit" value="Search"/>
+                <input type="week" class="in" name="weeks" id="weeks"  min="<?php echo $full_min_weeks?>" max="<?php echo $full_weeks?>" value="<?php echo $full_weeks?>" class="in" style="border:1px solid gray;border-top-right-radius:50px;border-bottom-right-radius:50px;" selected>
+                <input name="submit" type="submit" class="sub" id="submit" value="Search">
 </form>
               <!-- </select> -->
 
@@ -382,11 +320,12 @@ else{
               <hr style="margin-top:-5px;margin-bottom:0px;">
 
              
-                <h6 name="period" id="per" align="center" style="border:1px dashed gray;">LAST 3 YEAR</h6>
+                <h6 name="period" id="per" align="center" style="text-decoration:underline;">LAST 3 YEAR</h6>
 
               <!-- <a href="#" id="downloadPdf1"><i class="fa fa-download" style="font-size:22px;align-item:right;text-align:right;position:absolute;right:40px;margin-top:-10px;"></i></a> -->
+              <!-- <input name="submit" type="submit" id="submit1" class="sub" value="Search" style="position:absolute;right:70px;top:315px;"> -->
 
-              <a href="#" id="downloadPdf1"><i class="fa fa-download" style="font-size:22px;align-item:right;text-align:right;position:absolute;right:40px;"></i></a>
+              <a href="#" id="downloadPdf1"><i class="fa fa-download" style="font-size:22px;align-item:right;text-align:right;position:absolute;right:40px;top:315px;"></i></a>
 
               <div id="reportPage1">
                 <div class="chart" id="chart_data1" style="margin-top:-10px;">
@@ -562,7 +501,7 @@ $final_seven_year = $seven_year."-".$weeknumber6;
 
 
         $con = new mysqli('localhost','root','','agro');
-        $query1 =$con->query("SELECT NDVI from crop where d_id = 0 AND week IN('$weeknumber','$weeknumber1','$weeknumber2','$weeknumber3','$weeknumber4','$weeknumber5','$weeknumber6') AND year  = $date_current" );
+        $query1 =$con->query("SELECT NDVI from district_crop where d_id = 0 AND week IN('$weeknumber','$weeknumber1','$weeknumber2','$weeknumber3','$weeknumber4','$weeknumber5','$weeknumber6') AND year  = $date_current" );
         while($row1 = $query1->fetch_assoc()){
           $month1[] = $row1['NDVI'];
         }
@@ -579,7 +518,7 @@ $month_date2 =date("Y",strtotime($ret_1));
 $ret_2 = date("Y - M",strtotime($ret_1 . ' - 1 year'));
 $month_date3 =date("Y",strtotime($ret_2));
 
-    $query1 =$con->query("SELECT NDVI  from `crop` where d_id = 0  AND week BETWEEN 1 AND 52 AND year = '$month_date1'" );
+    $query1 =$con->query("SELECT NDVI  from `district_crop` where d_id = 0  AND week BETWEEN 1 AND 52 AND year = '$month_date1'" );
     while($row1 = $query1->fetch_assoc()){
       $month_1[] = $row1['NDVI'];
     }
@@ -599,7 +538,7 @@ foreach($temp_array1 as $temp1)
  $avg_high_temp1 = $tot_temp1/$temp_array_length1;
 
 
-  $query2 =$con->query("SELECT NDVI  from `crop` where d_id = 0  AND week BETWEEN 1 AND 52 AND year = '$month_date2'" );
+  $query2 =$con->query("SELECT NDVI  from `district_crop` where d_id = 0  AND week BETWEEN 1 AND 52 AND year = '$month_date2'" );
     while($row2 = $query2->fetch_assoc()){
       $month2[] = $row2['NDVI'];
     }
@@ -617,7 +556,7 @@ foreach($temp_array1 as $temp1)
    $avg_high_temp2 = $tot_temp2/$temp_array_length2;
 
 
-    $query3 =$con->query("SELECT NDVI  from `crop` where d_id = 0  AND week BETWEEN 1 AND 52 AND year = '$month_date3'" );
+    $query3 =$con->query("SELECT NDVI  from `district_crop` where d_id = 0  AND week BETWEEN 1 AND 52 AND year = '$month_date3'" );
     while($row3 = $query3->fetch_assoc()){
       $month3[] = $row3['NDVI'];
     }

@@ -29,7 +29,7 @@ $(function () {
   $(document).on("change", "#per", function () {
     per_id = $(this).val();
     fetch_data1();
-    fetch_data3();
+    // fetch_data3();
 
   });
 });
