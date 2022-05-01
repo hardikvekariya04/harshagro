@@ -8,6 +8,55 @@ require_once '../config/db.php';
 if (!isset($_SESSION['ID']) && !isset($_SESSION['EMAIL'])) {
   header("location: ../index.php");
 }
+$current_date1 = "select max(date) AS date from district_data LIMIT 1";
+$date_result1 = mysqli_query($con, $current_date1);
+$row_date1 = mysqli_fetch_assoc($date_result1);
+
+$date_current1 = $row_date1['date']; 
+
+$current_min_date1 = "select min(date) AS date from district_data LIMIT 1";
+$date_min_result1 = mysqli_query($con, $current_min_date1);
+$row_min_date1 = mysqli_fetch_assoc($date_min_result1);
+
+$date_min_current1 = $row_min_date1['date']; 
+
+
+$current_date = "select max(year) AS year from district_crop LIMIT 1";
+$date_result = mysqli_query($con, $current_date);
+$row_date = mysqli_fetch_assoc($date_result);
+
+$date_current = $row_date['year']; 
+
+$current_week = "select max(week) AS week from district_crop WHERE year = (select max(year) AS year from district_crop) ";
+$week_result = mysqli_query($con, $current_week);
+$row_week = mysqli_fetch_assoc($week_result);
+$week_current = $row_week['week']; 
+
+if($row_week['week'] > 10){
+$full_weeks = $date_current."-W".$week_current;
+}
+else{
+  $full_weeks = $date_current."-W0".$week_current;
+}
+
+
+$current_min_date = "select min(year) AS year from district_crop LIMIT 1";
+$date_min_result = mysqli_query($con, $current_min_date);
+$row_min_date = mysqli_fetch_assoc($date_min_result);
+
+$date_min_current = $row_min_date['year']; 
+
+$current_min_week = "select min(week) AS week from district_crop WHERE year = (select min(year) AS year from district_crop) ";
+$week_min_result = mysqli_query($con, $current_min_week);
+$row_min_week = mysqli_fetch_assoc($week_min_result);
+$week_min_current = $row_min_week['week']; 
+
+if($row_min_week['week'] > 10){
+$full_min_weeks = $date_min_current."-W".$week_min_current;
+}
+else{
+  $full_min_weeks = $date_min_current."-W0".$week_min_current;
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -174,9 +223,11 @@ if (!isset($_SESSION['ID']) && !isset($_SESSION['EMAIL'])) {
                 <option value="rain">Rainfall</option>
               </select>
               <label class="heading" style="position:absolute;top:10px;left:340px;border-radius:50px;width:150px;">Date:</label>
-              <input class="in" id="date" type="date" placeholder="DD-MM-YYYY" min="1997-01-01" max="2020-02-15"
-                value="2019-02-06" style="border-top-left-radius:50px;border-bottom-left-radius:50px;width:150px;padding:3px;margin-bottom:-10px;position:absolute;top:30px;left:340px;">
-            </div>
+              <!-- <input class="in" id="date" type="date" placeholder="DD-MM-YYYY" min="1997-01-01" max="2020-02-15"
+                value="2019-02-06" style="border-top-left-radius:50px;border-bottom-left-radius:50px;width:150px;padding:3px;margin-bottom:-10px;position:absolute;top:30px;left:340px;"> -->
+                <input class="in" id="date" type="date" placeholder="DD-MM-YYYY" min="<?php echo $date_min_current1?>" max="<?php echo $date_current1?>"
+                value="<?php echo $date_current1?>" style="border-top-left-radius:50px;border-bottom-left-radius:50px;width:150px;padding:3px;margin-bottom:-10px;position:absolute;top:30px;left:340px;" selected>
+              </div>
             <hr class="dark horizontal" style="margin-top:-30px;margin-bottom:-10px;">
             <div id="chart-line1" class="img-magnifier-container" style="min-height:440px"></div>
           </div>
@@ -193,8 +244,7 @@ if (!isset($_SESSION['ID']) && !isset($_SESSION['EMAIL'])) {
                 <option value="VHI">VHI</option>
               </select>
               <label class="heading" style="position:absolute;top:10px;left:340px;border-radius:50px;width:150px;">Week:</label>
-              <input type="week" name="week" id="week" value="2022-W15" style="position:absolute;top:30px;left:340px;border-radius:50px;width:150px;padding:3px;border:1px solid gray;" required>
-            </div>
+              <input type="week" class="in" name="weeks" id="weeks"  min="<?php echo $full_min_weeks?>" max="<?php echo $full_weeks?>" value="<?php echo $full_weeks?>" class="in" style="border:1px solid gray;border-top-right-radius:50px;border-bottom-right-radius:50px;" selected>            </div>
             <hr class="dark horizontal" style="margin-top:-30px;margin-bottom:-10px;">
             <div id="chart-line2" style="min-height:440px"></div>
           </div>

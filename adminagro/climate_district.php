@@ -1,7 +1,7 @@
 <?php  
 require_once '../config/function.php';
-$connect = mysqli_connect("localhost", "root", "", "agro");
-$connect_main = mysqli_connect("localhost", "root", "", "agro");
+$connect = mysqli_connect("localhost", "root", "", "agrocast");
+$connect_main = mysqli_connect("localhost", "root", "", "agrocast");
 if (!isset($_SESSION['ID']) && !isset($_SESSION['EMAIL'])) {
   header("location: index.php");
 }

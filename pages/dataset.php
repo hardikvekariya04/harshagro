@@ -7,7 +7,7 @@ require_once '../config/db.php';
 if (!isset($_SESSION['ID']) && !isset($_SESSION['EMAIL'])) {
   header("location: ../index.php");
 }
-$connect1 = mysqli_connect("localhost", "root", "", "agro");
+$connect1 = mysqli_connect("localhost", "root", "", "agrocast");
 $querydataset = "select * from dataset where id = 1";
 $result = mysqli_query($connect1,$querydataset);
 if($row=mysqli_fetch_assoc($result))
@@ -69,7 +69,7 @@ if($row=mysqli_fetch_assoc($result))
 </style>
 
 <body class="g-sidenav-show  bg-gray-200">
-<!-- <div class="loader"></div> -->
+<div class="loader"></div>
   <!-- <div class="circle"></div> -->
   <aside
     class="sidenav navbar navbar-vertical navbar-expand-xs border-0 border-radius-xl my-3 fixed-start ms-3 ps bg-white"

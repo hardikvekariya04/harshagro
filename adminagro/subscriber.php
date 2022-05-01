@@ -1,6 +1,6 @@
 <?php  
 // $connect = mysqli_connect("localhost", "root", "", "admin_agro");
-$connect1 = mysqli_connect("localhost", "root", "", "agro");
+$connect1 = mysqli_connect("localhost", "root", "", "agrocast");
 
 ?>
 <!DOCTYPE html>

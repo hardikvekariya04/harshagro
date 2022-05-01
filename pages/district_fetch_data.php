@@ -1,5 +1,5 @@
 <?php
-$con = new mysqli('localhost','root','','agro');
+$con = new mysqli('localhost','root','','agrocast');
 $taluka_id = $_POST['taluka_id'];
 $date_id = $_POST['date_id'];
 $temp_id = $_POST['temp_id'];

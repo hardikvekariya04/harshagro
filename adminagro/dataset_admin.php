@@ -1,6 +1,6 @@
 <?php  
 // $connect = mysqli_connect("localhost", "root", "", "admin_agro");
-$connect_main = mysqli_connect("localhost", "root", "", "agro");
+$connect_main = mysqli_connect("localhost", "root", "", "agrocast");
 
 $querydataset = "select * from dataset where id = 1";
 $result = mysqli_query($connect_mian,$querydataset);

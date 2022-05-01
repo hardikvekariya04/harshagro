@@ -70,7 +70,7 @@ $date_min_current = $row_min_date['date'];
   }
   </style>
 <body class="g-sidenav-show  bg-gray-200">
-<!-- <div class="loader"></div> -->
+<div class="loader"></div>
   <!-- <div class="circle"></div> -->
   <aside class="sidenav navbar navbar-vertical navbar-expand-xs border-0 border-radius-xl my-3 fixed-start ms-3 ps bg-white" id="sidenav-main">
     <div class="sidenav-header">
@@ -435,7 +435,7 @@ $dates6  =date('Y-m-d', $date6 );
 $dates7  =date('Y-m-d', $date7 );
 
 
-  $con = new mysqli('localhost','root','','agro');
+  $con = new mysqli('localhost','root','','agrocast');
   $query1 =$con->query("SELECT min_temp,date from district_data where district_id = 0 AND date IN('$dates1','$dates2','$dates3','$dates4','$dates5','$dates6','$dates7')" );
   while($row1 = $query1->fetch_assoc()){
     $month1[] = $row1['min_temp'];
@@ -461,7 +461,11 @@ $four_monthly =date("Y - M",strtotime($monthly3));
 $five_monthly =date("Y - M",strtotime($monthly4));
 $six_monthly =date("Y - M",strtotime($monthly5));
   //$query =$con->query("SELECT min_temp,date from district_data where district_id = 0 AND date IN(date_sub('$query_Date',Interval 1 month))" );
-  $query =$con->query("SELECT min_temp,date from district_data where district_id = 0 AND (date_sub('2018-09-30',Interval 1 month)) < date && date <= '2018-09-30'");
+  $query =$con->query("SELECT min_temp,date from district_data where district_id = 0 AND (date_sub('$date_current',Interval 1 month)) < date && date <= '$date_current'");
+  $month[] = array();
+  $month[] = "";
+  $amount[] = array();
+  $amount[] = "";
   while($row = $query->fetch_assoc()){
       $month[] = $row['min_temp'];
       $amount[] = $row['date'];
@@ -484,7 +488,11 @@ foreach($temp_array1 as $temp1)
 
 
 $query3 =$con->query("SELECT min_temp,date from district_data where district_id = 0 AND  (date_sub('$monthly',Interval 1 month)) < date && date <= '$monthly'" );
-  while($row3 = $query3->fetch_assoc()){
+$month3[] = array();
+$month3[] = "";
+$amount3[] = array();
+$amount3[] = "";  
+while($row3 = $query3->fetch_assoc()){
       $month3[] = $row3['min_temp'];
       $amount3[] = $row3['date'];
     }
@@ -505,7 +513,11 @@ foreach($temp_array2 as $temp2)
 
 
 $query4 =$con->query("SELECT min_temp,date from district_data where district_id = 0 AND (date_sub('$monthly1',Interval 1 month)) < date && date <= '$monthly1'" );
-  while($row4 = $query4->fetch_assoc()){
+ $month4[] = array();
+  $month4[] = "";
+  $amount4[] = array();
+  $amount4[] = "";  
+while($row4 = $query4->fetch_assoc()){
       $month4[] = $row4['min_temp'];
       $amount4[] = $row4['date'];
     }
@@ -526,7 +538,11 @@ foreach($temp_array3 as $temp3)
 
 
 $query5 =$con->query("SELECT min_temp,date from district_data where district_id = 0 AND (date_sub('$monthly2',Interval 1 month)) < date && date <= '$monthly2'" );
-  while($row5 = $query5->fetch_assoc()){
+$month5[] = array();
+$month5[] = "";
+$amount5[] = array();
+$amount5[] = "";  
+while($row5 = $query5->fetch_assoc()){
       $month5[] = $row5['min_temp'];
       $amount5[] = $row5['date'];
     }
@@ -547,7 +563,11 @@ foreach($temp_array4 as $temp4)
 
 
 $query6 =$con->query("SELECT min_temp,date from district_data where district_id = 0 AND (date_sub('$monthly3',Interval 1 month)) < date && date <= '$monthly3'" );
-  while($row6 = $query6->fetch_assoc()){
+$month6[] = array();
+$month6[] = "";
+$amount6[] = array();
+$amount6[] = "";  
+while($row6 = $query6->fetch_assoc()){
       $month6[] = $row6['min_temp'];
       $amount6[] = $row6['date'];
     }
@@ -567,7 +587,11 @@ foreach($temp_array5 as $temp5)
 
 
 $query7 =$con->query("SELECT min_temp,date from district_data where district_id = 0 AND (date_sub('$monthly4',Interval 1 month)) < date && date <= '$monthly4'" );
-  while($row7 = $query7->fetch_assoc()){
+$month7[] = array();
+$month7[] = "";
+$amount7[] = array();
+$amount7[] = "";  
+while($row7 = $query7->fetch_assoc()){
       $month7[] = $row7['min_temp'];
       $amount7[] = $row7['date'];
     }
@@ -587,7 +611,11 @@ foreach($temp_array6 as $temp6)
 
 
 $query8 =$con->query("SELECT min_temp,date from district_data where district_id = 0 AND (date_sub('$monthly5',Interval 1 month)) < date && date <= '$monthly5'" );
-  while($row8 = $query8->fetch_assoc()){
+$month8[] = array();
+$month8[] = "";
+$amount8[] = array();
+$amount8[] = "";  
+while($row8 = $query8->fetch_assoc()){
       $month8[] = $row8['min_temp'];
       $amount8[] = $row8['date'];
     }

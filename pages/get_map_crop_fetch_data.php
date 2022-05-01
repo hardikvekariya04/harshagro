@@ -1,5 +1,5 @@
 <?php
-$con = new mysqli('localhost','root','','agro');
+$con = new mysqli('localhost','root','','agrocast');
 $weeks = $_POST['weeks'];
 $type_id = $_POST['type_id'];
 

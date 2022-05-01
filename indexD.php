@@ -803,7 +803,7 @@ $dates7  =date('Y-m-d', $date7 );
 
 // echo '<br>';
 // echo  date('Y-m-d', $date3);
-  $con = new mysqli('localhost','root','','agro');
+  $con = new mysqli('localhost','root','','agrocast');
   // $currDate = "2018-01-07";
   //$query =$con->query("SELECT min_temp,date from taluka_data where taluka_id = 2 AND date >= CURDATE() - INTERVAL 7 DAY");
   $query1 =$con->query("SELECT min_temp,date from taluka_data where taluka_id = 1 AND date IN('$dates1','$dates2','$dates3','$dates4','$dates5','$dates6','$dates7')" );

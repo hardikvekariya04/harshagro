@@ -1,5 +1,5 @@
 <?php
-$con = new mysqli('localhost','root','','agro');
+$con = new mysqli('localhost','root','','agrocast');
 $taluka_id = $_POST['taluka_id'];
 $date_id = $_POST['date_id'];
 $temp_id = $_POST['temp_id'];
@@ -27,11 +27,11 @@ if($temp_id === 'max' ){
     echo json_encode($return_data);
 }
 else if($temp_id === 'rain'){
-  $query1 =$con->query("SELECT min_temp,date from taluka_data where taluka_id = ".$taluka_id." AND date IN('$dates1','$dates2','$dates3','$dates4','$dates5','$dates6','$dates7')" );
+  $query1 =$con->query("SELECT rainfall,date from taluka_data where taluka_id = ".$taluka_id." AND date IN('$dates1','$dates2','$dates3','$dates4','$dates5','$dates6','$dates7')" );
   $month = array();
   $amount = array();
   while($row1 = $query1->fetch_assoc()){
-    $month[] = $row1['min_temp'];
+    $month[] = $row1['rainfall'];
     $amount[] = $row1['date'];
   }
   

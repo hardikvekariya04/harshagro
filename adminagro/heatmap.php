@@ -1,57 +1,406 @@
 <?php
 require_once '../config/function.php';
-$db = mysqli_connect("localhost", "root", "", "agro");
+$db = mysqli_connect("localhost", "root", "", "agrocast");
 
 if (!isset($_SESSION['ID']) && !isset($_SESSION['EMAIL'])) {
   header("location: index.php");
 }
 $msg = "";
-if (isset($_POST['uploadfile'])) {
-    $date = $_POST['date'];
-    // $datepicker = $_POST['datepicker'];
-    $week = $_POST['week'];
-    $weather_max_heatmap = $_FILES["choosefile"]["name"];
-    $weather_min_heatmap = $_FILES["choosefile1"]["name"];
-    $weather_rain_heatmap = $_FILES["choosefile2"]["name"];
+// if (isset($_POST['uploadfile'])) {
+//     $date = $_POST['date'];
+//     // $datepicker = $_POST['datepicker'];
+//     $week = $_POST['week'];
+//     $weather_max_heatmap = $_FILES["choosefile"]["name"];
+//     $weather_min_heatmap = $_FILES["choosefile1"]["name"];
+//     $weather_rain_heatmap = $_FILES["choosefile2"]["name"];
 
-    $crop_ndvi = $_FILES["choosefile3"]["name"];
-    $crop_vci = $_FILES["choosefile4"]["name"];
-    $crop_vhi = $_FILES["choosefile5"]["name"];
+//     $crop_ndvi = $_FILES["choosefile3"]["name"];
+//     $crop_vci = $_FILES["choosefile4"]["name"];
+//     $crop_vhi = $_FILES["choosefile5"]["name"];
 
-    $tempname = $_FILES["choosefile"]["tmp_name"];  
-    $tempname1 = $_FILES["choosefile1"]["tmp_name"];  
-    $tempname2 = $_FILES["choosefile2"]["tmp_name"];  
-    $tempname3 = $_FILES["choosefile3"]["tmp_name"];  
-    $tempname4 = $_FILES["choosefile4"]["tmp_name"];  
-    $tempname5 = $_FILES["choosefile5"]["tmp_name"];  
+//     $tempname = $_FILES["choosefile"]["tmp_name"];  
+//     $tempname1 = $_FILES["choosefile1"]["tmp_name"];  
+//     $tempname2 = $_FILES["choosefile2"]["tmp_name"];  
+//     $tempname3 = $_FILES["choosefile3"]["tmp_name"];  
+//     $tempname4 = $_FILES["choosefile4"]["tmp_name"];  
+//     $tempname5 = $_FILES["choosefile5"]["tmp_name"];  
 
-    $folder = "weather_max_image/".$weather_max_heatmap;
-    $folder1 = "weather_min_image/".$weather_min_heatmap;
-    $folder2 = "weather_rain_image/".$weather_rain_heatmap;
+//     $folder = "weather_max_image/".$weather_max_heatmap;
+//     $folder1 = "weather_min_image/".$weather_min_heatmap;
+//     $folder2 = "weather_rain_image/".$weather_rain_heatmap;
 
-    $folder3 = "crop_ndvi/".$crop_ndvi;
-    $folder4 = "crop_vci/".$crop_vci;
-    $folder5 = "crop_vhi/".$crop_vhi;
+//     $folder3 = "crop_ndvi/".$crop_ndvi;
+//     $folder4 = "crop_vci/".$crop_vci;
+//     $folder5 = "crop_vhi/".$crop_vhi;
 
-      // connect with the database
-        $sql = "INSERT INTO image (weather_max_heat,weather_min_heat,weather_rain_heat,crop_ndvi,crop_vci,crop_vhi,date,week) VALUES ('$weather_max_heatmap','$weather_min_heatmap','$weather_rain_heatmap','$crop_ndvi','$crop_vci','$crop_vhi','$date','$week')";
-     // function to execute above query
-        mysqli_query($db, $sql);       
-        // Add the image to the "image" folder"
-        if (move_uploaded_file($tempname, $folder) && move_uploaded_file($tempname1, $folder1) && move_uploaded_file($tempname2, $folder2) && move_uploaded_file($tempname3, $folder3) && move_uploaded_file($tempname4, $folder4) && move_uploaded_file($tempname5, $folder5)) {
-            echo '<script language="javascript">';
-            echo 'alert("Successfully Added")'; 
-            echo '</script>';
-        }else{
-            $msg = "Failed to upload image";
-    }
-//     if (move_uploaded_file($tempname1, $folder1)) {
-//         $msg = "Image uploaded successfully";
-//     }else{
-//         $msg = "Failed to upload weather minimum temp image";
+//       // connect with the database
+//         $sql = "INSERT INTO image (weather_max_heat,weather_min_heat,weather_rain_heat,crop_ndvi,crop_vci,crop_vhi,date,week) VALUES ('$weather_max_heatmap','$weather_min_heatmap','$weather_rain_heatmap','$crop_ndvi','$crop_vci','$crop_vhi','$date','$week')";
+//      // function to execute above query
+//         mysqli_query($db, $sql);       
+//         // Add the image to the "image" folder"
+//         if (move_uploaded_file($tempname, $folder) && move_uploaded_file($tempname1, $folder1) && move_uploaded_file($tempname2, $folder2) && move_uploaded_file($tempname3, $folder3) && move_uploaded_file($tempname4, $folder4) && move_uploaded_file($tempname5, $folder5)) {
+//             echo '<script language="javascript">';
+//             echo 'alert("Successfully Added")'; 
+//             echo '</script>';
+//         }else{
+//             $msg = "Failed to upload image";
+//     }
+// //     if (move_uploaded_file($tempname1, $folder1)) {
+// //         $msg = "Image uploaded successfully";
+// //     }else{
+// //         $msg = "Failed to upload weather minimum temp image";
+// // }
 // }
+
+if(isset($_POST['uploadfile'])){ 
+  // File upload configuration 
+  $targetDir = "weather_max_image/"; 
+
+  $allowTypes = array('jpg','png','jpeg','gif'); 
+   
+  $statusMsg = $errorMsg = $insertValuesSQL = $errorUpload = $errorUploadType = ''; 
+
+  $fileNames = array_filter($_FILES['files']['name']); 
+
+  if(!empty($fileNames)){ 
+      foreach($_FILES['files']['name'] as $key=>$val){ 
+          // File upload path 
+          $fileName = basename($_FILES['files']['name'][$key]); 
+          $targetFilePath = $targetDir . $fileName; 
+           
+          // Check whether file type is valid 
+          $fileType = pathinfo($targetFilePath, PATHINFO_EXTENSION); 
+      
+          if(in_array($fileType, $allowTypes)){ 
+              // Upload file to server 
+              if(move_uploaded_file($_FILES["files"]["tmp_name"][$key], $targetFilePath)){ 
+                  // Image db insert sql 
+                  $insertValuesSQL .= "('".$fileName."', NOW()),"; 
+              }else{ 
+                  $errorUpload .= $_FILES['files']['name'][$key].' | '; 
+              } 
+          }else{ 
+              $errorUploadType .= $_FILES['files']['name'][$key].' | '; 
+          } 
+        }
+      // Error message 
+      $errorUpload = !empty($errorUpload)?'Upload Error: '.trim($errorUpload, ' | '):''; 
+      $errorUploadType = !empty($errorUploadType)?'File Type Error: '.trim($errorUploadType, ' | '):''; 
+      $errorMsg = !empty($errorUpload)?'<br/>'.$errorUpload.'<br/>'.$errorUploadType:'<br/>'.$errorUploadType; 
+       
+      if(!empty($insertValuesSQL)){ 
+          $insertValuesSQL = trim($insertValuesSQL,','); 
+
+          $insert = $db->query("INSERT into maximum_temp (weather_max_heat,upload_on) VALUES $insertValuesSQL");
+          // mysqli_query($db, $insert);  
+          if($insert){ 
+            ?>
+            <script>
+              window.location.href = "heatmap.php";
+              </script>
+            
+            <?php
+          }else{ 
+              $statusMsg = "Sorry, there was an error uploading your file."; 
+          } 
+      }else{ 
+          $statusMsg = "Upload failed! ".$errorMsg; 
+      } 
+  }else{ 
+      $statusMsg = 'Please select a file to upload.'; 
+  } 
 }
-$result = mysqli_query($db, "SELECT * FROM image");
+if(isset($_POST['uploadfile'])){ 
+  // File upload configuration 
+  $targetDir1 = "weather_min_image/"; 
+
+  $allowTypes1 = array('jpg','png','jpeg','gif'); 
+   
+  $statusMsg1 = $errorMsg1 = $insertValuesSQL1 = $errorUpload1 = $errorUploadType1 = ''; 
+
+  $fileNames1 = array_filter($_FILES['files1']['name']); 
+
+  if(!empty($fileNames1)){ 
+      foreach($_FILES['files1']['name'] as $key1=>$val1){ 
+          // File upload path 
+          $fileName1 = basename($_FILES['files1']['name'][$key1]); 
+          $targetFilePath1 = $targetDir1 . $fileName1; 
+           
+          // Check whether file type is valid 
+          $fileType1 = pathinfo($targetFilePath1, PATHINFO_EXTENSION); 
+      
+          if(in_array($fileType1, $allowTypes1)){ 
+              // Upload file to server 
+              if(move_uploaded_file($_FILES["files1"]["tmp_name"][$key1], $targetFilePath1)){ 
+                  // Image db insert sql 
+                  $insertValuesSQL1 .= "('".$fileName1."', NOW()),"; 
+              }else{ 
+                  $errorUpload1 .= $_FILES['files1']['name'][$key1].' | '; 
+              } 
+          }else{ 
+              $errorUploadType1 .= $_FILES['files1']['name'][$key1].' | '; 
+          } 
+        }
+      // Error message 
+      $errorUpload1 = !empty($errorUpload1)?'Upload Error: '.trim($errorUpload1, ' | '):''; 
+      $errorUploadType1 = !empty($errorUploadType1)?'File Type Error: '.trim($errorUploadType1, ' | '):''; 
+      $errorMsg1 = !empty($errorUpload1)?'<br/>'.$errorUpload1.'<br/>'.$errorUploadType1:'<br/>'.$errorUploadType1; 
+       
+      if(!empty($insertValuesSQL1)){ 
+          $insertValuesSQL1 = trim($insertValuesSQL1,','); 
+
+          $insert1 = $db->query("INSERT into minimum_temp (weather_min_heat,upload_on) VALUES $insertValuesSQL1");
+          // mysqli_query($db, $insert1);  
+          if($insert1){ 
+            ?>
+            <script>
+              window.location.href = "heatmap.php";
+              </script>
+            
+            <?php
+          }else{ 
+              $statusMsg1 = "Sorry, there was an error uploading your file."; 
+          } 
+      }else{ 
+          $statusMsg1 = "Upload failed! ".$errorMsg1; 
+      } 
+  }else{ 
+      $statusMsg1 = 'Please select a file to upload.'; 
+  } 
+}
+if(isset($_POST['uploadfile'])){ 
+  // File upload configuration 
+  $targetDir1 = "weather_rain_image/"; 
+
+  $allowTypes1 = array('jpg','png','jpeg','gif'); 
+   
+  $statusMsg1 = $errorMsg1 = $insertValuesSQL1 = $errorUpload1 = $errorUploadType1 = ''; 
+
+  $fileNames1 = array_filter($_FILES['files2']['name']); 
+
+  if(!empty($fileNames1)){ 
+      foreach($_FILES['files2']['name'] as $key1=>$val1){ 
+          // File upload path 
+          $fileName1 = basename($_FILES['files2']['name'][$key1]); 
+          $targetFilePath1 = $targetDir1 . $fileName1; 
+           
+          // Check whether file type is valid 
+          $fileType1 = pathinfo($targetFilePath1, PATHINFO_EXTENSION); 
+      
+          if(in_array($fileType1, $allowTypes1)){ 
+              // Upload file to server 
+              if(move_uploaded_file($_FILES["files2"]["tmp_name"][$key1], $targetFilePath1)){ 
+                  // Image db insert sql 
+                  $insertValuesSQL1 .= "('".$fileName1."', NOW()),"; 
+              }else{ 
+                  $errorUpload1 .= $_FILES['files2']['name'][$key1].' | '; 
+              } 
+          }else{ 
+              $errorUploadType1 .= $_FILES['files2']['name'][$key1].' | '; 
+          } 
+        }
+      // Error message 
+      $errorUpload1 = !empty($errorUpload1)?'Upload Error: '.trim($errorUpload1, ' | '):''; 
+      $errorUploadType1 = !empty($errorUploadType1)?'File Type Error: '.trim($errorUploadType1, ' | '):''; 
+      $errorMsg1 = !empty($errorUpload1)?'<br/>'.$errorUpload1.'<br/>'.$errorUploadType1:'<br/>'.$errorUploadType1; 
+       
+      if(!empty($insertValuesSQL1)){ 
+          $insertValuesSQL1 = trim($insertValuesSQL1,','); 
+
+          $insert1 = $db->query("INSERT into rainfall_image (weather_rain_heat,upload_on) VALUES $insertValuesSQL1");
+          // mysqli_query($db, $insert1);  
+          if($insert1){ 
+            ?>
+            <script>
+              window.location.href = "heatmap.php";
+              </script>
+            
+            <?php
+          }else{ 
+              $statusMsg1 = "Sorry, there was an error uploading your file."; 
+          } 
+      }else{ 
+          $statusMsg1 = "Upload failed! ".$errorMsg1; 
+      } 
+  }else{ 
+      $statusMsg1 = 'Please select a file to upload.'; 
+  } 
+}
+if(isset($_POST['uploadfile'])){ 
+  // File upload configuration 
+  $targetDir1 = "crop_ndvi/"; 
+
+  $allowTypes1 = array('jpg','png','jpeg','gif'); 
+   
+  $statusMsg1 = $errorMsg1 = $insertValuesSQL1 = $errorUpload1 = $errorUploadType1 = ''; 
+
+  $fileNames1 = array_filter($_FILES['files3']['name']); 
+
+  if(!empty($fileNames1)){ 
+      foreach($_FILES['files3']['name'] as $key1=>$val1){ 
+          // File upload path 
+          $fileName1 = basename($_FILES['files3']['name'][$key1]); 
+          $targetFilePath1 = $targetDir1 . $fileName1; 
+           
+          // Check whether file type is valid 
+          $fileType1 = pathinfo($targetFilePath1, PATHINFO_EXTENSION); 
+      
+          if(in_array($fileType1, $allowTypes1)){ 
+              // Upload file to server 
+              if(move_uploaded_file($_FILES["files3"]["tmp_name"][$key1], $targetFilePath1)){ 
+                  // Image db insert sql 
+                  $insertValuesSQL1 .= "('".$fileName1."', NOW()),"; 
+              }else{ 
+                  $errorUpload1 .= $_FILES['files3']['name'][$key1].' | '; 
+              } 
+          }else{ 
+              $errorUploadType1 .= $_FILES['files3']['name'][$key1].' | '; 
+          } 
+        }
+      // Error message 
+      $errorUpload1 = !empty($errorUpload1)?'Upload Error: '.trim($errorUpload1, ' | '):''; 
+      $errorUploadType1 = !empty($errorUploadType1)?'File Type Error: '.trim($errorUploadType1, ' | '):''; 
+      $errorMsg1 = !empty($errorUpload1)?'<br/>'.$errorUpload1.'<br/>'.$errorUploadType1:'<br/>'.$errorUploadType1; 
+       
+      if(!empty($insertValuesSQL1)){ 
+          $insertValuesSQL1 = trim($insertValuesSQL1,','); 
+
+          $insert1 = $db->query("INSERT into ndvi (crop_ndvi,upload_on) VALUES $insertValuesSQL1");
+          // mysqli_query($db, $insert1);  
+          if($insert1){ 
+            ?>
+            <script>
+              window.location.href = "heatmap.php";
+              </script>
+            
+            <?php
+          }else{ 
+              $statusMsg1 = "Sorry, there was an error uploading your file."; 
+          } 
+      }else{ 
+          $statusMsg1 = "Upload failed! ".$errorMsg1; 
+      } 
+  }else{ 
+      $statusMsg1 = 'Please select a file to upload.'; 
+  } 
+}
+if(isset($_POST['uploadfile'])){ 
+  // File upload configuration 
+  $targetDir1 = "crop_vci/"; 
+
+  $allowTypes1 = array('jpg','png','jpeg','gif'); 
+   
+  $statusMsg1 = $errorMsg1 = $insertValuesSQL1 = $errorUpload1 = $errorUploadType1 = ''; 
+
+  $fileNames1 = array_filter($_FILES['files4']['name']); 
+
+  if(!empty($fileNames1)){ 
+      foreach($_FILES['files4']['name'] as $key1=>$val1){ 
+          // File upload path 
+          $fileName1 = basename($_FILES['files4']['name'][$key1]); 
+          $targetFilePath1 = $targetDir1 . $fileName1; 
+           
+          // Check whether file type is valid 
+          $fileType1 = pathinfo($targetFilePath1, PATHINFO_EXTENSION); 
+      
+          if(in_array($fileType1, $allowTypes1)){ 
+              // Upload file to server 
+              if(move_uploaded_file($_FILES["files4"]["tmp_name"][$key1], $targetFilePath1)){ 
+                  // Image db insert sql 
+                  $insertValuesSQL1 .= "('".$fileName1."', NOW()),"; 
+              }else{ 
+                  $errorUpload1 .= $_FILES['files4']['name'][$key1].' | '; 
+              } 
+          }else{ 
+              $errorUploadType1 .= $_FILES['files4']['name'][$key1].' | '; 
+          } 
+        }
+      // Error message 
+      $errorUpload1 = !empty($errorUpload1)?'Upload Error: '.trim($errorUpload1, ' | '):''; 
+      $errorUploadType1 = !empty($errorUploadType1)?'File Type Error: '.trim($errorUploadType1, ' | '):''; 
+      $errorMsg1 = !empty($errorUpload1)?'<br/>'.$errorUpload1.'<br/>'.$errorUploadType1:'<br/>'.$errorUploadType1; 
+       
+      if(!empty($insertValuesSQL1)){ 
+          $insertValuesSQL1 = trim($insertValuesSQL1,','); 
+
+          $insert1 = $db->query("INSERT into vci (crop_vci,upload_on) VALUES $insertValuesSQL1");
+          // mysqli_query($db, $insert1);  
+          if($insert1){ 
+            ?>
+            <script>
+              window.location.href = "heatmap.php";
+              </script>
+            
+            <?php
+          }else{ 
+              $statusMsg1 = "Sorry, there was an error uploading your file."; 
+          } 
+      }else{ 
+          $statusMsg1 = "Upload failed! ".$errorMsg1; 
+      } 
+  }else{ 
+      $statusMsg1 = 'Please select a file to upload.'; 
+  } 
+}
+if(isset($_POST['uploadfile'])){ 
+  // File upload configuration 
+  $targetDir1 = "crop_vhi/"; 
+
+  $allowTypes1 = array('jpg','png','jpeg','gif'); 
+   
+  $statusMsg1 = $errorMsg1 = $insertValuesSQL1 = $errorUpload1 = $errorUploadType1 = ''; 
+
+  $fileNames1 = array_filter($_FILES['files4']['name']); 
+
+  if(!empty($fileNames1)){ 
+      foreach($_FILES['files5']['name'] as $key1=>$val1){ 
+          // File upload path 
+          $fileName1 = basename($_FILES['files5']['name'][$key1]); 
+          $targetFilePath1 = $targetDir1 . $fileName1; 
+           
+          // Check whether file type is valid 
+          $fileType1 = pathinfo($targetFilePath1, PATHINFO_EXTENSION); 
+      
+          if(in_array($fileType1, $allowTypes1)){ 
+              // Upload file to server 
+              if(move_uploaded_file($_FILES["files5"]["tmp_name"][$key1], $targetFilePath1)){ 
+                  // Image db insert sql 
+                  $insertValuesSQL1 .= "('".$fileName1."', NOW()),"; 
+              }else{ 
+                  $errorUpload1 .= $_FILES['files5']['name'][$key1].' | '; 
+              } 
+          }else{ 
+              $errorUploadType1 .= $_FILES['files5']['name'][$key1].' | '; 
+          } 
+        }
+      // Error message 
+      $errorUpload1 = !empty($errorUpload1)?'Upload Error: '.trim($errorUpload1, ' | '):''; 
+      $errorUploadType1 = !empty($errorUploadType1)?'File Type Error: '.trim($errorUploadType1, ' | '):''; 
+      $errorMsg1 = !empty($errorUpload1)?'<br/>'.$errorUpload1.'<br/>'.$errorUploadType1:'<br/>'.$errorUploadType1; 
+       
+      if(!empty($insertValuesSQL1)){ 
+          $insertValuesSQL1 = trim($insertValuesSQL1,','); 
+
+          $insert1 = $db->query("INSERT into vhi (crop_vhi,upload_on) VALUES $insertValuesSQL1");
+          // mysqli_query($db, $insert1);  
+          if($insert1){ 
+            ?>
+            <script>
+              window.location.href = "heatmap.php";
+              </script>
+            
+            <?php
+          }else{ 
+              $statusMsg1 = "Sorry, there was an error uploading your file."; 
+          } 
+      }else{ 
+          $statusMsg1 = "Upload failed! ".$errorMsg1; 
+      } 
+  }else{ 
+      $statusMsg1 = 'Please select a file to upload.'; 
+  } 
+}
+// $result = mysqli_query($db, "SELECT * FROM image");
 
 ?> 
 <!DOCTYPE html>
@@ -143,6 +492,7 @@ $result = mysqli_query($db, "SELECT * FROM image");
 </head>
 
 <body class="g-sidenav-show  bg-gray-200">
+
   <aside class="sidenav navbar navbar-vertical navbar-expand-xs border-0 border-radius-xl my-3 fixed-start ms-3   bg-gradient-dark" id="sidenav-main">
     <div class="sidenav-header">
       <i class="fas fa-times p-3 cursor-pointer text-white opacity-5 position-absolute end-0 top-0 d-none d-xl-none" aria-hidden="true" id="iconSidenav"></i>
@@ -263,38 +613,31 @@ $result = mysqli_query($db, "SELECT * FROM image");
     <h6>Heatmap photo upload</h6>
     <hr>
     <h2>Weather</h2>
-    <div>
+    <!-- <div>
         <label>Date</label>
         <input type="date" name="date" class="form-control" style="width: 500px;" />
-    </div>
+    </div> -->
     <br/>
 
    
     <div style="display:flex">
     <h6 style="margin-right:5px;">Max : </h6>
-    <input type="file" name="choosefile" style="width:280px;border : 2px solid #29C5F6;padding:5px;border-radius:10px;color:red;" />
+    <input type="file" name="files[]" multiple style="width:280px;border : 2px solid #29C5F6;padding:5px;border-radius:10px;color:red;" />
     <h6 style="margin-right:5px;margin-left:20px;">Min : </h6>
-    <input type="file" name="choosefile1" style="width:280px;border : 2px solid #29C5F6;padding:5px;border-radius:10px;color:red;" />
+    <input type="file" name="files1[]" multiple style="width:280px;border : 2px solid #29C5F6;padding:5px;border-radius:10px;color:red;" />
     <h6 style="margin-right:5px;margin-left:20px;">Rain : </h6>
-    <input type="file" name="choosefile2" style="width:280px;border : 2px solid #29C5F6;padding:5px;border-radius:10px;color:red;" />
+    <input type="file" name="files2[]" multiple style="width:280px;border : 2px solid #29C5F6;padding:5px;border-radius:10px;color:red;" />
     </div>
     <hr> 
     <h2>crop</h2>
-   
-    <div align = "center" >
-        <!-- <h6>Year : </h6>
-        <input type="text" class="form-control" name="datepicker" id="datepicker" style="width:400px;" /> -->
-        <label >Week : </label>
-                <input type="week" name="week" class="form-control" style="width: 500px;" >
-    </div>
     <br>
   <div style="display:flex">
     <h6 style="margin-right:5px;">NDVI : </h6>
-    <input type="file" name="choosefile3" style="width:280px;border : 2px solid #29C5F6;padding:5px;border-radius:10px;color:red;"  />
+    <input type="file" name="files3[]" multiple style="width:280px;border : 2px solid #29C5F6;padding:5px;border-radius:10px;color:red;"  />
     <h6 style="margin-right:5px;margin-left:20px;">VCI : </h6>
-    <input type="file" name="choosefile4" style="width:280px;border : 2px solid #29C5F6;padding:5px;border-radius:10px;color:red;" />
+    <input type="file" name="files4[]" multiple style="width:280px;border : 2px solid #29C5F6;padding:5px;border-radius:10px;color:red;" />
     <h6 style="margin-right:5px;margin-left:20px;">VHI : </h6>
-    <input type="file" name="choosefile5" style="width:280px;border : 2px solid #29C5F6;padding:5px;border-radius:10px;color:red;" />
+    <input type="file" name="files5[]" multiple style="width:280px;border : 2px solid #29C5F6;padding:5px;border-radius:10px;color:red;" />
   </div>
   <hr>
 

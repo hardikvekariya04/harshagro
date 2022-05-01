@@ -500,7 +500,7 @@ $final_six_year = $six_year."-".$weeknumber5;
 $final_seven_year = $seven_year."-".$weeknumber6;
 
 
-        $con = new mysqli('localhost','root','','agro');
+        $con = new mysqli('localhost','root','','agrocast');
         $query1 =$con->query("SELECT NDVI from district_crop where d_id = 0 AND week IN('$weeknumber','$weeknumber1','$weeknumber2','$weeknumber3','$weeknumber4','$weeknumber5','$weeknumber6') AND year  = $date_current" );
         while($row1 = $query1->fetch_assoc()){
           $month1[] = $row1['NDVI'];
